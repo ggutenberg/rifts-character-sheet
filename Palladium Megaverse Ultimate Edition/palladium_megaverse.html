@@ -365,14 +365,14 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="attribute-bonus"
                     type="text"
-                    value="@{psSupernaturalBonus}"
-                    name="attr_psSupernaturalBonus_disabled"
+                    value="@{ps_supernatural_bonus}"
+                    name="attr_ps_supernatural_bonus_disabled"
                     title="Supernatural MDC Damage"
                     disabled="true"
                   />
                   <input
                     type="hidden"
-                    name="attr_psSupernaturalBonus"
+                    name="attr_ps_supernatural_bonus"
                     value=""
                   />
                 </td>
@@ -1507,7 +1507,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_base"
                   /><b>%</b>
@@ -1518,7 +1517,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_bonus"
                   /><b>%</b>
@@ -1529,7 +1527,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_level"
                   /><b>%</b>
@@ -1618,7 +1615,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_base"
                   /><b>%</b>
@@ -1629,7 +1625,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_bonus"
                   /><b>%</b>
@@ -1640,7 +1635,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_level"
                   /><b>%</b>
@@ -1729,7 +1723,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_base"
                   /><b>%</b>
@@ -1740,7 +1733,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_bonus"
                   /><b>%</b>
@@ -1751,7 +1743,6 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    style="width: 60px"
                     value="0"
                     name="attr_skill_level"
                   /><b>%</b>
@@ -3285,7 +3276,7 @@ Palladium Megaverse© Character Sheet <br />
 
   on("change:ps", (e) => {
     const psBonus = e.newValue > 15 ? e.newValue - 15 : 0;
-    const psSupernaturalBonus =
+    const ps_supernatural_bonus =
       e.newValue >= 16
         ? e.newValue <= 20
           ? "1D6"
@@ -3305,7 +3296,7 @@ Palladium Megaverse© Character Sheet <br />
           ? "1D6*10+10"
           : "2D4*10"
         : "4D6 SDC";
-    setAttrs({ psSupernaturalBonus });
+    setAttrs({ psBonus, ps_supernatural_bonus });
   });
 
   on("change:pe", (e) => {
