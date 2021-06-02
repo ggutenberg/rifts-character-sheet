@@ -1456,8 +1456,10 @@ Palladium Megaverse© Character Sheet <br />
           <tr>
             <td style="width: 10%"></td>
             <td style="width: 25%"><h5>Name</h5></td>
-            <td style="width: 8%"><h5>Rating</h5></td>
-            <td style="width: 10%"><h5>Each Level</h5></td>
+            <td style="width: 10%"><h5>Rating</h5></td>
+            <td style="width: 8%"><h5>Base</h5></td>
+            <td style="width: 8%"><h5>OCC Bonus</h5></td>
+            <td style="width: 8%"><h5>Each Level</h5></td>
             <td><h5>Notes</h5></td>
           </tr>
         </table>
@@ -1468,7 +1470,7 @@ Palladium Megaverse© Character Sheet <br />
                 <div class="sheet-ability">
                   <button
                     type="roll"
-                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating}"
+                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating_disabled}"
                   ></button>
                 </div>
               </td>
@@ -1489,8 +1491,25 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    value=""
+                    value="@{skill_rating}"
+                    name="attr_skill_rating_disabled"
+                    disabled="true"
+                  /><b>%</b>
+                  <input
+                    type="hidden"
                     name="attr_skill_rating"
+                    value="@{skill_base}+@{skill_bonus}+(@{level}-1)*@{skill_level}+@{iqBonus}"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
+                    name="attr_skill_base"
                   /><b>%</b>
                 </div>
               </td>
@@ -1500,7 +1519,18 @@ Palladium Megaverse© Character Sheet <br />
                     class="sheet-input-center-aligned"
                     type="number"
                     style="width: 60px"
-                    value="+"
+                    value="0"
+                    name="attr_skill_bonus"
+                  /><b>%</b>
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
                     name="attr_skill_level"
                   /><b>%</b>
                 </div>
@@ -1537,8 +1567,10 @@ Palladium Megaverse© Character Sheet <br />
           <tr>
             <td style="width: 10%"></td>
             <td style="width: 25%"><h5>Name</h5></td>
-            <td style="width: 8%"><h5>Rating</h5></td>
-            <td style="width: 10%"><h5>Each Level</h5></td>
+            <td style="width: 10%"><h5>Rating</h5></td>
+            <td style="width: 8%"><h5>Base</h5></td>
+            <td style="width: 8%"><h5>OCC Bonus</h5></td>
+            <td style="width: 8%"><h5>Each Level</h5></td>
             <td><h5>Notes</h5></td>
           </tr>
         </table>
@@ -1549,7 +1581,7 @@ Palladium Megaverse© Character Sheet <br />
                 <div class="sheet-ability">
                   <button
                     type="roll"
-                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating}"
+                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating_disabled}"
                   ></button>
                 </div>
               </td>
@@ -1570,8 +1602,25 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    value=""
+                    value="@{skill_rating}"
+                    name="attr_skill_rating_disabled"
+                    disabled="true"
+                  /><b>%</b>
+                  <input
+                    type="hidden"
                     name="attr_skill_rating"
+                    value="@{skill_base}+@{skill_bonus}+(@{level}-1)*@{skill_level}+@{iqBonus}"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
+                    name="attr_skill_base"
                   /><b>%</b>
                 </div>
               </td>
@@ -1581,7 +1630,18 @@ Palladium Megaverse© Character Sheet <br />
                     class="sheet-input-center-aligned"
                     type="number"
                     style="width: 60px"
-                    value="+"
+                    value="0"
+                    name="attr_skill_bonus"
+                  /><b>%</b>
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
                     name="attr_skill_level"
                   /><b>%</b>
                 </div>
@@ -1618,8 +1678,10 @@ Palladium Megaverse© Character Sheet <br />
           <tr>
             <td style="width: 10%"></td>
             <td style="width: 25%"><h5>Name</h5></td>
-            <td style="width: 8%"><h5>Rating</h5></td>
-            <td style="width: 10%"><h5>Each Level</h5></td>
+            <td style="width: 10%"><h5>Rating</h5></td>
+            <td style="width: 8%"><h5>Base</h5></td>
+            <td style="width: 8%"><h5>OCC Bonus</h5></td>
+            <td style="width: 8%"><h5>Each Level</h5></td>
             <td><h5>Notes</h5></td>
           </tr>
         </table>
@@ -1630,7 +1692,7 @@ Palladium Megaverse© Character Sheet <br />
                 <div class="sheet-ability">
                   <button
                     type="roll"
-                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating}"
+                    value="@{character_name}'s @{skill_name} check:&#x00a;/roll d100<@{skill_rating_disabled}"
                   ></button>
                 </div>
               </td>
@@ -1651,8 +1713,25 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="sheet-input-center-aligned"
                     type="number"
-                    value=""
+                    value="@{skill_rating}"
+                    name="attr_skill_rating_disabled"
+                    disabled="true"
+                  /><b>%</b>
+                  <input
+                    type="hidden"
                     name="attr_skill_rating"
+                    value="@{skill_base}+@{skill_bonus}+(@{level}-1)*@{skill_level}+@{iqBonus}"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
+                    name="attr_skill_base"
                   /><b>%</b>
                 </div>
               </td>
@@ -1662,7 +1741,18 @@ Palladium Megaverse© Character Sheet <br />
                     class="sheet-input-center-aligned"
                     type="number"
                     style="width: 60px"
-                    value="+"
+                    value="0"
+                    name="attr_skill_bonus"
+                  /><b>%</b>
+                </div>
+              </td>
+              <td>
+                <div class="sheet-ability">
+                  <input
+                    class="sheet-input-center-aligned"
+                    type="number"
+                    style="width: 60px"
+                    value="0"
                     name="attr_skill_level"
                   /><b>%</b>
                 </div>
