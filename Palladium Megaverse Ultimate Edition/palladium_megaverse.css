@@ -68,6 +68,7 @@ input.sheet-arrow {
   float: left;
 }
 
+/* here */
 div.sheet-body {
   display: none;
 }
@@ -85,19 +86,20 @@ input.sheet-arrow:checked ~ div.sheet-body {
   height: 40px;
 }
 
+/* here */
 .sheet-center {
   margin-left: auto;
   margin-right: auto;
 }
 
-input.sheet-attribute-bonus {
+input.attribute-bonus {
   width: 3.5em;
 }
 
-.charsheet .sheet-charsheet .sheet-character-background input[type="number"] {
+.charsheet .charsheet .character-background input[type="number"] {
   width: 210px;
 }
 
-input.sheet-attribute.sheet-movement[type="number"] {
+input.attribute.movement[type="number"] {
   width: 4.5em;
 }
