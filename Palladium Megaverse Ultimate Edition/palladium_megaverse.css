@@ -94,6 +94,10 @@ input.sheet-attribute-bonus {
   width: 3.5em;
 }
 
-.sheet-charsheet .sheet-character-background input[type="number"] {
+.charsheet .sheet-charsheet .sheet-character-background input[type="number"] {
   width: 210px;
+}
+
+input.sheet-attribute.sheet-movement[type="number"] {
+  width: 4.5em;
 }

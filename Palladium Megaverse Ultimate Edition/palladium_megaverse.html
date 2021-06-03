@@ -672,34 +672,34 @@ Palladium Megaverse© Character Sheet <br />
           <td><h5>Run</h5></td>
           <td>
             <input
-              class="attribute"
+              class="attribute movement"
               type="number"
-              value="round(@{spd}*0.68)"
-              disabled="true"
+              value=""
+              readonly
               name="attr_run_mph"
             />
           </td>
           <td>
             <input
-              class="attribute"
+              class="attribute movement"
               type="number"
-              value="round(@{spd}*15)"
-              disabled="true"
+              value=""
+              readonly
               name="attr_run_ft_melee"
             />
           </td>
           <td>
             <input
-              class="attribute"
+              class="attribute movement"
               type="number"
-              value="round(@{spd}*15/@{combatskill_numberattacks})"
-              disabled="true"
+              value=""
+              readonly
               name="attr_run_ft_attack"
             />
           </td>
           <td>
             <input
-              class="attribute"
+              class="attribute movement"
               type="number"
               value=""
               name="attr_run_cruising"
@@ -707,7 +707,7 @@ Palladium Megaverse© Character Sheet <br />
           </td>
           <td>
             <input
-              class="attribute"
+              class="attribute movement"
               type="number"
               value="@{pe}/2"
               disabled="true"
@@ -750,7 +750,7 @@ Palladium Megaverse© Character Sheet <br />
             </td>
             <td>
               <input
-                class="attribute"
+                class="attribute movement"
                 type="number"
                 value=""
                 name="attr_movement_mph"
@@ -766,15 +766,16 @@ Palladium Megaverse© Character Sheet <br />
             </td>
             <td>
               <input
-                class="attribute"
+                class="attribute movement"
                 type="number"
                 value=""
                 name="attr_movement_ft_attack"
+                readonly
               />
             </td>
             <td>
               <input
-                class="attribute"
+                class="attribute movement"
                 type="number"
                 value=""
                 name="attr_movement_cruising"
@@ -782,7 +783,7 @@ Palladium Megaverse© Character Sheet <br />
             </td>
             <td>
               <input
-                class="attribute"
+                class="attribute movement"
                 type="number"
                 value=""
                 name="attr_movement_at_max"
@@ -2030,7 +2031,7 @@ Palladium Megaverse© Character Sheet <br />
                 <td>
                   <input
                     type="number"
-                    name="attr_hth_numberattacks"
+                    name="attr_combatskill_numberattacks"
                     value="1"
                   />
                 </td>
@@ -3230,7 +3231,7 @@ Palladium Megaverse© Character Sheet <br />
   Palladium.
 </div>
 <script type="text/worker">
-  // Change to text/worker before upload (javascript)
+  // Change from javascript to worker before upload
 
   const getBiAttributeBonus = (attr) => {
     const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
@@ -3311,5 +3312,66 @@ Palladium Megaverse© Character Sheet <br />
           : 92
         : 0;
     setAttrs({ pb_bonus });
+  });
+
+  on("change:spd", (e) => {
+    getAttrs(["combatskill_numberattacks"], (a) => {
+      const feetPerMelee = e.newValue * 15;
+      const attrs = {
+        run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
+        run_ft_melee: feetPerMelee,
+        run_ft_attack: Math.round(feetPerMelee / a.combatskill_numberattacks),
+      };
+      setAttrs(attrs);
+    });
+  });
+
+  on("change:repeating_movement:movement_mph", (e) => {
+    getAttrs(["combatskill_numberattacks"], (a) => {
+      const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
+      const attrs = {
+        repeating_movement_movement_ft_melee: feetPerMelee,
+        repeating_movement_movement_ft_attack: Math.round(
+          feetPerMelee / a.combatskill_numberattacks
+        ),
+      };
+      setAttrs(attrs);
+    });
+  });
+
+  on("change:repeating_movement:movement_ft_melee", (e) => {
+    getAttrs(["combatskill_numberattacks"], (a) => {
+      const feetPerMelee = e.newValue;
+      //const mph = Math.round((feetPerMelee * 4 * 60) / 5280);
+      const mph = ((feetPerMelee * 4 * 60) / 5280).toFixed(1);
+      const attrs = {
+        repeating_movement_movement_mph: mph,
+        repeating_movement_movement_ft_attack: Math.round(
+          feetPerMelee / a.combatskill_numberattacks
+        ),
+      };
+      setAttrs(attrs);
+    });
+  });
+
+  on("change:combatskill_numberattacks", (e) => {
+    getSectionIDs("movement", (ids) => {
+      const attrNames = ids.map(
+        (id) => `repeating_movement_${id}_movement_ft_melee`
+      );
+      getAttrs(attrNames, (a) => {
+        const attrs = {};
+        ids.forEach((id) => {
+          const row = `repeating_movement_${id}`;
+          const feetPerMelee = a[`${row}_movement_ft_melee`] || 0;
+          if (feetPerMelee) {
+            attrs[`${row}_movement_ft_attack`] = Math.round(
+              feetPerMelee / e.newValue
+            );
+          }
+        });
+        setAttrs(attrs);
+      });
+    });
   });
 </script>
