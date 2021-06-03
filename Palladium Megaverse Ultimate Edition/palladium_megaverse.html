@@ -274,23 +274,23 @@ Palladium Megaverse© Character Sheet <br />
                   <input
                     class="attribute"
                     type="number"
-                    value="@{iqBonus}"
-                    name="attr_iqBonus_disabled"
+                    value="@{iq_bonus}"
+                    name="attr_iq_bonus_disabled"
                     title="+ Skills %"
                     disabled="true"
                   />
-                  <input type="hidden" name="attr_iqBonus" value="0" />
+                  <input type="hidden" name="attr_iq_bonus" value="0" />
                 </td>
                 <td>
                   <input
                     class="attribute"
                     type="number"
-                    value="@{perceptionBonus}"
-                    name="attr_perceptionBonus_disabled"
-                    title="+ Perception"
+                    value="@{perception_bonus}"
+                    name="attr_perception_bonus_disabled"
+                    title="+ Perception (Rifter #13, p.16)"
                     disabled="true"
                   />
-                  <input type="hidden" name="attr_perceptionBonus" value="0" />
+                  <input type="hidden" name="attr_perception_bonus" value="0" />
                 </td>
               </tr>
               <tr>
@@ -3249,8 +3249,9 @@ Palladium Megaverse© Character Sheet <br />
   };
 
   on("change:iq", (e) => {
-    const iqBonus = e.newValue > 15 ? e.newValue - 14 : 0;
-    setAttrs({ iqBonus });
+    const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
+    const perception_bonus = getBiAttributeBonus(e.newValue);
+    setAttrs({ iq_bonus, perception_bonus });
   });
 
   on("change:me change:pp change:pe", (e) => {
