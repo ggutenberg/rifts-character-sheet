@@ -307,7 +307,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_meBonus"
+                    name="attr_me_bonus"
                     title="+ Save vs. Psionics"
                     readonly
                   />
@@ -329,7 +329,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_maBonus"
+                    name="attr_ma_bonus"
                     title="% Trust/Intimidate"
                     readonly
                   />
@@ -351,7 +351,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_psBonus"
+                    name="attr_ps_bonus"
                     title="+ Damage"
                     readonly
                   />
@@ -383,7 +383,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_ppBonus"
+                    name="attr_pp_bonus"
                     title="+ Strike/Parry/Dodge/Entangle/Disarm"
                     readonly
                   />
@@ -405,7 +405,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_peBonus"
+                    name="attr_pe_bonus"
                     title="+ Magic/Poison/Toxins"
                     readonly
                   />
@@ -415,7 +415,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_peComaBonus"
+                    name="attr_pe_coma_bonus"
                     title="+ Coma/Death %"
                     readonly
                   />
@@ -437,7 +437,7 @@ Palladium Megaverse© Character Sheet <br />
                     class="attribute"
                     type="number"
                     value="0"
-                    name="attr_pbBonus"
+                    name="attr_pb_bonus"
                     title="% Charm/Impress"
                     readonly
                   />
@@ -3243,12 +3243,22 @@ Palladium Megaverse© Character Sheet <br />
   on("change:me change:pp change:pe", (e) => {
     const bonus = getBiAttributeBonus(e.newValue);
     const attrs = {};
-    attrs[`${e.sourceAttribute}Bonus`] = bonus;
+    attrs[`${e.sourceAttribute}_bonus`] = bonus;
+    if (e.sourceAttribute == "pe") {
+      attrs["pe_coma_bonus"] =
+        e.newValue >= 16
+          ? e.newValue <= 18
+            ? 4 + (e.newValue - 16)
+            : e.newValue <= 30
+            ? 8 + (e.newValue - 19) * 2
+            : 30 + (e.newValue - 30)
+          : 0;
+    }
     setAttrs(attrs);
   });
 
   on("change:ma", (e) => {
-    const maBonus =
+    const ma_bonus =
       e.newValue >= 16
         ? e.newValue <= 24
           ? 40 + (e.newValue - 16) * 5
@@ -3258,11 +3268,11 @@ Palladium Megaverse© Character Sheet <br />
           ? 92 + (e.newValue - 27) * 2
           : 97
         : 0;
-    setAttrs({ maBonus });
+    setAttrs({ ma_bonus });
   });
 
   on("change:ps", (e) => {
-    const psBonus = e.newValue > 15 ? e.newValue - 15 : 0;
+    const ps_bonus = e.newValue > 15 ? e.newValue - 15 : 0;
     const ps_supernatural_bonus =
       e.newValue >= 16
         ? e.newValue <= 20
@@ -3283,23 +3293,11 @@ Palladium Megaverse© Character Sheet <br />
           ? "1D6*10+10"
           : "2D4*10"
         : "4D6 SDC";
-    setAttrs({ psBonus, ps_supernatural_bonus });
-  });
-
-  on("change:pe", (e) => {
-    const peComaBonus =
-      e.newValue >= 16
-        ? e.newValue <= 18
-          ? 4 + (e.newValue - 16)
-          : e.newValue <= 30
-          ? 8 + (e.newValue - 19) * 2
-          : 30 + (e.newValue - 30)
-        : 0;
-    setAttrs({ peComaBonus });
+    setAttrs({ ps_bonus, ps_supernatural_bonus });
   });
 
   on("change:pb", (e) => {
-    const pbBonus =
+    const pb_bonus =
       e.newValue >= 16
         ? e.newValue <= 26
           ? 30 + (e.newValue - 16) * 5
@@ -3309,6 +3307,6 @@ Palladium Megaverse© Character Sheet <br />
           ? 90
           : 92
         : 0;
-    setAttrs({ pbBonus });
+    setAttrs({ pb_bonus });
   });
 </script>
