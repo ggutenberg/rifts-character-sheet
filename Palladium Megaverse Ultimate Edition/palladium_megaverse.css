@@ -9,10 +9,25 @@
 .charsheet select,
 .charsheet .uneditable-input {
   width: auto;
+  margin-bottom: 0;
 }
 
 .charsheet main#megaverse input[type="number"] {
   width: auto;
+}
+/* End Resets */
+
+/* Tabs */
+/*Configure the tab buttons*/
+.core,
+.wp {
+  display: none;
+}
+
+/* show the selected tab */
+.tabstoggle[value="core"] ~ div.core,
+.tabstoggle[value="wp"] ~ div.wp {
+  display: block;
 }
 
 .grid-container {
@@ -45,7 +60,7 @@
 .ss-2c {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: max-content 5rem max-content;
+  grid-template-columns: max-content 8rem max-content;
   border: 1px solid #ccc;
   padding: 0.5rem;
 }

@@ -1,6 +1,12 @@
 <main id="megaverse">
-  Palladium Megaverse© Character Sheet <br />
-  <div class="sheet-tab-content sheet-tab1">
+  <div>
+    <button type="action" name="act_core">Core</button>
+    <button type="action" name="act_wp">WPs</button>
+  </div>
+  <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
+
+  <div class="core">
+    Palladium Megaverse© Character Sheet <br />
     <h1>Character Statistics</h1>
     <div class="grid-container">
       <div class="section-one character-background">
@@ -21,6 +27,14 @@
         <label for="occ">O.C.C.</label>
         <input id="occ" type="text" value="" name="attr_occ" />
 
+        <label for="ps-type">Strength Type</label>
+        <select id="ps-type" class="" name="attr_ps_type" value="normal">
+          <option value="normal">Normal</option>
+          <option value="augmented">Augmented</option>
+          <option value="robotic">Robotic</option>
+          <option value="supernatural">Supernatural</option>
+        </select>
+
         <label for="level">Level</label>
         <input id="level" type="number" name="attr_level" />
 
@@ -30,7 +44,7 @@
         <label for="alignment">Alignment</label>
         <select
           id="alignment"
-          class="sheet-select"
+          class="select"
           name="attr_alignment_select"
           value="0"
         >
@@ -176,14 +190,7 @@
             title="+ SDC Damage"
             readonly
           />
-          <input
-            class="attribute-bonus"
-            type="text"
-            value="0"
-            name="attr_ps_supernatural_bonus"
-            title="Supernatural MDC Damage"
-            readonly
-          />
+          <div></div>
 
           <label for="physical-prowess">P.P</label>
           <input
@@ -256,12 +263,12 @@
           />
         </div>
         <div class="ss-2b">
-          <label for="invoke-trust">Trust/Intimidate</label>
+          <label for="trust-intimidate">Trust/Intimidate</label>
           <input
-            id="invoke-trust"
+            id="trust-intimidate"
             type="number"
             value=""
-            name="attr_invoke_trust"
+            name="attr_trust_intimidate"
           /><span>%</span>
 
           <label for="charm-impress">Charm/Impress</label>
@@ -273,6 +280,45 @@
           /><span>%</span>
         </div>
         <div class="ss-2c">
+          <label for="restrained-punch">Restrained Punch</label>
+          <input
+            id="restrained-punch"
+            type="text"
+            name="attr_restrained_punch"
+          />
+          <select name="attr_restrained_punch_unit" value="sdc">
+            <option value="sdc">SDC</option>
+            <option value="mdc">MDC</option>
+          </select>
+
+          <label for="punch">Punch</label>
+          <input id="punch" type="text" name="attr_punch" />
+          <select name="attr_punch_unit" value="sdc">
+            <option value="sdc">SDC</option>
+            <option value="mdc">MDC</option>
+          </select>
+
+          <label for="power-punch">Power Punch</label>
+          <input id="power-punch" type="text" name="attr_power_punch" />
+          <select name="attr_power_punch_unit" value="sdc">
+            <option value="sdc">SDC</option>
+            <option value="mdc">MDC</option>
+          </select>
+
+          <label for="kick">Kick</label>
+          <input id="kick" type="text" name="attr_kick" />
+          <select name="attr_kick_unit" value="sdc">
+            <option value="sdc">SDC</option>
+            <option value="mdc">MDC</option>
+          </select>
+
+          <label for="leap-kick">Leap Kick</label>
+          <input id="leap-kick" type="text" name="attr_leap_kick" />
+          <select name="attr_leap_kick_unit" value="sdc">
+            <option value="sdc">SDC</option>
+            <option value="mdc">MDC</option>
+          </select>
+
           <label for="lift">Lift</label>
           <input id="lift" type="number" value="" name="attr_lift" />
           <div></div>
@@ -319,7 +365,7 @@
           name="attr_character_hp"
         />
         <select
-          class="sheet-select"
+          class="select"
           name="attr_charactertype_select"
           value="0"
           style="width: 80px"
@@ -436,52 +482,54 @@
   </div>
   <br />
 
-  <div class="wp-container">
-    <fieldset class="repeating_wp">
-      <h5>Weapon Proficiency</h5>
-      <h5>Strike</h5>
-      <h5>Burst</h5>
-      <h5>Parry</h5>
-      <h5>Disarm</h5>
-      <h5>RoF</h5>
-      <h5>Thrown</h5>
-      <h5>Entangle</h5>
-      <input type="text" list="weaponProficiencies" name="attr_name" />
-      <datalist id="weaponProficiencies">
-        <option value="Archery"></option>
-        <option value="Axe"></option>
-        <option value="Blunt"></option>
-        <option value="Chain"></option>
-        <option value="Forked"></option>
-        <option value="Knife"></option>
-        <option value="Grappling Hook"></option>
-        <option value="Pole Arm"></option>
-        <option value="Rope"></option>
-        <option value="Shield"></option>
-        <option value="Spear"></option>
-        <option value="Staff"></option>
-        <option value="Sword"></option>
-        <option value="Targeting"></option>
-        <option value="Whip"></option>
-        <option value="Handguns"></option>
-        <option value="Rifles"></option>
-        <option value="Energy Heavy"></option>
-        <option value="Energy Pistol"></option>
-        <option value="Energy Rifle"></option>
-        <option value="Heavy"></option>
-        <option value="Speargun"></option>
-        <option value="Shotgun"></option>
-        <option value="Submachinegun"></option>
-        <option value="Flamethrower"></option>
-      </datalist>
-      <input type="number" value="" name="attr_strike" />
-      <input type="number" value="" name="attr_burst" />
-      <input type="number" value="" name="attr_parry" />
-      <input type="number" value="" name="attr_disarm" />
-      <input type="number" value="" name="attr_rof" />
-      <input type="number" value="" name="attr_thrown" />
-      <input type="number" value="" name="attr_entangle" />
-    </fieldset>
+  <div class="wp">
+    <div class="wp-container">
+      <fieldset class="repeating_wp">
+        <h5>Weapon Proficiency</h5>
+        <h5>Strike</h5>
+        <h5>Burst</h5>
+        <h5>Parry</h5>
+        <h5>Disarm</h5>
+        <h5>RoF</h5>
+        <h5>Thrown</h5>
+        <h5>Entangle</h5>
+        <input type="text" list="weaponProficiencies" name="attr_name" />
+        <datalist id="weaponProficiencies">
+          <option value="Archery"></option>
+          <option value="Axe"></option>
+          <option value="Blunt"></option>
+          <option value="Chain"></option>
+          <option value="Forked"></option>
+          <option value="Knife"></option>
+          <option value="Grappling Hook"></option>
+          <option value="Pole Arm"></option>
+          <option value="Rope"></option>
+          <option value="Shield"></option>
+          <option value="Spear"></option>
+          <option value="Staff"></option>
+          <option value="Sword"></option>
+          <option value="Targeting"></option>
+          <option value="Whip"></option>
+          <option value="Handguns"></option>
+          <option value="Rifles"></option>
+          <option value="Energy Heavy"></option>
+          <option value="Energy Pistol"></option>
+          <option value="Energy Rifle"></option>
+          <option value="Heavy"></option>
+          <option value="Speargun"></option>
+          <option value="Shotgun"></option>
+          <option value="Submachinegun"></option>
+          <option value="Flamethrower"></option>
+        </datalist>
+        <input type="number" value="" name="attr_strike" />
+        <input type="number" value="" name="attr_burst" />
+        <input type="number" value="" name="attr_parry" />
+        <input type="number" value="" name="attr_disarm" />
+        <input type="number" value="" name="attr_rof" />
+        <input type="number" value="" name="attr_thrown" />
+        <input type="number" value="" name="attr_entangle" />
+      </fieldset>
+    </div>
   </div>
 </main>
 <script type="text/worker">
@@ -915,6 +963,15 @@
       { strike: 1 },
     ],
   };
+  const buttonlist = ["core", "wp"];
+  buttonlist.forEach((button) => {
+    on(`clicked:${button}`, function () {
+      setAttrs({
+        sheetTab: button,
+      });
+    });
+  });
+
   const getBiAttributeBonus = (attr) => {
     const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
     return bonus;
@@ -939,12 +996,10 @@
     const levelBonuses = WP[name].slice(0, level);
     const totalBonuses = mergeAndAddObjects(levelBonuses);
     WP_ACTIONS.forEach((action) => {
-      const keyPrefix = rowId
-        ? `repeating_wp_${rowId}`
-        : `repeating_wp`;
-      const key = `${keyPrefix}_${action}`
+      const keyPrefix = rowId ? `repeating_wp_${rowId}` : `repeating_wp`;
+      const key = `${keyPrefix}_${action}`;
       attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
-      if (action == 'strike') {
+      if (action == "strike") {
         attrs[`${keyPrefix}_burst`] = Math.floor(attrs[key] / 2);
       }
     });
@@ -1009,32 +1064,207 @@
           ? 92 + (e.newValue - 27) * 2
           : 97
         : 0;
-    setAttrs({ ma_bonus });
+    setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
   });
 
-  on("change:ps", (e) => {
-    const ps_bonus = e.newValue > 15 ? e.newValue - 15 : 0;
-    const ps_supernatural_bonus =
-      e.newValue >= 16
-        ? e.newValue <= 20
-          ? "1D6"
-          : e.newValue <= 25
-          ? "2D6"
-          : e.newValue <= 30
-          ? "3D6"
-          : e.newValue <= 35
-          ? "4D6"
-          : e.newValue <= 40
-          ? "5D6"
-          : e.newValue <= 50
-          ? "6D6"
-          : e.newValue <= 60
-          ? "1D6*10"
-          : e.newValue <= 70
-          ? "1D6*10+10"
-          : "2D4*10"
-        : "4D6 SDC";
-    setAttrs({ ps_bonus, ps_supernatural_bonus });
+  on("change:ps change:ps_type", (e) => {
+    getAttrs(["ps", "ps_type"], (a) => {
+      const ps = a.ps;
+      const ps_type = a.ps_type;
+      const ps_bonus = ps > 15 ? ps - 15 : 0;
+
+      let restrained_punch = (punch = power_punch = kick = leap_kick = "");
+      let restrained_punch_unit =
+        (punch_unit =
+        power_punch_unit =
+        kick_unit =
+        leap_kick_unit =
+          "sdc");
+
+      switch (ps_type) {
+        case "normal":
+          punch = "1D4";
+          kick = "1D4";
+          break;
+        case "augmented":
+          if (ps < 24) {
+            // nop
+          } else if (ps == 24) {
+            power_punch = "1";
+            power_punch_unit = "mdc";
+          } else if (ps <= 27) {
+            power_punch = "1D4";
+            power_punch_unit = "mdc";
+          } else if (ps <= 30) {
+            power_punch = "1D6";
+            power_punch_unit = "mdc";
+          } else if (ps <= 40) {
+            power_punch = "2D4";
+            power_punch_unit = "mdc";
+          } else if (ps <= 50) {
+            restrained_punch = "3D6";
+            punch = "1D4";
+            punch_unit = "mdc";
+            power_punch = "3D4";
+            power_punch_unit = "mdc";
+          } else {
+            restrained_punch = "4D6";
+            punch = "1D8";
+            punch_unit = "mdc";
+            power_punch = "4D4";
+            power_punch_unit = "mdc";
+          }
+          break;
+        case "robotic":
+          if (ps <= 15) {
+            restrained_punch = "1D6";
+            punch = "2D6";
+            power_punch = "4D6";
+            kick = "2D6";
+            leap_kick = "3D6";
+          } else if (ps <= 20) {
+            restrained_punch = "2D6";
+            punch = "1";
+            power_punch = "1D6";
+            kick = "1D4";
+            leap_kick = "2D4";
+            punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
+          } else if (ps <= 25) {
+            restrained_punch = "6D6";
+            punch = "1D4";
+            power_punch = "2D4";
+            kick = "1D6";
+            leap_kick = "2D6";
+            punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
+          } else if (ps <= 30) {
+            restrained_punch = "1D4";
+            punch = "1D6";
+            power_punch = "2D6";
+            kick = "2D4";
+            leap_kick = "2D8";
+            restrained_punch_unit =
+              punch_unit =
+              power_punch_unit =
+              kick_unit =
+              leap_kick_unit =
+                "mdc";
+          } else if (ps <= 35) {
+            restrained_punch = "1D4";
+            punch = "2D4";
+            power_punch = "4D4";
+            kick = "2D8";
+            leap_kick = "4D8";
+            restrained_punch_unit =
+              punch_unit =
+              power_punch_unit =
+              kick_unit =
+              leap_kick_unit =
+                "mdc";
+          } else if (ps <= 40) {
+            restrained_punch = "1D4";
+            punch = "2D6";
+            power_punch = "4D6";
+            kick = "3D8";
+            leap_kick = "5D8";
+            restrained_punch_unit =
+              punch_unit =
+              power_punch_unit =
+              kick_unit =
+              leap_kick_unit =
+                "mdc";
+          } else if (ps <= 50) {
+            restrained_punch = "1D6";
+            punch = "3D6";
+            power_punch = "1D6*10";
+            kick = "5D8";
+            leap_kick = "1D8*10";
+            restrained_punch_unit =
+              punch_unit =
+              power_punch_unit =
+              kick_unit =
+              leap_kick_unit =
+                "mdc";
+          } else {
+            restrained_punch = "2D6";
+            punch = "6D6";
+            power_punch = "2D6*10";
+            kick = "6D8";
+            leap_kick = "2D6*10";
+            restrained_punch_unit =
+              punch_unit =
+              power_punch_unit =
+              kick_unit =
+              leap_kick_unit =
+                "mdc";
+          }
+          break;
+        case "supernatural":
+          if (ps <= 15) {
+            restrained_punch = "1D6";
+            punch = "4D6";
+            power_punch = "1D4";
+            power_punch_unit = "mdc";
+          } else if (ps <= 20) {
+            restrained_punch = "3D6";
+            punch = "1D6";
+            power_punch = "2D6";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 25) {
+            restrained_punch = "4D6";
+            punch = "2D6";
+            power_punch = "4D6";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 30) {
+            restrained_punch = "5D6";
+            punch = "3D6";
+            power_punch = "6D6";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 35) {
+            restrained_punch = "5D6";
+            punch = "4D6";
+            power_punch = "1D4*10";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 40) {
+            restrained_punch = "6D6";
+            punch = "5D6";
+            power_punch = "1D6*10";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 50) {
+            restrained_punch = "1D6*10";
+            punch = "6D6";
+            power_punch = "2D4*10";
+            punch_unit = power_punch_unit = "mdc";
+          } else if (ps <= 60) {
+            restrained_punch = "1D6";
+            punch = "1D6*10";
+            power_punch = "2D6*10";
+            restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
+          } else {
+            // > 60
+            const extra = Math.ceil((ps - 60) / 10) * 10;
+            restrained_punch = "1D6";
+            punch = `1D6*10+${extra}`;
+            power_punch = `2D6*10+${extra * 2}`;
+            restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
+          }
+          break;
+      }
+      const attrs = {
+        ps_bonus,
+        restrained_punch,
+        punch,
+        power_punch,
+        kick,
+        leap_kick,
+        restrained_punch_unit,
+        punch_unit,
+        power_punch_unit,
+        kick_unit,
+        leap_kick_unit,
+      };
+      console.log(attrs);
+      setAttrs(attrs);
+    });
   });
 
   on("change:pb", (e) => {
@@ -1048,7 +1278,7 @@
           ? 90
           : 92
         : 0;
-    setAttrs({ pb_bonus });
+    setAttrs({ pb_bonus, charm_impress: pb_bonus });
   });
 
   on("change:spd", (e) => {
