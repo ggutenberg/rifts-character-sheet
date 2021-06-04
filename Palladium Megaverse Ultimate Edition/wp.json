@@ -1,0 +1,942 @@
+[
+  {
+    "archery": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "disarm": 1,
+        "rof": 2
+      },
+      {
+        "strike": 1,
+        "disarm": 1,
+        "rof": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "rof": 1
+      },
+      {
+        "disarm": 1,
+        "rof": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "rof": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "disarm": 1,
+        "rof": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "rof": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "rof": 1
+      }
+    ]
+  },
+  {
+    "axe": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "blunt": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "thrown": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "chain": [
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {}
+    ]
+  },
+  {
+    "forked": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1,
+        "entangle": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "entangle": 1
+      },
+      {
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "thrown": 1,
+        "entangle": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "entangle": 1
+      },
+      {}
+    ]
+  },
+  {
+    "knife": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "thrown": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1,
+        "thrown": 1
+      },
+      {},
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1,
+        "thrown": 1
+      },
+      {}
+    ]
+  },
+  {
+    "grappling hook": [
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "entangle": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "pole arm": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "rope": [
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "shield": [
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {}
+    ]
+  },
+  {
+    "spear": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "thrown": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "thrown": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {},
+      {
+        "thrown": 1
+      }
+    ]
+  },
+  {
+    "staff": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "parry": 1,
+        "thrown": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "thrown": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      }
+    ]
+  },
+  {
+    "sword": [
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1,
+        "parry": 1
+      },
+      {
+        "parry": 1,
+        "thrown": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {
+        "thrown": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "parry": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "thrown": 1
+      },
+      {
+        "parry": 1
+      },
+      {}
+    ]
+  },
+  {
+    "targeting": [
+      {
+        "strike": 1
+      },
+      {
+        "damage": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "damage": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "whip": [
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1,
+        "damage": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1,
+        "damage": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1,
+        "damage": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1
+      },
+      {
+        "damage": 1
+      },
+      {},
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1
+      },
+      {},
+      {
+        "damage": 1
+      },
+      {
+        "strike": 1,
+        "entangle": 1,
+        "disarm": 1
+      },
+      {}
+    ]
+  },
+  {
+    "handguns": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      }
+    ]
+  },
+  {
+    "rifles": [
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {}
+    ]
+  },
+  {
+    "energy heavy": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {}
+    ]
+  },
+  {
+    "energy pistol": [
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {}
+    ]
+  },
+  {
+    "energy rifle": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      }
+    ]
+  },
+  {
+    "heavy": [
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      }
+    ]
+  },
+  {
+    "speargun": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "shotgun": [
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      }
+    ]
+  },
+  {
+    "submachinegun": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {}
+    ]
+  },
+  {
+    "flamethrower": [
+      {
+        "strike": 1
+      },
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {},
+      {
+        "strike": 1
+      },
+      {},
+      {},
+      {},
+      {}
+    ]
+  }
+]
