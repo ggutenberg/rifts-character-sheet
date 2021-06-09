@@ -21,6 +21,10 @@
   font-size: 1.3rem;
 }
 
+details {
+  margin-bottom: 1rem;
+}
+
 /* End Resets */
 
 /* Tabs */
