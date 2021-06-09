@@ -1,8 +1,8 @@
 <main id="megaverse">
   <div>
-    <button type="action" name="act_core">Core</button>
-    <button type="action" name="act_wp">WPs</button>
-    <button type="action" name="act_combat">Combat</button>
+    <button class="metal linear" type="action" name="act_core">Core</button>
+    <button class="metal linear" type="action" name="act_wp">WPs</button>
+    <button class="metal linear" type="action" name="act_combat">Combat</button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
@@ -582,7 +582,6 @@
             <label
               >Initiative
               <input
-                id="h2h-initiative"
                 type="number"
                 value=""
                 name="attr_combat_combined_initiative"
@@ -809,12 +808,7 @@
         <div class="lnr">
           <label
             >Initiative
-            <input
-              id="h2h-initiative"
-              type="number"
-              value=""
-              name="attr_combat_skill_initiative"
-            />
+            <input type="number" value="" name="attr_combat_skill_initiative" />
             <button
               type="roll"
               value="Initiative: [[d20+@{combat_skill_initiative}]]"
@@ -1843,6 +1837,46 @@
           }
         });
         setAttrs(attrs);
+      });
+    });
+  });
+
+  /**
+   * @todo HERE
+   * */
+  const combineCombat = (sectionIds) => {
+    // we need to combine the values of each repeated attribute within
+    // each of the sectionIds and aggregate them in the combined combat section
+  };
+
+  on("change:combat_skill_base", (e) => {
+    console.log("change:combat_skill_base");
+    const combinerNames = [
+      "combat_skill_base",
+      "combat_skill_extra",
+      "combat_skill_additional",
+    ];
+    getSectionIDs("combat", (ids) => {
+      console.log(ids);
+      const attrNames = ids.map((id) => `repeating_combat_${id}_combat_skill`);
+      getAttrs(attrNames, (repeaters) => {
+        getAttrs(combinerNames, (combiners) => {
+          const sectionIds = [];
+          for (const [cKey, cValue] of Object.entries(combiners)) {
+            console.log("c", cKey, cValue);
+            const repeaterSkill = Object.keys(repeaters).find(
+              (rKey) => repeaters[rKey] == cValue
+            );
+            console.log("repeaterSkill", repeaterSkill);
+            if (repeaterSkill) {
+              sectionIds.push(
+                ids.find((id) => repeaterSkill.includes(id.toLowerCase()))
+              );
+            }
+          }
+          console.log(sectionIds);
+          combineCombat(sectionIds);
+        });
       });
     });
   });
