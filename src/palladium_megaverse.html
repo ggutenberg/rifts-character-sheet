@@ -746,6 +746,8 @@
           ><span>Level</span>
           <input type="number" value="" name="attr_combat_skill_level" />
         </label>
+        <div></div>
+        <div></div>
         <label
           ><span>Attacks</span>
           <input type="number" value="" name="attr_combat_skill_attacks" />
@@ -867,6 +869,161 @@
 <script type="text/javascript">
   // Change from javascript to worker before upload
 
+  const repeatingSum = (destinations, section, fields, ...extras) => {
+    const isNumber = (value) =>
+      parseFloat(value).toString() === value.toString();
+    const isOption = (value) =>
+      [...checks.valid, ...checks.roundtypes].includes(value);
+    const isRounding = (value) => checks.roundtypes.includes(value);
+    const isFraction = (value) =>
+      value.includes("/") && !(value.includes(",") || value.includes("|"));
+    const getTrimmed = (value) => value.toLowerCase().replace(/\s/g, "");
+    const getRounded = (type, value, pow) =>
+      (Math[type](value * Math.pow(10, pow)) / Math.pow(10, pow)).toFixed(
+        Math.max(0, pow)
+      );
+    const getFraction = (value /*{ console.log(`value: ${value}`); */) =>
+      parseInt(value.split("/")[0]) / parseInt(value.split("/")[1]);
+    const getMultiplier = (value, rounding = 1) =>
+      "undefined" === typeof value
+        ? rounding
+          ? 0
+          : 1
+        : isNumber(value)
+        ? parseFloat(value)
+        : isFraction(value)
+        ? getFraction(value)
+        : value;
+    if (!Array.isArray(destinations)) destinations = [getTrimmed(destinations)];
+    if (!Array.isArray(fields)) fields = [getTrimmed(fields)];
+    const fields_trimmed = fields.map(
+      (field) => getTrimmed(field).split(":")[0]
+    );
+    const subfields = fields_trimmed.slice(0, destinations.length);
+    const checks = {
+      valid: ["multiplier"],
+      roundtypes: ["ceil", "round", "floor"],
+    };
+    let properties = { attributes: {}, options: {} };
+    extras.forEach((extra) => {
+      const [prop, v] = getTrimmed(extra).split(":");
+      const multiplier_maybe = getMultiplier(v, isRounding(prop));
+      const obj = isNumber(multiplier_maybe)
+        ? subfields.reduce((obj, field) => {
+            obj[field] = multiplier_maybe;
+            return obj;
+          }, {})
+        : multiplier_maybe.split(",").reduce((obj, item) => {
+            const [stat, value] = item.split("|");
+            const multiplier = getMultiplier(value, isRounding(prop));
+            obj[stat] = multiplier;
+            return obj;
+          }, {});
+      properties[isOption(prop) ? "options" : "attributes"][prop] = obj;
+    });
+    getSectionIDs(`repeating_${section}`, (idArray) => {
+      const attrArray = idArray.reduce(
+        (m, id) => [
+          ...m,
+          ...fields_trimmed.map(
+            (field) => `repeating_${section}_${id}_${field}`
+          ),
+        ],
+        []
+      );
+      let filteredAttrArray = attrArray;
+      if (properties.attributes.filter) {
+        filteredAttrArray = attrArray.filter((attr) =>
+          Object.keys(properties.attributes.filter).some((sectionId) =>
+            attr.includes(sectionId)
+          )
+        );
+      }
+      console.log("properties", properties);
+      console.log("attrArray", attrArray);
+      console.log("filteredAttrArray", filteredAttrArray);
+      getAttrs(
+        [...filteredAttrArray, ...Object.keys(properties.attributes)],
+        (v) => {
+          const getValue = (section, id, field) =>
+            v[`repeating_${section}_${id}_${field}`] === "on"
+              ? 1
+              : parseFloat(v[`repeating_${section}_${id}_${field}`]) || 0;
+          const commonMultipliers =
+            fields.length <= destinations.length
+              ? []
+              : fields.splice(
+                  destinations.length,
+                  fields.length - destinations.length
+                );
+          const output = destinations.reduce((obj, destination, index) => {
+            let sumTotal = idArray.reduce(
+              (total, id) =>
+                total +
+                getValue(section, id, fields_trimmed[index]) *
+                  commonMultipliers.reduce(
+                    (subtotal, mult) =>
+                      subtotal *
+                      (!mult.includes(":") ||
+                      mult
+                        .split(":")[1]
+                        .split(",")
+                        .includes(fields_trimmed[index])
+                        ? getValue(section, id, mult.split(":")[0])
+                        : 1),
+                    1
+                  ),
+              0
+            );
+            sumTotal *=
+              properties.options.hasOwnProperty("multiplier") &&
+              Object.keys(properties.options.multiplier).includes(
+                fields_trimmed[index]
+              )
+                ? parseFloat(
+                    properties.options.multiplier[fields_trimmed[index]]
+                  ) || 0
+                : 1;
+            sumTotal += Object.entries(properties.attributes).reduce(
+              (total, [key, value]) =>
+                (total += value.hasOwnProperty(fields_trimmed[index])
+                  ? parseFloat(v[key] || 0) *
+                    (parseFloat(value[fields_trimmed[index]]) || 1)
+                  : 0),
+              0
+            );
+            checks.roundtypes.forEach((type) => {
+              if (properties.options.hasOwnProperty(type)) {
+                if (
+                  Object.keys(properties.options[type]).includes(
+                    fields_trimmed[index]
+                  )
+                ) {
+                  sumTotal = getRounded(
+                    type,
+                    sumTotal,
+                    +properties.options[type][fields_trimmed[index]] || 0
+                  );
+                } else if (
+                  properties.options[type] == "0" ||
+                  !isNaN(+properties.options[type] || "x")
+                ) {
+                  sumTotal = getRounded(
+                    type,
+                    sumTotal,
+                    +properties.options[type]
+                  );
+                }
+              }
+            });
+            obj[destination] = sumTotal;
+            return obj;
+          }, {});
+          setAttrs(output);
+        }
+      );
+    });
+  };
   const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "thrown", "entangle"];
   const WP = {
     archery: [
@@ -1743,39 +1900,51 @@
     // we need to combine the values of each repeated attribute within
     // each of the sectionIds and aggregate them in the combined combat section
     // +PP +PS, and add a saving throws section with +ME +PE
+
+    repeatingSum(
+      "combat_combined_attacks",
+      "combat",
+      "combat_skill_attacks",
+      `filter:${sectionIds.toString()}`
+    );
   };
 
-  on("change:combat_skill_base", (e) => {
-    console.log("change:combat_skill_base");
-    const combinerNames = [
-      "combat_skill_base",
-      "combat_skill_extra",
-      "combat_skill_additional",
-    ];
-    getSectionIDs("combat", (ids) => {
-      console.log(ids);
-      const attrNames = ids.map((id) => `repeating_combat_${id}_combat_skill`);
-      getAttrs(attrNames, (repeaters) => {
-        getAttrs(combinerNames, (combiners) => {
-          const sectionIds = [];
-          for (const [cKey, cValue] of Object.entries(combiners)) {
-            console.log("c", cKey, cValue);
-            const repeaterSkill = Object.keys(repeaters).find(
-              (rKey) => repeaters[rKey] == cValue
-            );
-            console.log("repeaterSkill", repeaterSkill);
-            if (repeaterSkill) {
-              sectionIds.push(
-                ids.find((id) => repeaterSkill.includes(id.toLowerCase()))
+  on(
+    "change:combat_skill_base change:combat_skill_extra change:combat_skill_additional change:repeating_combat",
+    (e) => {
+      console.log("change:combat_skill_base");
+      const combinerNames = [
+        "combat_skill_base",
+        "combat_skill_extra",
+        "combat_skill_additional",
+      ];
+      getSectionIDs("combat", (ids) => {
+        console.log(ids);
+        const attrNames = ids.map(
+          (id) => `repeating_combat_${id}_combat_skill`
+        );
+        getAttrs(attrNames, (repeaters) => {
+          getAttrs(combinerNames, (combiners) => {
+            const sectionIds = [];
+            for (const [cKey, cValue] of Object.entries(combiners)) {
+              console.log("c", cKey, cValue);
+              const repeaterSkill = Object.keys(repeaters).find(
+                (rKey) => repeaters[rKey] == cValue
               );
+              console.log("repeaterSkill", repeaterSkill);
+              if (repeaterSkill) {
+                sectionIds.push(
+                  ids.find((id) => repeaterSkill.includes(id.toLowerCase()))
+                );
+              }
             }
-          }
-          console.log(sectionIds);
-          combineCombat(sectionIds);
+            console.log(sectionIds);
+            combineCombat(sectionIds);
+          });
         });
       });
-    });
-  });
+    }
+  );
 
   const buttonlist = ["core", "wp", "combat"];
   buttonlist.forEach((button) => {
