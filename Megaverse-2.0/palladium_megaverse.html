@@ -576,7 +576,7 @@
         <div class="combat-combined-bonuses">
           <label
             >Attacks
-            <input type="number" value="" name="attr_combat_skill_attacks" />
+            <input type="number" value="" name="attr_combat_combined_attacks" />
           </label>
           <div class="lnr">
             <label
@@ -585,97 +585,114 @@
                 id="h2h-initiative"
                 type="number"
                 value=""
-                name="attr_combat_skill_initiative"
+                name="attr_combat_combined_initiative"
               />
               <button
                 type="roll"
-                value="Initiative: [[d20+@{combat_skill_initiative}]]"
+                value="Initiative: [[d20+@{combat_combined_initiative}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Strike
-              <input type="number" value="" name="attr_combat_skill_strike" />
+              <input
+                type="number"
+                value=""
+                name="attr_combat_combined_strike"
+              />
               <button
                 type="roll"
-                value="Strike: [[d20+@{combat_skill_strike}]]"
+                value="Strike: [[d20+@{combat_combined_strike}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Parry
-              <input type="number" value="" name="attr_combat_skill_parry" />
+              <input type="number" value="" name="attr_combat_combined_parry" />
               <button
                 type="roll"
-                value="Parry: [[d20+@{combat_skill_parry}]]"
+                value="Parry: [[d20+@{combat_combined_parry}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Dodge
-              <input type="number" value="" name="attr_combat_skill_dodge" />
+              <input type="number" value="" name="attr_combat_combined_dodge" />
               <button
                 type="roll"
-                value="Dodge: [[d20+@{combat_skill_dodge}]]"
+                value="Dodge: [[d20+@{combat_combined_dodge}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Throw
-              <input type="number" value="" name="attr_combat_skill_throw" />
+              <input type="number" value="" name="attr_combat_combined_throw" />
               <button
                 type="roll"
-                value="Throw: [[d20+@{combat_skill_throw}]]"
+                value="Throw: [[d20+@{combat_combined_throw}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Disarm
-              <input type="number" value="" name="attr_combat_skill_disarm" />
+              <input
+                type="number"
+                value=""
+                name="attr_combat_combined_disarm"
+              />
               <button
                 type="roll"
-                value="Disarm: [[d20+@{combat_skill_disarm}]]"
+                value="Disarm: [[d20+@{combat_combined_disarm}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Entangle
-              <input type="number" value="" name="attr_combat_skill_entangle" />
+              <input
+                type="number"
+                value=""
+                name="attr_combat_combined_entangle"
+              />
               <button
                 type="roll"
-                value="Entangle: [[d20+@{combat_skill_entangle}]]"
+                value="Entangle: [[d20+@{combat_combined_entangle}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Pull Punch
-              <input type="number" value="" name="attr_combat_skill_pull" />
+              <input type="number" value="" name="attr_combat_combined_pull" />
               <button
                 type="roll"
-                value="Pull Punch: [[d20+@{combat_skill_pull}]]"
+                value="Pull Punch: [[d20+@{combat_combined_pull}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Roll w/ Impact
-              <input type="number" value="" name="attr_combat_skill_roll" />
+              <input type="number" value="" name="attr_combat_combined_roll" />
               <button
                 type="roll"
-                value="Roll w/ Impact: [[d20+@{combat_skill_roll}]]"
+                value="Roll w/ Impact: [[d20+@{combat_combined_roll}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
-              >Damage <input type="number" value="" name="attr_combat_damage" />
+              >Damage
+              <input
+                type="number"
+                value=""
+                name="attr_combat_combined_damage"
+              />
               <div></div>
             </label>
           </div>
@@ -685,11 +702,11 @@
               <input
                 type="number"
                 value=""
-                name="attr_combat_skill_dodge_flight"
+                name="attr_combat_combined_dodge_flight"
               />
               <button
                 type="roll"
-                value="Dodge in Flight: [[d20+@{combat_skill_dodge_flight}]]"
+                value="Dodge in Flight: [[d20+@{combat_combined_dodge_flight}]]"
               />
             </label>
           </div>
@@ -699,11 +716,11 @@
               <input
                 type="number"
                 value=""
-                name="attr_combat_skill_dodge_auto"
+                name="attr_combat_combined_dodge_auto"
               />
               <button
                 type="roll"
-                value="Auto Dodge: [[d20+@{combat_skill_dodge_auto}]]"
+                value="Auto Dodge: [[d20+@{combat_combined_dodge_auto}]]"
               />
             </label>
           </div>
@@ -713,11 +730,11 @@
               <input
                 type="number"
                 value=""
-                name="attr_combat_skill_dodge_teleport"
+                name="attr_combat_combined_dodge_teleport"
               />
               <button
                 type="roll"
-                value="Teleport Dodge: [[d20+@{combat_skill_dodge_teleport}]]"
+                value="Teleport Dodge: [[d20+@{combat_combined_dodge_teleport}]]"
               />
             </label>
           </div>
@@ -727,11 +744,11 @@
               <input
                 type="number"
                 value=""
-                name="attr_combat_skill_dodge_motion"
+                name="attr_combat_combined_dodge_motion"
               />
               <button
                 type="roll"
-                value="Dodge in Motion: [[d20+@{combat_skill_dodge_motion}]]"
+                value="Dodge in Motion: [[d20+@{combat_combined_dodge_motion}]]"
               />
             </label>
           </div>
@@ -741,18 +758,21 @@
               <input
                 type="number"
                 value=""
-                name="attr_combat_skill_strike_range"
+                name="attr_combat_combined_strike_range"
               />
               <button
                 type="roll"
-                value="Range Strike: [[d20+@{combat_skill_strike_range}]]"
+                value="Range Strike: [[d20+@{combat_combined_strike_range}]]"
               />
             </label>
           </div>
           <div class="lnr">
             <label
               >Critical
-              <input type="number" value="" name="attr_combat_skill_critical"
+              <input
+                type="number"
+                value=""
+                name="attr_combat_combined_critical"
             /></label>
           </div>
         </div>
@@ -874,7 +894,8 @@
         </div>
         <div class="lnr">
           <label
-            >Damage <input type="number" value="" name="attr_combat_damage" />
+            >Damage
+            <input type="number" value="" name="attr_combat_skill_damage" />
             <div></div>
           </label>
         </div>
@@ -1763,24 +1784,24 @@
   });
 
   on("change:spd", (e) => {
-    getAttrs(["combatskill_numberattacks"], (a) => {
+    getAttrs(["combat_combined_attacks"], (a) => {
       const feetPerMelee = e.newValue * 15;
       const attrs = {
         run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
         run_ft_melee: feetPerMelee,
-        run_ft_attack: Math.round(feetPerMelee / a.combatskill_numberattacks),
+        run_ft_attack: Math.round(feetPerMelee / a.combat_combined_attacks),
       };
       setAttrs(attrs);
     });
   });
 
   on("change:repeating_movement:movement_mph", (e) => {
-    getAttrs(["combatskill_numberattacks"], (a) => {
+    getAttrs(["combat_combined_attacks"], (a) => {
       const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
       const attrs = {
         repeating_movement_movement_ft_melee: feetPerMelee,
         repeating_movement_movement_ft_attack: Math.round(
-          feetPerMelee / a.combatskill_numberattacks
+          feetPerMelee / a.combat_combined_attacks
         ),
       };
       setAttrs(attrs);
@@ -1788,21 +1809,24 @@
   });
 
   on("change:repeating_movement:movement_ft_melee", (e) => {
-    getAttrs(["combatskill_numberattacks"], (a) => {
+    getAttrs(["combat_combined_attacks"], (a) => {
       const feetPerMelee = e.newValue;
       //const mph = Math.round((feetPerMelee * 4 * 60) / 5280);
       const mph = ((feetPerMelee * 4 * 60) / 5280).toFixed(1);
       const attrs = {
         repeating_movement_movement_mph: mph,
         repeating_movement_movement_ft_attack: Math.round(
-          feetPerMelee / a.combatskill_numberattacks
+          feetPerMelee / a.combat_combined_attacks
         ),
       };
       setAttrs(attrs);
     });
   });
 
-  on("change:combatskill_numberattacks", (e) => {
+  on("change:combat_combined_attacks", (e) => {
+    getAttrs(["run_ft_melee"], (a) => {
+      setAttrs({ run_ft_attack: Math.round(a.run_ft_melee / e.newValue) });
+    });
     getSectionIDs("movement", (ids) => {
       const attrNames = ids.map(
         (id) => `repeating_movement_${id}_movement_ft_melee`
