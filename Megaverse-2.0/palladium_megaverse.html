@@ -526,29 +526,42 @@
   <div class="combat">
     <div class="combat-container">
       <div class="combat-combined">
-        <h4>Instructions</h4>
-        <p>
-          Complete the repeating sections for your various combat skills, then
-          select a valid skill as your base skill, followed by a valid skill as
-          your extra skill. Skill dropdowns are free-form, so you can type
-          anything in them and don't need to select from the list. Just make
-          sure that your Base and Extra skill selections match what you typed
-          exactly.
-        </p>
-        <p>
-          If you have additional bonuses from items, magic, training, etc., you
-          can create an arbitrarily named Additional section and apply that as
-          Additional Bonuses as well.
-        </p>
-        <p>Examples:</p>
-        <ul>
-          <li>
-            <b>Base</b>: Commando<br /><b>Extra</b>: RPA Elite: Glitter Boy<br /><b
-              >Additional</b
-            >: Magic Gear
-          </li>
-          <li>Base: White Jade Fan; Extra: Bok Pai Kung Fu (Crane Style)</li>
-        </ul>
+        <details>
+          <summary><b>Instructions</b></summary>
+          <p>
+            Complete the repeating sections for your various combat skills, then
+            select a valid skill as your base skill, followed by a valid skill
+            as your extra skill. Skill dropdowns are free-form, so you can type
+            anything in them and don't need to select from the list. Just make
+            sure that your Base and Extra skill selections match what you typed
+            exactly.
+          </p>
+          <p>
+            If you have additional bonuses from items, magic, training, etc.,
+            you can create an arbitrarily named Additional section and apply
+            that as Additional Bonuses as well.
+          </p>
+          <p>
+            Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
+            Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
+            Motion. PS bonus isn't added to Damage because it could be
+            non-Normal. Crit should be the lowest of the available options (ex.
+            Crit: 17 is better than Crit: 19), but hasn't been implemented so
+            needs to be set manually.
+          </p>
+          <p>Examples:</p>
+          <ul>
+            <li>
+              <b>Base</b>: Commando<br /><b>Extra</b>: RPA Elite: Glitter Boy<br /><b
+                >Additional</b
+              >: Magic Gear
+            </li>
+            <li>
+              <b>Base</b>: White Jade Fan<br /><b>Extra</b>: Bok Pai Kung Fu
+              (Crane Style)<br /><b>Additional</b>: Super Powers
+            </li>
+          </ul>
+        </details>
         <label
           >Base Skill
           <input type="text" list="handToHand" name="attr_combat_skill_base" />
@@ -558,7 +571,7 @@
           <input type="text" list="handToHand" name="attr_combat_skill_extra" />
         </label>
         <label
-          >Additional Bonuses
+          >Additional
           <input
             type="text"
             list="handToHand"
@@ -1901,11 +1914,103 @@
     // each of the sectionIds and aggregate them in the combined combat section
     // +PP +PS, and add a saving throws section with +ME +PE
 
+    // No attribute bonuses.
     repeatingSum(
-      "combat_combined_attacks",
+      [
+        "combat_combined_attacks",
+        "combat_combined_initiative",
+        "combat_combined_pull",
+        "combat_combined_roll",
+        "combat_combined_damage",
+        "combat_combined_strike_range",
+      ],
       "combat",
-      "combat_skill_attacks",
+      [
+        "combat_skill_attacks",
+        "combat_skill_initiative",
+        "combat_skill_pull",
+        "combat_skill_roll",
+        "combat_skill_damage",
+        "combat_skill_strike_range",
+      ],
       `filter:${sectionIds.toString()}`
+    );
+
+    // PP Bonus
+    repeatingSum(
+      [
+        "combat_combined_strike",
+        "combat_combined_parry",
+        "combat_combined_dodge",
+        "combat_combined_throw",
+        "combat_combined_disarm",
+        "combat_combined_entangle",
+        "combat_combined_dodge_flight",
+        "combat_combined_dodge_auto",
+        "combat_combined_dodge_teleport",
+        "combat_combined_dodge_motion",
+      ],
+      "combat",
+      [
+        "combat_skill_strike",
+        "combat_skill_parry",
+        "combat_skill_dodge",
+        "combat_skill_throw",
+        "combat_skill_disarm",
+        "combat_skill_entangle",
+        "combat_skill_dodge_flight",
+        "combat_skill_dodge_auto",
+        "combat_skill_dodge_teleport",
+        "combat_skill_dodge_motion",
+      ],
+      `filter:${sectionIds.toString()}`,
+      "pp_bonus"
+    );
+    return;
+
+    // Master list
+    repeatingSum(
+      [
+        "combat_combined_attacks",
+        "combat_combined_initiative",
+        "combat_combined_strike",
+        "combat_combined_parry",
+        "combat_combined_dodge",
+        "combat_combined_throw",
+        "combat_combined_disarm",
+        "combat_combined_entangle",
+        "combat_combined_pull",
+        "combat_combined_roll",
+        "combat_combined_damage",
+        "combat_combined_dodge_flight",
+        "combat_combined_dodge_auto",
+        "combat_combined_dodge_teleport",
+        "combat_combined_dodge_motion",
+        "combat_combined_strike_range",
+        "combat_combined_critical",
+      ],
+      "combat",
+      [
+        "combat_skill_attacks",
+        "combat_skill_initiative",
+        "combat_skill_strike",
+        "combat_skill_parry",
+        "combat_skill_dodge",
+        "combat_skill_throw",
+        "combat_skill_disarm",
+        "combat_skill_entangle",
+        "combat_skill_pull",
+        "combat_skill_roll",
+        "combat_skill_damage",
+        "combat_skill_dodge_flight",
+        "combat_skill_dodge_auto",
+        "combat_skill_dodge_teleport",
+        "combat_skill_dodge_motion",
+        "combat_skill_strike_range",
+        "combat_skill_critical",
+      ],
+      `filter:${sectionIds.toString()}`,
+      "pp_bonus"
     );
   };
 
