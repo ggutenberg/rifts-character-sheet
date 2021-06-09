@@ -2,6 +2,7 @@
   <div>
     <button type="action" name="act_core">Core</button>
     <button type="action" name="act_wp">WPs</button>
+    <button type="action" name="act_combat">Combat</button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
@@ -533,6 +534,425 @@
       </fieldset>
     </div>
   </div>
+
+  <div class="combat">
+    <div class="combat-container">
+      <div class="combat-combined">
+        <h4>Instructions</h4>
+        <p>
+          Complete the repeating sections for your various combat skills, then
+          select a valid skill as your base skill, followed by a valid skill as
+          your extra skill. Skill dropdowns are free-form, so you can type
+          anything in them and don't need to select from the list. Just make
+          sure that your Base and Extra skill selections match what you typed
+          exactly.
+        </p>
+        <p>
+          If you have additional bonuses from items, magic, training, etc., you
+          can create an arbitrarily named Additional section and apply that as
+          Additional Bonuses as well.
+        </p>
+        <p>Examples:</p>
+        <ul>
+          <li>Base: Commando; Extra: RPA Elite: Glitter Boy</li>
+          <li>Base: White Jade Fan; Extra: Bok Pai Kung Fu (Crane Style)</li>
+        </ul>
+        <label
+          >Base Skill
+          <input type="text" list="handToHand" name="attr_combat_skill_base" />
+        </label>
+        <label
+          >Extra Skill
+          <input type="text" list="handToHand" name="attr_combat_skill_extra" />
+        </label>
+        <label
+          >Additional Bonuses
+          <input
+            type="text"
+            list="handToHand"
+            name="attr_combat_skill_additional"
+          />
+        </label>
+        <div class="combat-combined-bonuses">
+          <label
+            >Attacks
+            <input type="number" value="" name="attr_combat_skill_attacks" />
+          </label>
+          <div class="lnr">
+            <label
+              >Initiative
+              <input
+                id="h2h-initiative"
+                type="number"
+                value=""
+                name="attr_combat_skill_initiative"
+              />
+              <button
+                type="roll"
+                value="Initiative: [[d20+@{combat_skill_initiative}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Strike
+              <input type="number" value="" name="attr_combat_skill_strike" />
+              <button
+                type="roll"
+                value="Strike: [[d20+@{combat_skill_strike}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Parry
+              <input type="number" value="" name="attr_combat_skill_parry" />
+              <button
+                type="roll"
+                value="Parry: [[d20+@{combat_skill_parry}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Dodge
+              <input type="number" value="" name="attr_combat_skill_dodge" />
+              <button
+                type="roll"
+                value="Dodge: [[d20+@{combat_skill_dodge}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Throw
+              <input type="number" value="" name="attr_combat_skill_throw" />
+              <button
+                type="roll"
+                value="Throw: [[d20+@{combat_skill_throw}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Disarm
+              <input type="number" value="" name="attr_combat_skill_disarm" />
+              <button
+                type="roll"
+                value="Disarm: [[d20+@{combat_skill_disarm}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Entangle
+              <input type="number" value="" name="attr_combat_skill_entangle" />
+              <button
+                type="roll"
+                value="Entangle: [[d20+@{combat_skill_entangle}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Pull Punch
+              <input type="number" value="" name="attr_combat_skill_pull" />
+              <button
+                type="roll"
+                value="Pull Punch: [[d20+@{combat_skill_pull}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Roll w/ Impact
+              <input type="number" value="" name="attr_combat_skill_roll" />
+              <button
+                type="roll"
+                value="Roll w/ Impact: [[d20+@{combat_skill_roll}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Damage <input type="number" value="" name="attr_combat_damage" />
+              <div></div>
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Dodge: Flight
+              <input
+                type="number"
+                value=""
+                name="attr_combat_skill_dodge_flight"
+              />
+              <button
+                type="roll"
+                value="Dodge in Flight: [[d20+@{combat_skill_dodge_flight}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Dodge: Auto
+              <input
+                type="number"
+                value=""
+                name="attr_combat_skill_dodge_auto"
+              />
+              <button
+                type="roll"
+                value="Auto Dodge: [[d20+@{combat_skill_dodge_auto}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Dodge: Teleport
+              <input
+                type="number"
+                value=""
+                name="attr_combat_skill_dodge_teleport"
+              />
+              <button
+                type="roll"
+                value="Teleport Dodge: [[d20+@{combat_skill_dodge_teleport}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Dodge: Motion
+              <input
+                type="number"
+                value=""
+                name="attr_combat_skill_dodge_motion"
+              />
+              <button
+                type="roll"
+                value="Dodge in Motion: [[d20+@{combat_skill_dodge_motion}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Strike: Range
+              <input
+                type="number"
+                value=""
+                name="attr_combat_skill_strike_range"
+              />
+              <button
+                type="roll"
+                value="Range Strike: [[d20+@{combat_skill_strike_range}]]"
+              />
+            </label>
+          </div>
+          <div class="lnr">
+            <label
+              >Critical
+              <input type="number" value="" name="attr_combat_skill_critical"
+            /></label>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <fieldset class="repeating_combat">
+        <label
+          >Skill
+          <input type="text" list="handToHand" name="attr_combat_skill" />
+          <datalist id="handToHand">
+            <option value="Basic"></option>
+            <option value="Expert"></option>
+            <option value="Martial Arts"></option>
+            <option value="Assassin"></option>
+            <option value="Commando"></option>
+            <option value="Dragon"></option>
+            <option value="RPA Basic"></option>
+            <option value="RPA Elite: Flying PA"></option>
+            <option value="RPA Elite: Ground PA"></option>
+            <option value="RPA Elite: Heavy Vehicle"></option>
+            <option value="RPA Elite: Heavy Ground"></option>
+            <option value="RPA Elite: Light Ground"></option>
+            <option value="RPA Elite: Glitter Boy"></option>
+          </datalist>
+        </label>
+        <label
+          >Level
+          <input type="number" value="" name="attr_combat_skill_level" />
+        </label>
+        <label
+          >Attacks
+          <input type="number" value="" name="attr_combat_skill_attacks" />
+        </label>
+        <div class="lnr">
+          <label
+            >Initiative
+            <input
+              id="h2h-initiative"
+              type="number"
+              value=""
+              name="attr_combat_skill_initiative"
+            />
+            <button
+              type="roll"
+              value="Initiative: [[d20+@{combat_skill_initiative}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Strike
+            <input type="number" value="" name="attr_combat_skill_strike" />
+            <button
+              type="roll"
+              value="Strike: [[d20+@{combat_skill_strike}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Parry
+            <input type="number" value="" name="attr_combat_skill_parry" />
+            <button type="roll" value="Parry: [[d20+@{combat_skill_parry}]]" />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Dodge
+            <input type="number" value="" name="attr_combat_skill_dodge" />
+            <button type="roll" value="Dodge: [[d20+@{combat_skill_dodge}]]" />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Throw
+            <input type="number" value="" name="attr_combat_skill_throw" />
+            <button type="roll" value="Throw: [[d20+@{combat_skill_throw}]]" />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Disarm
+            <input type="number" value="" name="attr_combat_skill_disarm" />
+            <button
+              type="roll"
+              value="Disarm: [[d20+@{combat_skill_disarm}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Entangle
+            <input type="number" value="" name="attr_combat_skill_entangle" />
+            <button
+              type="roll"
+              value="Entangle: [[d20+@{combat_skill_entangle}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Pull Punch
+            <input type="number" value="" name="attr_combat_skill_pull" />
+            <button
+              type="roll"
+              value="Pull Punch: [[d20+@{combat_skill_pull}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Roll w/ Impact
+            <input type="number" value="" name="attr_combat_skill_roll" />
+            <button
+              type="roll"
+              value="Roll w/ Impact: [[d20+@{combat_skill_roll}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Damage <input type="number" value="" name="attr_combat_damage" />
+            <div></div>
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Dodge: Flight
+            <input
+              type="number"
+              value=""
+              name="attr_combat_skill_dodge_flight"
+            />
+            <button
+              type="roll"
+              value="Dodge in Flight: [[d20+@{combat_skill_dodge_flight}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Dodge: Auto
+            <input type="number" value="" name="attr_combat_skill_dodge_auto" />
+            <button
+              type="roll"
+              value="Auto Dodge: [[d20+@{combat_skill_dodge_auto}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Dodge: Teleport
+            <input
+              type="number"
+              value=""
+              name="attr_combat_skill_dodge_teleport"
+            />
+            <button
+              type="roll"
+              value="Teleport Dodge: [[d20+@{combat_skill_dodge_teleport}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Dodge: Motion
+            <input
+              type="number"
+              value=""
+              name="attr_combat_skill_dodge_motion"
+            />
+            <button
+              type="roll"
+              value="Dodge in Motion: [[d20+@{combat_skill_dodge_motion}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Strike: Range
+            <input
+              type="number"
+              value=""
+              name="attr_combat_skill_strike_range"
+            />
+            <button
+              type="roll"
+              value="Range Strike: [[d20+@{combat_skill_strike_range}]]"
+            />
+          </label>
+        </div>
+        <div class="lnr">
+          <label
+            >Critical
+            <input type="number" value="" name="attr_combat_skill_critical"
+          /></label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
 </main>
 <script type="text/worker">
   // Change from javascript to worker before upload
@@ -965,14 +1385,6 @@
       { strike: 1 },
     ],
   };
-  const buttonlist = ["core", "wp"];
-  buttonlist.forEach((button) => {
-    on(`clicked:${button}`, function () {
-      setAttrs({
-        sheetTab: button,
-      });
-    });
-  });
 
   const getBiAttributeBonus = (attr) => {
     const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
@@ -1008,27 +1420,6 @@
     });
     setAttrs(attrs);
   };
-
-  // const setWp = (name, newLevel, oldLevel, rowId = "") => {
-  //   console.log(newLevel, oldLevel, rowId);
-  //   const keyPrefix = rowId ? `repeating_wp_${rowId}` : `repeating_wp`;
-  //   if (rowId) {
-  //     getAttrs([`${keyPrefix}_wplevel`], (a) => {
-  //       const oldWpLevel = a[`${keyPrefix}_wplevel`];
-  //       console.log("oldWpLevel", oldWpLevel);
-  //       const delta = oldLevel - oldWpLevel;
-  //       console.log("delta", delta);
-  //       if (delta != 0) {
-  //         const newWpLevel = newLevel - delta;
-  //         setWpRow(name, keyPrefix, newWpLevel);
-  //       } else {
-  //         setWpRow(name, keyPrefix, newLevel);
-  //       }
-  //     });
-  //   } else {
-  //     setWpRow(name, keyPrefix, newLevel);
-  //   }
-  // };
 
   const setWp = ({
     wpName,
@@ -1088,6 +1479,12 @@
           });
         });
       });
+    });
+  });
+
+  on("change:h2h", (e) => {
+    getAttrs([`level`], (a) => {
+      setAttrs({ h2hlevel: a.level });
     });
   });
 
@@ -1422,6 +1819,15 @@
           }
         });
         setAttrs(attrs);
+      });
+    });
+  });
+
+  const buttonlist = ["core", "wp", "combat"];
+  buttonlist.forEach((button) => {
+    on(`clicked:${button}`, function () {
+      setAttrs({
+        sheetTab: button,
       });
     });
   });

@@ -15,18 +15,26 @@
 .charsheet main#megaverse input[type="number"] {
   width: auto;
 }
+
+.charsheet main#megaverse label {
+  margin-bottom: 0;
+  font-size: 1.3rem;
+}
+
 /* End Resets */
 
 /* Tabs */
 /*Configure the tab buttons*/
 .core,
-.wp {
+.wp,
+.combat {
   display: none;
 }
 
 /* show the selected tab */
 .tabstoggle[value="core"] ~ div.core,
-.tabstoggle[value="wp"] ~ div.wp {
+.tabstoggle[value="wp"] ~ div.wp,
+.tabstoggle[value="combat"] ~ div.combat {
   display: block;
 }
 
@@ -86,4 +94,30 @@
 
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {
   display: none;
+}
+
+/* .charsheet .combat-container {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: max-content max-content;
+} */
+
+/* Label Number Roll */
+.charsheet div.lnr {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: max-content;
+}
+
+.charsheet main#megaverse .combat-container input[type="number"] {
+  width: 5rem;
+}
+
+.charsheet .combat-container .combat-combined-bonuses,
+.charsheet .combat-container .repcontainer .repitem {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: max-content max-content max-content max-content;
 }
