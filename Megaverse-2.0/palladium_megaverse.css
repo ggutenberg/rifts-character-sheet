@@ -41,13 +41,26 @@
 .grid-container {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 1fr;
 }
 
-.section-one {
+/* .section-one {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: max-content 1fr;
+} */
+
+.section-one label {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.section-one label span {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 }
 
 .ss-2a {
@@ -102,11 +115,17 @@
   grid-template-columns: max-content max-content;
 } */
 
-/* Label Number Roll */
-.charsheet div.lnr {
+.charsheet .combat-container .repcontainer .repitem label,
+.combat-combined-bonuses label {
   display: grid;
-  gap: 0.5rem;
-  grid-template-columns: max-content;
+  grid-template-columns: 1fr min-content 4rem;
+  width: 100%;
+}
+
+.charsheet .combat-container .repcontainer .repitem label span,
+.combat-combined-bonuses label span {
+  display: flex;
+  align-items: center;
 }
 
 .charsheet main#megaverse .combat-container input[type="number"] {
@@ -122,6 +141,14 @@
   grid-template-columns: max-content max-content max-content max-content;
 }
 
+.charsheet .combat-container .repcontainer .repitem:not(:last-of-type) {
+  margin-bottom: 3rem;
+}
+
+/*****************/
+/* Metal Buttons */
+/*****************/
+
 .dialog.characterviewer {
   background-color: hsla(0, 0%, 90%, 1);
   background-image: linear-gradient(
@@ -131,8 +158,6 @@
   );
   background-size: 5px;
 }
-
-/*********************/
 
 /* globals */
 
