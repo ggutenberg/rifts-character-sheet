@@ -553,6 +553,13 @@
             Crit: 17 is better than Crit: 19), but hasn't been implemented so
             needs to be set manually.
           </p>
+          <p>
+            Also note that removing a skill from Base, Extra, or Additional
+            doesn't actually remove it from the aggregated values. This is a bug
+            which will be fixed, but in the meantime you can create a skill
+            called "None" with no values, and enter that into Base, Extra, or
+            Additional if you want to remove one of them.
+          </p>
           <p>Examples:</p>
           <ul>
             <li>
@@ -582,14 +589,22 @@
             name="attr_combat_skill_additional"
           />
         </label>
+        <br />
+        <h3>Aggregated Bonuses</h3>
         <div class="combat-combined-bonuses">
           <label
             ><span>Attacks</span>
-            <input type="number" value="" name="attr_combat_combined_attacks" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_attacks"
+            />
           </label>
           <label
             ><span>Initiative</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_initiative"
@@ -601,7 +616,12 @@
           </label>
           <label
             ><span>Strike</span>
-            <input type="number" value="" name="attr_combat_combined_strike" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_strike"
+            />
             <button
               type="roll"
               value="Strike: [[d20+@{combat_combined_strike}]]"
@@ -609,7 +629,12 @@
           </label>
           <label
             ><span>Parry</span>
-            <input type="number" value="" name="attr_combat_combined_parry" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_parry"
+            />
             <button
               type="roll"
               value="Parry: [[d20+@{combat_combined_parry}]]"
@@ -617,7 +642,12 @@
           </label>
           <label
             ><span>Dodge</span>
-            <input type="number" value="" name="attr_combat_combined_dodge" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_dodge"
+            />
             <button
               type="roll"
               value="Dodge: [[d20+@{combat_combined_dodge}]]"
@@ -625,7 +655,12 @@
           </label>
           <label
             ><span>Throw</span>
-            <input type="number" value="" name="attr_combat_combined_throw" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_throw"
+            />
             <button
               type="roll"
               value="Throw: [[d20+@{combat_combined_throw}]]"
@@ -633,7 +668,12 @@
           </label>
           <label
             ><span>Disarm</span>
-            <input type="number" value="" name="attr_combat_combined_disarm" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_disarm"
+            />
             <button
               type="roll"
               value="Disarm: [[d20+@{combat_combined_disarm}]]"
@@ -642,6 +682,7 @@
           <label
             ><span>Entangle</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_entangle"
@@ -653,7 +694,12 @@
           </label>
           <label
             ><span>Pull Punch</span>
-            <input type="number" value="" name="attr_combat_combined_pull" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_pull"
+            />
             <button
               type="roll"
               value="Pull Punch: [[d20+@{combat_combined_pull}]]"
@@ -661,7 +707,12 @@
           </label>
           <label
             ><span>Roll w/ Impact</span>
-            <input type="number" value="" name="attr_combat_combined_roll" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_roll"
+            />
             <button
               type="roll"
               value="Roll w/ Impact: [[d20+@{combat_combined_roll}]]"
@@ -669,12 +720,18 @@
           </label>
           <label
             ><span>Damage</span>
-            <input type="number" value="" name="attr_combat_combined_damage" />
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_damage"
+            />
             <div></div>
           </label>
           <label
             ><span>Dodge: Flight</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_dodge_flight"
@@ -687,6 +744,7 @@
           <label
             ><span>Dodge: Auto</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_dodge_auto"
@@ -699,6 +757,7 @@
           <label
             ><span>Dodge: Teleport</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_dodge_teleport"
@@ -711,6 +770,7 @@
           <label
             ><span>Dodge: Motion</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_dodge_motion"
@@ -723,6 +783,7 @@
           <label
             ><span>Strike: Range</span>
             <input
+              readonly
               type="number"
               value=""
               name="attr_combat_combined_strike_range"
@@ -739,6 +800,7 @@
         </div>
       </div>
       <hr />
+      <h3>Combat Skills</h3>
       <fieldset class="repeating_combat">
         <label
           ><span>Skill</span>

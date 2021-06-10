@@ -23,6 +23,9 @@
 
 details {
   margin-bottom: 1rem;
+}
+
+details summary {
   cursor: pointer;
 }
 
