@@ -3,11 +3,15 @@
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
     <button class="metal linear" type="action" name="act_combat">Combat</button>
+    <button class="metal linear" type="action" name="act_equipment">
+      Equipment
+    </button>
+    <button class="metal linear" type="action" name="act_skills">Skills</button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
   <div class="core">
-    Palladium Megaverse© Character Sheet <br />
+    Palladium Rifts Character Sheet <br />
     <h1>Character Statistics</h1>
     <div class="grid-container">
       <div class="section-one character-background">
@@ -878,6 +882,9 @@
       </fieldset>
     </div>
   </div>
+
+  <div class="equipment">Equipment Coming Soon!</div>
+  <div class="skills">Skills Coming Soon!</div>
 </main>
 <script type="text/worker">
   // Change from javascript to worker before upload
@@ -2051,7 +2058,7 @@
     }
   );
 
-  const buttonlist = ["core", "wp", "combat"];
+  const buttonlist = ["core", "wp", "combat", "equipment", "skills"];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {
       setAttrs({
