@@ -114,7 +114,7 @@ details summary {
 .charsheet .wp-container .repcontainer .repitem {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: max-content 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem;
+  grid-template-columns: max-content 7rem 4rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem;
 }
 
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {

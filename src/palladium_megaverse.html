@@ -477,9 +477,11 @@
 
   <div class="wp">
     <div class="wp-container">
+      <h4>Ancient Weapon Proficiencies</h4>
       <fieldset class="repeating_wp">
         <h5>Weapon Proficiency</h5>
         <h5>Strike</h5>
+        <h5></h5>
         <h5>Burst</h5>
         <h5>Parry</h5>
         <h5>Disarm</h5>
@@ -504,6 +506,35 @@
           <option value="Sword"></option>
           <option value="Targeting"></option>
           <option value="Whip"></option>
+        </datalist>
+        <input type="number" value="" name="attr_strike" />
+        <button type="roll" value="@{wpname}: [[d20+@{strike}]]"></button>
+        <input type="number" value="" name="attr_burst" />
+        <input type="number" value="" name="attr_parry" />
+        <input type="number" value="" name="attr_disarm" />
+        <input type="number" value="" name="attr_rof" />
+        <input type="number" value="" name="attr_thrown" />
+        <input type="number" value="" name="attr_entangle" />
+        <input type="number" value="" name="attr_wplevel" />
+      </fieldset>
+      <h4>Modern Weapon Proficiencies</h4>
+      <fieldset class="repeating_wpmodern">
+        <h5>Weapon Proficiency</h5>
+        <h5>Strike</h5>
+        <h5></h5>
+        <h5>Burst</h5>
+        <h5>Parry</h5>
+        <h5>Disarm</h5>
+        <h5>RoF</h5>
+        <h5>Thrown</h5>
+        <h5>Entangle</h5>
+        <h5>WP Level</h5>
+        <input
+          type="text"
+          list="weaponProficienciesModern"
+          name="attr_wpname"
+        />
+        <datalist id="weaponProficienciesModern">
           <option value="Handguns"></option>
           <option value="Rifles"></option>
           <option value="Energy Heavy"></option>
@@ -516,6 +547,7 @@
           <option value="Flamethrower"></option>
         </datalist>
         <input type="number" value="" name="attr_strike" />
+        <button type="roll" value="@{wpname}: [[d20+@{strike}]]"></button>
         <input type="number" value="" name="attr_burst" />
         <input type="number" value="" name="attr_parry" />
         <input type="number" value="" name="attr_disarm" />
@@ -1567,24 +1599,29 @@
       }
       attrs[`${keyPrefix}_wplevel`] = level;
     });
+    console.log(attrs);
     setAttrs(attrs);
   };
 
   const setWp = ({
+    section,
     wpName,
     newCharacterLevel,
     oldCharacterLevel,
     newWpLevel,
     rowId,
   }) => {
-    console.log({
+    console.log("setWp", {
+      section,
       wpName,
       newCharacterLevel,
       oldCharacterLevel,
       newWpLevel,
       rowId,
     });
-    const keyPrefix = rowId ? `repeating_wp_${rowId}` : `repeating_wp`;
+    const keyPrefix = rowId
+      ? `repeating_${section}_${rowId}`
+      : `repeating_${section}`;
     if (newWpLevel) {
       setWpRow(wpName, keyPrefix, newWpLevel);
     } else if (!rowId) {
@@ -1609,26 +1646,38 @@
     }
   };
 
+  const updateWeaponProficiencies = (
+    section,
+    newCharacterLevel,
+    oldCharacterLevel
+  ) => {
+    console.log(section);
+    getSectionIDs(section, (ids) => {
+      console.log(ids);
+      const attrNames = ids.map((id) => `repeating_${section}_${id}_wpname`);
+      getAttrs(attrNames, (a) => {
+        const attrs = {};
+        ids.forEach((id) => {
+          setWp({
+            section,
+            wpName: a[`repeating_${section}_${id}_wpname`].toLowerCase(),
+            newCharacterLevel,
+            oldCharacterLevel,
+            rowId: id,
+          });
+        });
+      });
+    });
+  };
+
   /**
    * This one is a doozy
    * */
   on("change:level", (e) => {
     console.log("change:level", e.newValue, e.previousValue);
     // Update WPs
-    getSectionIDs("wp", (ids) => {
-      const attrNames = ids.map((id) => `repeating_wp_${id}_wpname`);
-      getAttrs(attrNames, (a) => {
-        const attrs = {};
-        ids.forEach((id) => {
-          setWp({
-            wpName: a[`repeating_wp_${id}_wpname`].toLowerCase(),
-            newCharacterLevel: e.newValue,
-            oldCharacterLevel: e.previousValue,
-            rowId: id,
-          });
-        });
-      });
-    });
+    updateWeaponProficiencies("wp", e.newValue, e.previousValue);
+    updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
   });
 
   on("change:h2h", (e) => {
@@ -1637,26 +1686,35 @@
     });
   });
 
-  on("change:repeating_wp:wplevel", (e) => {
-    getSectionIDs("wp", (ids) => {
+  const updateWeaponProficiency = (section, source, newWpLevel) => {
+    getSectionIDs(section, (ids) => {
       const rowId = ids.find(
-        (id) => `repeating_wp_${id}_wplevel`.toLowerCase() == e.sourceAttribute
+        (id) => `repeating_${section}_${id}_wplevel`.toLowerCase() == source
       );
-      getAttrs([`repeating_wp_${rowId}_wpname`], (a) => {
+      getAttrs([`repeating_${section}_${rowId}_wpname`], (a) => {
         setWp({
-          wpName: a[`repeating_wp_${rowId}_wpname`],
-          newWpLevel: e.newValue,
+          section,
+          wpName: a[`repeating_${section}_${rowId}_wpname`],
+          newWpLevel,
           rowId: rowId,
         });
       });
     });
+  };
+
+  on("change:repeating_wp:wplevel change:repeating_wpmodern:wplevel", (e) => {
     console.log(e);
+    const section = e.sourceAttribute.split("_")[1];
+    console.log(section);
+    updateWeaponProficiency(section, e.sourceAttribute, e.newValue);
   });
 
-  on("change:repeating_wp:wpname", (e) => {
+  on("change:repeating_wp:wpname change:repeating_wpmodern:wpname", (e) => {
+    const section = e.sourceAttribute.split("_")[1];
+    console.log("change", section);
     const wpName = e.newValue.toLowerCase();
     getAttrs(["level"], (a) => {
-      setWp({ wpName, newCharacterLevel: a.level });
+      setWp({ section, wpName, newCharacterLevel: a.level });
     });
   });
 
