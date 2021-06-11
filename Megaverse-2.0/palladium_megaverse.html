@@ -625,6 +625,16 @@
             </li>
           </ul>
         </details>
+        <!-- @todo
+          Using checkboxes - https://wiki.roll20.net/Building_Character_Sheets#Checkboxes_and_Radio_Buttons
+          and CSS Wizardry - https://wiki.roll20.net/CSS_Wizardry#Select_Dropdown_Styling
+          I might be able to emulate a dynamic <select> based on values from repeating element
+        -->
+        <label>
+          <input type="checkbox" name="attr_skill0_check" value="1" />
+          <span name="attr_skill0"></span
+        ></label>
+        <input type="text" name="attr_skill0" value="" />
         <label
           >Base Skill
           <input type="text" list="handToHand" name="attr_combat_skill_base" />
@@ -2167,10 +2177,24 @@
     );
   };
 
+  on("change:repeating_combat:combat_skill", (e) => {
+    console.log("change:repeating_combat:combat_skill", e);
+    getSectionIDs("combat", (ids) => {
+      console.log(ids);
+      const idx = ids.findIndex((id) => e.sourceAttribute.includes(id));
+      const attrs = {};
+      attrs[`skill${idx}`] = e.newValue;
+      setAttrs(attrs);
+    });
+  });
+
+  on("change:skill0_check", (e) => {
+    console.log(e);
+  });
+
   on(
     "change:combat_skill_base change:combat_skill_extra change:combat_skill_additional change:repeating_combat",
     (e) => {
-      console.log("change:combat_skill_base");
       const combinerNames = [
         "combat_skill_base",
         "combat_skill_extra",
