@@ -632,30 +632,12 @@
         -->
         <fieldset class="repeating_combatselections">
           <label>
-            <input
-              type="checkbox"
-              name="attr_selected_combat_skill_check"
-              value="1" />
-            <span name="attr_selected_combat_skill"></span
+            <input type="checkbox" name="attr_combat_skill_check" value="1" />
+            <span name="attr_combat_skill"></span
           ></label>
-          <input type="text" name="attr_selected_combat_skill" value="" />
+          <input type="text" name="attr_combat_skill" value="" />
+          <input type="text" name="attr_combat_id" value="" />
         </fieldset>
-        <label
-          >Base Skill
-          <input type="text" list="handToHand" name="attr_combat_skill_base" />
-        </label>
-        <label
-          >Extra Skill
-          <input type="text" list="handToHand" name="attr_combat_skill_extra" />
-        </label>
-        <label
-          >Additional
-          <input
-            type="text"
-            list="handToHand"
-            name="attr_combat_skill_additional"
-          />
-        </label>
         <br />
         <h3>Aggregated Bonuses</h3>
         <div class="combat-combined-bonuses">
@@ -869,6 +851,7 @@
       <hr />
       <h3>Combat Skills</h3>
       <fieldset class="repeating_combat">
+        <input type="hidden" name="attr_combat_selection_id" value="" />
         <label
           ><span>Skill</span>
           <input type="text" list="handToHand" name="attr_combat_skill" />
@@ -1084,14 +1067,11 @@
       let filteredAttrArray = attrArray;
       if (properties.attributes.filter) {
         filteredAttrArray = attrArray.filter((attr) =>
-          Object.keys(properties.attributes.filter).some((sectionId) =>
-            attr.includes(sectionId)
+          Object.keys(properties.attributes.filter).some(
+            (sectionId) => sectionId && attr.includes(sectionId)
           )
         );
       }
-      console.log("properties", properties);
-      console.log("attrArray", attrArray);
-      console.log("filteredAttrArray", filteredAttrArray);
       getAttrs(
         [...filteredAttrArray, ...Object.keys(properties.attributes)],
         (v) => {
@@ -2082,6 +2062,8 @@
     // each of the sectionIds and aggregate them in the combined combat section
     // +PP +PS, and add a saving throws section with +ME +PE
 
+    console.log("combineCombat", sectionIds);
+
     // No attribute bonuses.
     repeatingSum(
       [
@@ -2191,60 +2173,73 @@
           e.sourceAttribute.includes(id)
         );
         const attrs = {};
+        let rowId;
         if (skillIdx >= selectionIds.length) {
           // add new row
-          const newRowId = generateRowID();
-          attrs[
-            `repeating_combatselections_${newRowId}_selected_combat_skill`
-          ] = e.newValue;
+          rowId = generateRowID();
+          // attrs[`repeating_combatselections_${rowId}_combat_selection`] =
+          //   e.newValue;
         } else {
-          attrs[
-            `repeating_combatselections_${selectionIds[skillIdx]}_selected_combat_skill`
-          ] = e.newValue;
+          rowId = selectionIds[skillIdx];
+          // attrs[
+          //   `repeating_combatselections_${selectionIds[skillIdx]}_combat_selection`
+          // ] = e.newValue;
         }
+        // Store related row ID from repeating_combatselections
+        attrs[`repeating_combat_combat_selection_id`] = rowId;
+        attrs[`repeating_combatselections_${rowId}_combat_id`] =
+          skillIds[skillIdx];
+        attrs[`repeating_combatselections_${rowId}_combat_skill`] = e.newValue;
         console.log(attrs);
         setAttrs(attrs);
       });
     });
   });
 
-  on("change:repeating_combatselections:selected_combat_skill_check", (e) => {
-    console.log(e);
+  on("remove:repeating_combat", (e) => {
+    // remove repeating_combatselections row with the same index
+    const combatselectionsRowIdToRemove =
+      e.removedInfo[`${e.sourceAttribute}_combat_selection_id`];
+    removeRepeatingRow(
+      `repeating_combatselections_${combatselectionsRowIdToRemove}`
+    );
   });
 
-  on(
-    "change:combat_skill_base change:combat_skill_extra change:combat_skill_additional change:repeating_combat",
-    (e) => {
-      const combinerNames = [
-        "combat_skill_base",
-        "combat_skill_extra",
-        "combat_skill_additional",
-      ];
-      getSectionIDs("combat", (ids) => {
-        console.log(ids);
-        const attrNames = ids.map(
-          (id) => `repeating_combat_${id}_combat_skill`
-        );
-        getAttrs(attrNames, (repeaters) => {
-          getAttrs(combinerNames, (combiners) => {
-            const sectionIds = [];
-            for (const [cKey, cValue] of Object.entries(combiners)) {
-              console.log("c", cKey, cValue);
-              const repeaterSkill = Object.keys(repeaters).find(
-                (rKey) => repeaters[rKey] == cValue
-              );
-              console.log("repeaterSkill", repeaterSkill);
-              if (repeaterSkill) {
-                sectionIds.push(
-                  ids.find((id) => repeaterSkill.includes(id.toLowerCase()))
-                );
-              }
-            }
-            console.log(sectionIds);
-            combineCombat(sectionIds);
-          });
-        });
+  on("change:_reorder:combat", (e) => {
+    // reorder repeating_combatselections to match
+    console.log("change:_reorder:combat", e);
+  });
+
+  const aggregateBonuses = () => {
+    getSectionIDs("combatselections", (ids) => {
+      const checkboxNames = ids.map(
+        (id) => `repeating_combatselections_${id}_combat_skill_check`
+      );
+      const combatIdNames = ids.map(
+        (id) => `repeating_combatselections_${id}_combat_id`
+      );
+      const attrNames = checkboxNames.concat(combatIdNames);
+      getAttrs(attrNames, (a) => {
+        const sectionIdsToAggregate = ids.reduce((acc, id) => {
+          if (
+            Boolean(
+              Number(a[`repeating_combatselections_${id}_combat_skill_check`])
+            ) == true
+          ) {
+            acc.push(a[`repeating_combatselections_${id}_combat_id`]);
+          }
+          return acc;
+        }, []);
+        combineCombat(sectionIdsToAggregate);
       });
+    });
+  };
+
+  on(
+    "change:repeating_combatselections:combat_skill_check change:repeating_combat",
+    (e) => {
+      console.log(e);
+      aggregateBonuses();
     }
   );
 
