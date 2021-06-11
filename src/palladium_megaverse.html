@@ -564,15 +564,15 @@
           <option value="Submachinegun"></option>
           <option value="Flamethrower"></option>
         </datalist>
-        <input type="number" value="" name="attr_strike" />
+        <input type="number" value="" name="attr_strike_range_single" />
         <button
           type="roll"
-          value="@{wpname}: [[d20+@{strike}+@{combat_combined_strike_range}]]"
+          value="@{wpname}: [[d20+@{strike_range_single}+@{combat_combined_strike_range}]]"
         ></button>
         <input type="number" value="" name="attr_burst" />
         <button
           type="roll"
-          value="@{wpname}: [[d20+@{burst}+@{combat_combined_strike_range}]]"
+          value="@{wpname}: [[d20+@{burst}+@{combat_combined_burst}]]"
         ></button>
         <input type="number" value="" name="attr_wplevel" />
       </fieldset>
@@ -637,6 +637,7 @@
           ></label>
           <input type="text" name="attr_combat_skill" value="" />
           <input type="text" name="attr_combat_id" value="" />
+          <input type="text" name="attr_bonus_section" value="" />
         </fieldset>
         <br />
         <h3>Aggregated Bonuses</h3>
@@ -843,6 +844,32 @@
             />
           </label>
           <label
+            ><span>Range: Single</span>
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_strike_range_single"
+            />
+            <button
+              type="roll"
+              value="Range Strike - Single Shot: [[d20+@{combat_combined_strike_range_single}]]"
+            />
+          </label>
+          <label
+            ><span>Burst</span>
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_burst"
+            />
+            <button
+              type="roll"
+              value="Range Strike - Burst: [[d20+@{combat_combined_burst}]]"
+            />
+          </label>
+          <label
             ><span>Critical</span>
             <input type="number" value="" name="attr_combat_combined_critical"
           /></label>
@@ -880,117 +907,108 @@
         <div></div>
         <label
           ><span>Attacks</span>
-          <input type="number" value="" name="attr_combat_skill_attacks" />
+          <input type="number" value="" name="attr_attacks" />
         </label>
         <label
           ><span>Initiative</span>
-          <input type="number" value="" name="attr_combat_skill_initiative" />
-          <button
-            type="roll"
-            value="Initiative: [[d20+@{combat_skill_initiative}]]"
-          />
+          <input type="number" value="" name="attr_initiative" />
+          <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
         </label>
         <label
           ><span>Strike</span>
-          <input type="number" value="" name="attr_combat_skill_strike" />
-          <button type="roll" value="Strike: [[d20+@{combat_skill_strike}]]" />
+          <input type="number" value="" name="attr_strike" />
+          <button type="roll" value="Strike: [[d20+@{strike}]]" />
         </label>
         <label
           ><span>Parry</span>
-          <input type="number" value="" name="attr_combat_skill_parry" />
-          <button type="roll" value="Parry: [[d20+@{combat_skill_parry}]]" />
+          <input type="number" value="" name="attr_parry" />
+          <button type="roll" value="Parry: [[d20+@{parry}]]" />
         </label>
         <label
           ><span>Dodge</span>
-          <input type="number" value="" name="attr_combat_skill_dodge" />
-          <button type="roll" value="Dodge: [[d20+@{combat_skill_dodge}]]" />
+          <input type="number" value="" name="attr_dodge" />
+          <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
         </label>
         <label
           ><span>Throw</span>
-          <input type="number" value="" name="attr_combat_skill_throw" />
-          <button type="roll" value="Throw: [[d20+@{combat_skill_throw}]]" />
+          <input type="number" value="" name="attr_throw" />
+          <button type="roll" value="Throw: [[d20+@{throw}]]" />
         </label>
         <label
           ><span>Disarm</span>
-          <input type="number" value="" name="attr_combat_skill_disarm" />
-          <button type="roll" value="Disarm: [[d20+@{combat_skill_disarm}]]" />
+          <input type="number" value="" name="attr_disarm" />
+          <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
         </label>
         <label
           ><span>Entangle</span>
-          <input type="number" value="" name="attr_combat_skill_entangle" />
-          <button
-            type="roll"
-            value="Entangle: [[d20+@{combat_skill_entangle}]]"
-          />
+          <input type="number" value="" name="attr_entangle" />
+          <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
         </label>
         <label
           ><span>Pull Punch</span>
-          <input type="number" value="" name="attr_combat_skill_pull" />
-          <button
-            type="roll"
-            value="Pull Punch: [[d20+@{combat_skill_pull}]]"
-          />
+          <input type="number" value="" name="attr_pull" />
+          <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
         </label>
         <label
           ><span>Roll w/ Impact</span>
-          <input type="number" value="" name="attr_combat_skill_roll" />
-          <button
-            type="roll"
-            value="Roll w/ Impact: [[d20+@{combat_skill_roll}]]"
-          />
+          <input type="number" value="" name="attr_roll" />
+          <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
         </label>
         <label
           ><span>Damage</span>
-          <input type="number" value="" name="attr_combat_skill_damage" />
+          <input type="number" value="" name="attr_damage" />
           <div></div>
         </label>
         <label
           ><span>Dodge: Flight</span>
-          <input type="number" value="" name="attr_combat_skill_dodge_flight" />
+          <input type="number" value="" name="attr_dodge_flight" />
           <button
             type="roll"
-            value="Dodge in Flight: [[d20+@{combat_skill_dodge_flight}]]"
+            value="Dodge in Flight: [[d20+@{dodge_flight}]]"
           />
         </label>
         <label
           >Dodge: Auto
-          <input type="number" value="" name="attr_combat_skill_dodge_auto" />
-          <button
-            type="roll"
-            value="Auto Dodge: [[d20+@{combat_skill_dodge_auto}]]"
-          />
+          <input type="number" value="" name="attr_dodge_auto" />
+          <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
         </label>
         <label
           ><span>Dodge: Teleport</span>
-          <input
-            type="number"
-            value=""
-            name="attr_combat_skill_dodge_teleport"
-          />
+          <input type="number" value="" name="attr_dodge_teleport" />
           <button
             type="roll"
-            value="Teleport Dodge: [[d20+@{combat_skill_dodge_teleport}]]"
+            value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
           />
         </label>
         <label
           ><span>Dodge: Motion</span>
-          <input type="number" value="" name="attr_combat_skill_dodge_motion" />
+          <input type="number" value="" name="attr_dodge_motion" />
           <button
             type="roll"
-            value="Dodge in Motion: [[d20+@{combat_skill_dodge_motion}]]"
+            value="Dodge in Motion: [[d20+@{dodge_motion}]]"
           />
         </label>
         <label
           ><span>Strike: Range</span>
-          <input type="number" value="" name="attr_combat_skill_strike_range" />
+          <input type="number" value="" name="attr_strike_range" />
+          <button type="roll" value="Range Strike: [[d20+@{strike_range}]]" />
+        </label>
+        <label
+          ><span>Range: Single</span>
+          <input type="number" value="" name="attr_strike_range_single" />
           <button
             type="roll"
-            value="Range Strike: [[d20+@{combat_skill_strike_range}]]"
+            value="Range Strike: [[d20+@{strike_range_single}]]"
           />
         </label>
         <label
+          ><span>Range: Burst</span>
+          <input type="number" value="" name="attr_burst" />
+          <button type="roll" value="Range Strike: [[d20+@{burst}]]" />
+        </label>
+        <label
           ><span>Critical</span>
-          <input type="number" value="" name="attr_combat_skill_critical"
+          <input type="number" value="" name="attr_critical"
         /></label>
       </fieldset>
     </div>
@@ -1156,7 +1174,7 @@
   };
   const WP_ACTIONS = {
     wp: ["strike", "parry", "disarm", "rof", "throw", "entangle"],
-    wpmodern: ["strike", "disarm"],
+    wpmodern: ["strike_range_single", "disarm"],
   };
   // const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "throw", "entangle"];
   // const WP_ACTIONS_MODERN = ["strike", "burst"];
@@ -1418,173 +1436,173 @@
     ],
     handguns: [
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
     ],
     rifles: [
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
     ],
     "energy heavy": [
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      { strike_range_single: 1 },
       {},
       {},
     ],
     "energy pistol": [
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
     ],
     "energy rifle": [
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
     ],
     heavy: [
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      {},
+      { strike_range_single: 1 },
       {},
     ],
     speargun: [
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      { strike_range_single: 1 },
       {},
       {},
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
     ],
     shotgun: [
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      {},
+      { strike_range_single: 1 },
       {},
     ],
     submachinegun: [
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
-      { strike: 1 },
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      { strike_range_single: 1 },
     ],
     flamethrower: [
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
-      { strike: 1 },
-      {},
-      {},
-      {},
-      {},
-      { strike: 1 },
+      { strike_range_single: 1 },
       {},
       {},
       {},
       {},
-      { strike: 1 },
+      { strike_range_single: 1 },
+      {},
+      {},
+      {},
+      {},
+      { strike_range_single: 1 },
     ],
   };
 
@@ -1615,7 +1633,7 @@
     WP_ACTIONS[section].forEach((action) => {
       const key = `${keyPrefix}_${action}`;
       attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
-      if (action == "strike" && section == "wpmodern") {
+      if (action == "strike_range_single") {
         attrs[`${keyPrefix}_burst`] = Math.floor(attrs[key] / 2);
       }
       attrs[`${keyPrefix}_wplevel`] = level;
@@ -2062,8 +2080,6 @@
     // each of the sectionIds and aggregate them in the combined combat section
     // +PP +PS, and add a saving throws section with +ME +PE
 
-    console.log("combineCombat", sectionIds);
-
     // No attribute bonuses.
     repeatingSum(
       [
@@ -2073,15 +2089,19 @@
         "combat_combined_roll",
         "combat_combined_damage",
         "combat_combined_strike_range",
+        "combat_combined_strike_range_single",
+        "combat_combined_burst",
       ],
       "combat",
       [
-        "combat_skill_attacks",
-        "combat_skill_initiative",
-        "combat_skill_pull",
-        "combat_skill_roll",
-        "combat_skill_damage",
-        "combat_skill_strike_range",
+        "attacks",
+        "initiative",
+        "pull",
+        "roll",
+        "damage",
+        "strike_range",
+        "strike_range_single",
+        "burst",
       ],
       `filter:${sectionIds.toString()}`
     );
@@ -2102,16 +2122,16 @@
       ],
       "combat",
       [
-        "combat_skill_strike",
-        "combat_skill_parry",
-        "combat_skill_dodge",
-        "combat_skill_throw",
-        "combat_skill_disarm",
-        "combat_skill_entangle",
-        "combat_skill_dodge_flight",
-        "combat_skill_dodge_auto",
-        "combat_skill_dodge_teleport",
-        "combat_skill_dodge_motion",
+        "strike",
+        "parry",
+        "dodge",
+        "throw",
+        "disarm",
+        "entangle",
+        "dodge_flight",
+        "dodge_auto",
+        "dodge_teleport",
+        "dodge_motion",
       ],
       `filter:${sectionIds.toString()}`,
       "pp_bonus"
@@ -2167,7 +2187,6 @@
   on("change:repeating_combat:combat_skill", (e) => {
     console.log("change:repeating_combat:combat_skill", e);
     getSectionIDs("combat", (skillIds) => {
-      console.log(skillIds);
       getSectionIDs("combatselections", (selectionIds) => {
         const skillIdx = skillIds.findIndex((id) =>
           e.sourceAttribute.includes(id)
@@ -2177,20 +2196,16 @@
         if (skillIdx >= selectionIds.length) {
           // add new row
           rowId = generateRowID();
-          // attrs[`repeating_combatselections_${rowId}_combat_selection`] =
-          //   e.newValue;
         } else {
+          // use existing row
           rowId = selectionIds[skillIdx];
-          // attrs[
-          //   `repeating_combatselections_${selectionIds[skillIdx]}_combat_selection`
-          // ] = e.newValue;
         }
         // Store related row ID from repeating_combatselections
         attrs[`repeating_combat_combat_selection_id`] = rowId;
         attrs[`repeating_combatselections_${rowId}_combat_id`] =
           skillIds[skillIdx];
         attrs[`repeating_combatselections_${rowId}_combat_skill`] = e.newValue;
-        console.log(attrs);
+        attrs[`repeating_combatselections_${rowId}_bonus_section`] = "combat";
         setAttrs(attrs);
       });
     });
@@ -2230,6 +2245,7 @@
           }
           return acc;
         }, []);
+        console.log(sectionIdsToAggregate);
         combineCombat(sectionIdsToAggregate);
       });
     });
@@ -2238,7 +2254,10 @@
   on(
     "change:repeating_combatselections:combat_skill_check change:repeating_combat",
     (e) => {
-      console.log(e);
+      console.log(
+        "change:repeating_combatselections:combat_skill_check change:repeating_combat",
+        e
+      );
       aggregateBonuses();
     }
   );
