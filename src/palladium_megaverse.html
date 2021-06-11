@@ -1,12 +1,12 @@
 <main id="megaverse">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
+    <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
     <button class="metal linear" type="action" name="act_combat">Combat</button>
     <button class="metal linear" type="action" name="act_equipment">
       Equipment
     </button>
-    <button class="metal linear" type="action" name="act_skills">Skills</button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
@@ -477,7 +477,7 @@
 
   <div class="wp">
     <div class="wp-container">
-      <h4>Ancient Weapon Proficiencies</h4>
+      <h3>Ancient Weapon Proficiencies</h3>
       <fieldset class="repeating_wp">
         <h5>Weapon Proficiency</h5>
         <h5>Strike</h5>
@@ -486,7 +486,7 @@
         <h5></h5>
         <h5>Disarm</h5>
         <h5></h5>
-        <h5>Thrown</h5>
+        <h5>Throw</h5>
         <h5></h5>
         <h5>Entangle</h5>
         <h5></h5>
@@ -525,7 +525,7 @@
           type="roll"
           value="@{wpname}: [[d20+@{disarm}+@{combat_combined_disarm}]]"
         ></button>
-        <input type="number" value="" name="attr_thrown" />
+        <input type="number" value="" name="attr_throw" />
         <button
           type="roll"
           value="@{wpname}: [[d20+@{throw}+@{combat_combined_throw}]]"
@@ -538,7 +538,8 @@
         <input type="number" value="" name="attr_rof" />
         <input type="number" value="" name="attr_wplevel" />
       </fieldset>
-      <h4>Modern Weapon Proficiencies</h4>
+      <hr />
+      <h3>Modern Weapon Proficiencies</h3>
       <fieldset class="repeating_wpmodern">
         <h5>Weapon Proficiency</h5>
         <h5>Strike</h5>
@@ -857,6 +858,7 @@
           ><span>Skill</span>
           <input type="text" list="handToHand" name="attr_combat_skill" />
           <datalist id="handToHand">
+            <option value="Custom - Type Your Own"></option>
             <option value="Basic"></option>
             <option value="Expert"></option>
             <option value="Martial Arts"></option>
@@ -1158,10 +1160,10 @@
     });
   };
   const WP_ACTIONS = {
-    wp: ["strike", "parry", "disarm", "rof", "thrown", "entangle"],
+    wp: ["strike", "parry", "disarm", "rof", "throw", "entangle"],
     wpmodern: ["strike", "disarm"],
   };
-  // const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "thrown", "entangle"];
+  // const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "throw", "entangle"];
   // const WP_ACTIONS_MODERN = ["strike", "burst"];
   const WP = {
     archery: [
@@ -1186,14 +1188,14 @@
       { strike: 1, parry: 1 },
       {},
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
       { strike: 1, parry: 1 },
@@ -1203,17 +1205,17 @@
       {},
       { strike: 1, parry: 1 },
       {},
-      { thrown: 1 },
+      { throw: 1 },
       { strike: 1, parry: 1 },
       {},
       {},
       { strike: 1, parry: 1 },
-      { thrown: 1 },
+      { throw: 1 },
       {},
       { strike: 1, parry: 1 },
       {},
       {},
-      { thrown: 1 },
+      { throw: 1 },
     ],
     chain: [
       { strike: 1 },
@@ -1236,33 +1238,33 @@
       { strike: 1, parry: 1, entangle: 1 },
       {},
       { strike: 1, parry: 1, entangle: 1 },
-      { thrown: 1 },
+      { throw: 1 },
       { strike: 1, entangle: 1 },
       { parry: 1 },
       {},
       { strike: 1, entangle: 1 },
       {},
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       { strike: 1, entangle: 1 },
       {},
       { strike: 1, parry: 1, entangle: 1 },
       {},
-      { thrown: 1 },
+      { throw: 1 },
     ],
     knife: [
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       { strike: 1 },
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       { strike: 1 },
       {},
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       { strike: 1 },
-      { thrown: 1 },
+      { throw: 1 },
       { parry: 1 },
-      { strike: 1, thrown: 1 },
+      { strike: 1, throw: 1 },
       {},
       { parry: 1 },
-      { strike: 1, thrown: 1 },
+      { strike: 1, throw: 1 },
       {},
       {},
     ],
@@ -1286,16 +1288,16 @@
     "pole arm": [
       { strike: 1, parry: 1 },
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
       { strike: 1, parry: 1 },
       {},
-      { thrown: 1 },
+      { throw: 1 },
       { strike: 1, parry: 1 },
       {},
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
       {},
@@ -1337,18 +1339,18 @@
     spear: [
       { strike: 1, parry: 1 },
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
-      { strike: 1, parry: 1, thrown: 1 },
+      { strike: 1, parry: 1, throw: 1 },
       {},
       {},
       { strike: 1, parry: 1 },
-      { thrown: 1 },
+      { throw: 1 },
       {},
       { strike: 1, parry: 1 },
       {},
-      { thrown: 1 },
+      { throw: 1 },
       {},
     ],
     staff: [
@@ -1356,31 +1358,31 @@
       { parry: 1 },
       { strike: 1 },
       {},
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       {},
       { strike: 1 },
       { parry: 1 },
       {},
-      { strike: 1, thrown: 1 },
+      { strike: 1, throw: 1 },
       { parry: 1 },
       {},
       { strike: 1 },
       { parry: 1 },
-      { thrown: 1 },
+      { throw: 1 },
     ],
     sword: [
       { strike: 1 },
       { parry: 1 },
       { strike: 1 },
-      { parry: 1, thrown: 1 },
+      { parry: 1, throw: 1 },
       {},
       { strike: 1 },
       { parry: 1 },
-      { thrown: 1 },
+      { throw: 1 },
       { strike: 1 },
       { parry: 1 },
       {},
-      { strike: 1, thrown: 1 },
+      { strike: 1, throw: 1 },
       { parry: 1 },
       {},
       { strike: 1 },

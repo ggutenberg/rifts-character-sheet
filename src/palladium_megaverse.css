@@ -130,8 +130,8 @@ details summary {
   display: none;
 }
 
-.charsheet .wp-container h4:last-of-type {
-  margin-top: 1rem;
+.charsheet .wp-container h3:last-of-type {
+  margin-top: 2rem;
 }
 
 /* .charsheet .combat-container {
