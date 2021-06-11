@@ -630,11 +630,16 @@
           and CSS Wizardry - https://wiki.roll20.net/CSS_Wizardry#Select_Dropdown_Styling
           I might be able to emulate a dynamic <select> based on values from repeating element
         -->
-        <label>
-          <input type="checkbox" name="attr_skill0_check" value="1" />
-          <span name="attr_skill0"></span
-        ></label>
-        <input type="text" name="attr_skill0" value="" />
+        <fieldset class="repeating_combatselections">
+          <label>
+            <input
+              type="checkbox"
+              name="attr_selected_combat_skill_check"
+              value="1" />
+            <span name="attr_selected_combat_skill"></span
+          ></label>
+          <input type="text" name="attr_selected_combat_skill" value="" />
+        </fieldset>
         <label
           >Base Skill
           <input type="text" list="handToHand" name="attr_combat_skill_base" />
@@ -2179,16 +2184,31 @@
 
   on("change:repeating_combat:combat_skill", (e) => {
     console.log("change:repeating_combat:combat_skill", e);
-    getSectionIDs("combat", (ids) => {
-      console.log(ids);
-      const idx = ids.findIndex((id) => e.sourceAttribute.includes(id));
-      const attrs = {};
-      attrs[`skill${idx}`] = e.newValue;
-      setAttrs(attrs);
+    getSectionIDs("combat", (skillIds) => {
+      console.log(skillIds);
+      getSectionIDs("combatselections", (selectionIds) => {
+        const skillIdx = skillIds.findIndex((id) =>
+          e.sourceAttribute.includes(id)
+        );
+        const attrs = {};
+        if (skillIdx >= selectionIds.length) {
+          // add new row
+          const newRowId = generateRowID();
+          attrs[
+            `repeating_combatselections_${newRowId}_selected_combat_skill`
+          ] = e.newValue;
+        } else {
+          attrs[
+            `repeating_combatselections_${selectionIds[skillIdx]}_selected_combat_skill`
+          ] = e.newValue;
+        }
+        console.log(attrs);
+        setAttrs(attrs);
+      });
     });
   });
 
-  on("change:skill0_check", (e) => {
+  on("change:repeating_combatselections:selected_combat_skill_check", (e) => {
     console.log(e);
   });
 
