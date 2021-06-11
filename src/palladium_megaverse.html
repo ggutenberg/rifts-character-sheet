@@ -482,13 +482,16 @@
         <h5>Weapon Proficiency</h5>
         <h5>Strike</h5>
         <h5></h5>
-        <h5>Burst</h5>
         <h5>Parry</h5>
+        <h5></h5>
         <h5>Disarm</h5>
-        <h5>RoF</h5>
+        <h5></h5>
         <h5>Thrown</h5>
+        <h5></h5>
         <h5>Entangle</h5>
-        <h5>WP Level</h5>
+        <h5></h5>
+        <h5>RoF</h5>
+        <h5>Level</h5>
         <input type="text" list="weaponProficiencies" name="attr_wpname" />
         <datalist id="weaponProficiencies">
           <option value="Archery"></option>
@@ -508,13 +511,31 @@
           <option value="Whip"></option>
         </datalist>
         <input type="number" value="" name="attr_strike" />
-        <button type="roll" value="@{wpname}: [[d20+@{strike}]]"></button>
-        <input type="number" value="" name="attr_burst" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{strike}+@{combat_combined_strike}]]"
+        ></button>
         <input type="number" value="" name="attr_parry" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{parry}+@{combat_combined_parry}]]"
+        ></button>
         <input type="number" value="" name="attr_disarm" />
-        <input type="number" value="" name="attr_rof" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{disarm}+@{combat_combined_disarm}]]"
+        ></button>
         <input type="number" value="" name="attr_thrown" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{throw}+@{combat_combined_throw}]]"
+        ></button>
         <input type="number" value="" name="attr_entangle" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{entangle}+@{combat_combined_entangle}]]"
+        ></button>
+        <input type="number" value="" name="attr_rof" />
         <input type="number" value="" name="attr_wplevel" />
       </fieldset>
       <h4>Modern Weapon Proficiencies</h4>
@@ -523,12 +544,8 @@
         <h5>Strike</h5>
         <h5></h5>
         <h5>Burst</h5>
-        <h5>Parry</h5>
-        <h5>Disarm</h5>
-        <h5>RoF</h5>
-        <h5>Thrown</h5>
-        <h5>Entangle</h5>
-        <h5>WP Level</h5>
+        <h5></h5>
+        <h5>Level</h5>
         <input
           type="text"
           list="weaponProficienciesModern"
@@ -547,13 +564,15 @@
           <option value="Flamethrower"></option>
         </datalist>
         <input type="number" value="" name="attr_strike" />
-        <button type="roll" value="@{wpname}: [[d20+@{strike}]]"></button>
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{strike}+@{combat_combined_strike_range}]]"
+        ></button>
         <input type="number" value="" name="attr_burst" />
-        <input type="number" value="" name="attr_parry" />
-        <input type="number" value="" name="attr_disarm" />
-        <input type="number" value="" name="attr_rof" />
-        <input type="number" value="" name="attr_thrown" />
-        <input type="number" value="" name="attr_entangle" />
+        <button
+          type="roll"
+          value="@{wpname}: [[d20+@{burst}+@{combat_combined_strike_range}]]"
+        ></button>
         <input type="number" value="" name="attr_wplevel" />
       </fieldset>
     </div>
@@ -1138,7 +1157,12 @@
       );
     });
   };
-  const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "thrown", "entangle"];
+  const WP_ACTIONS = {
+    wp: ["strike", "parry", "disarm", "rof", "thrown", "entangle"],
+    wpmodern: ["strike", "disarm"],
+  };
+  // const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "thrown", "entangle"];
+  // const WP_ACTIONS_MODERN = ["strike", "burst"];
   const WP = {
     archery: [
       { strike: 1, parry: 1, rof: 2 },
@@ -1586,15 +1610,15 @@
     return result;
   };
 
-  const setWpRow = (name, keyPrefix, level) => {
+  const setWpRow = (section, name, keyPrefix, level) => {
     console.log("setWpRow", name, keyPrefix, level);
     const attrs = {};
     const levelBonuses = WP[name.toLowerCase()].slice(0, level);
     const totalBonuses = mergeAndAddObjects(levelBonuses);
-    WP_ACTIONS.forEach((action) => {
+    WP_ACTIONS[section].forEach((action) => {
       const key = `${keyPrefix}_${action}`;
       attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
-      if (action == "strike") {
+      if (action == "strike" && section == "wpmodern") {
         attrs[`${keyPrefix}_burst`] = Math.floor(attrs[key] / 2);
       }
       attrs[`${keyPrefix}_wplevel`] = level;
@@ -1623,9 +1647,9 @@
       ? `repeating_${section}_${rowId}`
       : `repeating_${section}`;
     if (newWpLevel) {
-      setWpRow(wpName, keyPrefix, newWpLevel);
+      setWpRow(section, wpName, keyPrefix, newWpLevel);
     } else if (!rowId) {
-      setWpRow(wpName, keyPrefix, newCharacterLevel);
+      setWpRow(section, wpName, keyPrefix, newCharacterLevel);
     } else {
       getAttrs([`${keyPrefix}_wplevel`], (a) => {
         const oldWpLevel = a[`${keyPrefix}_wplevel`];
@@ -1635,12 +1659,12 @@
           console.log("delta", delta);
           if (delta != 0) {
             newWpLevel = newCharacterLevel - delta;
-            setWpRow(wpName, keyPrefix, newWpLevel);
+            setWpRow(section, wpName, keyPrefix, newWpLevel);
           } else {
-            setWpRow(wpName, keyPrefix, newCharacterLevel);
+            setWpRow(section, wpName, keyPrefix, newCharacterLevel);
           }
         } else {
-          setWpRow(wpName, keyPrefix, newCharacterLevel);
+          setWpRow(section, wpName, keyPrefix, newCharacterLevel);
         }
       });
     }
