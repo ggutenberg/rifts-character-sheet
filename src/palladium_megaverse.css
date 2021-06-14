@@ -140,14 +140,32 @@ details summary {
   grid-template-columns: max-content max-content;
 } */
 
-.charsheet .combat-container .repcontainer .repitem label,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combatselections"] {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  label,
 .combat-combined-bonuses label {
   display: grid;
   grid-template-columns: 1fr min-content 4rem;
   width: 100%;
 }
 
-.charsheet .combat-container .repcontainer .repitem label span,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  label
+  span,
 .combat-combined-bonuses label span {
   display: flex;
   align-items: center;
@@ -158,7 +176,10 @@ details summary {
 }
 
 .charsheet .combat-container .combat-combined-bonuses,
-.charsheet .combat-container .repcontainer .repitem {
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem {
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: grid;
@@ -166,7 +187,10 @@ details summary {
   grid-template-columns: max-content max-content max-content max-content;
 }
 
-.charsheet .combat-container .repcontainer .repitem:not(:last-of-type) {
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem:not(:last-of-type) {
   margin-bottom: 3rem;
 }
 
