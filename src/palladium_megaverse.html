@@ -1762,7 +1762,7 @@
   };
 
   /**
-   * This one is a doozy
+   * This one could be a doozy
    * */
   on("change:level", (e) => {
     console.log("change:level", e.newValue, e.previousValue);
@@ -1776,6 +1776,11 @@
       setAttrs({ h2hlevel: a.level });
     });
   });
+
+  /**
+   * @todo Delete WP from Combat when it's deleted from WP
+   * @todo recalculate Combat Combined bonuses when a section is deleted
+   * */
 
   const updateWeaponProficiency = (section, source, newWpLevel) => {
     getSectionIDs(section, (ids) => {
@@ -2142,91 +2147,70 @@
     });
   });
 
-  /**
-   * @todo Make this function accept an array of objects
-   * [
-   *   {section1: [id1, id2]},
-   *   {section2: [id3, id4]}
-   * ]
-   * */
-  const combineCombat = (sectionsAndIds) => {
+  const combineCombat = (rowIds) => {
     // we need to combine the values of each repeated attribute within
     // each of the sectionIds and aggregate them in the combined combat section
     // +PP +PS, and add a saving throws section with +ME +PE
 
-    console.log("combineCombat", sectionsAndIds);
-    Object.keys(sectionsAndIds).forEach((section) => {
-      const sectionIds = sectionsAndIds[section];
-      console.log(section, sectionIds);
-      // No attribute bonuses.
-      // repeatingSum(
-      //   [
-      //     "combat_combined_attacks",
-      //     "combat_combined_initiative",
-      //     "combat_combined_pull",
-      //     "combat_combined_roll",
-      //     "combat_combined_damage",
-      //     "combat_combined_strike_range",
-      //     "combat_combined_strike_range_single",
-      //     "combat_combined_burst",
-      //   ],
-      //   section,
-      //   [
-      //     "attacks",
-      //     "initiative",
-      //     "pull",
-      //     "roll",
-      //     "damage",
-      //     "strike_range",
-      //     "strike_range_single",
-      //     "burst",
-      //   ],
-      //   `filter:${sectionIds.toString()}`
-      // );
+    console.log("combineCombat", rowIds);
+    // No attribute bonuses.
+    repeatingSum(
+      [
+        "combat_combined_attacks",
+        "combat_combined_initiative",
+        "combat_combined_pull",
+        "combat_combined_roll",
+        "combat_combined_damage",
+        "combat_combined_strike_range",
+        "combat_combined_strike_range_single",
+        "combat_combined_burst",
+      ],
+      "combat",
+      [
+        "attacks",
+        "initiative",
+        "pull",
+        "roll",
+        "damage",
+        "strike_range",
+        "strike_range_single",
+        "burst",
+      ],
+      `filter:${rowIds.toString()}`
+    );
 
-      repeatingSum(
-        [`${section}_strike`],
-        section,
-        ["strike"],
-        `filter:${sectionIds.toString()}`
-      );
-
-      // PP Bonus
-      // repeatingSum(
-      //   [
-      //     "combat_combined_strike",
-      //     "combat_combined_parry",
-      //     "combat_combined_dodge",
-      //     "combat_combined_throw",
-      //     "combat_combined_disarm",
-      //     "combat_combined_entangle",
-      //     "combat_combined_dodge_flight",
-      //     "combat_combined_dodge_auto",
-      //     "combat_combined_dodge_teleport",
-      //     "combat_combined_dodge_motion",
-      //   ],
-      //   section,
-      //   [
-      //     "strike",
-      //     "parry",
-      //     "dodge",
-      //     "throw",
-      //     "disarm",
-      //     "entangle",
-      //     "dodge_flight",
-      //     "dodge_auto",
-      //     "dodge_teleport",
-      //     "dodge_motion",
-      //   ],
-      //   `filter:${sectionIds.toString()}`,
-      //   "pp_bonus"
-      // );
-    });
+    // PP Bonus
+    repeatingSum(
+      [
+        "combat_combined_strike",
+        "combat_combined_parry",
+        "combat_combined_dodge",
+        "combat_combined_throw",
+        "combat_combined_disarm",
+        "combat_combined_entangle",
+        "combat_combined_dodge_flight",
+        "combat_combined_dodge_auto",
+        "combat_combined_dodge_teleport",
+        "combat_combined_dodge_motion",
+      ],
+      "combat",
+      [
+        "strike",
+        "parry",
+        "dodge",
+        "throw",
+        "disarm",
+        "entangle",
+        "dodge_flight",
+        "dodge_auto",
+        "dodge_teleport",
+        "dodge_motion",
+      ],
+      `filter:${rowIds.toString()}`,
+      "pp_bonus"
+    );
   };
 
-  /**
-   * @todo change wplevel to skill_level
-   * */
   const addWpToCombat = (section, rowId, wpName) => {
     console.log("addWpToCombat", section, rowId);
     if (!section || !rowId || !wpName) {
@@ -2259,52 +2243,9 @@
     });
   };
 
-  const addWpToCombatSelections = (section, rowId, wpName) => {
-    console.log("addWpToCombatSelections", section, rowId);
-    return;
-    if (!section || !rowId || !wpName) {
-      return;
-    }
-    getSectionIDs("combat", (combatIds) => {
-      getSectionIDs("wp", (wpIds) => {
-        getSectionIDs("wpmodern", (wpmodernIds) => {
-          getSectionIDs("combatselections", (selectionIds) => {
-            const attrNames = selectionIds.map(
-              (id) => `repeating_combatselections_${id}_combat_id`
-            );
-            getAttrs(attrNames, (a) => {
-              const selectionRowEntries = Object.entries(a).find(
-                ([key, val]) => rowId == val
-              );
-              console.log("selectionRowEntries", selectionRowEntries);
-              let selectionRowId;
-              if (!selectionRowEntries) {
-                selectionRowId = generateRowID();
-              }
-              const attrs = {};
-              // Store related row ID from repeating_combatselections
-              attrs[`repeating_${section}_${rowId}_combat_id`] = selectionRowId;
-              attrs[`repeating_combatselections_${selectionRowId}_combat_id`] =
-                rowId;
-              attrs[
-                `repeating_combatselections_${selectionRowId}_bonus_section`
-              ] = section;
-              attrs[`repeating_combatselections_${selectionRowId}_skill`] =
-                wpName;
-              console.log(attrs);
-              setAttrs(attrs);
-            });
-          });
-        });
-      });
-    });
-  };
-
   /**
-   * @todo this function is fucked and needs to use a variation of the above
-   * addWpToCombatSelections. This function wrongly assumes its indices
-   * match up with combatselections indices, which it doesn't now that there
-   * are multiple sources feeding into selections
+   * This function assumes its indices match up with combatselections indices.
+   * If that changes, it will need to be modified.
    * */
   on("change:repeating_combat:skill", (e) => {
     console.log("change:repeating_combat:skill", e);
@@ -2360,63 +2301,19 @@
       );
       const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
       getAttrs(attrNames, (a) => {
-        const sectionsAndIdsToAggregate = ids.reduce(
-          (acc, id) => {
-            if (
-              Boolean(
-                Number(a[`repeating_combatselections_${id}_skill_check`])
-              ) == true
-            ) {
-              const section =
-                a[`repeating_combatselections_${id}_bonus_section`];
-              if (!acc[section]) {
-                acc[section] = [];
-              }
-              acc[section].push(
-                a[`repeating_combatselections_${id}_combat_id`]
-              );
-            }
-            return acc;
-          },
-          { combat: [], wp: [], wpmodern: [] }
-        );
-        console.log("sectionIdsToAggregate", sectionsAndIdsToAggregate);
-        // This needs to pass in an array of objects with
-        // section name and related section IDs
-        combineCombat(sectionsAndIdsToAggregate);
+        console.log("aggregateBonuses", a);
+
+        const combatRowIds = ids.reduce((acc, id) => {
+          const prefix = `repeating_combatselections_${id}`;
+          if (Boolean(Number(a[`${prefix}_skill_check`])) == true) {
+            acc.push(a[`${prefix}_combat_id`]);
+          }
+          return acc;
+        }, []);
+        combineCombat(combatRowIds);
       });
     });
   };
-
-  /**
-   * @todo
-   * Need to selectively add PP bonus because we can't do that in repeatingSum(),
-   * otherwise it dupes.
-   * Need to either do multiple getAttrs() calls - one for each bonus, or parse
-   * the keys and add like strings. Ex. split at `_` and take element 1 as the comparator.
-   * */
-  // const combinedBonusSections = ["wp", "wpmodern", "combat"];
-  // const combinedBonusKeys = ["strike"];
-  // let combinedBonusListener = "";
-  // combinedBonusSections.forEach((section) => {
-  //   combinedBonusKeys.forEach((key) => {
-  //     combinedBonusListener += `change:${section}_${key} `;
-  //   });
-  // });
-  // console.log("combinedBonusListener", combinedBonusListener);
-  // // "change:wp_strike change:wpmodern_strike change:combat_strike"
-  // on(combinedBonusListener, (e) => {
-  //   const withPP = ["strike"];
-  //   getAttrs(["wp_strike", "wpmodern_strike", "combat_strike"], (a) => {
-  //     console.log("Strike", a);
-  //     setAttrs({
-  //       combat_combined_strike: Object.values(a).reduce(
-  //         (acc, cur) => acc + cur,
-  //         0
-  //       ),
-  //     });
-  //   });
-  // });
 
   on(
     "change:repeating_combatselections:skill_check change:repeating_combat",
