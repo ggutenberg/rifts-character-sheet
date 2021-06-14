@@ -493,7 +493,7 @@
         <h5>RoF</h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_selection_id" value="" />
-        <input type="text" list="weaponProficiencies" name="attr_wpname" />
+        <input type="text" list="weaponProficiencies" name="attr_skill" />
         <datalist id="weaponProficiencies">
           <option value="Archery"></option>
           <option value="Axe"></option>
@@ -549,11 +549,7 @@
         <h5></h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_selection_id" value="" />
-        <input
-          type="text"
-          list="weaponProficienciesModern"
-          name="attr_wpname"
-        />
+        <input type="text" list="weaponProficienciesModern" name="attr_skill" />
         <datalist id="weaponProficienciesModern">
           <option value="Handguns"></option>
           <option value="Rifles"></option>
@@ -634,10 +630,10 @@
         -->
         <fieldset class="repeating_combatselections">
           <label>
-            <input type="checkbox" name="attr_combat_skill_check" value="1" />
-            <span name="attr_combat_skill"></span
+            <input type="checkbox" name="attr_skill_check" value="1" />
+            <span name="attr_skill"></span
           ></label>
-          <input type="text" name="attr_combat_skill" value="" />
+          <input type="text" name="attr_skill" value="" />
           <input type="text" name="attr_combat_id" value="" />
           <input type="text" name="attr_bonus_section" value="" />
         </fieldset>
@@ -888,7 +884,7 @@
         <input type="hidden" name="attr_combat_selection_id" value="" />
         <label
           ><span>Skill</span>
-          <input type="text" list="handToHand" name="attr_combat_skill" />
+          <input type="text" list="handToHand" name="attr_skill" />
           <datalist id="handToHand">
             <option value="Custom - Type Your Own"></option>
             <option value="Basic"></option>
@@ -908,7 +904,7 @@
         </label>
         <label
           ><span>Level</span>
-          <input type="number" value="" name="attr_combat_skill_level" />
+          <input type="number" value="" name="attr_skill_level" />
         </label>
         <div></div>
         <div></div>
@@ -1183,8 +1179,6 @@
       );
     });
   };
-  // const WP_ACTIONS = ["strike", "parry", "disarm", "rof", "throw", "entangle"];
-  // const WP_ACTIONS_MODERN = ["strike", "burst"];
   const WP = {
     archery: [
       { strike: 1, parry: 1, rof: 2 },
@@ -1613,12 +1607,24 @@
     ],
   };
 
-  const WP_ACTIONS = {
-    wp: ["strike", "parry", "disarm", "rof", "throw", "entangle"],
-    wpmodern: ["strike_range_single", "disarm"],
+  const WP_KEYS = {
+    wp: [
+      "skill",
+      "skill_level",
+      "strike",
+      "parry",
+      "disarm",
+      "rof",
+      "throw",
+      "entangle",
+    ],
+    wpmodern: ["skill", "skill_level", "strike_range_single", "disarm"],
   };
 
   const COMBAT_KEYS = [
+    "selection_id",
+    "skill",
+    "skill_level",
     "attacks",
     "initiative",
     "strike",
@@ -1664,14 +1670,15 @@
     const attrs = {};
     const levelBonuses = WP[name.toLowerCase()].slice(0, level);
     const totalBonuses = mergeAndAddObjects(levelBonuses);
-    WP_ACTIONS[section].forEach((action) => {
+    WP_KEYS[section].forEach((action) => {
+      if (action == "skill") return; // kick out on name
       const key = `${keyPrefix}_${action}`;
       attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
       if (action == "strike_range_single") {
         attrs[`${keyPrefix}_burst`] = Math.floor(attrs[key] / 2);
       }
-      attrs[`${keyPrefix}_skill_level`] = level;
     });
+    attrs[`${keyPrefix}_skill_level`] = level;
     console.log(attrs);
     setAttrs(attrs);
   };
@@ -1738,13 +1745,13 @@
     console.log(section);
     getSectionIDs(section, (ids) => {
       console.log(ids);
-      const attrNames = ids.map((id) => `repeating_${section}_${id}_wpname`);
+      const attrNames = ids.map((id) => `repeating_${section}_${id}_skill`);
       getAttrs(attrNames, (a) => {
         const attrs = {};
         ids.forEach((id) => {
           setWp({
             section,
-            wpName: a[`repeating_${section}_${id}_wpname`].toLowerCase(),
+            wpName: a[`repeating_${section}_${id}_skill`].toLowerCase(),
             newCharacterLevel,
             oldCharacterLevel,
             rowId: id,
@@ -1775,10 +1782,10 @@
       const rowId = ids.find(
         (id) => `repeating_${section}_${id}_skill_level`.toLowerCase() == source
       );
-      getAttrs([`repeating_${section}_${rowId}_wpname`], (a) => {
+      getAttrs([`repeating_${section}_${rowId}_skill`], (a) => {
         setWp({
           section,
-          wpName: a[`repeating_${section}_${rowId}_wpname`],
+          wpName: a[`repeating_${section}_${rowId}_skill`],
           newWpLevel,
           rowId: rowId,
           callback: addWpToCombat,
@@ -1797,11 +1804,8 @@
     }
   );
 
-  on("change:repeating_wp:wpname change:repeating_wpmodern:wpname", (e) => {
-    console.log(
-      "change:repeating_wp:wpname change:repeating_wpmodern:wpname",
-      e
-    );
+  on("change:repeating_wp:skill change:repeating_wpmodern:skill", (e) => {
+    console.log("change:repeating_wp:skill change:repeating_wpmodern:skill", e);
     const section = e.sourceAttribute.split("_")[1];
     console.log("change", section);
     const wpName = e.newValue.toLowerCase();
@@ -2229,7 +2233,7 @@
       return;
     }
 
-    const wpActions = WP_ACTIONS[section];
+    const wpActions = WP_KEYS[section];
     const wpAttrs = wpActions.map(
       (action) => `repeating_${section}_${rowId}_${action}`
     );
@@ -2278,9 +2282,8 @@
               attrs[
                 `repeating_combatselections_${selectionRowId}_bonus_section`
               ] = section;
-              attrs[
-                `repeating_combatselections_${selectionRowId}_combat_skill`
-              ] = wpName;
+              attrs[`repeating_combatselections_${selectionRowId}_skill`] =
+                wpName;
               console.log(attrs);
               setAttrs(attrs);
             });
@@ -2296,8 +2299,8 @@
    * match up with combatselections indices, which it doesn't now that there
    * are multiple sources feeding into selections
    * */
-  on("change:repeating_combat:combat_skill", (e) => {
-    console.log("change:repeating_combat:combat_skill", e);
+  on("change:repeating_combat:skill", (e) => {
+    console.log("change:repeating_combat:skill", e);
     getSectionIDs("combat", (skillIds) => {
       getSectionIDs("combatselections", (selectionIds) => {
         const skillIdx = skillIds.findIndex((id) =>
@@ -2316,7 +2319,7 @@
         attrs[`repeating_combat_combat_selection_id`] = rowId;
         attrs[`repeating_combatselections_${rowId}_combat_id`] =
           skillIds[skillIdx];
-        attrs[`repeating_combatselections_${rowId}_combat_skill`] = e.newValue;
+        attrs[`repeating_combatselections_${rowId}_skill`] = e.newValue;
         attrs[`repeating_combatselections_${rowId}_bonus_section`] = "combat";
         setAttrs(attrs);
       });
@@ -2340,7 +2343,7 @@
   const aggregateBonuses = () => {
     getSectionIDs("combatselections", (ids) => {
       const checkboxNames = ids.map(
-        (id) => `repeating_combatselections_${id}_combat_skill_check`
+        (id) => `repeating_combatselections_${id}_skill_check`
       );
       const combatIdNames = ids.map(
         (id) => `repeating_combatselections_${id}_combat_id`
@@ -2354,7 +2357,7 @@
           (acc, id) => {
             if (
               Boolean(
-                Number(a[`repeating_combatselections_${id}_combat_skill_check`])
+                Number(a[`repeating_combatselections_${id}_skill_check`])
               ) == true
             ) {
               const section =
@@ -2409,10 +2412,10 @@
   // });
 
   on(
-    "change:repeating_combatselections:combat_skill_check change:repeating_combat",
+    "change:repeating_combatselections:skill_check change:repeating_combat",
     (e) => {
       console.log(
-        "change:repeating_combatselections:combat_skill_check change:repeating_combat",
+        "change:repeating_combatselections:skill_check change:repeating_combat",
         e
       );
       aggregateBonuses();
