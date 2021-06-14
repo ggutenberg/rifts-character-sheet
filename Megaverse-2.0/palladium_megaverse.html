@@ -492,7 +492,7 @@
         <h5></h5>
         <h5>RoF</h5>
         <h5>Level</h5>
-        <input type="hidden" name="attr_combat_selection_id" value="" />
+        <input type="hidden" name="attr_combat_id" value="" />
         <input type="text" list="weaponProficiencies" name="attr_skill" />
         <datalist id="weaponProficiencies">
           <option value="Archery"></option>
@@ -548,7 +548,7 @@
         <h5>Burst</h5>
         <h5></h5>
         <h5>Level</h5>
-        <input type="hidden" name="attr_combat_selection_id" value="" />
+        <input type="hidden" name="attr_combat_id" value="" />
         <input type="text" list="weaponProficienciesModern" name="attr_skill" />
         <datalist id="weaponProficienciesModern">
           <option value="Handguns"></option>
@@ -2237,17 +2237,25 @@
     const wpAttrs = wpActions.map(
       (action) => `repeating_${section}_${rowId}_${action}`
     );
+    const wpCombatId = `repeating_${section}_${rowId}_combat_id`;
+    wpAttrs.push(wpCombatId);
     console.log(wpAttrs);
     getAttrs(wpAttrs, (a) => {
       console.log(a);
-      const combatAttrs = {};
-      const combatRowId = generateRowID();
+      const attrs = {};
+      let combatRowId;
+      if (a[wpCombatId]) {
+        combatRowId = a[wpCombatId];
+      } else {
+        combatRowId = generateRowID();
+        attrs[wpCombatId] = combatRowId;
+      }
       COMBAT_KEYS.forEach((key) => {
-        combatAttrs[`repeating_combat_${combatRowId}_${key}`] =
+        attrs[`repeating_combat_${combatRowId}_${key}`] =
           a[`repeating_${section}_${rowId}_${key}`] || 0;
       });
-      console.log(combatAttrs);
-      setAttrs(combatAttrs);
+      console.log(attrs);
+      setAttrs(attrs);
     });
   };
 
@@ -2275,8 +2283,7 @@
               }
               const attrs = {};
               // Store related row ID from repeating_combatselections
-              attrs[`repeating_${section}_${rowId}_combat_selection_id`] =
-                selectionRowId;
+              attrs[`repeating_${section}_${rowId}_combat_id`] = selectionRowId;
               attrs[`repeating_combatselections_${selectionRowId}_combat_id`] =
                 rowId;
               attrs[
