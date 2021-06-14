@@ -628,6 +628,13 @@
           and CSS Wizardry - https://wiki.roll20.net/CSS_Wizardry#Select_Dropdown_Styling
           I might be able to emulate a dynamic <select> based on values from repeating element
         -->
+        <p>
+          The Add/Modify buttons below will eventually disappear, as this
+          section is dynamic. Unless you're using them for debugging or testing,
+          don't touch them, as it may cause unpredictable behavior. The text
+          boxes are also for debugging. The only thing you should need to touch
+          in this section is the checkboxes themselves.
+        </p>
         <fieldset class="repeating_combatselections">
           <label>
             <input type="checkbox" name="attr_skill_check" value="1" />
@@ -639,11 +646,6 @@
         </fieldset>
         <br />
         <h3>Aggregated Bonuses</h3>
-        <div class="">
-          <input readonly type="number" value="" name="attr_wp_strike" />
-          <input readonly type="number" value="" name="attr_wpmodern_strike" />
-          <input readonly type="number" value="" name="attr_combat_strike" />
-        </div>
         <div class="combat-combined-bonuses">
           <label
             ><span>Attacks</span>
