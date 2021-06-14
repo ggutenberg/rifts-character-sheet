@@ -583,17 +583,24 @@
         <details>
           <summary><b>Instructions</b></summary>
           <p>
-            Complete the repeating sections for your various combat skills, then
-            select a valid skill as your base skill, followed by a valid skill
-            as your extra skill. Skill dropdowns are free-form, so you can type
-            anything in them and don't need to select from the list. Just make
-            sure that your Base and Extra skill selections match what you typed
-            exactly.
+            Complete the repeating sections for your various combat skills.
+            Skill dropdowns are free-form, so you can type anything in them and
+            don't need to select from the list. What's there is just a small
+            sample.
+          </p>
+          <p>
+            Any skills you add will appear as checkboxes. Toggling them will
+            recalculate the bonuses for all checked items.
+          </p>
+          <p>
+            Any Weapon Proficiencies you add on the WPs tab will appear on this
+            page as well. Weapon Proficiencies <b>automatically</b> calculate
+            their bonuses based on level, but no other skill (like Hand-to-Hand)
+            does so yet.
           </p>
           <p>
             If you have additional bonuses from items, magic, training, etc.,
-            you can create an arbitrarily named Additional section and apply
-            that as Additional Bonuses as well.
+            you can create arbitrarily named sections and apply those as well.
           </p>
           <p>
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
@@ -603,37 +610,17 @@
             Crit: 17 is better than Crit: 19), but hasn't been implemented so
             needs to be set manually.
           </p>
-          <p>
-            Also note that removing a skill from Base, Extra, or Additional
-            doesn't actually remove it from the aggregated values. This is a bug
-            which will be fixed, but in the meantime you can create a skill
-            called "None" with no values, and enter that into Base, Extra, or
-            Additional if you want to remove one of them.
-          </p>
-          <p>Examples:</p>
-          <ul>
-            <li>
-              <b>Base</b>: Commando<br /><b>Extra</b>: RPA Elite: Glitter Boy<br /><b
-                >Additional</b
-              >: Magic Gear
-            </li>
-            <li>
-              <b>Base</b>: White Jade Fan<br /><b>Extra</b>: Bok Pai Kung Fu
-              (Crane Style)<br /><b>Additional</b>: Super Powers
-            </li>
-          </ul>
         </details>
         <!-- @todo
           Using checkboxes - https://wiki.roll20.net/Building_Character_Sheets#Checkboxes_and_Radio_Buttons
           and CSS Wizardry - https://wiki.roll20.net/CSS_Wizardry#Select_Dropdown_Styling
           I might be able to emulate a dynamic <select> based on values from repeating element
         -->
+        <p>Click <b>Instructions</b> for detailed instructions.</p>
         <p>
           The Add/Modify buttons below will eventually disappear, as this
           section is dynamic. Unless you're using them for debugging or testing,
-          don't touch them, as it may cause unpredictable behavior. The text
-          boxes are also for debugging. The only thing you should need to touch
-          in this section is the checkboxes themselves.
+          don't touch them, as it may cause unpredictable behavior.
         </p>
         <fieldset class="repeating_combatselections">
           <label>
@@ -902,6 +889,9 @@
             <option value="RPA Elite: Heavy Ground"></option>
             <option value="RPA Elite: Light Ground"></option>
             <option value="RPA Elite: Glitter Boy"></option>
+            <option value="Spell: Superhuman Speed"></option>
+            <option value="Psionic: Sixth Sense"></option>
+            <option value="Magic Amulet: Charm"></option>
           </datalist>
         </label>
         <label
