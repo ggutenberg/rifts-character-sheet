@@ -1779,11 +1779,6 @@
     });
   });
 
-  /**
-   * @todo Delete WP from Combat when it's deleted from WP
-   * @todo recalculate Combat Combined bonuses when a section is deleted
-   * */
-
   const updateWeaponProficiency = (section, source, newWpLevel) => {
     getSectionIDs(section, (ids) => {
       const rowId = ids.find(
@@ -2276,6 +2271,20 @@
     });
   });
 
+  on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
+    console.log("remove wp", e);
+    // const [r, section, rowId] = e.sourceAttribute.split('_');
+    const combatRowId = e.removedInfo[`${e.sourceAttribute}_combat_id`];
+    console.log(combatRowId);
+    const combatSelectionKey = `repeating_combat_${combatRowId}_combat_selection_id`;
+    getAttrs([combatSelectionKey], (a) => {
+      console.log(a);
+      removeRepeatingRow(`repeating_combatselections_${a[combatSelectionKey]}`);
+      removeRepeatingRow(`repeating_combat_${combatRowId}`);
+      aggregateBonuses();
+    });
+  });
+
   on("remove:repeating_combat", (e) => {
     // remove repeating_combatselections row with the same index
     const combatselectionsRowIdToRemove =
@@ -2283,6 +2292,7 @@
     removeRepeatingRow(
       `repeating_combatselections_${combatselectionsRowIdToRemove}`
     );
+    aggregateBonuses();
   });
 
   on("change:_reorder:combat", (e) => {
