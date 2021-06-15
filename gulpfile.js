@@ -1,6 +1,8 @@
 const gulp = require("gulp");
 const replace = require("gulp-replace");
 const del = require("del");
+const tap = require("gulp-tap");
+const inject = require("gulp-inject");
 
 const paths = {
   html: {
@@ -9,6 +11,10 @@ const paths = {
   },
   styles: {
     src: "src/**/*.css",
+    dest: "Megaverse-2.0/",
+  },
+  js: {
+    src: "src/**/*.js",
     dest: "Megaverse-2.0/",
   },
 };
@@ -23,10 +29,33 @@ const buildStyles = () => {
 
 const buildHtml = () => {
   return gulp
-    .src(paths.html.src)
+    .src("src/palladium_megaverse.html")
+    .pipe(
+      inject(gulp.src(["src/skills.js"]), {
+        starttag: "// Skills",
+        endtag: "// End Skills",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };
+
+exports.js = () =>
+  gulp
+    .src("src/palladium_megaverse.html")
+    .pipe(
+      inject(gulp.src(["src/skills.js"]), {
+        starttag: "// Skills",
+        endtag: "// End Skills",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
+    .pipe(gulp.dest(paths.html.dest));
 
 const build = gulp.series(clean, buildHtml, buildStyles);
 
