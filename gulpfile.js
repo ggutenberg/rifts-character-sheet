@@ -7,20 +7,20 @@ const inject = require("gulp-inject");
 const paths = {
   html: {
     src: "src/**/*.html",
-    dest: "Megaverse-2.0/",
+    dest: "dist/",
   },
   styles: {
     src: "src/**/*.css",
-    dest: "Megaverse-2.0/",
+    dest: "dist/",
   },
   js: {
     src: "src/**/*.js",
-    dest: "Megaverse-2.0/",
+    dest: "dist/",
   },
 };
 
 const clean = () => {
-  return del(["Megaverse-2.0"]);
+  return del(["dist"]);
 };
 
 const buildStyles = () => {
@@ -29,7 +29,7 @@ const buildStyles = () => {
 
 const buildHtml = () => {
   return gulp
-    .src("src/palladium_megaverse.html")
+    .src("src/sheet.html")
     .pipe(
       inject(gulp.src(["src/skills.js"]), {
         starttag: "// SKILLS",
