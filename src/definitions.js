@@ -475,3 +475,11 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   []
 );
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
+const SKILL_KEYS = [
+  "skill",
+  "base",
+  "bonus",
+  "perlevel",
+  "skilllevel",
+  "total",
+];

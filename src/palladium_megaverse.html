@@ -1282,7 +1282,7 @@
               <input type="number" value="" name="attr_comadeath" />
               <button
                 type="roll"
-                value="Save vs. Coma/Death: [[d20+@{comadeath}]]"
+                value="Save vs. Coma/Death: [[d100+@{comadeath}]]"
               />
             </label>
           </div>
@@ -1291,8 +1291,37 @@
     </div>
   </div>
 
+  <div class="skills">
+    <h3>Skills</h3>
+    <fieldset class="repeating_skills">
+      <div class="values">
+        <h5>Skill</h5>
+        <h5>Base</h5>
+        <h5>Bonus</h5>
+        <h5>Per Level</h5>
+        <h5>Level</h5>
+        <h5>Total</h5>
+        <h5></h5>
+        <input type="text" value="" name="attr_skill" />
+        <input type="number" value="0" name="attr_base" />
+        <input type="number" value="0" name="attr_bonus" />
+        <input type="number" value="0" name="attr_perlevel" />
+        <input type="number" value="0" name="attr_skilllevel" />
+        <input type="number" value="0" name="attr_total" />
+        <button
+          type="roll"
+          value="@{character_name} @{skill} check: [[d100<@{total}]]"
+        />
+      </div>
+      <details>
+        <summary>
+          <b>Describe <span name="attr_skill"></span></b>
+        </summary>
+        <textarea name="attr_description" value=""></textarea>
+      </details>
+    </fieldset>
+  </div>
   <div class="equipment">Equipment Coming Soon!</div>
-  <div class="skills">Skills Coming Soon!</div>
   <div class="magic">Magic Coming Soon!</div>
   <div class="psionics">Psionics Coming Soon!</div>
 </main>

@@ -115,6 +115,34 @@ details summary {
   grid-template-columns: max-content 8rem 8rem 8rem 8rem max-content;
 }
 
+.charsheet
+  .skills
+  .repcontainer[data-groupname="repeating_skills"]
+  .repitem
+  .values {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 5fr 4rem 4rem 4rem 4rem 4rem 4rem;
+}
+
+.charsheet
+  .skills
+  .repcontainer[data-groupname="repeating_skills"]
+  .repitem
+  h5 {
+  display: flex;
+  align-items: flex-end;
+}
+
+.charsheet
+  .skills
+  .repcontainer[data-groupname="repeating_skills"]
+  .repitem
+  details
+  textarea {
+  width: 100%;
+}
+
 .charsheet .wp-container .repcontainer[data-groupname="repeating_wp"] .repitem {
   display: grid;
   gap: 0.5rem;
@@ -130,6 +158,7 @@ details summary {
   grid-template-columns: max-content 5rem 4rem 5rem 4rem 5rem;
 }
 
+.charsheet .skills .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {
   display: none;
 }

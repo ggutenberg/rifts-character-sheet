@@ -1282,7 +1282,7 @@
               <input type="number" value="" name="attr_comadeath" />
               <button
                 type="roll"
-                value="Save vs. Coma/Death: [[d20+@{comadeath}]]"
+                value="Save vs. Coma/Death: [[d100+@{comadeath}]]"
               />
             </label>
           </div>
@@ -1291,8 +1291,37 @@
     </div>
   </div>
 
+  <div class="skills">
+    <h3>Skills</h3>
+    <fieldset class="repeating_skills">
+      <div class="values">
+        <h5>Skill</h5>
+        <h5>Base</h5>
+        <h5>Bonus</h5>
+        <h5>Per Level</h5>
+        <h5>Level</h5>
+        <h5>Total</h5>
+        <h5></h5>
+        <input type="text" value="" name="attr_skill" />
+        <input type="number" value="0" name="attr_base" />
+        <input type="number" value="0" name="attr_bonus" />
+        <input type="number" value="0" name="attr_perlevel" />
+        <input type="number" value="0" name="attr_skilllevel" />
+        <input type="number" value="0" name="attr_total" />
+        <button
+          type="roll"
+          value="@{character_name} @{skill} check: [[d100<@{total}]]"
+        />
+      </div>
+      <details>
+        <summary>
+          <b>Describe <span name="attr_skill"></span></b>
+        </summary>
+        <textarea name="attr_description" value=""></textarea>
+      </details>
+    </fieldset>
+  </div>
   <div class="equipment">Equipment Coming Soon!</div>
-  <div class="skills">Skills Coming Soon!</div>
   <div class="magic">Magic Coming Soon!</div>
   <div class="psionics">Psionics Coming Soon!</div>
 </main>
@@ -1777,6 +1806,14 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   []
 );
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
+const SKILL_KEYS = [
+  "skill",
+  "base",
+  "bonus",
+  "perlevel",
+  "skilllevel",
+  "total",
+];
 
   // END DEFINITIONS
 
@@ -2602,6 +2639,35 @@ on("change:spd", (e) => {
 
   // SKILLS
   // These are some Skills
+
+function updateSkill(rowId) {
+  const row = `repeating_skills_${rowId}`;
+  const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
+  console.log(skillAttrs);
+  getAttrs(skillAttrs, (a) => {
+    console.log(a);
+    const attrs = {};
+    const total =
+      +a[`${row}_base`] +
+      +a[`${row}_bonus`] +
+      (+a[`${row}_skilllevel`] - 1) * +a[`${row}_perlevel`];
+    console.log(total);
+    attrs[`${row}_total`] = total;
+    setAttrs(attrs);
+  });
+}
+
+on("change:repeating_skills", (e) => {
+  console.log(e);
+  const [r, section, rowId] = e.triggerName.split("_");
+  const row = `${r}_${section}_${rowId}`;
+  getAttrs(["level"], (a) => {
+    console.log(a);
+    const attrs = { repeating_skills_skilllevel: a.level };
+    console.log(attrs);
+    setAttrs(attrs, {}, () => updateSkill(rowId));
+  });
+});
 
   // END SKILLS
 
