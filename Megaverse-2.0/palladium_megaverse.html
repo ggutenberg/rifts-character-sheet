@@ -1042,39 +1042,43 @@
       <hr />
       <h3>Combat Skills</h3>
       <fieldset class="repeating_combat">
+        <div class="bonus-type-container">
+          <input type="hidden" name="attr_combat_selection_id" value="" />
+          <label
+            ><span>Skill</span>
+            <input type="text" list="handToHand" name="attr_skill" />
+            <datalist id="handToHand">
+              <option value="Custom - Type Your Own"></option>
+              <option value="Basic"></option>
+              <option value="Expert"></option>
+              <option value="Martial Arts"></option>
+              <option value="Assassin"></option>
+              <option value="Commando"></option>
+              <option value="Dragon"></option>
+              <option value="RPA Basic"></option>
+              <option value="RPA Elite: Flying PA"></option>
+              <option value="RPA Elite: Ground PA"></option>
+              <option value="RPA Elite: Heavy Vehicle"></option>
+              <option value="RPA Elite: Heavy Ground"></option>
+              <option value="RPA Elite: Light Ground"></option>
+              <option value="RPA Elite: Glitter Boy"></option>
+              <option value="Spell: Superhuman Speed"></option>
+              <option value="Psionic: Sixth Sense"></option>
+              <option value="Magic Amulet: Charm"></option>
+            </datalist>
+          </label>
+          <label
+            ><span>Level</span>
+            <input type="number" value="" name="attr_skill_level" />
+          </label>
+          <div></div>
+          <div></div>
+        </div>
         <details>
-          <summary>Expand</summary>
+          <summary>
+            <b><span name="attr_skill">Expand</span></b>
+          </summary>
           <div class="bonus-type-container">
-            <input type="hidden" name="attr_combat_selection_id" value="" />
-            <label
-              ><span>Skill</span>
-              <input type="text" list="handToHand" name="attr_skill" />
-              <datalist id="handToHand">
-                <option value="Custom - Type Your Own"></option>
-                <option value="Basic"></option>
-                <option value="Expert"></option>
-                <option value="Martial Arts"></option>
-                <option value="Assassin"></option>
-                <option value="Commando"></option>
-                <option value="Dragon"></option>
-                <option value="RPA Basic"></option>
-                <option value="RPA Elite: Flying PA"></option>
-                <option value="RPA Elite: Ground PA"></option>
-                <option value="RPA Elite: Heavy Vehicle"></option>
-                <option value="RPA Elite: Heavy Ground"></option>
-                <option value="RPA Elite: Light Ground"></option>
-                <option value="RPA Elite: Glitter Boy"></option>
-                <option value="Spell: Superhuman Speed"></option>
-                <option value="Psionic: Sixth Sense"></option>
-                <option value="Magic Amulet: Charm"></option>
-              </datalist>
-            </label>
-            <label
-              ><span>Level</span>
-              <input type="number" value="" name="attr_skill_level" />
-            </label>
-            <div></div>
-            <div></div>
             <label
               ><span>Attacks</span>
               <input type="number" value="" name="attr_attacks" />
@@ -1711,15 +1715,15 @@
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
@@ -1727,15 +1731,15 @@
     rifles: [
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
@@ -1745,13 +1749,13 @@
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
@@ -1761,33 +1765,33 @@
     "energy pistol": [
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
     ],
     "energy rifle": [
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       { strike_range_single: 1 },
       {},
@@ -1795,14 +1799,14 @@
     heavy: [
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       {},
@@ -1813,13 +1817,13 @@
       {},
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       {},
@@ -1829,14 +1833,14 @@
     shotgun: [
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       {},
@@ -1846,26 +1850,26 @@
     submachinegun: [
       { strike_range_single: 1 },
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       { strike_range_single: 1 },
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
     ],
     flamethrower: [
       {},
       { strike_range_single: 1 },
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
       {},
       {},
       {},
@@ -1875,7 +1879,7 @@
       {},
       {},
       {},
-      { strike_range_single: 1 },
+      { strike_range_single: 1, burst: 1 },
     ],
   };
 
@@ -1890,7 +1894,13 @@
       "throw",
       "entangle",
     ],
-    wpmodern: ["skill", "skill_level", "strike_range_single", "disarm"],
+    wpmodern: [
+      "skill",
+      "skill_level",
+      "strike_range_single",
+      "disarm",
+      "burst",
+    ],
   };
 
   const COMBAT_KEYS = [
@@ -1957,9 +1967,6 @@
       if (action == "skill") return; // kick out on name
       const key = `${keyPrefix}_${action}`;
       attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
-      if (action == "strike_range_single") {
-        attrs[`${keyPrefix}_burst`] = Math.floor(attrs[key] / 2);
-      }
     });
     attrs[`${keyPrefix}_skill_level`] = level;
     console.log(attrs);
