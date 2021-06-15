@@ -1,4 +1,4 @@
-const setWpRow = (section, name, keyPrefix, level) => {
+function setWpRow(section, name, keyPrefix, level) {
   console.log("setWpRow", name, keyPrefix, level);
   const attrs = {};
   const levelBonuses = WP[name.toLowerCase()].slice(0, level);
@@ -11,9 +11,9 @@ const setWpRow = (section, name, keyPrefix, level) => {
   attrs[`${keyPrefix}_skill_level`] = level;
   console.log(attrs);
   setAttrs(attrs);
-};
+}
 
-const setWp = ({
+function setWp({
   section,
   wpName,
   newCharacterLevel,
@@ -21,7 +21,7 @@ const setWp = ({
   newWpLevel,
   rowId,
   callback,
-}) => {
+}) {
   console.log("setWp", {
     section,
     wpName,
@@ -68,13 +68,13 @@ const setWp = ({
       }
     });
   }
-};
+}
 
-const updateWeaponProficiencies = (
+function updateWeaponProficiencies(
   section,
   newCharacterLevel,
   oldCharacterLevel
-) => {
+) {
   console.log(section);
   getSectionIDs(section, (ids) => {
     console.log(ids);
@@ -92,9 +92,9 @@ const updateWeaponProficiencies = (
       });
     });
   });
-};
+}
 
-const updateWeaponProficiency = (section, source, newWpLevel) => {
+function updateWeaponProficiency(section, source, newWpLevel) {
   getSectionIDs(section, (ids) => {
     const rowId = ids.find(
       (id) => `repeating_${section}_${id}_skill_level`.toLowerCase() == source
@@ -109,7 +109,7 @@ const updateWeaponProficiency = (section, source, newWpLevel) => {
       });
     });
   });
-};
+}
 
 on(
   "change:repeating_wp:skill_level change:repeating_wpmodern:skill_level",
@@ -170,7 +170,7 @@ on("change:combat_combined_attacks", (e) => {
   });
 });
 
-const combineCombat = (rowIds) => {
+function combineCombat(rowIds) {
   // we need to combine the values of each repeated attribute within
   // each of the sectionIds and aggregate them in the combined combat section
   // +PP +PS, and add a saving throws section with +ME +PE
@@ -243,9 +243,9 @@ const combineCombat = (rowIds) => {
       key
     );
   });
-};
+}
 
-const addWpToCombat = (section, rowId, wpName) => {
+function addWpToCombat(section, rowId, wpName) {
   console.log("addWpToCombat", section, rowId);
   if (!section || !rowId || !wpName) {
     return;
@@ -275,7 +275,7 @@ const addWpToCombat = (section, rowId, wpName) => {
     console.log(attrs);
     setAttrs(attrs);
   });
-};
+}
 
 /**
  * This function assumes its indices match up with combatselections indices.
@@ -337,7 +337,7 @@ on("change:_reorder:combat", (e) => {
   console.log("change:_reorder:combat", e);
 });
 
-const aggregateBonuses = () => {
+function aggregateBonuses() {
   getSectionIDs("combatselections", (ids) => {
     const checkboxNames = ids.map(
       (id) => `repeating_combatselections_${id}_skill_check`
@@ -362,7 +362,7 @@ const aggregateBonuses = () => {
       combineCombat(combatRowIds);
     });
   });
-};
+}
 
 on(
   "change:repeating_combatselections:skill_check change:repeating_combat",

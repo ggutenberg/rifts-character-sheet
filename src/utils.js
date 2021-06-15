@@ -1,4 +1,4 @@
-const repeatingSum = (destinations, section, fields, ...extras) => {
+function repeatingSum(destinations, section, fields, ...extras) {
   const isNumber = (value) => parseFloat(value).toString() === value.toString();
   const isOption = (value) =>
     [...checks.valid, ...checks.roundtypes].includes(value);
@@ -148,14 +148,14 @@ const repeatingSum = (destinations, section, fields, ...extras) => {
       }
     );
   });
-};
+}
 
-const getBiAttributeBonus = (attr) => {
+function getBiAttributeBonus(attr) {
   const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
   return bonus;
-};
+}
 
-const mergeAndAddObjects = (data) => {
+function mergeAndAddObjects(data) {
   const result = {};
   data.forEach((obj) => {
     for (let [key, value] of Object.entries(obj)) {
@@ -167,4 +167,4 @@ const mergeAndAddObjects = (data) => {
     }
   });
   return result;
-};
+}
