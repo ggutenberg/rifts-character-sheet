@@ -1,7 +1,7 @@
 on("change:iq", (e) => {
   const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
   const perception_bonus = getBiAttributeBonus(e.newValue);
-  setAttrs({ iq_bonus, perception_bonus });
+  setAttrs({ iq_bonus, perception_bonus }, {}, updateSkills);
 });
 
 on("change:me change:pp change:pe", (e) => {

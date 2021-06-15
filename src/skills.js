@@ -4,16 +4,26 @@ function updateSkill(rowId) {
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
   console.log(skillAttrs);
-  getAttrs(skillAttrs, (a) => {
+  getAttrs(skillAttrs.concat(["iq_bonus"]), (a) => {
     console.log(a);
     const attrs = {};
     const total =
       +a[`${row}_base`] +
+      +a["iq_bonus"] +
       +a[`${row}_bonus`] +
       (+a[`${row}_skilllevel`] - 1) * +a[`${row}_perlevel`];
     console.log(total);
     attrs[`${row}_total`] = total;
     setAttrs(attrs);
+  });
+}
+
+function updateSkills() {
+  getSectionIDs("skills", (ids) => {
+    console.log(ids);
+    ids.forEach((id) => {
+      updateSkill(id);
+    });
   });
 }
 
