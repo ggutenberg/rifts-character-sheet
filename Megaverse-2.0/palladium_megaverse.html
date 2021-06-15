@@ -2355,7 +2355,7 @@ on("change:me change:pp change:pe", (e) => {
           : 30 + (e.newValue - 30)
         : 0;
   }
-  setAttrs(attrs);
+  setAttrs(attrs, {}, aggregateBonuses);
 });
 
 on("change:ma", (e) => {
@@ -2606,12 +2606,15 @@ on("change:spd", (e) => {
   // END SKILLS
 
   /**
-   * @todo attribute change needs to recalculate combat rows and aggregate bonuses
    * @todo combat row `level` needs to populate when `skill` does
    * @todo combat row `level` needs to adjust with Character level like WPs do
    * @todo Skills
-   * @todo better build process with imports/file modules
-   * @todo update combat row on WP name/level change
+   * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
+   * @todo Psionics - include checkbox beside each spell to add it as a row on the Combat tab
+   * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
+   *    modifies PS type,
+   *
+   * @todo better better build process with imports/file modules
    * */
 
   /**

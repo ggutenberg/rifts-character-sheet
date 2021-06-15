@@ -18,7 +18,7 @@ on("change:me change:pp change:pe", (e) => {
           : 30 + (e.newValue - 30)
         : 0;
   }
-  setAttrs(attrs);
+  setAttrs(attrs, {}, aggregateBonuses);
 });
 
 on("change:ma", (e) => {
