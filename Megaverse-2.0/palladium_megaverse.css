@@ -46,6 +46,8 @@ details summary {
 .tabstoggle[value="wp"] ~ div.wp,
 .tabstoggle[value="equipment"] ~ div.equipment,
 .tabstoggle[value="skills"] ~ div.skills,
+.tabstoggle[value="magic"] ~ div.magic,
+.tabstoggle[value="psionics"] ~ div.psionics,
 .tabstoggle[value="combat"] ~ div.combat {
   display: block;
 }
