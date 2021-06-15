@@ -57,6 +57,24 @@ const buildHtml = () => {
         },
       })
     )
+    .pipe(
+      inject(gulp.src(["src/combat.js"]), {
+        starttag: "// COMBAT",
+        endtag: "// END COMBAT",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
+    .pipe(
+      inject(gulp.src(["src/utils.js"]), {
+        starttag: "// UTILS",
+        endtag: "// END UTILS",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };
