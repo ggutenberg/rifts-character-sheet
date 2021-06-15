@@ -37,6 +37,8 @@ details summary {
 .wp,
 .equipment,
 .skills,
+.magic,
+.psionics,
 .combat {
   display: none;
 }

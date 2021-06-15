@@ -39,6 +39,15 @@ const buildHtml = () => {
         },
       })
     )
+    .pipe(
+      inject(gulp.src(["src/attributes.js"]), {
+        starttag: "// Attributes",
+        endtag: "// End Attributes",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };
@@ -62,6 +71,7 @@ const build = gulp.series(clean, buildHtml, buildStyles);
 const watch = () => {
   gulp.watch(paths.html.src, build);
   gulp.watch(paths.styles.src, build);
+  gulp.watch(paths.js.src, build);
 };
 
 exports.watch = watch;
