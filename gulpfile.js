@@ -32,8 +32,8 @@ const buildHtml = () => {
     .src("src/palladium_megaverse.html")
     .pipe(
       inject(gulp.src(["src/skills.js"]), {
-        starttag: "// Skills",
-        endtag: "// End Skills",
+        starttag: "// SKILLS",
+        endtag: "// END SKILLS",
         transform: function (filepath, file) {
           return file.contents.toString();
         },
@@ -41,8 +41,17 @@ const buildHtml = () => {
     )
     .pipe(
       inject(gulp.src(["src/attributes.js"]), {
-        starttag: "// Attributes",
-        endtag: "// End Attributes",
+        starttag: "// ATTRIBUTES",
+        endtag: "// END ATTRIBUTES",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
+    .pipe(
+      inject(gulp.src(["src/definitions.js"]), {
+        starttag: "// DEFINITIONS",
+        endtag: "// END DEFINITIONS",
         transform: function (filepath, file) {
           return file.contents.toString();
         },
