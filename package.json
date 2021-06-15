@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "html": "cat Megaverse-2.0/palladium_megaverse.html|pbcopy",
+    "css": "cat Megaverse-2.0/palladium_megaverse.css|pbcopy"
   },
   "author": "",
   "license": "ISC",
