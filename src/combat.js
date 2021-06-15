@@ -9,7 +9,6 @@ function setWpRow(section, name, keyPrefix, level) {
     attrs[key] = action in totalBonuses ? totalBonuses[action] : 0;
   });
   attrs[`${keyPrefix}_skill_level`] = level;
-  console.log(attrs);
   setAttrs(attrs);
 }
 
@@ -37,22 +36,18 @@ function setWp({
   if (newWpLevel) {
     setWpRow(section, wpName, keyPrefix, newWpLevel);
     if (callback) {
-      console.log("callback newWpLevel", wpName);
       callback(section, rowId, wpName);
     }
   } else if (!rowId) {
     setWpRow(section, wpName, keyPrefix, newCharacterLevel);
     if (callback) {
-      console.log("callback !rowId", wpName);
       callback(section, rowId, wpName);
     }
   } else {
     getAttrs([`${keyPrefix}_skill_level`], (a) => {
       const oldWpLevel = a[`${keyPrefix}_skill_level`];
-      console.log("oldWpLevel", oldWpLevel);
       if (oldCharacterLevel) {
         const delta = oldCharacterLevel - oldWpLevel;
-        console.log("delta", delta);
         if (delta != 0) {
           newWpLevel = newCharacterLevel - delta;
           setWpRow(section, wpName, keyPrefix, newWpLevel);
@@ -63,7 +58,6 @@ function setWp({
         setWpRow(section, wpName, keyPrefix, newCharacterLevel);
       }
       if (callback) {
-        console.log("callback", wpName);
         callback(section, rowId, wpName);
       }
     });
@@ -75,12 +69,9 @@ function updateWeaponProficiencies(
   newCharacterLevel,
   oldCharacterLevel
 ) {
-  console.log(section);
   getSectionIDs(section, (ids) => {
-    console.log(ids);
     const attrNames = ids.map((id) => `repeating_${section}_${id}_skill`);
     getAttrs(attrNames, (a) => {
-      const attrs = {};
       ids.forEach((id) => {
         setWp({
           section,
@@ -114,9 +105,7 @@ function updateWeaponProficiency(section, source, newWpLevel) {
 on(
   "change:repeating_wp:skill_level change:repeating_wpmodern:skill_level",
   (e) => {
-    console.log(e);
     const section = e.sourceAttribute.split("_")[1];
-    console.log(section);
     updateWeaponProficiency(section, e.sourceAttribute, e.newValue);
   }
 );
@@ -124,12 +113,9 @@ on(
 on("change:repeating_wp:skill change:repeating_wpmodern:skill", (e) => {
   console.log("change:repeating_wp:skill change:repeating_wpmodern:skill", e);
   const [r, section, rowId, attr] = e.sourceAttribute.split("_");
-  //   const section = e.sourceAttribute.split("_")[1];
-  console.log("change", section);
   const wpName = e.newValue.toLowerCase();
   const wpLevelKey = `repeating_${section}_skill_level`;
   getAttrs(["level", wpLevelKey], (a) => {
-    console.log(a);
     if (Boolean(a[wpLevelKey])) {
       setWp({
         section,
@@ -250,16 +236,13 @@ function addWpToCombat(section, rowId, wpName) {
   if (!section || !rowId || !wpName) {
     return;
   }
-
   const wpActions = WP_KEYS[section];
   const wpAttrs = wpActions.map(
     (action) => `repeating_${section}_${rowId}_${action}`
   );
   const wpCombatId = `repeating_${section}_${rowId}_combat_id`;
   wpAttrs.push(wpCombatId);
-  console.log(wpAttrs);
   getAttrs(wpAttrs, (a) => {
-    console.log(a);
     const attrs = {};
     let combatRowId;
     if (a[wpCombatId]) {
@@ -272,7 +255,6 @@ function addWpToCombat(section, rowId, wpName) {
       attrs[`repeating_combat_${combatRowId}_${key}`] =
         a[`repeating_${section}_${rowId}_${key}`] || 0;
     });
-    console.log(attrs);
     setAttrs(attrs);
   });
 }
@@ -312,10 +294,8 @@ on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
   console.log("remove wp", e);
   // const [r, section, rowId] = e.sourceAttribute.split('_');
   const combatRowId = e.removedInfo[`${e.sourceAttribute}_combat_id`];
-  console.log(combatRowId);
   const combatSelectionKey = `repeating_combat_${combatRowId}_combat_selection_id`;
   getAttrs([combatSelectionKey], (a) => {
-    console.log(a);
     removeRepeatingRow(`repeating_combatselections_${a[combatSelectionKey]}`);
     removeRepeatingRow(`repeating_combat_${combatRowId}`);
     aggregateBonuses();
@@ -350,8 +330,6 @@ function aggregateBonuses() {
     );
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
     getAttrs(attrNames, (a) => {
-      console.log("aggregateBonuses", a);
-
       const combatRowIds = ids.reduce((acc, id) => {
         const prefix = `repeating_combatselections_${id}`;
         if (Boolean(Number(a[`${prefix}_skill_check`])) == true) {

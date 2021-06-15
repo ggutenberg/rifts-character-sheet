@@ -230,7 +230,6 @@ on("change:ps change:ps_type", (e) => {
       kick_unit,
       leap_kick_unit,
     };
-    console.log(attrs);
     setAttrs(attrs);
   });
 });

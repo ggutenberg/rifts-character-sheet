@@ -55,8 +55,6 @@ function repeatingSum(destinations, section, fields, ...extras) {
       ],
       []
     );
-    console.log("attrArray", attrArray);
-    console.log(properties.attributes.filter);
     let filteredAttrArray = attrArray;
     if (properties.attributes.filter) {
       filteredAttrArray = attrArray.filter((attr) =>
@@ -65,7 +63,6 @@ function repeatingSum(destinations, section, fields, ...extras) {
         )
       );
     }
-    console.log("filteredAttrArray", filteredAttrArray);
     getAttrs(
       [...filteredAttrArray, ...Object.keys(properties.attributes)],
       (v) => {
@@ -143,7 +140,6 @@ function repeatingSum(destinations, section, fields, ...extras) {
           obj[destination] = sumTotal;
           return obj;
         }, {});
-        console.log(output);
         setAttrs(output);
       }
     );

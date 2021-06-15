@@ -20,17 +20,30 @@ function updateSkill(rowId) {
 
 function updateSkills() {
   getSectionIDs("skills", (ids) => {
-    console.log(ids);
     ids.forEach((id) => {
       updateSkill(id);
     });
   });
 }
 
+function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
+  const delta = newCharacterLevel - oldCharacterLevel;
+  getSectionIDs("skills", (ids) => {
+    const attrNames = ids.map((id) => `repeating_skills_${id}_skilllevel`);
+    getAttrs(attrNames, (a) => {
+      const attrs = {};
+      ids.forEach((id) => {
+        attrs[`repeating_skills_${id}_skilllevel`] =
+          +a[`repeating_skills_${id}_skilllevel`] + delta;
+      });
+      setAttrs(attrs);
+    });
+  });
+}
+
 on("change:repeating_skills", (e) => {
-  console.log(e);
+  if (e.sourceAttribute.endsWith("_skilllevel")) return;
   const [r, section, rowId] = e.triggerName.split("_");
-  const row = `${r}_${section}_${rowId}`;
   getAttrs(["level"], (a) => {
     console.log(a);
     const attrs = { repeating_skills_skilllevel: a.level };

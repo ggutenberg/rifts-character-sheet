@@ -1364,6 +1364,7 @@
     // Update WPs
     updateWeaponProficiencies("wp", e.newValue, e.previousValue);
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
+    updateSkillLevels(+e.newValue, +e.previousValue);
   });
 
   on("change:repeating_movement:movement_mph", (e) => {
