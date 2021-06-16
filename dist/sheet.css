@@ -257,7 +257,7 @@ details summary {
   .spells-list {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 1fr 5rem 5rem 5rem 5rem 4rem 4rem 4rem min-content 4rem;
+  grid-template-columns: 1fr min-content 4rem 5rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
 
 .charsheet
@@ -274,6 +274,10 @@ details summary {
   display: grid;
   grid-template-columns: 1fr min-content;
   width: 100%;
+}
+
+.charsheet .spells-list input[name="attr_school"] {
+  max-width: 10rem;
 }
 
 .charsheet .full {
