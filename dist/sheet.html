@@ -354,66 +354,40 @@
         </div>
       </div>
       <div class="section-three">
-        <label for="hit-points">Hit Points</label>
-        <input
-          id="hit-points"
-          type="number"
-          value=""
-          name="attr_character_hp"
-        />
-        <select
-          class="select"
-          name="attr_charactertype_select"
-          value="0"
-          style="width: 80px"
-        >
-          <option value="0"></option>
-          <option value="sdc">S.D.C.</option>
-          <option value="mdc">M.D.C.</option>
-        </select>
-        <input
-          class="attribute"
-          type="number"
-          value=""
-          name="attr_character_dc"
-        />
-
-        <label for="ppe">P.P.E.</label>
-        <input id="ppe" type="number" value="" name="attr_character_ppe" />
-
-        <label for="ar">A.R.</label>
-        <input id="ar" type="number" value="" name="attr_character_ar" />
-
-        <label for="isp">I.S.P.</label>
-        <input id="isp" type="number" value="" name="attr_character_isp" />
-
-        <label for="hf">H.F.</label>
-        <input id="hf" type="number" value="" name="attr_character_hf" />
-
-        <label for="initiative">Initiative</label>
-        <div>
-          <input
-            id="initative"
-            type="number"
-            value="@{initiative}"
-            disabled="true"
-          />
-          <button
-            type="roll"
-            value="Initiative: [[d20+@{initiative}+0.1*@{initiative}&{tracker}]]"
-          >
-            Roll
-          </button>
-        </div>
-
-        <label for="perception">Perception</label>
-        <div>
+        <label
+          ><span>Hit Points</span>
+          <input type="number" value="" name="attr_character_hp" />
+        </label>
+        <label>
+          <span>S.D.C.</span>
+          <input type="number" value="" name="attr_character_sdc" />
+        </label>
+        <label
+          ><span>M.D.C.</span>
+          <input type="number" value="" name="attr_character_mdc" />
+        </label>
+        <label
+          ><span>P.P.E.</span>
+          <input type="number" value="" name="attr_character_ppe" />
+        </label>
+        <label
+          ><span>A.R.</span
+          ><input type="number" value="" name="attr_character_ar"
+        /></label>
+        <label
+          ><span>I.S.P.</span
+          ><input type="number" value="" name="attr_character_isp"
+        /></label>
+        <label
+          ><span>H.F.</span
+          ><input type="number" value="" name="attr_character_hf"
+        /></label>
+        <label
+          ><span>Perception</span>
           <input id="perception" type="number" value"0" name="attr_perception"
           />
-          <button type="roll" value="Perception: [[d20+@{perception}]]">
-            Roll
-          </button>
-        </div>
+          <button type="roll" value="Perception: [[d20+@{perception}]]" />
+        </label>
       </div>
     </div>
 
@@ -1335,8 +1309,140 @@
       </details>
     </fieldset>
   </div>
+
+  <div class="magic">
+    <h3>Magic</h3>
+    <datalist id="distance-units">
+      <option value="m"></option>
+      <option value="km"></option>
+      <option value="ft"></option>
+      <option value="yd"></option>
+      <option value="mi"></option>
+    </datalist>
+    <datalist id="damage-units">
+      <option value="MDC"></option>
+      <option value="SDC"></option>
+    </datalist>
+    <datalist id="time-units">
+      <option value="seconds"></option>
+      <option value="melees"></option>
+      <option value="minutes"></option>
+      <option value="hours"></option>
+      <option value="days"></option>
+      <option value="months"></option>
+      <option value="years"></option>
+    </datalist>
+    <datalist id="spell-schools">
+      <option value="Invocation"></option>
+      <option value="Elemental"></option>
+      <option value="Necromancy"></option>
+    </datalist>
+    <label
+      ><span>Current P.P.E.</span>
+      <input type="number" name="attr_currentppe" value="0" />
+      <button type="action" name="act_resetppe">Reset P.P.E.</button>
+    </label>
+    <fieldset class="repeating_magic">
+      <div class="spells-list">
+        <h5>Spell</h5>
+        <h5>P.P.E.</h5>
+        <h5>Range</h5>
+        <h5>Damage</h5>
+        <h5>Duration</h5>
+        <h5>Skill</h5>
+        <h5></h5>
+        <h5>Spell Level</h5>
+        <h5>School</h5>
+        <h5></h5>
+        <input type="text" value="" name="attr_skill" />
+        <input type="number" value="0" name="attr_ppe" />
+        <input type="text" value="" name="attr_range" />
+        <input type="text" value="" name="attr_damage" />
+        <input type="text" value="" name="attr_duration" />
+        <input type="text" value="" name="attr_percentage" />
+        <button
+          type="roll"
+          value="@{character_name} @{skill} check: [[d100<@{percentage}]]"
+        />
+        <input type="number" value="0" name="attr_spell_level" />
+        <input type="text" value="" name="attr_school" list="spell-schools" />
+        <button type="action" name="act_usespell">Cast</button>
+      </div>
+      <details>
+        <summary>
+          <b>Details for <span name="attr_skill"></span></b>
+        </summary>
+        <div class="spell-details">
+          <label
+            ><span>Starting range</span
+            ><input type="number" value="0" name="attr_range_starting"
+          /></label>
+          <label
+            ><span>Range per level</span
+            ><input type="number" value="0" name="attr_range_per_level"
+          /></label>
+          <label
+            ><span>Range unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_range_unit"
+              list="distance-units"
+            />
+          </label>
+          <label
+            ><span>Starting damage</span
+            ><input type="text" value="0" name="attr_damage_starting"
+          /></label>
+          <label
+            ><span>Damage per level</span
+            ><input type="text" value="0" name="attr_damage_per_level"
+          /></label>
+          <label
+            ><span>Damage unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_damage_unit"
+              list="damage-units"
+            />
+          </label>
+          <label
+            ><span>Starting duration</span
+            ><input type="number" value="0" name="attr_duration_starting"
+          /></label>
+          <label
+            ><span>Duration per level</span
+            ><input type="number" value="0" name="attr_duration_per_level"
+          /></label>
+          <label
+            ><span>Duration unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_duration_unit"
+              list="time-units"
+            />
+          </label>
+          <label
+            ><span>Starting skill %</span
+            ><input type="number" value="0" name="attr_percentage_starting"
+          /></label>
+          <label
+            ><span>Skill % per level</span
+            ><input type="number" value="0" name="attr_percentage_per_level"
+          /></label>
+          <label></label>
+        </div>
+        <label
+          ><b>Description</b>
+          <textarea class="full" name="attr_description" value=""></textarea>
+        </label>
+      </details>
+    </fieldset>
+  </div>
+
   <div class="equipment">Equipment Coming Soon!</div>
-  <div class="magic">Magic Coming Soon!</div>
   <div class="psionics">Psionics Coming Soon!</div>
 </main>
 <script type="text/worker">
@@ -2627,9 +2733,7 @@ on("change:spd", (e) => {
   // END ATTRIBUTES
 
   // SKILLS
-  // These are some Skills
-
-function updateSkill(rowId) {
+  function updateSkill(rowId) {
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
   console.log(skillAttrs);
@@ -2682,6 +2786,24 @@ on("change:repeating_skills", (e) => {
 });
 
   // END SKILLS
+
+  // MAGIC
+  on("clicked:repeating_magic:usespell", (e) => {
+  console.log(e);
+  getAttrs(["repeating_magic_ppe", "currentppe"], (a) => {
+    console.log(a);
+    setAttrs({ currentppe: a.currentppe - a.repeating_magic_ppe });
+  });
+});
+
+on("clicked:resetppe", (e) => {
+  console.log(e);
+  getAttrs(["character_ppe"], (a) => {
+    setAttrs({ currentppe: a.character_ppe });
+  });
+});
+
+  // END MAGIC
 
   /**
    * @todo combat row `level` needs to populate when `skill` does

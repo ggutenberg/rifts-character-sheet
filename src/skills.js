@@ -1,5 +1,3 @@
-// These are some Skills
-
 function updateSkill(rowId) {
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);

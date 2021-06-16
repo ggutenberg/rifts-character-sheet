@@ -75,6 +75,15 @@ const buildHtml = () => {
         },
       })
     )
+    .pipe(
+      inject(gulp.src(["src/magic.js"]), {
+        starttag: "// MAGIC",
+        endtag: "// END MAGIC",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };

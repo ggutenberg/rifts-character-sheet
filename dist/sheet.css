@@ -73,7 +73,8 @@ details summary {
   margin: 0.5rem 0;
 }
 
-.section-one label span {
+.section-one label span,
+.section-three label span {
   display: flex;
   align-items: center;
   margin-right: 1rem;
@@ -102,11 +103,15 @@ details summary {
   padding: 0.5rem;
 }
 
-.section-three {
+.section-three label {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: max-content max-content;
-  grid-template-rows: repeat(7, max-content);
+  grid-template-columns: 1fr max-content max-content;
+  /* grid-template-rows: repeat(7, max-content); */
+}
+
+.charsheet main#megaverse .section-three input[type="number"] {
+  width: 8rem;
 }
 
 .movement-container {
@@ -122,14 +127,11 @@ details summary {
   .values {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 5fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
+  grid-template-columns: 1fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
 }
 
-.charsheet
-  .skills
-  .repcontainer[data-groupname="repeating_skills"]
-  .repitem
-  h5 {
+.charsheet .skills .repcontainer[data-groupname="repeating_skills"] .repitem h5,
+.charsheet .magic .repcontainer[data-groupname="repeating_magic"] .repitem h5 {
   display: flex;
   align-items: flex-end;
 }
@@ -207,7 +209,8 @@ details summary {
   .repitem
   label
   span,
-.combat-combined-bonuses label span {
+.combat-combined-bonuses label span,
+.spell-details label span {
   display: flex;
   align-items: center;
 }
@@ -245,6 +248,36 @@ details summary {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 1fr 7fr;
+}
+
+.charsheet
+  .magic
+  .repcontainer[data-groupname="repeating_magic"]
+  .repitem
+  .spells-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 5rem 5rem 5rem 5rem 4rem 4rem 4rem min-content 4rem;
+}
+
+.charsheet
+  .magic
+  .repcontainer[data-groupname="repeating_magic"]
+  .repitem
+  .spell-details {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.spell-details label {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  width: 100%;
+}
+
+.charsheet .full {
+  width: 100%;
 }
 
 /*****************/
