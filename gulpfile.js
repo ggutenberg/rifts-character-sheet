@@ -76,9 +76,9 @@ const buildHtml = () => {
       })
     )
     .pipe(
-      inject(gulp.src(["src/magic.js"]), {
-        starttag: "// MAGIC",
-        endtag: "// END MAGIC",
+      inject(gulp.src(["src/magic_psionics.js"]), {
+        starttag: "// MAGIC_PSIONICS",
+        endtag: "// END MAGIC_PSIONICS",
         transform: function (filepath, file) {
           return file.contents.toString();
         },

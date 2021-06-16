@@ -41,21 +41,25 @@ function calculateMagicPercentage() {
   });
 }
 
+function calculateMagicDamage() {
+  const row = "repeating_magic_damage";
+  const attrNames = ["starting", "per_level", "unit"].map(
+    (subProp) => `${row}_${subProp}`
+  );
+  getAttrs(attrNames.concat(["level"]), (a) => {
+    console.log(a);
+    const perLevel = a[`${row}_per_level`];
+    const repeats = perLevel ? `+${perLevel}`.repeat(a.level - 1) : "";
+    const value = `${a[`${row}_starting`]}${repeats}`;
+    setAttrs({ [row]: value });
+  });
+}
+
 on(
   "change:repeating_magic:damage_starting change:repeating_magic:damage_per_level change:repeating_magic:damage_unit",
   (e) => {
     console.log(e);
-    const row = "repeating_magic_damage";
-    const attrNames = ["starting", "per_level", "unit"].map(
-      (subProp) => `${row}_${subProp}`
-    );
-    getAttrs(attrNames.concat(["level"]), (a) => {
-      console.log(a);
-      const perLevel = a[`${row}_per_level`];
-      const repeats = perLevel ? `+${perLevel}`.repeat(a.level - 1) : "";
-      const value = `${a[`${row}_starting`]}${repeats}`;
-      setAttrs({ [row]: value });
-    });
+    calculateMagicDamage();
   }
 );
 
