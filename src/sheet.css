@@ -122,7 +122,7 @@ details summary {
   .values {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 5fr 4rem 4rem 4rem 4rem 4rem 4rem;
+  grid-template-columns: 5fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
 }
 
 .charsheet
@@ -234,6 +234,17 @@ details summary {
   .repcontainer[data-groupname="repeating_combat"]
   .repitem:not(:last-of-type) {
   margin-bottom: 3rem;
+}
+
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  .macro-help
+  label {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 7fr;
 }
 
 /*****************/

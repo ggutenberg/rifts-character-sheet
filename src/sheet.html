@@ -1286,6 +1286,13 @@
               />
             </label>
           </div>
+          <h4>Macro Help</h4>
+          <div class="macro-help">
+            <label
+              ><span><b>Row ID:</b></span>
+              <input type="text" readonly name="attr_rowid" value=""
+            /></label>
+          </div>
         </details>
       </fieldset>
     </div>
@@ -1297,6 +1304,7 @@
     <fieldset class="repeating_skills">
       <div class="values">
         <h5>Skill</h5>
+        <h5>Category</h5>
         <h5>Base</h5>
         <h5>Bonus</h5>
         <h5>Per Level</h5>
@@ -1304,6 +1312,11 @@
         <h5>Total</h5>
         <h5></h5>
         <input type="text" value="" name="attr_skill" />
+        <select name="attr_category" value="occ">
+          <option value="occ">O.C.C.</option>
+          <option value="related">O.C.C. Related</option>
+          <option value="secondary">Secondary</option>
+        </select>
         <input type="number" value="0" name="attr_base" />
         <input type="number" value="0" name="attr_bonus" />
         <input type="number" value="0" name="attr_perlevel" />

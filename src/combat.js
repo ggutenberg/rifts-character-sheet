@@ -265,6 +265,7 @@ function addWpToCombat(section, rowId, wpName) {
  * */
 on("change:repeating_combat:skill", (e) => {
   console.log("change:repeating_combat:skill", e);
+  const [r, section, combatRowId] = e.sourceAttribute.split("_");
   getSectionIDs("combat", (skillIds) => {
     getSectionIDs("combatselections", (selectionIds) => {
       const skillIdx = skillIds.findIndex((id) =>
@@ -280,6 +281,7 @@ on("change:repeating_combat:skill", (e) => {
         rowId = selectionIds[skillIdx];
       }
       // Store related row ID from repeating_combatselections
+      attrs[`repeating_combat_rowid`] = `repeating_combat_${combatRowId}_`;
       attrs[`repeating_combat_combat_selection_id`] = rowId;
       attrs[`repeating_combatselections_${rowId}_combat_id`] =
         skillIds[skillIdx];

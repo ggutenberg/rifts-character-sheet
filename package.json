@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "html": "cat Megaverse-2.0/palladium_megaverse.html|pbcopy",
-    "css": "cat Megaverse-2.0/palladium_megaverse.css|pbcopy"
+    "html": "cat dist/sheet.html|pbcopy",
+    "css": "cat dist/sheet.css|pbcopy"
   },
   "author": "",
   "license": "ISC",
