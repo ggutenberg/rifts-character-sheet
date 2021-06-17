@@ -241,6 +241,18 @@ details summary {
 }
 
 .charsheet
+  .magic
+  .repcontainer[data-groupname="repeating_magic"]
+  .repitem
+  .macro-help
+  label,
+.charsheet
+  .psionics
+  .repcontainer[data-groupname="repeating_psionics"]
+  .repitem
+  .macro-help
+  label,
+.charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
   .repitem
@@ -279,6 +291,32 @@ details summary {
 
 .charsheet .spells-list input[name="attr_school"] {
   max-width: 10rem;
+}
+
+.charsheet
+  .psionics
+  .repcontainer[data-groupname="repeating_psionics"]
+  .repitem
+  .psionics-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 5rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+}
+
+.charsheet
+  .psionics
+  .repcontainer[data-groupname="repeating_psionics"]
+  .repitem
+  .psionic-details {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.psionic-details label {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  width: 100%;
 }
 
 .charsheet .full {

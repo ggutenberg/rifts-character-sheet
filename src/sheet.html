@@ -389,6 +389,10 @@
           <input type="number" value="" name="attr_character_sdc" />
         </label>
         <label
+          ><span>A.R.</span
+          ><input type="number" value="" name="attr_character_ar"
+        /></label>
+        <label
           ><span>M.D.C.</span>
           <input type="number" value="" name="attr_character_mdc" />
         </label>
@@ -396,10 +400,6 @@
           ><span>P.P.E.</span>
           <input type="number" value="" name="attr_character_ppe" />
         </label>
-        <label
-          ><span>A.R.</span
-          ><input type="number" value="" name="attr_character_ar"
-        /></label>
         <label
           ><span>I.S.P.</span
           ><input type="number" value="" name="attr_character_isp"
@@ -1034,7 +1034,7 @@
             />
             <button
               type="roll"
-              value="Save vs. Coma/Death: [[d100+@{combat_combined_comadeath}]]"
+              value="Save vs. Coma/Death: [[d100-@{combat_combined_comadeath}]]"
             />
           </label>
         </div>
@@ -1282,7 +1282,7 @@
               <input type="number" value="" name="attr_comadeath" />
               <button
                 type="roll"
-                value="Save vs. Coma/Death: [[d100+@{comadeath}]]"
+                value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
               />
             </label>
           </div>
@@ -1468,12 +1468,156 @@
           ><b>Description</b>
           <textarea class="full" name="attr_description" value=""></textarea>
         </label>
+        <h4>Macro Help</h4>
+        <div class="macro-help">
+          <label
+            ><span><b>Row ID:</b></span>
+            <input type="text" readonly name="attr_rowid" value=""
+          /></label>
+        </div>
+      </details>
+    </fieldset>
+  </div>
+
+  <div class="psionics">
+    <h3>Psionics</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Psionic name and its ISP. Then expand the Details, and fill in
+        the applicable values. They will calculate and populate Range, Damage,
+        Duration, and Skill if applicable.
+      </p>
+      <p>
+        For Starting Damage and Damage per Level enter values that roll20 would
+        use for dice rolls. Ex. "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Use button to remove the ISP from the Current ISP input field.
+        Click Reset ISP to set Current ISP back to the value on the Core tab.
+        Note the roll button beside Damage and Skill.
+      </p>
+      <p>
+        Don't forget to copy/paste the power description into the Description
+        field to make life easier for your GM. Also use that field for any
+        macros you may need like Strike with an arbitrary bonus.
+      </p>
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current I.S.P.</span>
+      <input type="number" name="attr_currentisp" value="0" />
+      <button type="action" name="act_resetisp">Reset I.S.P.</button>
+    </label>
+    <fieldset class="repeating_psionics">
+      <div class="psionics-list">
+        <h5>Psionic</h5>
+        <h5>Range</h5>
+        <h5>Damage</h5>
+        <h5></h5>
+        <h5>Duration</h5>
+        <h5>Skill</h5>
+        <h5></h5>
+        <h5>I.S.P.</h5>
+        <h5></h5>
+        <input type="text" value="" name="attr_skill" />
+        <input type="text" value="" name="attr_range" />
+        <input type="text" value="" name="attr_damage" />
+        <button
+          type="roll"
+          value="@{character_name} @{skill} [[@{damage}]] @{damage_unit}"
+        />
+        <input type="text" value="" name="attr_duration" />
+        <input type="number" value="" name="attr_percentage" />
+        <button
+          type="roll"
+          value="@{character_name} @{skill} check: [[d100<@{percentage}]]"
+        />
+        <input type="number" value="0" name="attr_isp" />
+        <button type="action" name="act_usepsionic">Use</button>
+      </div>
+      <details>
+        <summary>
+          <b>Details for <span name="attr_skill"></span></b>
+        </summary>
+        <div class="psionic-details">
+          <label
+            ><span>Starting range</span
+            ><input type="number" value="0" name="attr_range_starting"
+          /></label>
+          <label
+            ><span>Range per level</span
+            ><input type="number" value="0" name="attr_range_per_level"
+          /></label>
+          <label
+            ><span>Range unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_range_unit"
+              list="distance-units"
+            />
+          </label>
+          <label
+            ><span>Starting damage</span
+            ><input type="text" value="" name="attr_damage_starting"
+          /></label>
+          <label
+            ><span>Damage per level</span
+            ><input type="text" value="" name="attr_damage_per_level"
+          /></label>
+          <label
+            ><span>Damage unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_damage_unit"
+              list="damage-units"
+            />
+          </label>
+          <label
+            ><span>Starting duration</span
+            ><input type="number" value="0" name="attr_duration_starting"
+          /></label>
+          <label
+            ><span>Duration per level</span
+            ><input type="number" value="0" name="attr_duration_per_level"
+          /></label>
+          <label
+            ><span>Duration unit</span
+            ><input
+              type="text"
+              value=""
+              name="attr_duration_unit"
+              list="time-units"
+            />
+          </label>
+          <label
+            ><span>Starting skill %</span
+            ><input type="number" value="0" name="attr_percentage_starting"
+          /></label>
+          <label
+            ><span>Skill % per level</span
+            ><input type="number" value="0" name="attr_percentage_per_level"
+          /></label>
+          <label></label>
+        </div>
+        <label
+          ><b>Description</b>
+          <textarea class="full" name="attr_description" value=""></textarea>
+        </label>
+        <h4>Macro Help</h4>
+        <div class="macro-help">
+          <label
+            ><span><b>Row ID:</b></span>
+            <input type="text" readonly name="attr_rowid" value=""
+          /></label>
+        </div>
       </details>
     </fieldset>
   </div>
 
   <div class="equipment">Equipment Coming Soon!</div>
-  <div class="psionics">Psionics Coming Soon!</div>
 </main>
 <script type="text/javascript">
   // Change from javascript to worker before upload
@@ -1517,6 +1661,7 @@
     updateWeaponProficiencies("wp", e.newValue, e.previousValue);
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
     updateSkillLevels(+e.newValue, +e.previousValue);
+    updateMagicPsionicsLevels();
   });
 
   on("change:repeating_movement:movement_mph", (e) => {

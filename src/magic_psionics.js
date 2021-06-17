@@ -13,8 +13,22 @@ on("clicked:resetppe", (e) => {
   });
 });
 
-function calculateMagicRangeDuration(prop) {
-  const row = `repeating_magic_${prop}`;
+on("clicked:repeating_psionics:usepsionic", (e) => {
+  console.log(e);
+  getAttrs(["repeating_psionics_isp", "currentisp"], (a) => {
+    console.log(a);
+    setAttrs({ currentisp: a.currentisp - a.repeating_psionics_isp });
+  });
+});
+
+on("clicked:resetisp", (e) => {
+  console.log(e);
+  getAttrs(["character_isp"], (a) => {
+    setAttrs({ currentisp: a.character_isp });
+  });
+});
+
+function calculateRangeDuration(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
@@ -28,8 +42,7 @@ function calculateMagicRangeDuration(prop) {
   });
 }
 
-function calculateMagicPercentage() {
-  const row = "repeating_magic_percentage";
+function calculatePercentage(row) {
   const attrNames = ["starting", "per_level"].map(
     (subProp) => `${row}_${subProp}`
   );
@@ -41,8 +54,7 @@ function calculateMagicPercentage() {
   });
 }
 
-function calculateMagicDamage() {
-  const row = "repeating_magic_damage";
+function calculateDamage(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
@@ -55,42 +67,80 @@ function calculateMagicDamage() {
   });
 }
 
+function updateMagicPsionicsLevels() {
+  ["magic", "psionics"].forEach((section) => {
+    getSectionIDs(section, (ids) => {
+      ids.forEach((id) => {
+        const row = `repeating_${section}_${id}`;
+        calculateDamage(`${row}_damage`);
+        calculatePercentage(`${row}_percentage`);
+        calculateRangeDuration(`${row}_range`);
+        calculateRangeDuration(`${row}_duration`);
+      });
+    });
+  });
+}
+
 on(
   "change:repeating_magic:damage_starting \
   change:repeating_magic:damage_per_level \
-  change:repeating_magic:damage_unit",
+  change:repeating_magic:damage_unit \
+  change:repeating_psionics:damage_starting \
+  change:repeating_psionics:damage_per_level \
+  change:repeating_psionics:damage_unit",
   (e) => {
     console.log(e);
-    calculateMagicDamage();
+    const [r, section] = e.sourceAttribute.split("_");
+    const row = `${r}_${section}_damage`;
+    calculateDamage(row);
   }
 );
 
 on(
   "change:repeating_magic:percentage_starting \
-  change:repeating_magic:percentage_per_level",
+  change:repeating_magic:percentage_per_level \
+  change:repeating_psionics:percentage_starting \
+  change:repeating_psionics:percentage_per_level",
   (e) => {
     console.log(e);
-    calculateMagicPercentage();
+    const [r, section] = e.sourceAttribute.split("_");
+    const row = `${r}_${section}_percentage`;
+    calculatePercentage(row);
   }
 );
 on(
   "change:repeating_magic:duration_starting \
   change:repeating_magic:duration_per_level \
-  change:repeating_magic:duration_unit",
+  change:repeating_magic:duration_unit \
+  change:repeating_psionics:duration_starting \
+  change:repeating_psionics:duration_per_level \
+  change:repeating_psionics:duration_unit",
   (e) => {
     console.log(e);
-    const prop = "duration";
-    calculateMagicRangeDuration(prop);
+    const [r, section] = e.sourceAttribute.split("_");
+    const row = `${r}_${section}_duration`;
+    calculateRangeDuration(row);
   }
 );
 
 on(
   "change:repeating_magic:range_starting \
   change:repeating_magic:range_per_level \
-  change:repeating_magic:range_unit",
+  change:repeating_magic:range_unit \
+  change:repeating_psionics:range_starting \
+  change:repeating_psionics:range_per_level \
+  change:repeating_psionics:range_unit",
   (e) => {
     console.log(e);
-    const prop = "range";
-    calculateMagicRangeDuration(prop);
+    const [r, section] = e.sourceAttribute.split("_");
+    const row = `${r}_${section}_range`;
+    calculateRangeDuration(row);
   }
 );
+
+on("change:repeating_magic:skill change:repeating_psionics:skill", (e) => {
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const attrs = {};
+  attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;
+  setAttrs(attrs);
+});
