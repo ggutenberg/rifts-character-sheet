@@ -56,7 +56,9 @@ function calculateMagicDamage() {
 }
 
 on(
-  "change:repeating_magic:damage_starting change:repeating_magic:damage_per_level change:repeating_magic:damage_unit",
+  "change:repeating_magic:damage_starting \
+  change:repeating_magic:damage_per_level \
+  change:repeating_magic:damage_unit",
   (e) => {
     console.log(e);
     calculateMagicDamage();
@@ -64,14 +66,17 @@ on(
 );
 
 on(
-  "change:repeating_magic:percentage_starting change:repeating_magic:percentage_per_level",
+  "change:repeating_magic:percentage_starting \
+  change:repeating_magic:percentage_per_level",
   (e) => {
     console.log(e);
     calculateMagicPercentage();
   }
 );
 on(
-  "change:repeating_magic:duration_starting change:repeating_magic:duration_per_level change:repeating_magic:duration_unit",
+  "change:repeating_magic:duration_starting \
+  change:repeating_magic:duration_per_level \
+  change:repeating_magic:duration_unit",
   (e) => {
     console.log(e);
     const prop = "duration";
@@ -80,7 +85,9 @@ on(
 );
 
 on(
-  "change:repeating_magic:range_starting change:repeating_magic:range_per_level change:repeating_magic:range_unit",
+  "change:repeating_magic:range_starting \
+  change:repeating_magic:range_per_level \
+  change:repeating_magic:range_unit",
   (e) => {
     console.log(e);
     const prop = "range";
