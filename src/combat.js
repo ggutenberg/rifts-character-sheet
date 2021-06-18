@@ -162,6 +162,15 @@ function combineCombat(rowIds) {
   // +PP +PS, and add a saving throws section with +ME +PE
 
   console.log("combineCombat", rowIds);
+  repeatingStringConcat({
+    destinations: ["combat_combined_damage"],
+    section: "combat",
+    fields: ["damage"],
+    filter: rowIds,
+    callback: () => {
+      console.log("hello");
+    },
+  });
   // No attribute bonuses.
   repeatingSum(
     [
@@ -169,7 +178,6 @@ function combineCombat(rowIds) {
       "combat_combined_initiative",
       "combat_combined_pull",
       "combat_combined_roll",
-      "combat_combined_damage",
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
       "combat_combined_burst",
@@ -180,7 +188,6 @@ function combineCombat(rowIds) {
       "initiative",
       "pull",
       "roll",
-      "damage",
       "strike_range",
       "strike_range_single",
       "burst",
@@ -220,15 +227,17 @@ function combineCombat(rowIds) {
   );
 
   // Saving Throws
-  Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(([key, saves]) => {
-    repeatingSum(
-      saves.map((key) => `combat_combined_${key}`),
-      "combat",
-      saves,
-      `filter:${rowIds.toString()}`,
-      key
-    );
-  });
+  Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
+    ([attributeBonus, saves]) => {
+      repeatingSum(
+        saves.map((save) => `combat_combined_${save}`),
+        "combat",
+        saves,
+        `filter:${rowIds.toString()}`,
+        attributeBonus
+      );
+    }
+  );
 }
 
 function addWpToCombat(section, rowId, wpName) {

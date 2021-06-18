@@ -146,6 +146,48 @@ function repeatingSum(destinations, section, fields, ...extras) {
   });
 }
 
+function repeatingStringConcat({
+  destinations,
+  section,
+  fields,
+  filter,
+  callback,
+}) {
+  getSectionIDs(`repeating_${section}`, (sectionIds) => {
+    const attrArray = sectionIds.reduce(
+      (m, id) => [
+        ...m,
+        ...fields.map((field) => `repeating_${section}_${id}_${field}`),
+      ],
+      []
+    );
+    let filteredAttrArray = attrArray;
+    if (filter) {
+      filteredAttrArray = attrArray.filter((attr) =>
+        filter.some((sectionId) => sectionId && attr.includes(sectionId))
+      );
+    }
+    getAttrs(filteredAttrArray, (a) => {
+      const output = destinations.reduce((acc, cur, i) => {
+        acc[cur] = Object.keys(a)
+          .filter((val) => {
+            // the 4th part of `val` needs to match fields[i]
+            const [, , , ...attrParts] = val.split("_");
+            const attr = attrParts.join("_");
+            return attr == fields[i];
+          })
+          .reduce((attrAcc, attrCur) => {
+            return a[attrCur] == "" || a[attrCur] == "0"
+              ? attrAcc
+              : `${a[attrCur]}+${attrAcc}`;
+          }, "");
+        return acc;
+      }, {});
+      setAttrs(output, {}, callback ? callback : () => {});
+    });
+  });
+}
+
 function getBiAttributeBonus(attr) {
   const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
   return bonus;

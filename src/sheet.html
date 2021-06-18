@@ -605,11 +605,14 @@
           <p>
             If you have additional bonuses from items, magic, training, etc.,
             you can create arbitrarily named sections and apply those as well.
+            You can also add weapons here, and include any strike/parry bonuses
+            they provide, as well as their damage.
           </p>
           <p>
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
             Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
-            Motion. PS bonus isn't added to Damage because it could be
+            Motion. Damage adds everything together as a rollable field. Note
+            that PS bonus isn't currently added to Damage because it could be
             non-Normal. Crit should be the lowest of the available options (ex.
             Crit: 17 is better than Crit: 19), but hasn't been implemented so
             needs to be set manually.
@@ -763,11 +766,11 @@
             ><span>Damage</span>
             <input
               readonly
-              type="number"
+              type="text"
               value=""
               name="attr_combat_combined_damage"
             />
-            <div></div>
+            <button type="roll" value="Damage: [[@{combat_combined_damage}]]" />
           </label>
           <label
             ><span>Dodge: Flight</span>
@@ -835,7 +838,12 @@
             />
           </label>
           <label
-            ><span>Range: Single</span>
+            ><span
+              >Range: Single<span
+                title="Does not currently include Strike: Range, but will in the future"
+                >&nbsp;&#9432;</span
+              >
+            </span>
             <input
               readonly
               type="number"
@@ -848,7 +856,13 @@
             />
           </label>
           <label
-            ><span>Burst</span>
+            ><span
+              >Burst
+              <span
+                title="Does not currently include Strike: Range, but will in the future"
+                >&nbsp;&#9432;</span
+              ></span
+            >
             <input
               readonly
               type="number"
@@ -1130,8 +1144,8 @@
             </label>
             <label
               ><span>Damage</span>
-              <input type="number" value="" name="attr_damage" />
-              <div></div>
+              <input type="text" value="" name="attr_damage" />
+              <button type="roll" value="Damage: [[@{damage}]]" />
             </label>
             <label
               ><span>Dodge: Flight</span>
@@ -1641,13 +1655,14 @@
   // END MAGIC_PSIONICS
 
   /**
-   * @todo combat row `level` needs to populate when `skill` does
-   * @todo combat row `level` needs to adjust with Character level like WPs do
-   * @todo Skills
+   * @todo Damage aggregation
+   * @todo Crit aggregation (best of)
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type,
+   * @todo combat row `level` needs to populate when `skill` does
+   * @todo combat row `level` needs to adjust with Character level like WPs do
    *
    * @todo better better build process with imports/file modules
    * */

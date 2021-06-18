@@ -216,6 +216,8 @@ details summary {
   align-items: center;
 }
 
+.charsheet main#megaverse .combat-container .combat-combined-bonuses input,
+.charsheet main#megaverse .combat-container details input,
 .charsheet main#megaverse .combat-container input[type="number"] {
   width: 5rem;
 }

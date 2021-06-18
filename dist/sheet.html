@@ -605,11 +605,14 @@
           <p>
             If you have additional bonuses from items, magic, training, etc.,
             you can create arbitrarily named sections and apply those as well.
+            You can also add weapons here, and include any strike/parry bonuses
+            they provide, as well as their damage.
           </p>
           <p>
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
             Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
-            Motion. PS bonus isn't added to Damage because it could be
+            Motion. Damage adds everything together as a rollable field. Note
+            that PS bonus isn't currently added to Damage because it could be
             non-Normal. Crit should be the lowest of the available options (ex.
             Crit: 17 is better than Crit: 19), but hasn't been implemented so
             needs to be set manually.
@@ -763,11 +766,11 @@
             ><span>Damage</span>
             <input
               readonly
-              type="number"
+              type="text"
               value=""
               name="attr_combat_combined_damage"
             />
-            <div></div>
+            <button type="roll" value="Damage: [[@{combat_combined_damage}]]" />
           </label>
           <label
             ><span>Dodge: Flight</span>
@@ -835,7 +838,12 @@
             />
           </label>
           <label
-            ><span>Range: Single</span>
+            ><span
+              >Range: Single<span
+                title="Does not currently include Strike: Range, but will in the future"
+                >&nbsp;&#9432;</span
+              >
+            </span>
             <input
               readonly
               type="number"
@@ -848,7 +856,13 @@
             />
           </label>
           <label
-            ><span>Burst</span>
+            ><span
+              >Burst
+              <span
+                title="Does not currently include Strike: Range, but will in the future"
+                >&nbsp;&#9432;</span
+              ></span
+            >
             <input
               readonly
               type="number"
@@ -1130,8 +1144,8 @@
             </label>
             <label
               ><span>Damage</span>
-              <input type="number" value="" name="attr_damage" />
-              <div></div>
+              <input type="text" value="" name="attr_damage" />
+              <button type="roll" value="Damage: [[@{damage}]]" />
             </label>
             <label
               ><span>Dodge: Flight</span>
@@ -2260,6 +2274,48 @@ const SKILL_KEYS = [
   });
 }
 
+function repeatingStringConcat({
+  destinations,
+  section,
+  fields,
+  filter,
+  callback,
+}) {
+  getSectionIDs(`repeating_${section}`, (sectionIds) => {
+    const attrArray = sectionIds.reduce(
+      (m, id) => [
+        ...m,
+        ...fields.map((field) => `repeating_${section}_${id}_${field}`),
+      ],
+      []
+    );
+    let filteredAttrArray = attrArray;
+    if (filter) {
+      filteredAttrArray = attrArray.filter((attr) =>
+        filter.some((sectionId) => sectionId && attr.includes(sectionId))
+      );
+    }
+    getAttrs(filteredAttrArray, (a) => {
+      const output = destinations.reduce((acc, cur, i) => {
+        acc[cur] = Object.keys(a)
+          .filter((val) => {
+            // the 4th part of `val` needs to match fields[i]
+            const [, , , ...attrParts] = val.split("_");
+            const attr = attrParts.join("_");
+            return attr == fields[i];
+          })
+          .reduce((attrAcc, attrCur) => {
+            return a[attrCur] == "" || a[attrCur] == "0"
+              ? attrAcc
+              : `${a[attrCur]}+${attrAcc}`;
+          }, "");
+        return acc;
+      }, {});
+      setAttrs(output, {}, callback ? callback : () => {});
+    });
+  });
+}
+
 function getBiAttributeBonus(attr) {
   const bonus = attr > 15 ? Math.ceil((Math.min(attr, 30) - 15) / 2) : 0;
   return bonus;
@@ -2446,6 +2502,15 @@ function combineCombat(rowIds) {
   // +PP +PS, and add a saving throws section with +ME +PE
 
   console.log("combineCombat", rowIds);
+  repeatingStringConcat({
+    destinations: ["combat_combined_damage"],
+    section: "combat",
+    fields: ["damage"],
+    filter: rowIds,
+    callback: () => {
+      console.log("hello");
+    },
+  });
   // No attribute bonuses.
   repeatingSum(
     [
@@ -2453,7 +2518,6 @@ function combineCombat(rowIds) {
       "combat_combined_initiative",
       "combat_combined_pull",
       "combat_combined_roll",
-      "combat_combined_damage",
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
       "combat_combined_burst",
@@ -2464,7 +2528,6 @@ function combineCombat(rowIds) {
       "initiative",
       "pull",
       "roll",
-      "damage",
       "strike_range",
       "strike_range_single",
       "burst",
@@ -2504,15 +2567,17 @@ function combineCombat(rowIds) {
   );
 
   // Saving Throws
-  Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(([key, saves]) => {
-    repeatingSum(
-      saves.map((key) => `combat_combined_${key}`),
-      "combat",
-      saves,
-      `filter:${rowIds.toString()}`,
-      key
-    );
-  });
+  Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
+    ([attributeBonus, saves]) => {
+      repeatingSum(
+        saves.map((save) => `combat_combined_${save}`),
+        "combat",
+        saves,
+        `filter:${rowIds.toString()}`,
+        attributeBonus
+      );
+    }
+  );
 }
 
 function addWpToCombat(section, rowId, wpName) {
@@ -3112,13 +3177,14 @@ on("change:repeating_magic:skill change:repeating_psionics:skill", (e) => {
   // END MAGIC_PSIONICS
 
   /**
-   * @todo combat row `level` needs to populate when `skill` does
-   * @todo combat row `level` needs to adjust with Character level like WPs do
-   * @todo Skills
+   * @todo Damage aggregation
+   * @todo Crit aggregation (best of)
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type,
+   * @todo combat row `level` needs to populate when `skill` does
+   * @todo combat row `level` needs to adjust with Character level like WPs do
    *
    * @todo better better build process with imports/file modules
    * */
