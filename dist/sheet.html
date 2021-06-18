@@ -485,15 +485,10 @@
       <fieldset class="repeating_wp">
         <h5>Weapon Proficiency</h5>
         <h5>Strike</h5>
-        <h5></h5>
         <h5>Parry</h5>
-        <h5></h5>
         <h5>Disarm</h5>
-        <h5></h5>
         <h5>Throw</h5>
-        <h5></h5>
         <h5>Entangle</h5>
-        <h5></h5>
         <h5>RoF</h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_id" value="" />
@@ -516,30 +511,10 @@
           <option value="Whip"></option>
         </datalist>
         <input type="number" value="" name="attr_strike" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{strike}+@{combat_combined_strike}]]"
-        ></button>
         <input type="number" value="" name="attr_parry" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{parry}+@{combat_combined_parry}]]"
-        ></button>
         <input type="number" value="" name="attr_disarm" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{disarm}+@{combat_combined_disarm}]]"
-        ></button>
         <input type="number" value="" name="attr_throw" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{throw}+@{combat_combined_throw}]]"
-        ></button>
         <input type="number" value="" name="attr_entangle" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{entangle}+@{combat_combined_entangle}]]"
-        ></button>
         <input type="number" value="" name="attr_rof" />
         <input type="number" value="" name="attr_skill_level" />
       </fieldset>
@@ -547,10 +522,8 @@
       <h3>Modern Weapon Proficiencies</h3>
       <fieldset class="repeating_wpmodern">
         <h5>Weapon Proficiency</h5>
-        <h5>Strike</h5>
-        <h5></h5>
+        <h5>Single</h5>
         <h5>Burst</h5>
-        <h5></h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_id" value="" />
         <input type="text" list="weaponProficienciesModern" name="attr_skill" />
@@ -567,15 +540,7 @@
           <option value="Flamethrower"></option>
         </datalist>
         <input type="number" value="" name="attr_strike_range_single" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{strike_range_single}+@{combat_combined_strike_range}]]"
-        ></button>
         <input type="number" value="" name="attr_burst" />
-        <button
-          type="roll"
-          value="@{wpname}: [[d20+@{burst}+@{combat_combined_burst}]]"
-        ></button>
         <input type="number" value="" name="attr_skill_level" />
       </fieldset>
     </div>
@@ -3019,13 +2984,20 @@ function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
 }
 
 on("change:repeating_skills", (e) => {
+  if (e.sourceAttribute.endsWith("_skill")) return;
+  console.log("skillevel", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  updateSkill(rowId);
+});
+
+on("change:repeating_skills:skill", (e) => {
   if (e.sourceAttribute.endsWith("_skilllevel")) return;
   const [r, section, rowId] = e.triggerName.split("_");
   getAttrs(["level"], (a) => {
     console.log(a);
     const attrs = { repeating_skills_skilllevel: a.level };
     console.log(attrs);
-    setAttrs(attrs, {}, () => updateSkill(rowId));
+    setAttrs(attrs);
   });
 });
 

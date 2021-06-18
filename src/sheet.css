@@ -148,7 +148,7 @@ details summary {
 .charsheet .wp-container .repcontainer[data-groupname="repeating_wp"] .repitem {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: max-content 5rem 4rem 5rem 4rem 5rem 4rem 5rem 4rem 5rem 4rem 5rem 5rem;
+  grid-template-columns: max-content 5rem 5rem 5rem 5rem 5rem 5rem 5rem;
 }
 
 .charsheet
@@ -157,7 +157,7 @@ details summary {
   .repitem {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: max-content 5rem 4rem 5rem 4rem 5rem;
+  grid-template-columns: max-content 5rem 5rem 5rem;
 }
 
 .charsheet .magic .repcontainer .repitem:not(:first-of-type) h5,
