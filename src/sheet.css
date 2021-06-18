@@ -321,6 +321,10 @@ details summary {
   width: 100%;
 }
 
+.charsheet .tall {
+  height: 300px;
+}
+
 .charsheet .full {
   width: 100%;
 }

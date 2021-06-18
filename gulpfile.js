@@ -84,6 +84,15 @@ const buildHtml = () => {
         },
       })
     )
+    .pipe(
+      inject(gulp.src(["src/movement.js"]), {
+        starttag: "// MOVEMENT",
+        endtag: "// END MOVEMENT",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };

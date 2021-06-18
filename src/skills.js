@@ -47,8 +47,6 @@ on("change:repeating_skills", (e) => {
 });
 
 on("change:repeating_skills:skill", (e) => {
-  if (e.sourceAttribute.endsWith("_skilllevel")) return;
-  const [r, section, rowId] = e.triggerName.split("_");
   getAttrs(["level"], (a) => {
     console.log(a);
     const attrs = { repeating_skills_skilllevel: a.level };

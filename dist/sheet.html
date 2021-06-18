@@ -1601,7 +1601,11 @@
     </fieldset>
   </div>
 
-  <div class="equipment">Equipment Coming Soon!</div>
+  <div class="equipment">
+    <h3>Equipment</h3>
+    <p>Free form equipment list for now.</p>
+    <textarea class="full tall"></textarea>
+  </div>
 </main>
 <script type="text/worker">
   // Change from javascript to worker before upload
@@ -2991,8 +2995,6 @@ on("change:repeating_skills", (e) => {
 });
 
 on("change:repeating_skills:skill", (e) => {
-  if (e.sourceAttribute.endsWith("_skilllevel")) return;
-  const [r, section, rowId] = e.triggerName.split("_");
   getAttrs(["level"], (a) => {
     console.log(a);
     const attrs = { repeating_skills_skilllevel: a.level };
@@ -3153,6 +3155,37 @@ on("change:repeating_magic:skill change:repeating_psionics:skill", (e) => {
 
   // END MAGIC_PSIONICS
 
+  // MOVEMENT
+  on("change:repeating_movement:movement_mph", (e) => {
+  getAttrs(["combat_combined_attacks"], (a) => {
+    const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
+    const attrs = {
+      repeating_movement_movement_ft_melee: feetPerMelee,
+      repeating_movement_movement_ft_attack: Math.round(
+        feetPerMelee / a.combat_combined_attacks
+      ),
+    };
+    setAttrs(attrs);
+  });
+});
+
+on("change:repeating_movement:movement_ft_melee", (e) => {
+  getAttrs(["combat_combined_attacks"], (a) => {
+    const feetPerMelee = e.newValue;
+    //const mph = Math.round((feetPerMelee * 4 * 60) / 5280);
+    const mph = ((feetPerMelee * 4 * 60) / 5280).toFixed(1);
+    const attrs = {
+      repeating_movement_movement_mph: mph,
+      repeating_movement_movement_ft_attack: Math.round(
+        feetPerMelee / a.combat_combined_attacks
+      ),
+    };
+    setAttrs(attrs);
+  });
+});
+
+  // END MOVEMENT
+
   /**
    * @todo Damage aggregation
    * @todo Crit aggregation (best of)
@@ -3176,34 +3209,6 @@ on("change:repeating_magic:skill change:repeating_psionics:skill", (e) => {
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
     updateSkillLevels(+e.newValue, +e.previousValue);
     updateMagicPsionicsLevels();
-  });
-
-  on("change:repeating_movement:movement_mph", (e) => {
-    getAttrs(["combat_combined_attacks"], (a) => {
-      const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
-      const attrs = {
-        repeating_movement_movement_ft_melee: feetPerMelee,
-        repeating_movement_movement_ft_attack: Math.round(
-          feetPerMelee / a.combat_combined_attacks
-        ),
-      };
-      setAttrs(attrs);
-    });
-  });
-
-  on("change:repeating_movement:movement_ft_melee", (e) => {
-    getAttrs(["combat_combined_attacks"], (a) => {
-      const feetPerMelee = e.newValue;
-      //const mph = Math.round((feetPerMelee * 4 * 60) / 5280);
-      const mph = ((feetPerMelee * 4 * 60) / 5280).toFixed(1);
-      const attrs = {
-        repeating_movement_movement_mph: mph,
-        repeating_movement_movement_ft_attack: Math.round(
-          feetPerMelee / a.combat_combined_attacks
-        ),
-      };
-      setAttrs(attrs);
-    });
   });
 
   const buttonlist = [
