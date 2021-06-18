@@ -2283,7 +2283,7 @@ function repeatingPickBest({
   section,
   fields,
   defaultValues,
-  rank,
+  ranks,
   filter,
   callback,
 }) {
@@ -2318,7 +2318,7 @@ function repeatingPickBest({
             }
 
             if (+accVal != 0) {
-              if (rank === "high") {
+              if (ranks[i] === "high") {
                 return +a[attrCur] > +accVal ? a[attrCur] : accVal;
               } else {
                 return +a[attrCur] < +accVal ? a[attrCur] : accVal;
@@ -2601,7 +2601,7 @@ function combineCombat(rowIds) {
     section: "combat",
     fields: ["critical", "knockout", "deathblow"],
     defaultValues: [20, 0, 0],
-    rank: "low",
+    ranks: ["low", "low", "low"],
     filter: rowIds,
     callback: () => {
       console.log("repeatingPickBest callback");

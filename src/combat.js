@@ -200,7 +200,7 @@ function combineCombat(rowIds) {
     section: "combat",
     fields: ["critical", "knockout", "deathblow"],
     defaultValues: [20, 0, 0],
-    rank: "low",
+    ranks: ["low", "low", "low"],
     filter: rowIds,
     callback: () => {
       console.log("repeatingPickBest callback");

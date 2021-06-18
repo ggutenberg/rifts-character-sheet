@@ -169,7 +169,7 @@ function repeatingPickBest({
   section,
   fields,
   defaultValues,
-  rank,
+  ranks,
   filter,
   callback,
 }) {
@@ -204,7 +204,7 @@ function repeatingPickBest({
             }
 
             if (+accVal != 0) {
-              if (rank === "high") {
+              if (ranks[i] === "high") {
                 return +a[attrCur] > +accVal ? a[attrCur] : accVal;
               } else {
                 return +a[attrCur] < +accVal ? a[attrCur] : accVal;
