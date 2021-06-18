@@ -611,11 +611,10 @@
           <p>
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
             Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
-            Motion. Damage adds everything together as a rollable field. Note
-            that PS bonus isn't currently added to Damage because it could be
-            non-Normal. Crit should be the lowest of the available options (ex.
-            Crit: 17 is better than Crit: 19), but hasn't been implemented so
-            needs to be set manually.
+            Motion. Damage adds everything together as a rollable field, and
+            prompts to add Punch damage. Crit should be the lowest of the
+            available options (ex. Crit: 17 is better than Crit: 19), but hasn't
+            been implemented so needs to be set manually.
           </p>
         </details>
         <p>Click <b>Instructions</b> for detailed instructions.</p>
@@ -767,10 +766,13 @@
             <input
               readonly
               type="text"
-              value=""
+              value="0"
               name="attr_combat_combined_damage"
             />
-            <button type="roll" value="Damage: [[@{combat_combined_damage}]]" />
+            <button
+              type="roll"
+              value="?{Add Punch damage?|Yes,Damage: [[@{combat_combined_damage}+@{punch}]]|No,Damage: [[@{combat_combined_damage}]]}"
+            />
           </label>
           <label
             ><span>Dodge: Flight</span>
@@ -1144,8 +1146,11 @@
             </label>
             <label
               ><span>Damage</span>
-              <input type="text" value="" name="attr_damage" />
-              <button type="roll" value="Damage: [[@{damage}]]" />
+              <input type="text" value="0" name="attr_damage" />
+              <button
+                type="roll"
+                value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+              />
             </label>
             <label
               ><span>Dodge: Flight</span>

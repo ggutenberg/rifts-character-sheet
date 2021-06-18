@@ -179,7 +179,7 @@ function repeatingStringConcat({
           .reduce((attrAcc, attrCur) => {
             return a[attrCur] == "" || a[attrCur] == "0"
               ? attrAcc
-              : `${a[attrCur]}+${attrAcc}`;
+              : `${a[attrCur]}+${attrAcc}`.replace(/\+$/, "");
           }, "");
         return acc;
       }, {});
