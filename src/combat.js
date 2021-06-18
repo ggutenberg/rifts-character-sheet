@@ -156,6 +156,25 @@ on("change:combat_combined_attacks", (e) => {
   });
 });
 
+function addStrikeRangeToCombined() {
+  getAttrs(
+    [
+      "combat_combined_strike_range",
+      "combat_combined_strike_range_single",
+      "combat_combined_burst",
+    ],
+    (a) => {
+      setAttrs({
+        combat_combined_strike_range_single:
+          +a.combat_combined_strike_range +
+          +a.combat_combined_strike_range_single,
+        combat_combined_burst:
+          +a.combat_combined_strike_range + +a.combat_combined_burst,
+      });
+    }
+  );
+}
+
 function combineCombat(rowIds) {
   // we need to combine the values of each repeated attribute within
   // each of the sectionIds and aggregate them in the combined combat section
@@ -168,9 +187,26 @@ function combineCombat(rowIds) {
     fields: ["damage"],
     filter: rowIds,
     callback: () => {
-      console.log("hello");
+      console.log("repeatingStringConcat callback");
     },
   });
+
+  repeatingPickBest({
+    destinations: [
+      "combat_combined_critical",
+      "combat_combined_knockout",
+      "combat_combined_deathblow",
+    ],
+    section: "combat",
+    fields: ["critical", "knockout", "deathblow"],
+    defaultValues: [20, 0, 0],
+    rank: "low",
+    filter: rowIds,
+    callback: () => {
+      console.log("repeatingPickBest callback");
+    },
+  });
+
   // No attribute bonuses.
   repeatingSum(
     [
@@ -192,7 +228,10 @@ function combineCombat(rowIds) {
       "strike_range_single",
       "burst",
     ],
-    `filter:${rowIds.toString()}`
+    `filter:${rowIds.toString()}`,
+    {
+      callback: addStrikeRangeToCombined,
+    }
   );
 
   // PP Bonus

@@ -806,8 +806,7 @@
           </label>
           <label
             ><span
-              >Range: Single<span
-                title="Does not currently include Strike: Range, but will in the future"
+              >Range: Single<span title="Includes Strike: Range"
                 >&nbsp;&#9432;</span
               >
             </span>
@@ -824,11 +823,8 @@
           </label>
           <label
             ><span
-              >Burst
-              <span
-                title="Does not currently include Strike: Range, but will in the future"
-                >&nbsp;&#9432;</span
-              ></span
+              >Range: Burst
+              <span title="Includes Strike: Range">&nbsp;&#9432;</span></span
             >
             <input
               readonly
@@ -844,6 +840,14 @@
           <label
             ><span>Critical</span>
             <input type="number" value="" name="attr_combat_combined_critical"
+          /></label>
+          <label
+            ><span>Knockout</span>
+            <input type="number" value="" name="attr_combat_combined_knockout"
+          /></label>
+          <label
+            ><span>Death Blow</span>
+            <input type="number" value="" name="attr_combat_combined_deathblow"
           /></label>
         </div>
         <hr />
@@ -1170,6 +1174,14 @@
             <label
               ><span>Critical</span>
               <input type="number" value="" name="attr_critical"
+            /></label>
+            <label
+              ><span>Knockout</span>
+              <input type="number" value="" name="attr_knockout"
+            /></label>
+            <label
+              ><span>Death Blow</span>
+              <input type="number" value="" name="attr_deathblow"
             /></label>
           </div>
           <h4>Saving Throws</h4>
@@ -2100,7 +2112,16 @@ const SKILL_KEYS = [
   // END DEFINITIONS
 
   // UTILS
-  function repeatingSum(destinations, section, fields, ...extras) {
+  /**
+ * Aggregates repeating values
+ * @param {string[]} destinations An array of field names to output to
+ * @param {string} section A repeating section name
+ * @param {string[]} fields An array of fields to aggregate into the associated destination
+ * @param  {...any} extras Some extra stuff
+ * If an extra is an object, it will be used for extendedProps.
+ * Currently this only includes `callback` which gets run after `setAttrs()`
+ */
+function repeatingSum(destinations, section, fields, ...extras) {
   const isNumber = (value) => parseFloat(value).toString() === value.toString();
   const isOption = (value) =>
     [...checks.valid, ...checks.roundtypes].includes(value);
@@ -2133,7 +2154,12 @@ const SKILL_KEYS = [
     roundtypes: ["ceil", "round", "floor"],
   };
   let properties = { attributes: {}, options: {} };
+  let extendedProps = {};
   extras.forEach((extra) => {
+    if (extra.constructor.name === "Object") {
+      extendedProps = extra;
+      return;
+    }
     const [prop, v] = getTrimmed(extra).split(":");
     const multiplier_maybe = getMultiplier(v, isRounding(prop));
     const obj = isNumber(multiplier_maybe)
@@ -2242,9 +2268,70 @@ const SKILL_KEYS = [
           obj[destination] = sumTotal;
           return obj;
         }, {});
-        setAttrs(output);
+        setAttrs(
+          output,
+          {},
+          extendedProps.callback ? extendedProps.callback : () => {}
+        );
       }
     );
+  });
+}
+
+function repeatingPickBest({
+  destinations,
+  section,
+  fields,
+  defaultValues,
+  rank,
+  filter,
+  callback,
+}) {
+  console.log(defaultValues);
+  getSectionIDs(`repeating_${section}`, (sectionIds) => {
+    const attrArray = sectionIds.reduce(
+      (m, id) => [
+        ...m,
+        ...fields.map((field) => `repeating_${section}_${id}_${field}`),
+      ],
+      []
+    );
+    let filteredAttrArray = attrArray;
+    if (filter) {
+      filteredAttrArray = attrArray.filter((attr) =>
+        filter.some((sectionId) => sectionId && attr.includes(sectionId))
+      );
+    }
+    getAttrs(filteredAttrArray, (a) => {
+      const output = destinations.reduce((acc, cur, i) => {
+        acc[cur] = Object.keys(a)
+          .filter((val) => {
+            // the 4th part of `val` needs to match fields[i]
+            const [, , , ...attrParts] = val.split("_");
+            const attr = attrParts.join("_");
+            return attr == fields[i];
+          })
+          .reduce((accVal, attrCur) => {
+            console.log("reduce", accVal, attrCur);
+            if (+a[attrCur] == 0) {
+              return accVal;
+            }
+
+            if (+accVal != 0) {
+              if (rank === "high") {
+                return +a[attrCur] > +accVal ? a[attrCur] : accVal;
+              } else {
+                return +a[attrCur] < +accVal ? a[attrCur] : accVal;
+              }
+            } else {
+              return a[attrCur];
+            }
+          }, defaultValues[i]);
+        return acc;
+      }, {});
+      console.log("repeatingPickBest", output);
+      setAttrs(output, {}, callback ? callback : () => {});
+    });
   });
 }
 
@@ -2470,6 +2557,25 @@ on("change:combat_combined_attacks", (e) => {
   });
 });
 
+function addStrikeRangeToCombined() {
+  getAttrs(
+    [
+      "combat_combined_strike_range",
+      "combat_combined_strike_range_single",
+      "combat_combined_burst",
+    ],
+    (a) => {
+      setAttrs({
+        combat_combined_strike_range_single:
+          +a.combat_combined_strike_range +
+          +a.combat_combined_strike_range_single,
+        combat_combined_burst:
+          +a.combat_combined_strike_range + +a.combat_combined_burst,
+      });
+    }
+  );
+}
+
 function combineCombat(rowIds) {
   // we need to combine the values of each repeated attribute within
   // each of the sectionIds and aggregate them in the combined combat section
@@ -2482,9 +2588,26 @@ function combineCombat(rowIds) {
     fields: ["damage"],
     filter: rowIds,
     callback: () => {
-      console.log("hello");
+      console.log("repeatingStringConcat callback");
     },
   });
+
+  repeatingPickBest({
+    destinations: [
+      "combat_combined_critical",
+      "combat_combined_knockout",
+      "combat_combined_deathblow",
+    ],
+    section: "combat",
+    fields: ["critical", "knockout", "deathblow"],
+    defaultValues: [20, 0, 0],
+    rank: "low",
+    filter: rowIds,
+    callback: () => {
+      console.log("repeatingPickBest callback");
+    },
+  });
+
   // No attribute bonuses.
   repeatingSum(
     [
@@ -2506,7 +2629,10 @@ function combineCombat(rowIds) {
       "strike_range_single",
       "burst",
     ],
-    `filter:${rowIds.toString()}`
+    `filter:${rowIds.toString()}`,
+    {
+      callback: addStrikeRangeToCombined,
+    }
   );
 
   // PP Bonus
