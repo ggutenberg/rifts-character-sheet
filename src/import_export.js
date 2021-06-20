@@ -67,11 +67,46 @@
     });
   });
 
+  function setRepeatingRows(section, data, callback) {
+    console.log("setRepeatingRows", section, data);
+    if (section != "wp") return callback();
+    console.log("continuing setRepeatingRows", section);
+    const attrs = data.reduce((acc, row) => {
+      const rowId = generateRowID();
+      Object.entries(row).forEach(([key, val]) => {
+        acc[`repeating_${section}_${rowId}_${key}`] = val;
+      });
+      return acc;
+    }, {});
+    console.log(attrs);
+    setAttrs(attrs, {}, callback);
+  }
+
   on("clicked:import", (e) => {
     console.log("import", e);
     getAttrs(["importexport"], (a) => {
       const data = JSON.parse(a.importexport);
       console.log(data);
+      setRepeatingRows("wp", data.wp, () => {
+        delete data.wp;
+        setRepeatingRows("wpmodern", data.wpmodern, () => {
+          delete data.wpmodern;
+          setRepeatingRows("skills", data.skills, () => {
+            delete data.skills;
+            setRepeatingRows("combat", data.combat, () => {
+              delete data.combat;
+              setRepeatingRows("magic", data.magic, () => {
+                delete data.magic;
+                setRepeatingRows("psionics", data.psionics, () => {
+                  delete data.psionics;
+                  console.log(data);
+                  setAttrs(data);
+                });
+              });
+            });
+          });
+        });
+      });
     });
   });
 })();

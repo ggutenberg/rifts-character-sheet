@@ -96,7 +96,7 @@ function updateWeaponProficiency(section, source, newWpLevel) {
         wpName: a[`repeating_${section}_${rowId}_name`],
         newWpLevel,
         rowId: rowId,
-        callback: addWpToCombat,
+        callback: addWpToBonuses,
       });
     });
   });
@@ -119,7 +119,7 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
         wpName,
         rowId,
         newWpLevel: a[wpLevelKey],
-        callback: addWpToCombat,
+        callback: addWpToBonuses,
       });
     } else {
       const attrs = {};
@@ -181,7 +181,7 @@ function combineCombat(rowIds) {
   console.log("combineCombat", rowIds);
   repeatingStringConcat({
     destinations: ["combat_combined_damage"],
-    section: "combat",
+    section: "bonuses",
     fields: ["damage"],
     filter: rowIds,
     callback: () => {
@@ -195,7 +195,7 @@ function combineCombat(rowIds) {
       "combat_combined_knockout",
       "combat_combined_deathblow",
     ],
-    section: "combat",
+    section: "bonuses",
     fields: ["critical", "knockout", "deathblow"],
     defaultValues: [20, 0, 0],
     ranks: ["low", "low", "low"],
@@ -216,7 +216,7 @@ function combineCombat(rowIds) {
       "combat_combined_strike_range_single",
       "combat_combined_strike_range_burst",
     ],
-    "combat",
+    "bonuses",
     [
       "attacks",
       "initiative",
@@ -246,7 +246,7 @@ function combineCombat(rowIds) {
       "combat_combined_dodge_teleport",
       "combat_combined_dodge_motion",
     ],
-    "combat",
+    "bonuses",
     [
       "strike",
       "parry",
@@ -268,7 +268,7 @@ function combineCombat(rowIds) {
     ([attributeBonus, saves]) => {
       repeatingSum(
         saves.map((save) => `combat_combined_${save}`),
-        "combat",
+        "bonuses",
         saves,
         `filter:${rowIds.toString()}`,
         attributeBonus
@@ -277,8 +277,37 @@ function combineCombat(rowIds) {
   );
 }
 
-function addWpToCombat(section, rowId, wpName) {
-  console.log("addWpToCombat", section, rowId);
+function addThingToBonuses(section, rowId) {
+  console.log("addThingToBonuses", section, rowId);
+  if (!section || !rowId) {
+    return;
+  }
+
+  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
+  const thingAttrs = COMBAT_SAVE_KEYS.map(
+    (key) => `repeating_${section}_${rowId}_${key}`
+  );
+  thingAttrs.push(thingBonusId);
+  getAttrs(thingAttrs, (a) => {
+    console.log(a);
+    const attrs = {};
+    let bonusRowId;
+    if (a[thingBonusId]) {
+      bonusRowId = a[thingBonusId];
+    } else {
+      bonusRowId = generateRowID();
+      attrs[thingBonusId] = bonusRowId;
+    }
+    COMBAT_SAVE_KEYS.forEach((key) => {
+      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
+        a[`repeating_${section}_${rowId}_${key}`] || 0;
+    });
+    setAttrs(attrs);
+  });
+}
+
+function addWpToBonuses(section, rowId, wpName) {
+  console.log("addWpToBonuses", section, rowId);
   if (!section || !rowId || !wpName) {
     return;
   }
@@ -286,7 +315,7 @@ function addWpToCombat(section, rowId, wpName) {
   const wpAttrs = wpActions.map(
     (action) => `repeating_${section}_${rowId}_${action}`
   );
-  const wpCombatId = `repeating_${section}_${rowId}_combat_id`;
+  const wpCombatId = `repeating_${section}_${rowId}_bonus_id`;
   wpAttrs.push(wpCombatId);
   getAttrs(wpAttrs, (a) => {
     const attrs = {};
@@ -298,22 +327,31 @@ function addWpToCombat(section, rowId, wpName) {
       attrs[wpCombatId] = combatRowId;
     }
     COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_combat_${combatRowId}_${key}`] =
+      attrs[`repeating_bonuses_${combatRowId}_${key}`] =
         a[`repeating_${section}_${rowId}_${key}`] || 0;
     });
     setAttrs(attrs);
   });
 }
 
+on("change:repeating_combat", (e) => {
+  console.log("change:repeating_combat", e);
+  const sourceParts = e.sourceAttribute.split("_");
+  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
+  const [r, section, rowId] = sourceParts;
+  addThingToBonuses(section, rowId);
+  setAttrs({ [`repeating_combat_rowid`]: `repeating_combat_${rowId}_` });
+});
+
 /**
- * This function assumes its indices match up with combatselections indices.
+ * This function assumes its indices match up with bonusselections indices.
  * If that changes, it will need to be modified.
  * */
-on("change:repeating_combat:name", (e) => {
-  console.log("change:repeating_combat:name", e);
+on("change:repeating_bonuses:name", (e) => {
+  console.log("change:repeating_bonuses:name", e);
   const [r, section, combatRowId] = e.sourceAttribute.split("_");
-  getSectionIDs("combat", (skillIds) => {
-    getSectionIDs("combatselections", (selectionIds) => {
+  getSectionIDs("bonuses", (skillIds) => {
+    getSectionIDs("bonusselections", (selectionIds) => {
       const skillIdx = skillIds.findIndex((id) =>
         e.sourceAttribute.includes(id)
       );
@@ -326,62 +364,86 @@ on("change:repeating_combat:name", (e) => {
         // use existing row
         rowId = selectionIds[skillIdx];
       }
-      // Store related row ID from repeating_combatselections
-      attrs[`repeating_combat_rowid`] = `repeating_combat_${combatRowId}_`;
-      attrs[`repeating_combat_combat_selection_id`] = rowId;
-      attrs[`repeating_combatselections_${rowId}_combat_id`] =
-        skillIds[skillIdx];
-      attrs[`repeating_combatselections_${rowId}_name`] = e.newValue;
-      attrs[`repeating_combatselections_${rowId}_bonus_section`] = "combat";
+      // Store related row ID from repeating_bonusselections
+      attrs[`repeating_bonuses_rowid`] = `repeating_bonuses_${combatRowId}_`;
+      attrs[`repeating_bonuses_bonus_selection_id`] = rowId;
+      attrs[`repeating_bonusselections_${rowId}_bonus_id`] = skillIds[skillIdx];
+      attrs[`repeating_bonusselections_${rowId}_name`] = e.newValue;
+      attrs[`repeating_bonusselections_${rowId}_bonus_section`] = "bonuses";
       setAttrs(attrs);
     });
   });
 });
 
+function removeBonusSelectionsRow(bonusRowId, callback = null) {
+  getAttrs([`repeating_bonuses_${bonusRowId}_bonus_selection_id`], (a) => {
+    removeRepeatingRow(
+      `repeating_bonusselections_${
+        a[`repeating_bonuses_${bonusRowId}_bonus_selection_id`]
+      }`
+    );
+    aggregateBonuses();
+    if (typeof callback == "function") {
+      callback();
+    }
+  });
+}
+
+function removeBonusRows(bonusRowId, callback = null) {
+  removeBonusSelectionsRow(bonusRowId, () => {
+    removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
+    if (typeof callback == "function") {
+      callback();
+    }
+  });
+}
+
 on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
   console.log("remove wp", e);
   // const [r, section, rowId] = e.sourceAttribute.split('_');
-  const combatRowId = e.removedInfo[`${e.sourceAttribute}_combat_id`];
-  const combatSelectionKey = `repeating_combat_${combatRowId}_combat_selection_id`;
-  getAttrs([combatSelectionKey], (a) => {
-    removeRepeatingRow(`repeating_combatselections_${a[combatSelectionKey]}`);
-    removeRepeatingRow(`repeating_combat_${combatRowId}`);
-    aggregateBonuses();
-  });
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusRows(bonusRowId);
 });
 
 on("remove:repeating_combat", (e) => {
-  // remove repeating_combatselections row with the same index
-  const combatselectionsRowIdToRemove =
-    e.removedInfo[`${e.sourceAttribute}_combat_selection_id`];
-  removeRepeatingRow(
-    `repeating_combatselections_${combatselectionsRowIdToRemove}`
-  );
-  aggregateBonuses();
+  console.log("remove:repeating_combat", e);
+  // remove repeating_bonusselections row with the same index
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusRows(bonusRowId);
+});
+
+on("remove:repeating_bonuses", (e) => {
+  console.log("remove:repeating_bonuses", e);
+  // remove repeating_selections row with the same index
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusSelectionsRow(bonusRowId);
 });
 
 on("change:_reorder:combat", (e) => {
-  // reorder repeating_combatselections to match
+  // reorder repeating_bonusselections to match
   console.log("change:_reorder:combat", e);
 });
 
 function aggregateBonuses() {
-  getSectionIDs("combatselections", (ids) => {
+  console.log("aggregateBonuses");
+  getSectionIDs("bonusselections", (ids) => {
     const checkboxNames = ids.map(
-      (id) => `repeating_combatselections_${id}_enabled`
+      (id) => `repeating_bonusselections_${id}_enabled`
     );
     const combatIdNames = ids.map(
-      (id) => `repeating_combatselections_${id}_combat_id`
+      (id) => `repeating_bonusselections_${id}_bonus_id`
     );
     const bonusSectionNames = ids.map(
-      (id) => `repeating_combatselections_${id}_bonus_section`
+      (id) => `repeating_bonusselections_${id}_bonus_section`
     );
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
+    console.log(attrNames);
     getAttrs(attrNames, (a) => {
+      console.log(a);
       const combatRowIds = ids.reduce((acc, id) => {
-        const prefix = `repeating_combatselections_${id}`;
+        const prefix = `repeating_bonusselections_${id}`;
         if (Boolean(Number(a[`${prefix}_enabled`])) == true) {
-          acc.push(a[`${prefix}_combat_id`]);
+          acc.push(a[`${prefix}_bonus_id`]);
         }
         return acc;
       }, []);
@@ -390,9 +452,9 @@ function aggregateBonuses() {
   });
 }
 
-on("change:repeating_combatselections:enabled change:repeating_combat", (e) => {
+on("change:repeating_bonusselections:enabled change:repeating_bonuses", (e) => {
   console.log(
-    "change:repeating_combatselections:enabled change:repeating_combat",
+    "change:repeating_bonusselections:enabled change:repeating_bonuses",
     e
   );
   aggregateBonuses();

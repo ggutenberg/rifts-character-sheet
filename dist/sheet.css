@@ -40,6 +40,7 @@ details summary {
 .magic,
 .psionics,
 .importexport,
+.bonuses,
 .combat {
   display: none;
 }
@@ -52,6 +53,7 @@ details summary {
 .tabstoggle[value="magic"] ~ div.magic,
 .tabstoggle[value="psionics"] ~ div.psionics,
 .tabstoggle[value="importexport"] ~ div.importexport,
+.tabstoggle[value="bonuses"] ~ div.bonuses,
 .tabstoggle[value="combat"] ~ div.combat {
   display: block;
 }
@@ -180,7 +182,7 @@ details summary {
 
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combatselections"] {
+  .repcontainer[data-groupname="repeating_bonusselections"] {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -189,7 +191,7 @@ details summary {
 
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combatselections"]
+  .repcontainer[data-groupname="repeating_bonusselections"]
   label
   span {
   cursor: pointer;
@@ -198,6 +200,11 @@ details summary {
 .charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  label,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_bonuses"]
   .repitem
   label,
 .combat-combined-bonuses label {
@@ -212,6 +219,12 @@ details summary {
   .repitem
   label
   span,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_bonuses"]
+  .repitem
+  label
+  span,
 .combat-combined-bonuses label span,
 .spell-details label span {
   display: flex;
@@ -219,7 +232,7 @@ details summary {
 }
 
 .charsheet main#megaverse .combat-container .combat-combined-bonuses input,
-.charsheet main#megaverse .combat-container details input,
+.charsheet main#megaverse .combat-container details div:not(.macro-help) input,
 .charsheet main#megaverse .combat-container input[type="number"] {
   width: 5rem;
 }
@@ -228,6 +241,11 @@ details summary {
 .charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  .bonus-type-container,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_bonuses"]
   .repitem
   .bonus-type-container {
   margin-top: 1rem;
@@ -240,6 +258,10 @@ details summary {
 .charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
+  .repitem:not(:last-of-type),
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_bonuses"]
   .repitem:not(:last-of-type) {
   margin-bottom: 3rem;
 }
@@ -259,6 +281,12 @@ details summary {
 .charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  .macro-help
+  label,
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_bonuses"]
   .repitem
   .macro-help
   label {

@@ -4,6 +4,9 @@
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
     <button class="metal linear" type="action" name="act_combat">Combat</button>
+    <button class="metal linear" type="action" name="act_bonuses">
+      Bonuses
+    </button>
     <button class="metal linear" type="action" name="act_magic">Magic</button>
     <button class="metal linear" type="action" name="act_psionics">
       Psionics
@@ -494,7 +497,7 @@
         <h5>Entangle</h5>
         <h5>RoF</h5>
         <h5>Level</h5>
-        <input type="hidden" name="attr_combat_id" value="" />
+        <input type="hidden" name="attr_bonus_id" value="" />
         <input type="text" list="weaponProficiencies" name="attr_name" />
         <datalist id="weaponProficiencies">
           <option value="Archery"></option>
@@ -528,7 +531,7 @@
         <h5>Single</h5>
         <h5>Burst</h5>
         <h5>Level</h5>
-        <input type="hidden" name="attr_combat_id" value="" />
+        <input type="hidden" name="attr_bonus_id" value="" />
         <input type="text" list="weaponProficienciesModern" name="attr_name" />
         <datalist id="weaponProficienciesModern">
           <option value="Handguns"></option>
@@ -550,6 +553,280 @@
   </div>
 
   <div class="combat">
+    <div class="combat-container">
+      <h3>Combat Skills</h3>
+      <fieldset class="repeating_combat">
+        <div class="bonus-type-container">
+          <input type="hidden" name="attr_bonus_id" value="" />
+          <label
+            ><span>Skill</span>
+            <input type="text" list="handToHand" name="attr_name" />
+            <datalist id="handToHand">
+              <option value="Custom - Type Your Own"></option>
+              <option value="Basic"></option>
+              <option value="Expert"></option>
+              <option value="Martial Arts"></option>
+              <option value="Assassin"></option>
+              <option value="Commando"></option>
+              <option value="Dragon"></option>
+              <option value="RPA Basic"></option>
+              <option value="RPA Elite: Flying PA"></option>
+              <option value="RPA Elite: Ground PA"></option>
+              <option value="RPA Elite: Heavy Vehicle"></option>
+              <option value="RPA Elite: Heavy Ground"></option>
+              <option value="RPA Elite: Light Ground"></option>
+              <option value="RPA Elite: Glitter Boy"></option>
+              <option value="Spell: Superhuman Speed"></option>
+              <option value="Psionic: Sixth Sense"></option>
+              <option value="Magic Amulet: Charm"></option>
+            </datalist>
+          </label>
+          <label
+            ><span>Level</span>
+            <input type="number" value="" name="attr_level" />
+          </label>
+          <div></div>
+          <div></div>
+        </div>
+        <details>
+          <summary>
+            <b>Expand <span name="attr_name"></span></b>
+          </summary>
+          <div class="bonus-type-container">
+            <label
+              ><span>Attacks</span>
+              <input type="number" value="" name="attr_attacks" />
+            </label>
+            <label
+              ><span>Initiative</span>
+              <input type="number" value="" name="attr_initiative" />
+              <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
+            </label>
+            <label
+              ><span>Strike</span>
+              <input type="number" value="" name="attr_strike" />
+              <button type="roll" value="Strike: [[d20+@{strike}]]" />
+            </label>
+            <label
+              ><span>Parry</span>
+              <input type="number" value="" name="attr_parry" />
+              <button type="roll" value="Parry: [[d20+@{parry}]]" />
+            </label>
+            <label
+              ><span>Dodge</span>
+              <input type="number" value="" name="attr_dodge" />
+              <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
+            </label>
+            <label
+              ><span>Throw</span>
+              <input type="number" value="" name="attr_throw" />
+              <button type="roll" value="Throw: [[d20+@{throw}]]" />
+            </label>
+            <label
+              ><span>Disarm</span>
+              <input type="number" value="" name="attr_disarm" />
+              <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
+            </label>
+            <label
+              ><span>Entangle</span>
+              <input type="number" value="" name="attr_entangle" />
+              <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
+            </label>
+            <label
+              ><span>Pull Punch</span>
+              <input type="number" value="" name="attr_pull" />
+              <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
+            </label>
+            <label
+              ><span>Roll w/ Impact</span>
+              <input type="number" value="" name="attr_roll" />
+              <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
+            </label>
+            <label
+              ><span>Damage</span>
+              <input type="text" value="0" name="attr_damage" />
+              <button
+                type="roll"
+                value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+              />
+            </label>
+            <label
+              ><span>Dodge: Flight</span>
+              <input type="number" value="" name="attr_dodge_flight" />
+              <button
+                type="roll"
+                value="Dodge in Flight: [[d20+@{dodge_flight}]]"
+              />
+            </label>
+            <label
+              >Dodge: Auto
+              <input type="number" value="" name="attr_dodge_auto" />
+              <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
+            </label>
+            <label
+              ><span>Dodge: Teleport</span>
+              <input type="number" value="" name="attr_dodge_teleport" />
+              <button
+                type="roll"
+                value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
+              />
+            </label>
+            <label
+              ><span>Dodge: Motion</span>
+              <input type="number" value="" name="attr_dodge_motion" />
+              <button
+                type="roll"
+                value="Dodge in Motion: [[d20+@{dodge_motion}]]"
+              />
+            </label>
+            <label
+              ><span>Strike: Range</span>
+              <input type="number" value="" name="attr_strike_range" />
+              <button
+                type="roll"
+                value="Range Strike: [[d20+@{strike_range}]]"
+              />
+            </label>
+            <label
+              ><span>Range: Single</span>
+              <input type="number" value="" name="attr_strike_range_single" />
+              <button
+                type="roll"
+                value="Range Strike: [[d20+@{strike_range_single}]]"
+              />
+            </label>
+            <label
+              ><span>Range: Burst</span>
+              <input type="number" value="" name="attr_strike_range_burst" />
+              <button
+                type="roll"
+                value="Range Strike: [[d20+@{strike_range_burst}]]"
+              />
+            </label>
+            <label
+              ><span>Critical</span>
+              <input type="number" value="" name="attr_critical"
+            /></label>
+            <label
+              ><span>Knockout</span>
+              <input type="number" value="" name="attr_knockout"
+            /></label>
+            <label
+              ><span>Death Blow</span>
+              <input type="number" value="" name="attr_deathblow"
+            /></label>
+          </div>
+          <h4>Saving Throws</h4>
+          <div class="bonus-type-container">
+            <label
+              ><span>Psionics</span>
+              <input type="number" value="" name="attr_psionics" />
+              <button
+                type="roll"
+                value="Save vs. Psionics: [[d20+@{psionics}]]"
+              />
+            </label>
+            <label
+              ><span>Magic</span>
+              <input type="number" value="" name="attr_magic" />
+              <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
+            </label>
+            <label
+              ><span>Poison</span>
+              <input type="number" value="" name="attr_poison" />
+              <button type="roll" value="Save vs. Poison: [[d20+@{poison}]]" />
+            </label>
+            <label
+              ><span>Horror Factor</span>
+              <input type="number" value="" name="attr_horrorfactor" />
+              <button
+                type="roll"
+                value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
+              />
+            </label>
+            <label
+              ><span>Mind Control</span>
+              <input type="number" value="" name="attr_mindcontrol" />
+              <button
+                type="roll"
+                value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
+              />
+            </label>
+            <label
+              ><span>Disease</span>
+              <input type="number" value="" name="attr_disease" />
+              <button
+                type="roll"
+                value="Save vs. Disease: [[d20+@{disease}]]"
+              />
+            </label>
+            <label
+              ><span>Illusions</span>
+              <input type="number" value="" name="attr_illusions" />
+              <button
+                type="roll"
+                value="Save vs. Illusions: [[d20+@{illusions}]]"
+              />
+            </label>
+            <label
+              ><span>Possession</span>
+              <input type="number" value="" name="attr_possession" />
+              <button
+                type="roll"
+                value="Save vs. Possession: [[d20+@{possession}]]"
+              />
+            </label>
+            <label
+              ><span>Insanity</span>
+              <input type="number" value="" name="attr_insanity" />
+              <button
+                type="roll"
+                value="Save vs. Insanity: [[d20+@{insanity}]]"
+              />
+            </label>
+            <label
+              ><span>Torture</span>
+              <input type="number" value="" name="attr_torture" />
+              <button
+                type="roll"
+                value="Save vs. Torture: [[d20+@{torture}]]"
+              />
+            </label>
+            <label
+              ><span>Fatigue</span>
+              <input type="number" value="" name="attr_fatigue" />
+              <button
+                type="roll"
+                value="Save vs. Fatigue: [[d20+@{fatigue}]]"
+              />
+            </label>
+            <label
+              ><span>Toxins</span>
+              <input type="number" value="" name="attr_toxins" />
+              <button type="roll" value="Save vs. Toxins: [[d20+@{toxins}]]" />
+            </label>
+            <label
+              ><span>Coma/Death</span>
+              <input type="number" value="" name="attr_comadeath" />
+              <button
+                type="roll"
+                value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
+              />
+            </label>
+          </div>
+          <h4>Macro Help</h4>
+          <div class="macro-help">
+            <label
+              ><span><b>Row ID:</b></span>
+              <input type="text" readonly name="attr_rowid" value=""
+            /></label>
+          </div>
+        </details>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="bonuses">
     <div class="combat-container">
       <div class="combat-combined">
         <details>
@@ -590,13 +867,13 @@
           section is dynamic. Unless you're using them for debugging or testing,
           don't touch them, as it may cause unpredictable behavior.
         </p>
-        <fieldset class="repeating_combatselections">
+        <fieldset class="repeating_bonusselections">
           <label>
             <input type="checkbox" name="attr_enabled" value="1" />
             <span name="attr_name"></span
           ></label>
           <input type="hidden" name="attr_name" value="" />
-          <input type="hidden" name="attr_combat_id" value="" />
+          <input type="hidden" name="attr_bonus_id" value="" />
           <input type="hidden" name="attr_bonus_section" value="" />
         </fieldset>
         <br />
@@ -1027,275 +1304,283 @@
         </div>
       </div>
       <hr />
-      <h3>Combat Skills</h3>
-      <fieldset class="repeating_combat">
-        <div class="bonus-type-container">
-          <input type="hidden" name="attr_combat_selection_id" value="" />
-          <label
-            ><span>Skill</span>
-            <input type="text" list="handToHand" name="attr_name" />
-            <datalist id="handToHand">
-              <option value="Custom - Type Your Own"></option>
-              <option value="Basic"></option>
-              <option value="Expert"></option>
-              <option value="Martial Arts"></option>
-              <option value="Assassin"></option>
-              <option value="Commando"></option>
-              <option value="Dragon"></option>
-              <option value="RPA Basic"></option>
-              <option value="RPA Elite: Flying PA"></option>
-              <option value="RPA Elite: Ground PA"></option>
-              <option value="RPA Elite: Heavy Vehicle"></option>
-              <option value="RPA Elite: Heavy Ground"></option>
-              <option value="RPA Elite: Light Ground"></option>
-              <option value="RPA Elite: Glitter Boy"></option>
-              <option value="Spell: Superhuman Speed"></option>
-              <option value="Psionic: Sixth Sense"></option>
-              <option value="Magic Amulet: Charm"></option>
-            </datalist>
-          </label>
-          <label
-            ><span>Level</span>
-            <input type="number" value="" name="attr_level" />
-          </label>
-          <div></div>
-          <div></div>
-        </div>
-        <details>
-          <summary>
-            <b>Expand <span name="attr_name"></span></b>
-          </summary>
+      <div class="hidden">
+        <h3>Bonus Sources</h3>
+        <fieldset class="repeating_bonuses">
           <div class="bonus-type-container">
+            <input type="hidden" name="attr_bonus_selection_id" value="" />
             <label
-              ><span>Attacks</span>
-              <input type="number" value="" name="attr_attacks" />
+              ><span>Skill</span>
+              <input type="text" list="handToHand" name="attr_name" />
+              <datalist id="handToHand">
+                <option value="Custom - Type Your Own"></option>
+                <option value="Basic"></option>
+                <option value="Expert"></option>
+                <option value="Martial Arts"></option>
+                <option value="Assassin"></option>
+                <option value="Commando"></option>
+                <option value="Dragon"></option>
+                <option value="RPA Basic"></option>
+                <option value="RPA Elite: Flying PA"></option>
+                <option value="RPA Elite: Ground PA"></option>
+                <option value="RPA Elite: Heavy Vehicle"></option>
+                <option value="RPA Elite: Heavy Ground"></option>
+                <option value="RPA Elite: Light Ground"></option>
+                <option value="RPA Elite: Glitter Boy"></option>
+                <option value="Spell: Superhuman Speed"></option>
+                <option value="Psionic: Sixth Sense"></option>
+                <option value="Magic Amulet: Charm"></option>
+              </datalist>
             </label>
             <label
-              ><span>Initiative</span>
-              <input type="number" value="" name="attr_initiative" />
-              <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
+              ><span>Level</span>
+              <input type="number" value="" name="attr_level" />
             </label>
-            <label
-              ><span>Strike</span>
-              <input type="number" value="" name="attr_strike" />
-              <button type="roll" value="Strike: [[d20+@{strike}]]" />
-            </label>
-            <label
-              ><span>Parry</span>
-              <input type="number" value="" name="attr_parry" />
-              <button type="roll" value="Parry: [[d20+@{parry}]]" />
-            </label>
-            <label
-              ><span>Dodge</span>
-              <input type="number" value="" name="attr_dodge" />
-              <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
-            </label>
-            <label
-              ><span>Throw</span>
-              <input type="number" value="" name="attr_throw" />
-              <button type="roll" value="Throw: [[d20+@{throw}]]" />
-            </label>
-            <label
-              ><span>Disarm</span>
-              <input type="number" value="" name="attr_disarm" />
-              <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
-            </label>
-            <label
-              ><span>Entangle</span>
-              <input type="number" value="" name="attr_entangle" />
-              <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
-            </label>
-            <label
-              ><span>Pull Punch</span>
-              <input type="number" value="" name="attr_pull" />
-              <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
-            </label>
-            <label
-              ><span>Roll w/ Impact</span>
-              <input type="number" value="" name="attr_roll" />
-              <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
-            </label>
-            <label
-              ><span>Damage</span>
-              <input type="text" value="0" name="attr_damage" />
-              <button
-                type="roll"
-                value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
-              />
-            </label>
-            <label
-              ><span>Dodge: Flight</span>
-              <input type="number" value="" name="attr_dodge_flight" />
-              <button
-                type="roll"
-                value="Dodge in Flight: [[d20+@{dodge_flight}]]"
-              />
-            </label>
-            <label
-              >Dodge: Auto
-              <input type="number" value="" name="attr_dodge_auto" />
-              <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
-            </label>
-            <label
-              ><span>Dodge: Teleport</span>
-              <input type="number" value="" name="attr_dodge_teleport" />
-              <button
-                type="roll"
-                value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
-              />
-            </label>
-            <label
-              ><span>Dodge: Motion</span>
-              <input type="number" value="" name="attr_dodge_motion" />
-              <button
-                type="roll"
-                value="Dodge in Motion: [[d20+@{dodge_motion}]]"
-              />
-            </label>
-            <label
-              ><span>Strike: Range</span>
-              <input type="number" value="" name="attr_strike_range" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range}]]"
-              />
-            </label>
-            <label
-              ><span>Range: Single</span>
-              <input type="number" value="" name="attr_strike_range_single" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range_single}]]"
-              />
-            </label>
-            <label
-              ><span>Range: Burst</span>
-              <input type="number" value="" name="attr_strike_range_burst" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range_burst}]]"
-              />
-            </label>
-            <label
-              ><span>Critical</span>
-              <input type="number" value="" name="attr_critical"
-            /></label>
-            <label
-              ><span>Knockout</span>
-              <input type="number" value="" name="attr_knockout"
-            /></label>
-            <label
-              ><span>Death Blow</span>
-              <input type="number" value="" name="attr_deathblow"
-            /></label>
+            <div></div>
+            <div></div>
           </div>
-          <h4>Saving Throws</h4>
-          <div class="bonus-type-container">
-            <label
-              ><span>Psionics</span>
-              <input type="number" value="" name="attr_psionics" />
-              <button
-                type="roll"
-                value="Save vs. Psionics: [[d20+@{psionics}]]"
-              />
-            </label>
-            <label
-              ><span>Magic</span>
-              <input type="number" value="" name="attr_magic" />
-              <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
-            </label>
-            <label
-              ><span>Poison</span>
-              <input type="number" value="" name="attr_poison" />
-              <button type="roll" value="Save vs. Poison: [[d20+@{poison}]]" />
-            </label>
-            <label
-              ><span>Horror Factor</span>
-              <input type="number" value="" name="attr_horrorfactor" />
-              <button
-                type="roll"
-                value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
-              />
-            </label>
-            <label
-              ><span>Mind Control</span>
-              <input type="number" value="" name="attr_mindcontrol" />
-              <button
-                type="roll"
-                value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
-              />
-            </label>
-            <label
-              ><span>Disease</span>
-              <input type="number" value="" name="attr_disease" />
-              <button
-                type="roll"
-                value="Save vs. Disease: [[d20+@{disease}]]"
-              />
-            </label>
-            <label
-              ><span>Illusions</span>
-              <input type="number" value="" name="attr_illusions" />
-              <button
-                type="roll"
-                value="Save vs. Illusions: [[d20+@{illusions}]]"
-              />
-            </label>
-            <label
-              ><span>Possession</span>
-              <input type="number" value="" name="attr_possession" />
-              <button
-                type="roll"
-                value="Save vs. Possession: [[d20+@{possession}]]"
-              />
-            </label>
-            <label
-              ><span>Insanity</span>
-              <input type="number" value="" name="attr_insanity" />
-              <button
-                type="roll"
-                value="Save vs. Insanity: [[d20+@{insanity}]]"
-              />
-            </label>
-            <label
-              ><span>Torture</span>
-              <input type="number" value="" name="attr_torture" />
-              <button
-                type="roll"
-                value="Save vs. Torture: [[d20+@{torture}]]"
-              />
-            </label>
-            <label
-              ><span>Fatigue</span>
-              <input type="number" value="" name="attr_fatigue" />
-              <button
-                type="roll"
-                value="Save vs. Fatigue: [[d20+@{fatigue}]]"
-              />
-            </label>
-            <label
-              ><span>Toxins</span>
-              <input type="number" value="" name="attr_toxins" />
-              <button type="roll" value="Save vs. Toxins: [[d20+@{toxins}]]" />
-            </label>
-            <label
-              ><span>Coma/Death</span>
-              <input type="number" value="" name="attr_comadeath" />
-              <button
-                type="roll"
-                value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
-              />
-            </label>
-          </div>
-          <h4>Macro Help</h4>
-          <div class="macro-help">
-            <label
-              ><span><b>Row ID:</b></span>
-              <input type="text" readonly name="attr_rowid" value=""
-            /></label>
-          </div>
-        </details>
-      </fieldset>
+          <details>
+            <summary>
+              <b>Expand <span name="attr_name"></span></b>
+            </summary>
+            <div class="bonus-type-container">
+              <label
+                ><span>Attacks</span>
+                <input type="number" value="" name="attr_attacks" />
+              </label>
+              <label
+                ><span>Initiative</span>
+                <input type="number" value="" name="attr_initiative" />
+                <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
+              </label>
+              <label
+                ><span>Strike</span>
+                <input type="number" value="" name="attr_strike" />
+                <button type="roll" value="Strike: [[d20+@{strike}]]" />
+              </label>
+              <label
+                ><span>Parry</span>
+                <input type="number" value="" name="attr_parry" />
+                <button type="roll" value="Parry: [[d20+@{parry}]]" />
+              </label>
+              <label
+                ><span>Dodge</span>
+                <input type="number" value="" name="attr_dodge" />
+                <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
+              </label>
+              <label
+                ><span>Throw</span>
+                <input type="number" value="" name="attr_throw" />
+                <button type="roll" value="Throw: [[d20+@{throw}]]" />
+              </label>
+              <label
+                ><span>Disarm</span>
+                <input type="number" value="" name="attr_disarm" />
+                <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
+              </label>
+              <label
+                ><span>Entangle</span>
+                <input type="number" value="" name="attr_entangle" />
+                <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
+              </label>
+              <label
+                ><span>Pull Punch</span>
+                <input type="number" value="" name="attr_pull" />
+                <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
+              </label>
+              <label
+                ><span>Roll w/ Impact</span>
+                <input type="number" value="" name="attr_roll" />
+                <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
+              </label>
+              <label
+                ><span>Damage</span>
+                <input type="text" value="0" name="attr_damage" />
+                <button
+                  type="roll"
+                  value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+                />
+              </label>
+              <label
+                ><span>Dodge: Flight</span>
+                <input type="number" value="" name="attr_dodge_flight" />
+                <button
+                  type="roll"
+                  value="Dodge in Flight: [[d20+@{dodge_flight}]]"
+                />
+              </label>
+              <label
+                >Dodge: Auto
+                <input type="number" value="" name="attr_dodge_auto" />
+                <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
+              </label>
+              <label
+                ><span>Dodge: Teleport</span>
+                <input type="number" value="" name="attr_dodge_teleport" />
+                <button
+                  type="roll"
+                  value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
+                />
+              </label>
+              <label
+                ><span>Dodge: Motion</span>
+                <input type="number" value="" name="attr_dodge_motion" />
+                <button
+                  type="roll"
+                  value="Dodge in Motion: [[d20+@{dodge_motion}]]"
+                />
+              </label>
+              <label
+                ><span>Strike: Range</span>
+                <input type="number" value="" name="attr_strike_range" />
+                <button
+                  type="roll"
+                  value="Range Strike: [[d20+@{strike_range}]]"
+                />
+              </label>
+              <label
+                ><span>Range: Single</span>
+                <input type="number" value="" name="attr_strike_range_single" />
+                <button
+                  type="roll"
+                  value="Range Strike: [[d20+@{strike_range_single}]]"
+                />
+              </label>
+              <label
+                ><span>Range: Burst</span>
+                <input type="number" value="" name="attr_strike_range_burst" />
+                <button
+                  type="roll"
+                  value="Range Strike: [[d20+@{strike_range_burst}]]"
+                />
+              </label>
+              <label
+                ><span>Critical</span>
+                <input type="number" value="" name="attr_critical"
+              /></label>
+              <label
+                ><span>Knockout</span>
+                <input type="number" value="" name="attr_knockout"
+              /></label>
+              <label
+                ><span>Death Blow</span>
+                <input type="number" value="" name="attr_deathblow"
+              /></label>
+            </div>
+            <h4>Saving Throws</h4>
+            <div class="bonus-type-container">
+              <label
+                ><span>Psionics</span>
+                <input type="number" value="" name="attr_psionics" />
+                <button
+                  type="roll"
+                  value="Save vs. Psionics: [[d20+@{psionics}]]"
+                />
+              </label>
+              <label
+                ><span>Magic</span>
+                <input type="number" value="" name="attr_magic" />
+                <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
+              </label>
+              <label
+                ><span>Poison</span>
+                <input type="number" value="" name="attr_poison" />
+                <button
+                  type="roll"
+                  value="Save vs. Poison: [[d20+@{poison}]]"
+                />
+              </label>
+              <label
+                ><span>Horror Factor</span>
+                <input type="number" value="" name="attr_horrorfactor" />
+                <button
+                  type="roll"
+                  value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
+                />
+              </label>
+              <label
+                ><span>Mind Control</span>
+                <input type="number" value="" name="attr_mindcontrol" />
+                <button
+                  type="roll"
+                  value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
+                />
+              </label>
+              <label
+                ><span>Disease</span>
+                <input type="number" value="" name="attr_disease" />
+                <button
+                  type="roll"
+                  value="Save vs. Disease: [[d20+@{disease}]]"
+                />
+              </label>
+              <label
+                ><span>Illusions</span>
+                <input type="number" value="" name="attr_illusions" />
+                <button
+                  type="roll"
+                  value="Save vs. Illusions: [[d20+@{illusions}]]"
+                />
+              </label>
+              <label
+                ><span>Possession</span>
+                <input type="number" value="" name="attr_possession" />
+                <button
+                  type="roll"
+                  value="Save vs. Possession: [[d20+@{possession}]]"
+                />
+              </label>
+              <label
+                ><span>Insanity</span>
+                <input type="number" value="" name="attr_insanity" />
+                <button
+                  type="roll"
+                  value="Save vs. Insanity: [[d20+@{insanity}]]"
+                />
+              </label>
+              <label
+                ><span>Torture</span>
+                <input type="number" value="" name="attr_torture" />
+                <button
+                  type="roll"
+                  value="Save vs. Torture: [[d20+@{torture}]]"
+                />
+              </label>
+              <label
+                ><span>Fatigue</span>
+                <input type="number" value="" name="attr_fatigue" />
+                <button
+                  type="roll"
+                  value="Save vs. Fatigue: [[d20+@{fatigue}]]"
+                />
+              </label>
+              <label
+                ><span>Toxins</span>
+                <input type="number" value="" name="attr_toxins" />
+                <button
+                  type="roll"
+                  value="Save vs. Toxins: [[d20+@{toxins}]]"
+                />
+              </label>
+              <label
+                ><span>Coma/Death</span>
+                <input type="number" value="" name="attr_comadeath" />
+                <button
+                  type="roll"
+                  value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
+                />
+              </label>
+            </div>
+            <h4>Macro Help</h4>
+            <div class="macro-help">
+              <label
+                ><span><b>Row ID:</b></span>
+                <input type="text" readonly name="attr_rowid" value=""
+              /></label>
+            </div>
+          </details>
+        </fieldset>
+      </div>
     </div>
   </div>
 
@@ -2632,7 +2917,7 @@ function updateWeaponProficiency(section, source, newWpLevel) {
         wpName: a[`repeating_${section}_${rowId}_name`],
         newWpLevel,
         rowId: rowId,
-        callback: addWpToCombat,
+        callback: addWpToBonuses,
       });
     });
   });
@@ -2655,7 +2940,7 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
         wpName,
         rowId,
         newWpLevel: a[wpLevelKey],
-        callback: addWpToCombat,
+        callback: addWpToBonuses,
       });
     } else {
       const attrs = {};
@@ -2717,7 +3002,7 @@ function combineCombat(rowIds) {
   console.log("combineCombat", rowIds);
   repeatingStringConcat({
     destinations: ["combat_combined_damage"],
-    section: "combat",
+    section: "bonuses",
     fields: ["damage"],
     filter: rowIds,
     callback: () => {
@@ -2731,7 +3016,7 @@ function combineCombat(rowIds) {
       "combat_combined_knockout",
       "combat_combined_deathblow",
     ],
-    section: "combat",
+    section: "bonuses",
     fields: ["critical", "knockout", "deathblow"],
     defaultValues: [20, 0, 0],
     ranks: ["low", "low", "low"],
@@ -2752,7 +3037,7 @@ function combineCombat(rowIds) {
       "combat_combined_strike_range_single",
       "combat_combined_strike_range_burst",
     ],
-    "combat",
+    "bonuses",
     [
       "attacks",
       "initiative",
@@ -2782,7 +3067,7 @@ function combineCombat(rowIds) {
       "combat_combined_dodge_teleport",
       "combat_combined_dodge_motion",
     ],
-    "combat",
+    "bonuses",
     [
       "strike",
       "parry",
@@ -2804,7 +3089,7 @@ function combineCombat(rowIds) {
     ([attributeBonus, saves]) => {
       repeatingSum(
         saves.map((save) => `combat_combined_${save}`),
-        "combat",
+        "bonuses",
         saves,
         `filter:${rowIds.toString()}`,
         attributeBonus
@@ -2813,8 +3098,37 @@ function combineCombat(rowIds) {
   );
 }
 
-function addWpToCombat(section, rowId, wpName) {
-  console.log("addWpToCombat", section, rowId);
+function addThingToBonuses(section, rowId) {
+  console.log("addThingToBonuses", section, rowId);
+  if (!section || !rowId) {
+    return;
+  }
+
+  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
+  const thingAttrs = COMBAT_SAVE_KEYS.map(
+    (key) => `repeating_${section}_${rowId}_${key}`
+  );
+  thingAttrs.push(thingBonusId);
+  getAttrs(thingAttrs, (a) => {
+    console.log(a);
+    const attrs = {};
+    let bonusRowId;
+    if (a[thingBonusId]) {
+      bonusRowId = a[thingBonusId];
+    } else {
+      bonusRowId = generateRowID();
+      attrs[thingBonusId] = bonusRowId;
+    }
+    COMBAT_SAVE_KEYS.forEach((key) => {
+      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
+        a[`repeating_${section}_${rowId}_${key}`] || 0;
+    });
+    setAttrs(attrs);
+  });
+}
+
+function addWpToBonuses(section, rowId, wpName) {
+  console.log("addWpToBonuses", section, rowId);
   if (!section || !rowId || !wpName) {
     return;
   }
@@ -2822,7 +3136,7 @@ function addWpToCombat(section, rowId, wpName) {
   const wpAttrs = wpActions.map(
     (action) => `repeating_${section}_${rowId}_${action}`
   );
-  const wpCombatId = `repeating_${section}_${rowId}_combat_id`;
+  const wpCombatId = `repeating_${section}_${rowId}_bonus_id`;
   wpAttrs.push(wpCombatId);
   getAttrs(wpAttrs, (a) => {
     const attrs = {};
@@ -2834,22 +3148,31 @@ function addWpToCombat(section, rowId, wpName) {
       attrs[wpCombatId] = combatRowId;
     }
     COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_combat_${combatRowId}_${key}`] =
+      attrs[`repeating_bonuses_${combatRowId}_${key}`] =
         a[`repeating_${section}_${rowId}_${key}`] || 0;
     });
     setAttrs(attrs);
   });
 }
 
+on("change:repeating_combat", (e) => {
+  console.log("change:repeating_combat", e);
+  const sourceParts = e.sourceAttribute.split("_");
+  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
+  const [r, section, rowId] = sourceParts;
+  addThingToBonuses(section, rowId);
+  setAttrs({ [`repeating_combat_rowid`]: `repeating_combat_${rowId}_` });
+});
+
 /**
- * This function assumes its indices match up with combatselections indices.
+ * This function assumes its indices match up with bonusselections indices.
  * If that changes, it will need to be modified.
  * */
-on("change:repeating_combat:name", (e) => {
-  console.log("change:repeating_combat:name", e);
+on("change:repeating_bonuses:name", (e) => {
+  console.log("change:repeating_bonuses:name", e);
   const [r, section, combatRowId] = e.sourceAttribute.split("_");
-  getSectionIDs("combat", (skillIds) => {
-    getSectionIDs("combatselections", (selectionIds) => {
+  getSectionIDs("bonuses", (skillIds) => {
+    getSectionIDs("bonusselections", (selectionIds) => {
       const skillIdx = skillIds.findIndex((id) =>
         e.sourceAttribute.includes(id)
       );
@@ -2862,62 +3185,86 @@ on("change:repeating_combat:name", (e) => {
         // use existing row
         rowId = selectionIds[skillIdx];
       }
-      // Store related row ID from repeating_combatselections
-      attrs[`repeating_combat_rowid`] = `repeating_combat_${combatRowId}_`;
-      attrs[`repeating_combat_combat_selection_id`] = rowId;
-      attrs[`repeating_combatselections_${rowId}_combat_id`] =
-        skillIds[skillIdx];
-      attrs[`repeating_combatselections_${rowId}_name`] = e.newValue;
-      attrs[`repeating_combatselections_${rowId}_bonus_section`] = "combat";
+      // Store related row ID from repeating_bonusselections
+      attrs[`repeating_bonuses_rowid`] = `repeating_bonuses_${combatRowId}_`;
+      attrs[`repeating_bonuses_bonus_selection_id`] = rowId;
+      attrs[`repeating_bonusselections_${rowId}_bonus_id`] = skillIds[skillIdx];
+      attrs[`repeating_bonusselections_${rowId}_name`] = e.newValue;
+      attrs[`repeating_bonusselections_${rowId}_bonus_section`] = "bonuses";
       setAttrs(attrs);
     });
   });
 });
 
+function removeBonusSelectionsRow(bonusRowId, callback = null) {
+  getAttrs([`repeating_bonuses_${bonusRowId}_bonus_selection_id`], (a) => {
+    removeRepeatingRow(
+      `repeating_bonusselections_${
+        a[`repeating_bonuses_${bonusRowId}_bonus_selection_id`]
+      }`
+    );
+    aggregateBonuses();
+    if (typeof callback == "function") {
+      callback();
+    }
+  });
+}
+
+function removeBonusRows(bonusRowId, callback = null) {
+  removeBonusSelectionsRow(bonusRowId, () => {
+    removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
+    if (typeof callback == "function") {
+      callback();
+    }
+  });
+}
+
 on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
   console.log("remove wp", e);
   // const [r, section, rowId] = e.sourceAttribute.split('_');
-  const combatRowId = e.removedInfo[`${e.sourceAttribute}_combat_id`];
-  const combatSelectionKey = `repeating_combat_${combatRowId}_combat_selection_id`;
-  getAttrs([combatSelectionKey], (a) => {
-    removeRepeatingRow(`repeating_combatselections_${a[combatSelectionKey]}`);
-    removeRepeatingRow(`repeating_combat_${combatRowId}`);
-    aggregateBonuses();
-  });
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusRows(bonusRowId);
 });
 
 on("remove:repeating_combat", (e) => {
-  // remove repeating_combatselections row with the same index
-  const combatselectionsRowIdToRemove =
-    e.removedInfo[`${e.sourceAttribute}_combat_selection_id`];
-  removeRepeatingRow(
-    `repeating_combatselections_${combatselectionsRowIdToRemove}`
-  );
-  aggregateBonuses();
+  console.log("remove:repeating_combat", e);
+  // remove repeating_bonusselections row with the same index
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusRows(bonusRowId);
+});
+
+on("remove:repeating_bonuses", (e) => {
+  console.log("remove:repeating_bonuses", e);
+  // remove repeating_selections row with the same index
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusSelectionsRow(bonusRowId);
 });
 
 on("change:_reorder:combat", (e) => {
-  // reorder repeating_combatselections to match
+  // reorder repeating_bonusselections to match
   console.log("change:_reorder:combat", e);
 });
 
 function aggregateBonuses() {
-  getSectionIDs("combatselections", (ids) => {
+  console.log("aggregateBonuses");
+  getSectionIDs("bonusselections", (ids) => {
     const checkboxNames = ids.map(
-      (id) => `repeating_combatselections_${id}_enabled`
+      (id) => `repeating_bonusselections_${id}_enabled`
     );
     const combatIdNames = ids.map(
-      (id) => `repeating_combatselections_${id}_combat_id`
+      (id) => `repeating_bonusselections_${id}_bonus_id`
     );
     const bonusSectionNames = ids.map(
-      (id) => `repeating_combatselections_${id}_bonus_section`
+      (id) => `repeating_bonusselections_${id}_bonus_section`
     );
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
+    console.log(attrNames);
     getAttrs(attrNames, (a) => {
+      console.log(a);
       const combatRowIds = ids.reduce((acc, id) => {
-        const prefix = `repeating_combatselections_${id}`;
+        const prefix = `repeating_bonusselections_${id}`;
         if (Boolean(Number(a[`${prefix}_enabled`])) == true) {
-          acc.push(a[`${prefix}_combat_id`]);
+          acc.push(a[`${prefix}_bonus_id`]);
         }
         return acc;
       }, []);
@@ -2926,9 +3273,9 @@ function aggregateBonuses() {
   });
 }
 
-on("change:repeating_combatselections:enabled change:repeating_combat", (e) => {
+on("change:repeating_bonusselections:enabled change:repeating_bonuses", (e) => {
   console.log(
-    "change:repeating_combatselections:enabled change:repeating_combat",
+    "change:repeating_bonusselections:enabled change:repeating_bonuses",
     e
   );
   aggregateBonuses();
@@ -3513,11 +3860,46 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
     });
   });
 
+  function setRepeatingRows(section, data, callback) {
+    console.log("setRepeatingRows", section, data);
+    if (section != "wp") return callback();
+    console.log("continuing setRepeatingRows", section);
+    const attrs = data.reduce((acc, row) => {
+      const rowId = generateRowID();
+      Object.entries(row).forEach(([key, val]) => {
+        acc[`repeating_${section}_${rowId}_${key}`] = val;
+      });
+      return acc;
+    }, {});
+    console.log(attrs);
+    setAttrs(attrs, {}, callback);
+  }
+
   on("clicked:import", (e) => {
     console.log("import", e);
     getAttrs(["importexport"], (a) => {
       const data = JSON.parse(a.importexport);
       console.log(data);
+      setRepeatingRows("wp", data.wp, () => {
+        delete data.wp;
+        setRepeatingRows("wpmodern", data.wpmodern, () => {
+          delete data.wpmodern;
+          setRepeatingRows("skills", data.skills, () => {
+            delete data.skills;
+            setRepeatingRows("combat", data.combat, () => {
+              delete data.combat;
+              setRepeatingRows("magic", data.magic, () => {
+                delete data.magic;
+                setRepeatingRows("psionics", data.psionics, () => {
+                  delete data.psionics;
+                  console.log(data);
+                  setAttrs(data);
+                });
+              });
+            });
+          });
+        });
+      });
     });
   });
 })();
@@ -3553,6 +3935,7 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
     "core",
     "wp",
     "combat",
+    "bonuses",
     "equipment",
     "skills",
     "magic",
