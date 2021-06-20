@@ -11,6 +11,9 @@
     <button class="metal linear" type="action" name="act_equipment">
       Equipment
     </button>
+    <button class="metal linear" type="action" name="act_importexport">
+      Imp/Exp
+    </button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
@@ -81,7 +84,7 @@
         /></label>
         <label
           ><span>Alignment</span>
-          <select class="select" name="attr_alignment_select" value="0">
+          <select class="select" name="attr_alignment" value="0">
             <option value="0"></option>
             <option value="Principled">Principled</option>
             <option value="Scrupulous">Scrupulous</option>
@@ -296,7 +299,7 @@
 
           <label for="charm-impress">Charm/Impress</label>
           <input
-            id="charm-imporess"
+            id="charm-impress"
             type="number"
             value=""
             name="attr_charm_impress"
@@ -1616,7 +1619,15 @@
   <div class="equipment">
     <h3>Equipment</h3>
     <p>Free form equipment list for now.</p>
-    <textarea class="full tall"></textarea>
+    <textarea class="full tall" name="attr_equipment"></textarea>
+  </div>
+
+  <div class="importexport">
+    <h3>Import/Export</h3>
+    <p>Work in progress</p>
+    <button type="action" name="act_import">Import</button>
+    <button type="action" name="act_export">Export</button>
+    <textarea class="full tall" name="attr_importexport"></textarea>
   </div>
 </main>
 <script type="text/javascript">
@@ -1643,9 +1654,10 @@
   // MOVEMENT
   // END MOVEMENT
 
+  // IMPORT_EXPORT
+  // END IMPORT_EXPORT
+
   /**
-   * @todo Damage aggregation
-   * @todo Crit aggregation (best of)
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
@@ -1654,6 +1666,8 @@
    * @todo combat row `level` needs to adjust with Character level like WPs do
    *
    * @todo better better build process with imports/file modules
+   *
+   * To get Character ID, `getAttrs(["character_id"])`
    * */
 
   /**
@@ -1676,6 +1690,7 @@
     "skills",
     "magic",
     "psionics",
+    "importexport",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {

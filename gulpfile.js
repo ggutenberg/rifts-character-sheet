@@ -93,6 +93,15 @@ const buildHtml = () => {
         },
       })
     )
+    .pipe(
+      inject(gulp.src(["src/import_export.js"]), {
+        starttag: "// IMPORT_EXPORT",
+        endtag: "// END IMPORT_EXPORT",
+        transform: function (filepath, file) {
+          return file.contents.toString();
+        },
+      })
+    )
     .pipe(replace(/text\/javascript/g, "text/worker"))
     .pipe(gulp.dest(paths.html.dest));
 };

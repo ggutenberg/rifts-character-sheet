@@ -11,6 +11,9 @@
     <button class="metal linear" type="action" name="act_equipment">
       Equipment
     </button>
+    <button class="metal linear" type="action" name="act_importexport">
+      Imp/Exp
+    </button>
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab" value="core" />
 
@@ -81,7 +84,7 @@
         /></label>
         <label
           ><span>Alignment</span>
-          <select class="select" name="attr_alignment_select" value="0">
+          <select class="select" name="attr_alignment" value="0">
             <option value="0"></option>
             <option value="Principled">Principled</option>
             <option value="Scrupulous">Scrupulous</option>
@@ -296,7 +299,7 @@
 
           <label for="charm-impress">Charm/Impress</label>
           <input
-            id="charm-imporess"
+            id="charm-impress"
             type="number"
             value=""
             name="attr_charm_impress"
@@ -1616,7 +1619,15 @@
   <div class="equipment">
     <h3>Equipment</h3>
     <p>Free form equipment list for now.</p>
-    <textarea class="full tall"></textarea>
+    <textarea class="full tall" name="attr_equipment"></textarea>
+  </div>
+
+  <div class="importexport">
+    <h3>Import/Export</h3>
+    <p>Work in progress</p>
+    <button type="action" name="act_import">Import</button>
+    <button type="action" name="act_export">Export</button>
+    <textarea class="full tall" name="attr_importexport"></textarea>
   </div>
 </main>
 <script type="text/worker">
@@ -3312,9 +3323,116 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
 
   // END MOVEMENT
 
+  // IMPORT_EXPORT
+  (function () {
+  const attributes = {
+    character_name: "",
+    truename_name: "",
+    character_race: "",
+    occ: "",
+    ps_type: "",
+    level: "",
+    experience: "",
+    alignment: "",
+    character_age: "",
+    character_gender: "",
+    character_height: "",
+    character_weight: "",
+    character_familyorigin: "",
+    character_environment: "",
+    character_languages: "",
+    character_insanity: "",
+    character_disposition: "",
+    iq: "",
+    iq_bonus: "",
+    perception_bonus: "",
+    me: "",
+    me_bonus: "",
+    ma: "",
+    ma_bonus: "",
+    ps: "",
+    ps_bonus: "",
+    pp: "",
+    pp_bonus: "",
+    pe: "",
+    pe_bonus: "",
+    pe_coma_bonus: "",
+    pb: "",
+    pb_bonus: "",
+    spd: "",
+    trust_intimidate: "",
+    charm_impress: "",
+    restrained_punch: "",
+    restrained_punch_unit: "",
+    punch: "",
+    punch_unit: "",
+    power_punch: "",
+    power_punch_unit: "",
+    kick: "",
+    kick_unit: "",
+    leap_kick: "",
+    leap_kick_unit: "",
+    lift: "",
+    carry: "",
+    throw: "",
+    carry_max: "",
+    carry_running: "",
+    hold_max: "",
+    character_hp: "",
+    character_sdc: "",
+    character_ar: "",
+    character_mdc: "",
+    character_ppe: "",
+    character_isp: "",
+    character_hf: "",
+    perception: "",
+    run_mph: "",
+    run_ft_melee: "",
+    run_ft_attack: "",
+    run_cruising: "",
+    run_at_max: "",
+    leapup: "",
+    leapout: "",
+  };
+
+  const wp = {
+    skill: "",
+    strike: "",
+    parry: "",
+    disarm: "",
+    throw: "",
+    entangle: "",
+    rof: "",
+    skill_level: "",
+  };
+
+  const wpmodern = {
+    skill: "",
+    strike_range_single: "",
+    burst: "",
+    skill_level: "",
+  };
+
+  on("clicked:import", (e) => {
+    console.log("import", e);
+  });
+
+  on("clicked:export", (e) => {
+    console.log("export", e);
+    getAttrs(Object.keys(attributes), (a) => {
+      console.log(a);
+      setAttrs({ importexport: JSON.stringify(a, null, 2) });
+      // Object.keys(attributes).forEach(
+      //   (attribute) => (attributes[attribute] = a[attribute])
+      // );
+      // console.log(attributes);
+    });
+  });
+})();
+
+  // END IMPORT_EXPORT
+
   /**
-   * @todo Damage aggregation
-   * @todo Crit aggregation (best of)
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
@@ -3323,6 +3441,8 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
    * @todo combat row `level` needs to adjust with Character level like WPs do
    *
    * @todo better better build process with imports/file modules
+   *
+   * To get Character ID, `getAttrs(["character_id"])`
    * */
 
   /**
@@ -3345,6 +3465,7 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
     "skills",
     "magic",
     "psionics",
+    "importexport",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {
