@@ -2120,6 +2120,129 @@ const SKILL_KEYS = [
   "total",
 ];
 
+const MAGIC_KEYS = [
+  "skill",
+  "school",
+  "spell_level",
+  "range",
+  "damage",
+  "duration",
+  "percentage",
+  "ppe",
+  "range_starting",
+  "range_per_level",
+  "range_units",
+  "damage_starting",
+  "damage_per_level",
+  "damage_units",
+  "duration_starting",
+  "duration_per_level",
+  "duration_units",
+  "percentage_starting",
+  "percentage_per_level",
+  "description",
+];
+
+const PSIONICS_KEYS = [
+  "skill",
+  "range",
+  "damage",
+  "duration",
+  "percentage",
+  "isp",
+  "range_starting",
+  "range_per_level",
+  "range_units",
+  "damage_starting",
+  "damage_per_level",
+  "damage_units",
+  "duration_starting",
+  "duration_per_level",
+  "duration_units",
+  "percentage_starting",
+  "percentage_per_level",
+  "description",
+];
+
+const CORE_KEYS = [
+  "character_name",
+  "truename_name",
+  "character_race",
+  "occ",
+  "ps_type",
+  "level",
+  "experience",
+  "alignment",
+  "character_age",
+  "character_gender",
+  "character_height",
+  "character_weight",
+  "character_familyorigin",
+  "character_environment",
+  "character_languages",
+  "character_insanity",
+  "character_disposition",
+  "iq",
+  "iq_bonus",
+  "perception_bonus",
+  "me",
+  "me_bonus",
+  "ma",
+  "ma_bonus",
+  "ps",
+  "ps_bonus",
+  "pp",
+  "pp_bonus",
+  "pe",
+  "pe_bonus",
+  "pe_coma_bonus",
+  "pb",
+  "pb_bonus",
+  "spd",
+  "trust_intimidate",
+  "charm_impress",
+  "restrained_punch",
+  "restrained_punch_unit",
+  "punch",
+  "punch_unit",
+  "power_punch",
+  "power_punch_unit",
+  "kick",
+  "kick_unit",
+  "leap_kick",
+  "leap_kick_unit",
+  "lift",
+  "carry",
+  "throw",
+  "carry_max",
+  "carry_running",
+  "hold_max",
+  "character_hp",
+  "character_sdc",
+  "character_ar",
+  "character_mdc",
+  "character_ppe",
+  "character_isp",
+  "character_hf",
+  "perception",
+  "run_mph",
+  "run_ft_melee",
+  "run_ft_attack",
+  "run_cruising",
+  "run_at_max",
+  "leapup",
+  "leapout",
+];
+
+const SECTIONS = {
+  wp: WP_KEYS.wp,
+  wpmodern: WP_KEYS.wpmodern,
+  skills: SKILL_KEYS,
+  combat: COMBAT_SAVE_KEYS,
+  magic: MAGIC_KEYS,
+  psionics: PSIONICS_KEYS,
+};
+
   // END DEFINITIONS
 
   // UTILS
@@ -3325,136 +3448,73 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
 
   // IMPORT_EXPORT
   (function () {
-  const attributes = {
-    character_name: "",
-    truename_name: "",
-    character_race: "",
-    occ: "",
-    ps_type: "",
-    level: "",
-    experience: "",
-    alignment: "",
-    character_age: "",
-    character_gender: "",
-    character_height: "",
-    character_weight: "",
-    character_familyorigin: "",
-    character_environment: "",
-    character_languages: "",
-    character_insanity: "",
-    character_disposition: "",
-    iq: "",
-    iq_bonus: "",
-    perception_bonus: "",
-    me: "",
-    me_bonus: "",
-    ma: "",
-    ma_bonus: "",
-    ps: "",
-    ps_bonus: "",
-    pp: "",
-    pp_bonus: "",
-    pe: "",
-    pe_bonus: "",
-    pe_coma_bonus: "",
-    pb: "",
-    pb_bonus: "",
-    spd: "",
-    trust_intimidate: "",
-    charm_impress: "",
-    restrained_punch: "",
-    restrained_punch_unit: "",
-    punch: "",
-    punch_unit: "",
-    power_punch: "",
-    power_punch_unit: "",
-    kick: "",
-    kick_unit: "",
-    leap_kick: "",
-    leap_kick_unit: "",
-    lift: "",
-    carry: "",
-    throw: "",
-    carry_max: "",
-    carry_running: "",
-    hold_max: "",
-    character_hp: "",
-    character_sdc: "",
-    character_ar: "",
-    character_mdc: "",
-    character_ppe: "",
-    character_isp: "",
-    character_hf: "",
-    perception: "",
-    run_mph: "",
-    run_ft_melee: "",
-    run_ft_attack: "",
-    run_cruising: "",
-    run_at_max: "",
-    leapup: "",
-    leapout: "",
-  };
-
-  const repeatingSections = {
-    wp: {
-      skill: "",
-      strike: "",
-      parry: "",
-      disarm: "",
-      throw: "",
-      entangle: "",
-      rof: "",
-      skill_level: "",
-    },
-    wpmodern: {
-      skill: "",
-      strike_range_single: "",
-      burst: "",
-      skill_level: "",
-    },
-    skills: {
-      skill: "",
-      category: "",
-      base: "",
-      bonus: "",
-      perlevel: "",
-      skilllevel: "",
-      total: "",
-      description: "",
-    },
-  };
-
   on("clicked:import", (e) => {
     console.log("import", e);
   });
 
-  function getRepeatingAttributeNames(section, callback) {
+  function getRepeatingRows(section, callback) {
     getSectionIDs(section, (ids) => {
       const attrNames = ids.reduce((acc, id) => {
-        Object.keys(repeatingSections[section]).forEach((key) => {
+        SECTIONS[section].forEach((key) => {
           acc.push(`repeating_${section}_${id}_${key}`);
         });
         return acc;
       }, []);
-      callback(attrNames);
+      //   callback(attrNames, ids);
+      getRepeatingSectionArray(section, ids, attrNames, callback);
+    });
+  }
+
+  function getRepeatingSectionArray(section, rowIds, attrNames, callback) {
+    let sectionArray = [];
+    getAttrs(attrNames, (attrs) => {
+      console.log(attrs);
+      rowIds.forEach((rowId) => {
+        const wpObj = Object.keys(attrs).reduce((acc, attr) => {
+          if (attr.includes(rowId)) {
+            acc[attr.replace(`repeating_${section}_${rowId}_`, "")] =
+              attrs[attr];
+          }
+          return acc;
+        }, {});
+        sectionArray.push(wpObj);
+      });
+      console.log(sectionArray);
+      callback(sectionArray);
     });
   }
 
   on("clicked:export", (e) => {
     console.log("export", e);
-    let attrNames = [];
-    getRepeatingAttributeNames("wp", (wpAttrNames) => {
-      getRepeatingAttributeNames("wpmodern", (wpmodernAttrNames) => {
-        getRepeatingAttributeNames("skills", (skillsAttrNames) => {
-          const attrNames = Object.keys(attributes).concat(
-            wpAttrNames,
-            wpmodernAttrNames,
-            skillsAttrNames
-          );
-          console.log(attrNames);
-          getAttrs(attrNames, (a) => {
-            console.log(a);
-            setAttrs({ importexport: JSON.stringify(a, null, 2) });
+    const attrs = {};
+    getRepeatingRows("wp", (wpSectionArray) => {
+      attrs.wp = wpSectionArray;
+
+      getRepeatingRows("wpmodern", (wpmodernSectionArray) => {
+        attrs.wpmodern = wpmodernSectionArray;
+
+        getRepeatingRows("skills", (skillsSectionArray) => {
+          attrs.skills = skillsSectionArray;
+
+          getRepeatingRows("combat", (combatSectionArray) => {
+            attrs.combat = combatSectionArray;
+
+            getRepeatingRows("magic", (magicSectionArray) => {
+              attrs.magic = magicSectionArray;
+
+              getRepeatingRows("psionics", (psionicsSectionArray) => {
+                attrs.psionics = psionicsSectionArray;
+
+                getAttrs(CORE_KEYS, (coreAttrs) => {
+                  Object.entries(coreAttrs).forEach(
+                    ([key, val]) => (attrs[key] = val)
+                  );
+
+                  console.log(attrs);
+                  setAttrs({ importexport: JSON.stringify(attrs, null, 2) });
+                });
+              });
+            });
           });
         });
       });
