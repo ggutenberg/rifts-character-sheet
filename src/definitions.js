@@ -469,6 +469,8 @@ const COMBAT_KEYS = [
   "strike_range_single",
   "strike_range_burst",
   "critical",
+  "knockout",
+  "deathblow",
 ];
 const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
