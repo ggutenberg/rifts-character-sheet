@@ -580,9 +580,8 @@
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
             Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
             Motion. Damage adds everything together as a rollable field, and
-            prompts to add Punch damage. Crit should be the lowest of the
-            available options (ex. Crit: 17 is better than Crit: 19), but hasn't
-            been implemented so needs to be set manually.
+            prompts to add Punch damage. Crit/Knockout/Death Blow use the lowest
+            of the available options (ex. Crit: 17 is better than Crit: 19).
           </p>
         </details>
         <p>Click <b>Instructions</b> for detailed instructions.</p>
@@ -2446,7 +2445,6 @@ function repeatingPickBest({
             return attr == fields[i];
           })
           .reduce((accVal, attrCur) => {
-            console.log("reduce", accVal, attrCur);
             if (+a[attrCur] == 0) {
               return accVal;
             }
@@ -2463,7 +2461,6 @@ function repeatingPickBest({
           }, defaultValues[i]);
         return acc;
       }, {});
-      console.log("repeatingPickBest", output);
       setAttrs(output, {}, callback ? callback : () => {});
     });
   });
@@ -3460,7 +3457,6 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
         });
         return acc;
       }, []);
-      //   callback(attrNames, ids);
       getRepeatingSectionArray(section, ids, attrNames, callback);
     });
   }

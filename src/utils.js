@@ -198,7 +198,6 @@ function repeatingPickBest({
             return attr == fields[i];
           })
           .reduce((accVal, attrCur) => {
-            console.log("reduce", accVal, attrCur);
             if (+a[attrCur] == 0) {
               return accVal;
             }
@@ -215,7 +214,6 @@ function repeatingPickBest({
           }, defaultValues[i]);
         return acc;
       }, {});
-      console.log("repeatingPickBest", output);
       setAttrs(output, {}, callback ? callback : () => {});
     });
   });

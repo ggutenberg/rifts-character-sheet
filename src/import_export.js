@@ -11,7 +11,6 @@
         });
         return acc;
       }, []);
-      //   callback(attrNames, ids);
       getRepeatingSectionArray(section, ids, attrNames, callback);
     });
   }
