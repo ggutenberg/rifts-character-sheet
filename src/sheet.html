@@ -543,7 +543,7 @@
           <option value="Flamethrower"></option>
         </datalist>
         <input type="number" value="" name="attr_strike_range_single" />
-        <input type="number" value="" name="attr_burst" />
+        <input type="number" value="" name="attr_strike_range_burst" />
         <input type="number" value="" name="attr_skill_level" />
       </fieldset>
     </div>
@@ -832,11 +832,11 @@
               readonly
               type="number"
               value=""
-              name="attr_combat_combined_burst"
+              name="attr_combat_combined_strike_range_burst"
             />
             <button
               type="roll"
-              value="Range Strike - Burst: [[d20+@{combat_combined_burst}]]"
+              value="Range Strike - Burst: [[d20+@{combat_combined_strike_range_burst}]]"
             />
           </label>
           <label
@@ -1170,8 +1170,11 @@
             </label>
             <label
               ><span>Range: Burst</span>
-              <input type="number" value="" name="attr_burst" />
-              <button type="roll" value="Range Strike: [[d20+@{burst}]]" />
+              <input type="number" value="" name="attr_strike_range_burst" />
+              <button
+                type="roll"
+                value="Range Strike: [[d20+@{strike_range_burst}]]"
+              />
             </label>
             <label
               ><span>Critical</span>

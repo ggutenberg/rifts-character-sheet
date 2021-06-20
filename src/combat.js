@@ -161,15 +161,16 @@ function addStrikeRangeToCombined() {
     [
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
-      "combat_combined_burst",
+      "combat_combined_strike_range_burst",
     ],
     (a) => {
       setAttrs({
         combat_combined_strike_range_single:
           +a.combat_combined_strike_range +
           +a.combat_combined_strike_range_single,
-        combat_combined_burst:
-          +a.combat_combined_strike_range + +a.combat_combined_burst,
+        combat_combined_strike_range_burst:
+          +a.combat_combined_strike_range +
+          +a.combat_combined_strike_range_burst,
       });
     }
   );
@@ -216,7 +217,7 @@ function combineCombat(rowIds) {
       "combat_combined_roll",
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
-      "combat_combined_burst",
+      "combat_combined_strike_range_burst",
     ],
     "combat",
     [
@@ -226,7 +227,7 @@ function combineCombat(rowIds) {
       "roll",
       "strike_range",
       "strike_range_single",
-      "burst",
+      "strike_range_burst",
     ],
     `filter:${rowIds.toString()}`,
     {
