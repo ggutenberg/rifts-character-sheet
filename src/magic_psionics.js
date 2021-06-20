@@ -140,7 +140,7 @@ on(
   }
 );
 
-on("change:repeating_magic:skill change:repeating_psionics:skill", (e) => {
+on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const attrs = {};
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;

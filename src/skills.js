@@ -9,7 +9,7 @@ function updateSkill(rowId) {
       +a[`${row}_base`] +
       +a["iq_bonus"] +
       +a[`${row}_bonus`] +
-      (+a[`${row}_skilllevel`] - 1) * +a[`${row}_perlevel`];
+      (+a[`${row}_level`] - 1) * +a[`${row}_perlevel`];
     console.log(total);
     attrs[`${row}_total`] = total;
     setAttrs(attrs);
@@ -27,12 +27,12 @@ function updateSkills() {
 function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
   const delta = newCharacterLevel - oldCharacterLevel;
   getSectionIDs("skills", (ids) => {
-    const attrNames = ids.map((id) => `repeating_skills_${id}_skilllevel`);
+    const attrNames = ids.map((id) => `repeating_skills_${id}_level`);
     getAttrs(attrNames, (a) => {
       const attrs = {};
       ids.forEach((id) => {
-        attrs[`repeating_skills_${id}_skilllevel`] =
-          +a[`repeating_skills_${id}_skilllevel`] + delta;
+        attrs[`repeating_skills_${id}_level`] =
+          +a[`repeating_skills_${id}_level`] + delta;
       });
       setAttrs(attrs);
     });
@@ -40,16 +40,15 @@ function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
 }
 
 on("change:repeating_skills", (e) => {
-  if (e.sourceAttribute.endsWith("_skill")) return;
-  console.log("skillevel", e);
+  if (e.sourceAttribute.endsWith("_name")) return;
   const [r, section, rowId] = e.sourceAttribute.split("_");
   updateSkill(rowId);
 });
 
-on("change:repeating_skills:skill", (e) => {
+on("change:repeating_skills:name", (e) => {
   getAttrs(["character_level"], (a) => {
     console.log(a);
-    const attrs = { repeating_skills_skilllevel: a.character_level };
+    const attrs = { repeating_skills_level: a.character_level };
     console.log(attrs);
     setAttrs(attrs);
   });

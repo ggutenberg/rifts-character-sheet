@@ -428,8 +428,8 @@ const WP = {
 
 const WP_KEYS = {
   wp: [
-    "skill",
-    "skill_level",
+    "name",
+    "level",
     "strike",
     "parry",
     "disarm",
@@ -438,8 +438,8 @@ const WP_KEYS = {
     "entangle",
   ],
   wpmodern: [
-    "skill",
-    "skill_level",
+    "name",
+    "level",
     "strike_range_single",
     "disarm",
     "strike_range_burst",
@@ -448,8 +448,8 @@ const WP_KEYS = {
 
 const COMBAT_KEYS = [
   "selection_id",
-  "skill",
-  "skill_level",
+  "name",
+  "level",
   "attacks",
   "initiative",
   "strike",
@@ -483,17 +483,10 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   []
 );
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
-const SKILL_KEYS = [
-  "skill",
-  "base",
-  "bonus",
-  "perlevel",
-  "skilllevel",
-  "total",
-];
+const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
 const MAGIC_KEYS = [
-  "skill",
+  "name",
   "school",
   "spell_level",
   "range",
@@ -516,7 +509,7 @@ const MAGIC_KEYS = [
 ];
 
 const PSIONICS_KEYS = [
-  "skill",
+  "name",
   "range",
   "damage",
   "duration",

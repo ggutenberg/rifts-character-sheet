@@ -495,7 +495,7 @@
         <h5>RoF</h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_id" value="" />
-        <input type="text" list="weaponProficiencies" name="attr_skill" />
+        <input type="text" list="weaponProficiencies" name="attr_name" />
         <datalist id="weaponProficiencies">
           <option value="Archery"></option>
           <option value="Axe"></option>
@@ -529,7 +529,7 @@
         <h5>Burst</h5>
         <h5>Level</h5>
         <input type="hidden" name="attr_combat_id" value="" />
-        <input type="text" list="weaponProficienciesModern" name="attr_skill" />
+        <input type="text" list="weaponProficienciesModern" name="attr_name" />
         <datalist id="weaponProficienciesModern">
           <option value="Handguns"></option>
           <option value="Rifles"></option>
@@ -593,9 +593,9 @@
         <fieldset class="repeating_combatselections">
           <label>
             <input type="checkbox" name="attr_skill_check" value="1" />
-            <span name="attr_skill"></span
+            <span name="attr_name"></span
           ></label>
-          <input type="hidden" name="attr_skill" value="" />
+          <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_combat_id" value="" />
           <input type="hidden" name="attr_bonus_section" value="" />
         </fieldset>
@@ -1033,7 +1033,7 @@
           <input type="hidden" name="attr_combat_selection_id" value="" />
           <label
             ><span>Skill</span>
-            <input type="text" list="handToHand" name="attr_skill" />
+            <input type="text" list="handToHand" name="attr_name" />
             <datalist id="handToHand">
               <option value="Custom - Type Your Own"></option>
               <option value="Basic"></option>
@@ -1056,14 +1056,14 @@
           </label>
           <label
             ><span>Level</span>
-            <input type="number" value="" name="attr_skill_level" />
+            <input type="number" value="" name="attr_level" />
           </label>
           <div></div>
           <div></div>
         </div>
         <details>
           <summary>
-            <b>Expand <span name="attr_skill"></span></b>
+            <b>Expand <span name="attr_name"></span></b>
           </summary>
           <div class="bonus-type-container">
             <label
@@ -1312,7 +1312,7 @@
         <h5>Level</h5>
         <h5>Total</h5>
         <h5></h5>
-        <input type="text" value="" name="attr_skill" />
+        <input type="text" value="" name="attr_name" />
         <select name="attr_category" value="occ">
           <option value="occ">O.C.C.</option>
           <option value="related">O.C.C. Related</option>
@@ -1321,7 +1321,7 @@
         <input type="number" value="0" name="attr_base" />
         <input type="number" value="0" name="attr_bonus" />
         <input type="number" value="0" name="attr_perlevel" />
-        <input type="number" value="0" name="attr_skilllevel" />
+        <input type="number" value="0" name="attr_level" />
         <input type="number" value="0" name="attr_total" />
         <button
           type="roll"
@@ -1330,7 +1330,7 @@
       </div>
       <details>
         <summary>
-          <b>Describe <span name="attr_skill"></span></b>
+          <b>Describe <span name="attr_name"></span></b>
         </summary>
         <textarea name="attr_description" value=""></textarea>
       </details>
@@ -1381,27 +1381,27 @@
         <h5></h5>
         <h5>P.P.E.</h5>
         <h5></h5>
-        <input type="text" value="" name="attr_skill" />
+        <input type="text" value="" name="attr_name" />
         <input type="text" value="" name="attr_school" list="spell-schools" />
         <input type="number" value="0" name="attr_spell_level" />
         <input type="text" value="" name="attr_range" />
         <input type="text" value="" name="attr_damage" />
         <button
           type="roll"
-          value="@{character_name} @{skill} [[@{damage}]] @{damage_unit}"
+          value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
         />
         <input type="text" value="" name="attr_duration" />
         <input type="number" value="" name="attr_percentage" />
         <button
           type="roll"
-          value="@{character_name} @{skill} check: [[d100<@{percentage}]]"
+          value="@{character_name} @{name} check: [[d100<@{percentage}]]"
         />
         <input type="number" value="0" name="attr_ppe" />
         <button type="action" name="act_usespell">Cast</button>
       </div>
       <details>
         <summary>
-          <b>Details for <span name="attr_skill"></span></b>
+          <b>Details for <span name="attr_name"></span></b>
         </summary>
         <div class="spell-details">
           <label
@@ -1521,25 +1521,25 @@
         <h5></h5>
         <h5>I.S.P.</h5>
         <h5></h5>
-        <input type="text" value="" name="attr_skill" />
+        <input type="text" value="" name="attr_name" />
         <input type="text" value="" name="attr_range" />
         <input type="text" value="" name="attr_damage" />
         <button
           type="roll"
-          value="@{character_name} @{skill} [[@{damage}]] @{damage_unit}"
+          value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
         />
         <input type="text" value="" name="attr_duration" />
         <input type="number" value="" name="attr_percentage" />
         <button
           type="roll"
-          value="@{character_name} @{skill} check: [[d100<@{percentage}]]"
+          value="@{character_name} @{name} check: [[d100<@{percentage}]]"
         />
         <input type="number" value="0" name="attr_isp" />
         <button type="action" name="act_usepsionic">Use</button>
       </div>
       <details>
         <summary>
-          <b>Details for <span name="attr_skill"></span></b>
+          <b>Details for <span name="attr_name"></span></b>
         </summary>
         <div class="psionic-details">
           <label
@@ -1660,9 +1660,6 @@
   // END IMPORT_EXPORT
 
   /**
-   * @todo Change "skill" to "name" in repeating sections
-   * @todo Change "skilllevel" (or "skill_level") to "level" in repeating sections
-   *
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each psionic to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
