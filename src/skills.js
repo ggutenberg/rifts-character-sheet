@@ -47,9 +47,9 @@ on("change:repeating_skills", (e) => {
 });
 
 on("change:repeating_skills:skill", (e) => {
-  getAttrs(["level"], (a) => {
+  getAttrs(["character_level"], (a) => {
     console.log(a);
-    const attrs = { repeating_skills_skilllevel: a.level };
+    const attrs = { repeating_skills_skilllevel: a.character_level };
     console.log(attrs);
     setAttrs(attrs);
   });

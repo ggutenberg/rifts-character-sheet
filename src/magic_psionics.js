@@ -32,10 +32,10 @@ function calculateRangeDuration(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
-  getAttrs(attrNames.concat(["level"]), (a) => {
+  getAttrs(attrNames.concat(["character_level"]), (a) => {
     console.log(a);
     const value =
-      +a[`${row}_starting`] + (+a.level - 1) * +a[`${row}_per_level`];
+      +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
     const unit = a[`${row}_unit`];
     const valueWithUnits = `${value} ${unit}`;
     setAttrs({ [row]: valueWithUnits });
@@ -46,10 +46,10 @@ function calculatePercentage(row) {
   const attrNames = ["starting", "per_level"].map(
     (subProp) => `${row}_${subProp}`
   );
-  getAttrs(attrNames.concat(["level"]), (a) => {
+  getAttrs(attrNames.concat(["character_level"]), (a) => {
     console.log(a);
     const value =
-      +a[`${row}_starting`] + (+a.level - 1) * +a[`${row}_per_level`];
+      +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
     setAttrs({ [row]: value });
   });
 }
@@ -58,10 +58,12 @@ function calculateDamage(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
-  getAttrs(attrNames.concat(["level"]), (a) => {
+  getAttrs(attrNames.concat(["character_level"]), (a) => {
     console.log(a);
     const perLevel = a[`${row}_per_level`];
-    const repeats = perLevel ? `+${perLevel}`.repeat(a.level - 1) : "";
+    const repeats = perLevel
+      ? `+${perLevel}`.repeat(a.character_level - 1)
+      : "";
     const value = `${a[`${row}_starting`]}${repeats}`;
     setAttrs({ [row]: value });
   });

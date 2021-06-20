@@ -540,7 +540,7 @@ const CORE_KEYS = [
   "character_race",
   "occ",
   "ps_type",
-  "level",
+  "character_level",
   "experience",
   "alignment",
   "character_age",

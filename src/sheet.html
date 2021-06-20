@@ -77,7 +77,7 @@
           </select></label
         >
         <label
-          ><span>Level</span> <input type="number" name="attr_level"
+          ><span>Level</span> <input type="number" name="attr_character_level"
         /></label>
         <label
           ><span>Experience</span> <input type="number" name="attr_experience"
@@ -1675,8 +1675,8 @@
   /**
    * This one could be a doozy
    * */
-  on("change:level", (e) => {
-    console.log("change:level", e.newValue, e.previousValue);
+  on("change:character_level", (e) => {
+    console.log("change:character_level", e.newValue, e.previousValue);
     // Update WPs
     updateWeaponProficiencies("wp", e.newValue, e.previousValue);
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);

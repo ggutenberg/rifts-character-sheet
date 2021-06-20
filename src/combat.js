@@ -115,7 +115,7 @@ on("change:repeating_wp:skill change:repeating_wpmodern:skill", (e) => {
   const [r, section, rowId, attr] = e.sourceAttribute.split("_");
   const wpName = e.newValue.toLowerCase();
   const wpLevelKey = `repeating_${section}_skill_level`;
-  getAttrs(["level", wpLevelKey], (a) => {
+  getAttrs(["character_level", wpLevelKey], (a) => {
     if (Boolean(a[wpLevelKey])) {
       setWp({
         section,
@@ -126,7 +126,7 @@ on("change:repeating_wp:skill change:repeating_wpmodern:skill", (e) => {
       });
     } else {
       const attrs = {};
-      attrs[`repeating_${section}_skill_level`] = a.level;
+      attrs[`repeating_${section}_skill_level`] = a.character_level;
       setAttrs(attrs);
     }
   });
