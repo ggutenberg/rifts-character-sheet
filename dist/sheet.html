@@ -592,7 +592,7 @@
         </p>
         <fieldset class="repeating_combatselections">
           <label>
-            <input type="checkbox" name="attr_skill_check" value="1" />
+            <input type="checkbox" name="attr_enabled" value="1" />
             <span name="attr_name"></span
           ></label>
           <input type="hidden" name="attr_name" value="" />
@@ -3445,10 +3445,6 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
 
   // IMPORT_EXPORT
   (function () {
-  on("clicked:import", (e) => {
-    console.log("import", e);
-  });
-
   function getRepeatingRows(section, callback) {
     getSectionIDs(section, (ids) => {
       const attrNames = ids.reduce((acc, id) => {
@@ -3514,6 +3510,14 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
           });
         });
       });
+    });
+  });
+
+  on("clicked:import", (e) => {
+    console.log("import", e);
+    getAttrs(["importexport"], (a) => {
+      const data = JSON.parse(a.importexport);
+      console.log(data);
     });
   });
 })();

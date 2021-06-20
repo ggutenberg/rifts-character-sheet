@@ -1,8 +1,4 @@
 (function () {
-  on("clicked:import", (e) => {
-    console.log("import", e);
-  });
-
   function getRepeatingRows(section, callback) {
     getSectionIDs(section, (ids) => {
       const attrNames = ids.reduce((acc, id) => {
@@ -68,6 +64,14 @@
           });
         });
       });
+    });
+  });
+
+  on("clicked:import", (e) => {
+    console.log("import", e);
+    getAttrs(["importexport"], (a) => {
+      const data = JSON.parse(a.importexport);
+      console.log(data);
     });
   });
 })();
