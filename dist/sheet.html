@@ -45,6 +45,21 @@
     <option value="Elemental"></option>
     <option value="Necromancy"></option>
   </datalist>
+  <datalist id="combat-modifiers">
+    <option value="Custom - Type Your Own"></option>
+    <option value="Hand to Hand: Basic"></option>
+    <option value="Hand to Hand: Dragon"></option>
+    <option value="RPA Basic"></option>
+    <option value="RPA Elite: Glitter Boy"></option>
+    <option value="Weapon: NG-P7"></option>
+    <option value="Weapon: TW Flame Sword"></option>
+    <option value="Armor: Crusader"></option>
+    <option value="Power Armor: Glitter Boy"></option>
+    <option value="TW: Armor of Ithan"></option>
+    <option value="Spell: Superhuman Speed"></option>
+    <option value="Psionic: Sixth Sense"></option>
+    <option value="Magic Amulet: Charm"></option>
+  </datalist>
 
   <div class="core">
     Palladium Rifts Character Sheet <br />
@@ -554,32 +569,13 @@
 
   <div class="combat">
     <div class="combat-container">
-      <h3>Combat Skills</h3>
+      <h3>Combat Modifiers</h3>
       <fieldset class="repeating_combat">
         <div class="bonus-type-container">
           <input type="hidden" name="attr_bonus_id" value="" />
           <label
             ><span>Skill</span>
-            <input type="text" list="handToHand" name="attr_name" />
-            <datalist id="handToHand">
-              <option value="Custom - Type Your Own"></option>
-              <option value="Basic"></option>
-              <option value="Expert"></option>
-              <option value="Martial Arts"></option>
-              <option value="Assassin"></option>
-              <option value="Commando"></option>
-              <option value="Dragon"></option>
-              <option value="RPA Basic"></option>
-              <option value="RPA Elite: Flying PA"></option>
-              <option value="RPA Elite: Ground PA"></option>
-              <option value="RPA Elite: Heavy Vehicle"></option>
-              <option value="RPA Elite: Heavy Ground"></option>
-              <option value="RPA Elite: Light Ground"></option>
-              <option value="RPA Elite: Glitter Boy"></option>
-              <option value="Spell: Superhuman Speed"></option>
-              <option value="Psionic: Sixth Sense"></option>
-              <option value="Magic Amulet: Charm"></option>
-            </datalist>
+            <input type="text" list="combat-modifiers" name="attr_name" />
           </label>
           <label
             ><span>Level</span>
@@ -1311,26 +1307,7 @@
             <input type="hidden" name="attr_bonus_selection_id" value="" />
             <label
               ><span>Skill</span>
-              <input type="text" list="handToHand" name="attr_name" />
-              <datalist id="handToHand">
-                <option value="Custom - Type Your Own"></option>
-                <option value="Basic"></option>
-                <option value="Expert"></option>
-                <option value="Martial Arts"></option>
-                <option value="Assassin"></option>
-                <option value="Commando"></option>
-                <option value="Dragon"></option>
-                <option value="RPA Basic"></option>
-                <option value="RPA Elite: Flying PA"></option>
-                <option value="RPA Elite: Ground PA"></option>
-                <option value="RPA Elite: Heavy Vehicle"></option>
-                <option value="RPA Elite: Heavy Ground"></option>
-                <option value="RPA Elite: Light Ground"></option>
-                <option value="RPA Elite: Glitter Boy"></option>
-                <option value="Spell: Superhuman Speed"></option>
-                <option value="Psionic: Sixth Sense"></option>
-                <option value="Magic Amulet: Charm"></option>
-              </datalist>
+              <input type="text" list="combat-modifiers" name="attr_name" />
             </label>
             <label
               ><span>Level</span>
@@ -3862,7 +3839,7 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
 
   function setRepeatingRows(section, data, callback) {
     console.log("setRepeatingRows", section, data);
-    if (section != "wp") return callback();
+    if (!data) return callback();
     console.log("continuing setRepeatingRows", section);
     const attrs = data.reduce((acc, row) => {
       const rowId = generateRowID();
@@ -3907,6 +3884,12 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
   // END IMPORT_EXPORT
 
   /**
+   * @todo put MDC in the repeating combat section
+   * @todo add an active combat section above Aggregate bonuses
+   *    - track attacks
+   *    - track ammo (roll20 has something for this)
+   *    - track MDC - for each aggregate MDC modifier, track it separately in a repeater. allow the user to reorder, and deduct from bottom to top
+   *
    * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
    * @todo Psionics - include checkbox beside each psionic to add it as a row on the Combat tab
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),

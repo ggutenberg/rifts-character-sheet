@@ -69,7 +69,7 @@
 
   function setRepeatingRows(section, data, callback) {
     console.log("setRepeatingRows", section, data);
-    if (section != "wp") return callback();
+    if (!data) return callback();
     console.log("continuing setRepeatingRows", section);
     const attrs = data.reduce((acc, row) => {
       const rowId = generateRowID();

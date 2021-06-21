@@ -237,6 +237,10 @@ details summary {
   width: 5rem;
 }
 
+.charsheet .bonuses .repcontrol[data-groupname="repeating_bonusselections"] {
+  display: none;
+}
+
 .charsheet .combat-container .combat-combined-bonuses,
 .charsheet
   .combat-container
