@@ -31,6 +31,16 @@ const buildHtml = () => {
   return gulp
     .src("src/sheet.html")
     .pipe(
+      inject(gulp.src(["src/partials/*.html"]), {
+        starttag: "<!-- inject:{{path}} -->",
+        relative: true,
+        transform: function (filepath, file) {
+          console.log(filepath, file);
+          return file.contents.toString("utf8");
+        },
+      })
+    )
+    .pipe(
       inject(gulp.src(["src/skills.js"]), {
         starttag: "// SKILLS",
         endtag: "// END SKILLS",

@@ -570,6 +570,26 @@
   <div class="combat">
     <div class="combat-container">
       <h3>Combat Modifiers</h3>
+      <details>
+        <summary><b>Instructions</b></summary>
+        <p>
+          Complete the repeating sections for your various combat skills and
+          modifiers. Skill dropdowns are free-form, so you can type anything in
+          them and don't need to select from the list. What's there is just a
+          small sample.
+        </p>
+        <p>
+          Any modifiers you add will appear as checkboxes on the Bonuses tab.
+          Toggling them will recalculate the bonuses for all checked items.
+        </p>
+        <p>
+          If you have additional bonuses from items, magic, training, etc., you
+          can create arbitrarily named sections and apply those as well. You can
+          also add weapons here, and include any strike/parry bonuses they
+          provide, as well as their damage.
+        </p>
+      </details>
+      <p>Click <b>Instructions</b> for detailed instructions.</p>
       <fieldset class="repeating_combat">
         <div class="bonus-type-container">
           <input type="hidden" name="attr_bonus_id" value="" />
@@ -584,240 +604,8 @@
           <div></div>
           <div></div>
         </div>
-        <details>
-          <summary>
-            <b>Expand <span name="attr_name"></span></b>
-          </summary>
-          <div class="bonus-type-container">
-            <label
-              ><span>Attacks</span>
-              <input type="number" value="" name="attr_attacks" />
-            </label>
-            <label
-              ><span>Initiative</span>
-              <input type="number" value="" name="attr_initiative" />
-              <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
-            </label>
-            <label
-              ><span>Strike</span>
-              <input type="number" value="" name="attr_strike" />
-              <button type="roll" value="Strike: [[d20+@{strike}]]" />
-            </label>
-            <label
-              ><span>Parry</span>
-              <input type="number" value="" name="attr_parry" />
-              <button type="roll" value="Parry: [[d20+@{parry}]]" />
-            </label>
-            <label
-              ><span>Dodge</span>
-              <input type="number" value="" name="attr_dodge" />
-              <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
-            </label>
-            <label
-              ><span>Throw</span>
-              <input type="number" value="" name="attr_throw" />
-              <button type="roll" value="Throw: [[d20+@{throw}]]" />
-            </label>
-            <label
-              ><span>Disarm</span>
-              <input type="number" value="" name="attr_disarm" />
-              <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
-            </label>
-            <label
-              ><span>Entangle</span>
-              <input type="number" value="" name="attr_entangle" />
-              <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
-            </label>
-            <label
-              ><span>Pull Punch</span>
-              <input type="number" value="" name="attr_pull" />
-              <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
-            </label>
-            <label
-              ><span>Roll w/ Impact</span>
-              <input type="number" value="" name="attr_roll" />
-              <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
-            </label>
-            <label
-              ><span>Damage</span>
-              <input type="text" value="0" name="attr_damage" />
-              <button
-                type="roll"
-                value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
-              />
-            </label>
-            <label
-              ><span>Dodge: Flight</span>
-              <input type="number" value="" name="attr_dodge_flight" />
-              <button
-                type="roll"
-                value="Dodge in Flight: [[d20+@{dodge_flight}]]"
-              />
-            </label>
-            <label
-              >Dodge: Auto
-              <input type="number" value="" name="attr_dodge_auto" />
-              <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
-            </label>
-            <label
-              ><span>Dodge: Teleport</span>
-              <input type="number" value="" name="attr_dodge_teleport" />
-              <button
-                type="roll"
-                value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
-              />
-            </label>
-            <label
-              ><span>Dodge: Motion</span>
-              <input type="number" value="" name="attr_dodge_motion" />
-              <button
-                type="roll"
-                value="Dodge in Motion: [[d20+@{dodge_motion}]]"
-              />
-            </label>
-            <label
-              ><span>Strike: Range</span>
-              <input type="number" value="" name="attr_strike_range" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range}]]"
-              />
-            </label>
-            <label
-              ><span>Range: Single</span>
-              <input type="number" value="" name="attr_strike_range_single" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range_single}]]"
-              />
-            </label>
-            <label
-              ><span>Range: Burst</span>
-              <input type="number" value="" name="attr_strike_range_burst" />
-              <button
-                type="roll"
-                value="Range Strike: [[d20+@{strike_range_burst}]]"
-              />
-            </label>
-            <label
-              ><span>Critical</span>
-              <input type="number" value="" name="attr_critical"
-            /></label>
-            <label
-              ><span>Knockout</span>
-              <input type="number" value="" name="attr_knockout"
-            /></label>
-            <label
-              ><span>Death Blow</span>
-              <input type="number" value="" name="attr_deathblow"
-            /></label>
-          </div>
-          <h4>Saving Throws</h4>
-          <div class="bonus-type-container">
-            <label
-              ><span>Psionics</span>
-              <input type="number" value="" name="attr_psionics" />
-              <button
-                type="roll"
-                value="Save vs. Psionics: [[d20+@{psionics}]]"
-              />
-            </label>
-            <label
-              ><span>Magic</span>
-              <input type="number" value="" name="attr_magic" />
-              <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
-            </label>
-            <label
-              ><span>Poison</span>
-              <input type="number" value="" name="attr_poison" />
-              <button type="roll" value="Save vs. Poison: [[d20+@{poison}]]" />
-            </label>
-            <label
-              ><span>Horror Factor</span>
-              <input type="number" value="" name="attr_horrorfactor" />
-              <button
-                type="roll"
-                value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
-              />
-            </label>
-            <label
-              ><span>Mind Control</span>
-              <input type="number" value="" name="attr_mindcontrol" />
-              <button
-                type="roll"
-                value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
-              />
-            </label>
-            <label
-              ><span>Disease</span>
-              <input type="number" value="" name="attr_disease" />
-              <button
-                type="roll"
-                value="Save vs. Disease: [[d20+@{disease}]]"
-              />
-            </label>
-            <label
-              ><span>Illusions</span>
-              <input type="number" value="" name="attr_illusions" />
-              <button
-                type="roll"
-                value="Save vs. Illusions: [[d20+@{illusions}]]"
-              />
-            </label>
-            <label
-              ><span>Possession</span>
-              <input type="number" value="" name="attr_possession" />
-              <button
-                type="roll"
-                value="Save vs. Possession: [[d20+@{possession}]]"
-              />
-            </label>
-            <label
-              ><span>Insanity</span>
-              <input type="number" value="" name="attr_insanity" />
-              <button
-                type="roll"
-                value="Save vs. Insanity: [[d20+@{insanity}]]"
-              />
-            </label>
-            <label
-              ><span>Torture</span>
-              <input type="number" value="" name="attr_torture" />
-              <button
-                type="roll"
-                value="Save vs. Torture: [[d20+@{torture}]]"
-              />
-            </label>
-            <label
-              ><span>Fatigue</span>
-              <input type="number" value="" name="attr_fatigue" />
-              <button
-                type="roll"
-                value="Save vs. Fatigue: [[d20+@{fatigue}]]"
-              />
-            </label>
-            <label
-              ><span>Toxins</span>
-              <input type="number" value="" name="attr_toxins" />
-              <button type="roll" value="Save vs. Toxins: [[d20+@{toxins}]]" />
-            </label>
-            <label
-              ><span>Coma/Death</span>
-              <input type="number" value="" name="attr_comadeath" />
-              <button
-                type="roll"
-                value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
-              />
-            </label>
-          </div>
-          <h4>Macro Help</h4>
-          <div class="macro-help">
-            <label
-              ><span><b>Row ID:</b></span>
-              <input type="text" readonly name="attr_rowid" value=""
-            /></label>
-          </div>
-        </details>
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <!-- endinject -->
       </fieldset>
     </div>
   </div>
@@ -828,26 +616,15 @@
         <details>
           <summary><b>Instructions</b></summary>
           <p>
-            Complete the repeating sections for your various combat skills.
-            Skill dropdowns are free-form, so you can type anything in them and
-            don't need to select from the list. What's there is just a small
-            sample.
-          </p>
-          <p>
-            Any skills you add will appear as checkboxes. Toggling them will
-            recalculate the bonuses for all checked items.
+            Any combat modifiers you add on the Combat tab will appear as
+            checkboxes. Toggling them will recalculate the bonuses for all
+            checked items.
           </p>
           <p>
             Any Weapon Proficiencies you add on the WPs tab will appear on this
             page as well. Weapon Proficiencies <b>automatically</b> calculate
             their bonuses based on level, but no other skill (like Hand-to-Hand)
             does so yet.
-          </p>
-          <p>
-            If you have additional bonuses from items, magic, training, etc.,
-            you can create arbitrarily named sections and apply those as well.
-            You can also add weapons here, and include any strike/parry bonuses
-            they provide, as well as their damage.
           </p>
           <p>
             Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
@@ -858,11 +635,6 @@
           </p>
         </details>
         <p>Click <b>Instructions</b> for detailed instructions.</p>
-        <p>
-          The Add/Modify buttons below will eventually disappear, as this
-          section is dynamic. Unless you're using them for debugging or testing,
-          don't touch them, as it may cause unpredictable behavior.
-        </p>
         <fieldset class="repeating_bonusselections">
           <label>
             <input type="checkbox" name="attr_enabled" value="1" />
@@ -894,7 +666,7 @@
             />
             <button
               type="roll"
-              value="Initiative: [[d20+@{combat_combined_initiative}]]"
+              value="Initiative: [[d20+@{combat_combined_initiative} &{tracker}]]"
             />
           </label>
           <label
@@ -1316,246 +1088,8 @@
             <div></div>
             <div></div>
           </div>
-          <details>
-            <summary>
-              <b>Expand <span name="attr_name"></span></b>
-            </summary>
-            <div class="bonus-type-container">
-              <label
-                ><span>Attacks</span>
-                <input type="number" value="" name="attr_attacks" />
-              </label>
-              <label
-                ><span>Initiative</span>
-                <input type="number" value="" name="attr_initiative" />
-                <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
-              </label>
-              <label
-                ><span>Strike</span>
-                <input type="number" value="" name="attr_strike" />
-                <button type="roll" value="Strike: [[d20+@{strike}]]" />
-              </label>
-              <label
-                ><span>Parry</span>
-                <input type="number" value="" name="attr_parry" />
-                <button type="roll" value="Parry: [[d20+@{parry}]]" />
-              </label>
-              <label
-                ><span>Dodge</span>
-                <input type="number" value="" name="attr_dodge" />
-                <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
-              </label>
-              <label
-                ><span>Throw</span>
-                <input type="number" value="" name="attr_throw" />
-                <button type="roll" value="Throw: [[d20+@{throw}]]" />
-              </label>
-              <label
-                ><span>Disarm</span>
-                <input type="number" value="" name="attr_disarm" />
-                <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
-              </label>
-              <label
-                ><span>Entangle</span>
-                <input type="number" value="" name="attr_entangle" />
-                <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
-              </label>
-              <label
-                ><span>Pull Punch</span>
-                <input type="number" value="" name="attr_pull" />
-                <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
-              </label>
-              <label
-                ><span>Roll w/ Impact</span>
-                <input type="number" value="" name="attr_roll" />
-                <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
-              </label>
-              <label
-                ><span>Damage</span>
-                <input type="text" value="0" name="attr_damage" />
-                <button
-                  type="roll"
-                  value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
-                />
-              </label>
-              <label
-                ><span>Dodge: Flight</span>
-                <input type="number" value="" name="attr_dodge_flight" />
-                <button
-                  type="roll"
-                  value="Dodge in Flight: [[d20+@{dodge_flight}]]"
-                />
-              </label>
-              <label
-                >Dodge: Auto
-                <input type="number" value="" name="attr_dodge_auto" />
-                <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
-              </label>
-              <label
-                ><span>Dodge: Teleport</span>
-                <input type="number" value="" name="attr_dodge_teleport" />
-                <button
-                  type="roll"
-                  value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
-                />
-              </label>
-              <label
-                ><span>Dodge: Motion</span>
-                <input type="number" value="" name="attr_dodge_motion" />
-                <button
-                  type="roll"
-                  value="Dodge in Motion: [[d20+@{dodge_motion}]]"
-                />
-              </label>
-              <label
-                ><span>Strike: Range</span>
-                <input type="number" value="" name="attr_strike_range" />
-                <button
-                  type="roll"
-                  value="Range Strike: [[d20+@{strike_range}]]"
-                />
-              </label>
-              <label
-                ><span>Range: Single</span>
-                <input type="number" value="" name="attr_strike_range_single" />
-                <button
-                  type="roll"
-                  value="Range Strike: [[d20+@{strike_range_single}]]"
-                />
-              </label>
-              <label
-                ><span>Range: Burst</span>
-                <input type="number" value="" name="attr_strike_range_burst" />
-                <button
-                  type="roll"
-                  value="Range Strike: [[d20+@{strike_range_burst}]]"
-                />
-              </label>
-              <label
-                ><span>Critical</span>
-                <input type="number" value="" name="attr_critical"
-              /></label>
-              <label
-                ><span>Knockout</span>
-                <input type="number" value="" name="attr_knockout"
-              /></label>
-              <label
-                ><span>Death Blow</span>
-                <input type="number" value="" name="attr_deathblow"
-              /></label>
-            </div>
-            <h4>Saving Throws</h4>
-            <div class="bonus-type-container">
-              <label
-                ><span>Psionics</span>
-                <input type="number" value="" name="attr_psionics" />
-                <button
-                  type="roll"
-                  value="Save vs. Psionics: [[d20+@{psionics}]]"
-                />
-              </label>
-              <label
-                ><span>Magic</span>
-                <input type="number" value="" name="attr_magic" />
-                <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
-              </label>
-              <label
-                ><span>Poison</span>
-                <input type="number" value="" name="attr_poison" />
-                <button
-                  type="roll"
-                  value="Save vs. Poison: [[d20+@{poison}]]"
-                />
-              </label>
-              <label
-                ><span>Horror Factor</span>
-                <input type="number" value="" name="attr_horrorfactor" />
-                <button
-                  type="roll"
-                  value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
-                />
-              </label>
-              <label
-                ><span>Mind Control</span>
-                <input type="number" value="" name="attr_mindcontrol" />
-                <button
-                  type="roll"
-                  value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
-                />
-              </label>
-              <label
-                ><span>Disease</span>
-                <input type="number" value="" name="attr_disease" />
-                <button
-                  type="roll"
-                  value="Save vs. Disease: [[d20+@{disease}]]"
-                />
-              </label>
-              <label
-                ><span>Illusions</span>
-                <input type="number" value="" name="attr_illusions" />
-                <button
-                  type="roll"
-                  value="Save vs. Illusions: [[d20+@{illusions}]]"
-                />
-              </label>
-              <label
-                ><span>Possession</span>
-                <input type="number" value="" name="attr_possession" />
-                <button
-                  type="roll"
-                  value="Save vs. Possession: [[d20+@{possession}]]"
-                />
-              </label>
-              <label
-                ><span>Insanity</span>
-                <input type="number" value="" name="attr_insanity" />
-                <button
-                  type="roll"
-                  value="Save vs. Insanity: [[d20+@{insanity}]]"
-                />
-              </label>
-              <label
-                ><span>Torture</span>
-                <input type="number" value="" name="attr_torture" />
-                <button
-                  type="roll"
-                  value="Save vs. Torture: [[d20+@{torture}]]"
-                />
-              </label>
-              <label
-                ><span>Fatigue</span>
-                <input type="number" value="" name="attr_fatigue" />
-                <button
-                  type="roll"
-                  value="Save vs. Fatigue: [[d20+@{fatigue}]]"
-                />
-              </label>
-              <label
-                ><span>Toxins</span>
-                <input type="number" value="" name="attr_toxins" />
-                <button
-                  type="roll"
-                  value="Save vs. Toxins: [[d20+@{toxins}]]"
-                />
-              </label>
-              <label
-                ><span>Coma/Death</span>
-                <input type="number" value="" name="attr_comadeath" />
-                <button
-                  type="roll"
-                  value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
-                />
-              </label>
-            </div>
-            <h4>Macro Help</h4>
-            <div class="macro-help">
-              <label
-                ><span><b>Row ID:</b></span>
-                <input type="text" readonly name="attr_rowid" value=""
-              /></label>
-            </div>
-          </details>
+          <!-- inject:partials/repeating_bonuses_details.html -->
+          <!-- endinject -->
         </fieldset>
       </div>
     </div>
