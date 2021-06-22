@@ -245,7 +245,7 @@ function combineCombat(rowIds) {
     "bonuses",
     ["mdc"],
     `filter:${rowIds.toString()}`,
-    "character_sdc"
+    "character_mdc"
   );
 
   // PP Bonus
