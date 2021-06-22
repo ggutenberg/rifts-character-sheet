@@ -451,6 +451,8 @@ const COMBAT_KEYS = [
   "name",
   "level",
   "attacks",
+  "sdc",
+  "mdc",
   "initiative",
   "strike",
   "parry",

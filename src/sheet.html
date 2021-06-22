@@ -657,6 +657,22 @@
             />
           </label>
           <label
+            ><span>S.D.C.</span
+            ><input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_sdc"
+          /></label>
+          <label
+            ><span>M.D.C.</span
+            ><input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_mdc"
+          /></label>
+          <label
             ><span>Initiative</span>
             <input
               readonly
@@ -1457,6 +1473,8 @@
 
   /**
    * @todo put MDC in the repeating combat section
+   * @todo fix repeating movement on Core tab
+   *
    * @todo add an active combat section above Aggregate bonuses
    *    - track attacks
    *    - track ammo (roll20 has something for this)

@@ -232,6 +232,22 @@ function combineCombat(rowIds) {
     }
   );
 
+  repeatingSum(
+    ["combat_combined_sdc"],
+    "bonuses",
+    ["sdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
+  );
+
+  repeatingSum(
+    ["combat_combined_mdc"],
+    "bonuses",
+    ["mdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
+  );
+
   // PP Bonus
   repeatingSum(
     [

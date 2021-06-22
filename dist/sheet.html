@@ -615,6 +615,12 @@
       <input type="number" value="" name="attr_attacks" />
     </label>
     <label
+      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
+    /></label>
+    <label
+      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
+    /></label>
+    <label
       ><span>Initiative</span>
       <input type="number" value="" name="attr_initiative" />
       <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
@@ -850,6 +856,22 @@
               name="attr_combat_combined_attacks"
             />
           </label>
+          <label
+            ><span>S.D.C.</span
+            ><input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_sdc"
+          /></label>
+          <label
+            ><span>M.D.C.</span
+            ><input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_mdc"
+          /></label>
           <label
             ><span>Initiative</span>
             <input
@@ -1292,6 +1314,12 @@
       ><span>Attacks</span>
       <input type="number" value="" name="attr_attacks" />
     </label>
+    <label
+      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
+    /></label>
+    <label
+      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
+    /></label>
     <label
       ><span>Initiative</span>
       <input type="number" value="" name="attr_initiative" />
@@ -2273,6 +2301,8 @@ const COMBAT_KEYS = [
   "name",
   "level",
   "attacks",
+  "sdc",
+  "mdc",
   "initiative",
   "strike",
   "parry",
@@ -2950,6 +2980,22 @@ function combineCombat(rowIds) {
     {
       callback: addStrikeRangeToCombined,
     }
+  );
+
+  repeatingSum(
+    ["combat_combined_sdc"],
+    "bonuses",
+    ["sdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
+  );
+
+  repeatingSum(
+    ["combat_combined_mdc"],
+    "bonuses",
+    ["mdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
   );
 
   // PP Bonus
@@ -3807,6 +3853,8 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
 
   /**
    * @todo put MDC in the repeating combat section
+   * @todo fix repeating movement on Core tab
+   *
    * @todo add an active combat section above Aggregate bonuses
    *    - track attacks
    *    - track ammo (roll20 has something for this)

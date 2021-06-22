@@ -35,7 +35,6 @@ const buildHtml = () => {
         starttag: "<!-- inject:{{path}} -->",
         relative: true,
         transform: function (filepath, file) {
-          console.log(filepath, file);
           return file.contents.toString("utf8");
         },
       })
