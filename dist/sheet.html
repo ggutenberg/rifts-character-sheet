@@ -480,22 +480,26 @@
       <input type="number" name="attr_leapout" value="" />
       <div>feet out?</div>
       <div></div>
-
-      <!-- <label>Additional Movement Type</label>
-      <label>MPH</label>
-      <label>Ft/Melee</label>
-      <label>Ft/Attack</label>
-      <label>Cruising</label>
-      <label>Run at Max</label>
-
-      <input type="text" value="" name="attr_movement_name" />
-      <input type="number" value="" name="attr_movement_mph" />
-      <input type="number" value="" name="attr_movement_ft_melee" />
-      <input type="number" value="" name="attr_movement_ft_attack" readonly />
-      <input type="number" value="" name="attr_movement_cruising" />
-      <div>
-        <input type="number" value="" name="attr_movement_at_max" /> minutes
-      </div> -->
+    </div>
+    <br />
+    <div class="repeating-movement">
+      <fieldset class="repeating_movement">
+        <h5>Additional Movement Type</h5>
+        <h5>MPH</h5>
+        <h5>Ft/Melee</h5>
+        <h5>Ft/Attack</h5>
+        <h5>Cruising</h5>
+        <h5>Max speed duration</h5>
+        <input type="text" value="" name="attr_name" />
+        <input type="number" value="0" name="attr_mph" />
+        <input type="number" value="0" name="attr_ft_melee" />
+        <input type="number" value="0" name="attr_ft_attack" readonly />
+        <input type="number" value="0" name="attr_cruising" />
+        <label
+          ><input type="number" value="0" name="attr_dur_at_max" />
+          minutes</label
+        >
+      </fieldset>
     </div>
   </div>
   <br />
@@ -3705,12 +3709,12 @@ on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
   /* endinject */
 
   /* inject:js/movement.js */
-  on("change:repeating_movement:movement_mph", (e) => {
+  on("change:repeating_movement:mph", (e) => {
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
     const attrs = {
-      repeating_movement_movement_ft_melee: feetPerMelee,
-      repeating_movement_movement_ft_attack: Math.round(
+      repeating_movement_ft_melee: feetPerMelee,
+      repeating_movement_ft_attack: Math.round(
         feetPerMelee / a.combat_combined_attacks
       ),
     };
@@ -3718,14 +3722,14 @@ on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
   });
 });
 
-on("change:repeating_movement:movement_ft_melee", (e) => {
+on("change:repeating_movement:ft_melee", (e) => {
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = e.newValue;
     //const mph = Math.round((feetPerMelee * 4 * 60) / 5280);
     const mph = ((feetPerMelee * 4 * 60) / 5280).toFixed(1);
     const attrs = {
-      repeating_movement_movement_mph: mph,
-      repeating_movement_movement_ft_attack: Math.round(
+      repeating_movement_mph: mph,
+      repeating_movement_ft_attack: Math.round(
         feetPerMelee / a.combat_combined_attacks
       ),
     };
@@ -3852,7 +3856,6 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
   /* endinject */
 
   /**
-   * @todo put MDC in the repeating combat section
    * @todo fix repeating movement on Core tab
    *
    * @todo add an active combat section above Aggregate bonuses

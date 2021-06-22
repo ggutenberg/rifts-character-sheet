@@ -124,6 +124,12 @@ details summary {
   grid-template-columns: max-content 8rem 8rem 8rem 8rem max-content;
 }
 
+.repeating-movement .repitem {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 8rem 8rem 8rem 8rem max-content;
+}
+
 .charsheet
   .skills
   .repcontainer[data-groupname="repeating_skills"]
@@ -164,6 +170,7 @@ details summary {
   grid-template-columns: max-content 5rem 5rem 5rem;
 }
 
+.charsheet .repeating-movement .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .magic .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .skills .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {
