@@ -28,91 +28,103 @@ const buildStyles = () => {
 };
 
 const buildHtml = () => {
-  return gulp
-    .src("src/sheet.html")
-    .pipe(
-      inject(gulp.src(["src/partials/*.html"]), {
-        starttag: "<!-- inject:{{path}} -->",
-        relative: true,
-        transform: function (filepath, file) {
-          return file.contents.toString("utf8");
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/skills.js"]), {
-        starttag: "// SKILLS",
-        endtag: "// END SKILLS",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/attributes.js"]), {
-        starttag: "// ATTRIBUTES",
-        endtag: "// END ATTRIBUTES",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/definitions.js"]), {
-        starttag: "// DEFINITIONS",
-        endtag: "// END DEFINITIONS",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/combat.js"]), {
-        starttag: "// COMBAT",
-        endtag: "// END COMBAT",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/utils.js"]), {
-        starttag: "// UTILS",
-        endtag: "// END UTILS",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/magic_psionics.js"]), {
-        starttag: "// MAGIC_PSIONICS",
-        endtag: "// END MAGIC_PSIONICS",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/movement.js"]), {
-        starttag: "// MOVEMENT",
-        endtag: "// END MOVEMENT",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(
-      inject(gulp.src(["src/import_export.js"]), {
-        starttag: "// IMPORT_EXPORT",
-        endtag: "// END IMPORT_EXPORT",
-        transform: function (filepath, file) {
-          return file.contents.toString();
-        },
-      })
-    )
-    .pipe(replace(/text\/javascript/g, "text/worker"))
-    .pipe(gulp.dest(paths.html.dest));
+  return (
+    gulp
+      .src("src/sheet.html")
+      .pipe(
+        inject(gulp.src(["src/partials/*.html"]), {
+          starttag: "<!-- inject:{{path}} -->",
+          relative: true,
+          transform: function (filepath, file) {
+            return file.contents.toString("utf8");
+          },
+        })
+      )
+      .pipe(
+        inject(gulp.src(["src/js/*.js"]), {
+          starttag: "/* inject:{{path}} */",
+          relative: true,
+          endtag: "/* endinject */",
+          transform: function (filepath, file) {
+            return file.contents.toString("utf8");
+          },
+        })
+      )
+      // .pipe(
+      //   inject(gulp.src(["src/skills.js"]), {
+      //     starttag: "// SKILLS",
+      //     endtag: "// END SKILLS",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/attributes.js"]), {
+      //     starttag: "// ATTRIBUTES",
+      //     endtag: "// END ATTRIBUTES",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/definitions.js"]), {
+      //     starttag: "// DEFINITIONS",
+      //     endtag: "// END DEFINITIONS",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/combat.js"]), {
+      //     starttag: "// COMBAT",
+      //     endtag: "// END COMBAT",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/utils.js"]), {
+      //     starttag: "// UTILS",
+      //     endtag: "// END UTILS",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/magic_psionics.js"]), {
+      //     starttag: "// MAGIC_PSIONICS",
+      //     endtag: "// END MAGIC_PSIONICS",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/movement.js"]), {
+      //     starttag: "// MOVEMENT",
+      //     endtag: "// END MOVEMENT",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      // .pipe(
+      //   inject(gulp.src(["src/import_export.js"]), {
+      //     starttag: "// IMPORT_EXPORT",
+      //     endtag: "// END IMPORT_EXPORT",
+      //     transform: function (filepath, file) {
+      //       return file.contents.toString();
+      //     },
+      //   })
+      // )
+      .pipe(replace(/text\/javascript/g, "text/worker"))
+      .pipe(gulp.dest(paths.html.dest))
+  );
 };
 
 exports.js = () =>

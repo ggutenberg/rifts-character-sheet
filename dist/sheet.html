@@ -1847,7 +1847,7 @@
 <script type="text/worker">
   // Change from javascript to worker before upload
 
-  // DEFINITIONS
+  /* inject:js/definitions.js */
   const WP = {
   archery: [
     { strike: 1, parry: 1, rof: 2 },
@@ -2460,9 +2460,9 @@ const SECTIONS = {
   psionics: PSIONICS_KEYS,
 };
 
-  // END DEFINITIONS
+  /* endinject */
 
-  // UTILS
+  /* inject:js/utils.js */
   /**
  * Aggregates repeating values
  * @param {string[]} destinations An array of field names to output to
@@ -2745,9 +2745,9 @@ function mergeAndAddObjects(data) {
   return result;
 }
 
-  // END UTILS
+  /* endinject */
 
-  // COMBAT
+  /* inject:js/combat.js */
   function setWpRow(section, name, keyPrefix, level) {
   console.log("setWpRow", name, keyPrefix, level);
   const attrs = {};
@@ -3226,9 +3226,9 @@ on("change:repeating_bonusselections:enabled change:repeating_bonuses", (e) => {
   aggregateBonuses();
 });
 
-  // END COMBAT
+  /* endinject */
 
-  // ATTRIBUTES
+  /* inject:js/attributes.js */
   on("change:iq", (e) => {
   const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
   const perception_bonus = getBiAttributeBonus(e.newValue);
@@ -3491,9 +3491,9 @@ on("change:spd", (e) => {
   });
 });
 
-  // END ATTRIBUTES
+  /* endinject */
 
-  // SKILLS
+  /* inject:js/skills.js */
   function updateSkill(rowId) {
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
@@ -3550,9 +3550,9 @@ on("change:repeating_skills:name", (e) => {
   });
 });
 
-  // END SKILLS
+  /* endinject */
 
-  // MAGIC_PSIONICS
+  /* inject:js/magic_psionics.js */
   on("clicked:repeating_magic:usespell", (e) => {
   console.log(e);
   getAttrs(["repeating_magic_ppe", "currentppe"], (a) => {
@@ -3702,9 +3702,9 @@ on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
   setAttrs(attrs);
 });
 
-  // END MAGIC_PSIONICS
+  /* endinject */
 
-  // MOVEMENT
+  /* inject:js/movement.js */
   on("change:repeating_movement:movement_mph", (e) => {
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);
@@ -3733,9 +3733,9 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
   });
 });
 
-  // END MOVEMENT
+  /* endinject */
 
-  // IMPORT_EXPORT
+  /* inject:js/import_export.js */
   (function () {
   function getRepeatingRows(section, callback) {
     getSectionIDs(section, (ids) => {
@@ -3849,7 +3849,7 @@ on("change:repeating_movement:movement_ft_melee", (e) => {
   });
 })();
 
-  // END IMPORT_EXPORT
+  /* endinject */
 
   /**
    * @todo put MDC in the repeating combat section
