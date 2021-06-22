@@ -58,6 +58,10 @@ details summary {
   display: block;
 }
 
+img.logo {
+  max-height: 30px;
+}
+
 .grid-container {
   display: grid;
   gap: 1rem;
