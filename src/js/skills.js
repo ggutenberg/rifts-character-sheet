@@ -46,9 +46,13 @@ on("change:repeating_skills", (e) => {
 });
 
 on("change:repeating_skills:name", (e) => {
+  const [r, section, rowId, attr] = e.sourceAttribute.split("_");
   getAttrs(["character_level"], (a) => {
     console.log(a);
-    const attrs = { repeating_skills_level: a.character_level };
+    const attrs = {
+      repeating_skills_level: a.character_level,
+      [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}`,
+    };
     console.log(attrs);
     setAttrs(attrs);
   });

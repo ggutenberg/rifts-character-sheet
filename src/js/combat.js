@@ -112,6 +112,7 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
   const [r, section, rowId, attr] = e.sourceAttribute.split("_");
   const wpName = e.newValue.toLowerCase();
   const wpLevelKey = `repeating_${section}_level`;
+  setAttrs({ [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}` });
   getAttrs(["character_level", wpLevelKey], (a) => {
     if (Boolean(a[wpLevelKey])) {
       setWp({

@@ -478,7 +478,7 @@
         minutes
       </div>
 
-      <label for="leaing-distance">Leaping Distance</label>
+      <label>Leaping Distance</label>
       <input type="number" name="attr_leapup" value="" />
       <div>feet up?</div>
       <input type="number" name="attr_leapout" value="" />
@@ -520,6 +520,7 @@
         <h5>Entangle</h5>
         <h5>RoF</h5>
         <h5>Level</h5>
+        <h5>Row ID</h5>
         <input type="hidden" name="attr_bonus_id" value="" />
         <input type="text" list="weaponProficiencies" name="attr_name" />
         <datalist id="weaponProficiencies">
@@ -546,6 +547,7 @@
         <input type="number" value="" name="attr_entangle" />
         <input type="number" value="" name="attr_rof" />
         <input type="number" value="" name="attr_level" />
+        <input type="string" value="" name="attr_rowid" readonly />
       </fieldset>
       <hr />
       <h3>Modern Weapon Proficiencies</h3>
@@ -554,6 +556,7 @@
         <h5>Single</h5>
         <h5>Burst</h5>
         <h5>Level</h5>
+        <h5>Row ID</h5>
         <input type="hidden" name="attr_bonus_id" value="" />
         <input type="text" list="weaponProficienciesModern" name="attr_name" />
         <datalist id="weaponProficienciesModern">
@@ -571,6 +574,7 @@
         <input type="number" value="" name="attr_strike_range_single" />
         <input type="number" value="" name="attr_strike_range_burst" />
         <input type="number" value="" name="attr_level" />
+        <input type="text" value="" name="attr_rowid" readonly />
       </fieldset>
     </div>
   </div>
@@ -820,6 +824,7 @@
 
   <div class="bonuses">
     <div class="combat-container">
+      <h3>Aggregated Bonuses</h3>
       <div class="combat-combined">
         <details>
           <summary><b>Instructions</b></summary>
@@ -852,8 +857,7 @@
           <input type="hidden" name="attr_bonus_id" value="" />
           <input type="hidden" name="attr_bonus_section" value="" />
         </fieldset>
-        <br />
-        <h3>Aggregated Bonuses</h3>
+        <hr />
         <div class="combat-combined-bonuses">
           <label
             ><span>Attacks</span>
@@ -1295,7 +1299,6 @@
           </label>
         </div>
       </div>
-      <hr />
       <div class="hidden">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
@@ -1553,6 +1556,12 @@
           <b>Describe <span name="attr_name"></span></b>
         </summary>
         <textarea name="attr_description" value=""></textarea>
+        <div class="macro-help">
+          <label
+            ><span><b>Row ID:</b></span>
+            <input type="text" readonly name="attr_rowid" value=""
+          /></label>
+        </div>
       </details>
     </fieldset>
   </div>
@@ -1689,7 +1698,6 @@
           ><b>Description</b>
           <textarea class="full" name="attr_description" value=""></textarea>
         </label>
-        <h4>Macro Help</h4>
         <div class="macro-help">
           <label
             ><span><b>Row ID:</b></span>
@@ -1827,7 +1835,6 @@
           ><b>Description</b>
           <textarea class="full" name="attr_description" value=""></textarea>
         </label>
-        <h4>Macro Help</h4>
         <div class="macro-help">
           <label
             ><span><b>Row ID:</b></span>
@@ -1846,7 +1853,19 @@
 
   <div class="importexport">
     <h3>Import/Export</h3>
-    <p>Work in progress</p>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Click the <b>Export</b> button to get a JSON object representing your
+        character. Paste a valid JSON object and click <b>Import</b> to import a
+        character.
+      </p>
+      <p>
+        In order to know what the valid fields are, complete all the fields with
+        at least one of each repeating section and do an Export.
+      </p>
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
     <button type="action" name="act_import">Import</button>
     <button type="action" name="act_export">Export</button>
     <textarea class="full tall" name="attr_importexport"></textarea>
@@ -2870,6 +2889,7 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
   const [r, section, rowId, attr] = e.sourceAttribute.split("_");
   const wpName = e.newValue.toLowerCase();
   const wpLevelKey = `repeating_${section}_level`;
+  setAttrs({ [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}` });
   getAttrs(["character_level", wpLevelKey], (a) => {
     if (Boolean(a[wpLevelKey])) {
       setWp({
@@ -3550,9 +3570,13 @@ on("change:repeating_skills", (e) => {
 });
 
 on("change:repeating_skills:name", (e) => {
+  const [r, section, rowId, attr] = e.sourceAttribute.split("_");
   getAttrs(["character_level"], (a) => {
     console.log(a);
-    const attrs = { repeating_skills_level: a.character_level };
+    const attrs = {
+      repeating_skills_level: a.character_level,
+      [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}`,
+    };
     console.log(attrs);
     setAttrs(attrs);
   });
