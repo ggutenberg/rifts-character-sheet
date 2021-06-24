@@ -87,7 +87,8 @@
           <input type="text" value="" name="attr_character_race"
         /></label>
         <label
-          ><span>O.C.C.</span> <input type="text" value="" name="attr_occ"
+          ><span>Character Class</span>
+          <input type="text" value="" name="attr_occ"
         /></label>
         <label
           ><span>Strength Type</span>
@@ -435,7 +436,11 @@
         /></label>
         <label
           ><span>Perception</span>
-          <input id="perception" type="number" value"0" name="attr_perception"
+          <input
+            id="perception"
+            type="number"
+            value="0"
+            name="attr_perception"
           />
           <button type="roll" value="Perception: [[d20+@{perception}]]" />
         </label>
@@ -809,7 +814,11 @@
             />
             <button
               type="roll"
-              value="?{Add Punch damage?|Yes,Damage: [[@{combat_combined_damage}+@{punch}]]|No,Damage: [[@{combat_combined_damage}]]}"
+              value="?{Add damage modifier?|
+                None,Damage: [[@{combat_combined_damage}]]|
+                Punch,Damage: [[@{combat_combined_damage}+@{punch}]]|
+                P.S. Bonus,Damage: [[@{combat_combined_damage}+@{ps_bonus}]]
+              }"
             />
           </label>
           <label
@@ -926,6 +935,19 @@
         <hr />
         <h4>Saving Throws</h4>
         <div class="combat-combined-bonuses">
+          <label
+            ><span>Perception</span>
+            <input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_perceptioncheck"
+            />
+            <button
+              type="roll"
+              value="Perception Check: [[d20+@{combat_combined_perceptioncheck}]]"
+            />
+          </label>
           <label
             ><span>Psionics</span>
             <input

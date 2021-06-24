@@ -63,7 +63,11 @@
       <input type="text" value="0" name="attr_damage" />
       <button
         type="roll"
-        value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+        value="?{Add damage modifier?|
+          None,Damage: [[@{damage}]]|
+          Punch,Damage: [[@{damage}+@{punch}]]|
+          P.S. Bonus,Damage: [[@{damage}+@{ps_bonus}]]
+        }"
       />
     </label>
     <label
@@ -117,6 +121,14 @@
   </div>
   <h4>Saving Throws</h4>
   <div class="bonus-type-container">
+    <label
+      ><span>Perception</span>
+      <input type="number" value="0" name="attr_perceptioncheck" />
+      <button
+        type="roll"
+        value="Perception Check: [[d20+@{perceptioncheck}]]"
+      />
+    </label>
     <label
       ><span>Psionics</span>
       <input type="number" value="" name="attr_psionics" />

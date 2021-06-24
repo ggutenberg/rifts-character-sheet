@@ -283,9 +283,14 @@ function combineCombat(rowIds) {
   // Saving Throws
   Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
     ([attributeBonus, saves]) => {
+      // console.log(attributeBonus, saves);
+      const destinations = saves.map((save) => `combat_combined_${save}`);
+      const section = "bonuses";
+      const fields = saves;
+      // console.log(attributeBonus, destinations, section, fields);
       repeatingSum(
-        saves.map((save) => `combat_combined_${save}`),
-        "bonuses",
+        destinations,
+        section,
         saves,
         `filter:${rowIds.toString()}`,
         attributeBonus

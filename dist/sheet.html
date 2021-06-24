@@ -87,7 +87,8 @@
           <input type="text" value="" name="attr_character_race"
         /></label>
         <label
-          ><span>O.C.C.</span> <input type="text" value="" name="attr_occ"
+          ><span>Character Class</span>
+          <input type="text" value="" name="attr_occ"
         /></label>
         <label
           ><span>Strength Type</span>
@@ -435,7 +436,11 @@
         /></label>
         <label
           ><span>Perception</span>
-          <input id="perception" type="number" value"0" name="attr_perception"
+          <input
+            id="perception"
+            type="number"
+            value="0"
+            name="attr_perception"
           />
           <button type="roll" value="Perception: [[d20+@{perception}]]" />
         </label>
@@ -680,7 +685,11 @@
       <input type="text" value="0" name="attr_damage" />
       <button
         type="roll"
-        value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+        value="?{Add damage modifier?|
+          None,Damage: [[@{damage}]]|
+          Punch,Damage: [[@{damage}+@{punch}]]|
+          P.S. Bonus,Damage: [[@{damage}+@{ps_bonus}]]
+        }"
       />
     </label>
     <label
@@ -734,6 +743,14 @@
   </div>
   <h4>Saving Throws</h4>
   <div class="bonus-type-container">
+    <label
+      ><span>Perception</span>
+      <input type="number" value="0" name="attr_perceptioncheck" />
+      <button
+        type="roll"
+        value="Perception Check: [[d20+@{perceptioncheck}]]"
+      />
+    </label>
     <label
       ><span>Psionics</span>
       <input type="number" value="" name="attr_psionics" />
@@ -1008,7 +1025,11 @@
             />
             <button
               type="roll"
-              value="?{Add Punch damage?|Yes,Damage: [[@{combat_combined_damage}+@{punch}]]|No,Damage: [[@{combat_combined_damage}]]}"
+              value="?{Add damage modifier?|
+                None,Damage: [[@{combat_combined_damage}]]|
+                Punch,Damage: [[@{combat_combined_damage}+@{punch}]]|
+                P.S. Bonus,Damage: [[@{combat_combined_damage}+@{ps_bonus}]]
+              }"
             />
           </label>
           <label
@@ -1125,6 +1146,19 @@
         <hr />
         <h4>Saving Throws</h4>
         <div class="combat-combined-bonuses">
+          <label
+            ><span>Perception</span>
+            <input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_perceptioncheck"
+            />
+            <button
+              type="roll"
+              value="Perception Check: [[d20+@{combat_combined_perceptioncheck}]]"
+            />
+          </label>
           <label
             ><span>Psionics</span>
             <input
@@ -1378,7 +1412,11 @@
       <input type="text" value="0" name="attr_damage" />
       <button
         type="roll"
-        value="?{Add Punch damage?|Yes,[[@{damage}+@{punch}]]|No,[[@{damage}]]}"
+        value="?{Add damage modifier?|
+          None,Damage: [[@{damage}]]|
+          Punch,Damage: [[@{damage}+@{punch}]]|
+          P.S. Bonus,Damage: [[@{damage}+@{ps_bonus}]]
+        }"
       />
     </label>
     <label
@@ -1432,6 +1470,14 @@
   </div>
   <h4>Saving Throws</h4>
   <div class="bonus-type-container">
+    <label
+      ><span>Perception</span>
+      <input type="number" value="0" name="attr_perceptioncheck" />
+      <button
+        type="roll"
+        value="Perception Check: [[d20+@{perceptioncheck}]]"
+      />
+    </label>
     <label
       ><span>Psionics</span>
       <input type="number" value="" name="attr_psionics" />
@@ -2351,10 +2397,11 @@ const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
   pe_bonus: ["magic", "poison", "disease", "torture", "fatigue", "toxins"],
   pe_coma_bonus: ["comadeath"],
+  perception: ["perceptioncheck"],
   none: ["horrorfactor", "mindcontrol", "illusions", "possession"],
 };
 const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
-  (acc, cur) => acc.concat(),
+  (acc, cur) => acc.concat(cur),
   []
 );
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
@@ -3056,9 +3103,14 @@ function combineCombat(rowIds) {
   // Saving Throws
   Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
     ([attributeBonus, saves]) => {
+      // console.log(attributeBonus, saves);
+      const destinations = saves.map((save) => `combat_combined_${save}`);
+      const section = "bonuses";
+      const fields = saves;
+      // console.log(attributeBonus, destinations, section, fields);
       repeatingSum(
-        saves.map((save) => `combat_combined_${save}`),
-        "bonuses",
+        destinations,
+        section,
         saves,
         `filter:${rowIds.toString()}`,
         attributeBonus
