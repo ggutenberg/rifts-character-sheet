@@ -975,19 +975,6 @@
             />
           </label>
           <label
-            ><span>Poison</span>
-            <input
-              readonly
-              type="number"
-              value=""
-              name="attr_combat_combined_poison"
-            />
-            <button
-              type="roll"
-              value="Save vs. Poison: [[d20+@{combat_combined_poison}]]"
-            />
-          </label>
-          <label
             ><span>Horror Factor</span>
             <input
               readonly
@@ -1023,7 +1010,7 @@
             />
             <button
               type="roll"
-              value="Save vs. Disease: [[d20+@{combat_combined_disease}]]"
+              value="Save vs. Disease: [[{d20+@{combat_combined_disease}}>13]]"
             />
           </label>
           <label
@@ -1066,42 +1053,68 @@
             />
           </label>
           <label
-            ><span>Torture</span>
+            ><span>Pain</span>
             <input
               readonly
               type="number"
               value=""
-              name="attr_combat_combined_torture"
+              name="attr_combat_combined_pain"
             />
             <button
               type="roll"
-              value="Save vs. Torture: [[d20+@{combat_combined_torture}]]"
+              value="Save vs. Pain: [[d20+@{combat_combined_pain}]]"
             />
           </label>
           <label
-            ><span>Fatigue</span>
+            ><span>Lethal Poison</span>
             <input
               readonly
               type="number"
               value=""
-              name="attr_combat_combined_fatigue"
+              name="attr_combat_combined_lethalpoison"
             />
             <button
               type="roll"
-              value="Save vs. Fatigue: [[d20+@{combat_combined_fatigue}]]"
+              value="Save vs. Lethal Poison: [[{d20+@{combat_combined_lethalpoison}}>13]]"
             />
           </label>
           <label
-            ><span>Toxins</span>
+            ><span>Non-Lethal Poison</span>
             <input
               readonly
               type="number"
               value=""
-              name="attr_combat_combined_toxins"
+              name="attr_combat_combined_nonlethalpoison"
             />
             <button
               type="roll"
-              value="Save vs. Toxins: [[d20+@{combat_combined_toxins}]]"
+              value="Save vs. Non-Lethal Poison: [[{d20+@{combat_combined_nonlethalpoison}}>15]]"
+            />
+          </label>
+          <label
+            ><span>Drugs</span>
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_drugs"
+            />
+            <button
+              type="roll"
+              value="Save vs. Drugs: [[{d20+@{combat_combined_drugs}}>14]]"
+            />
+          </label>
+          <label
+            ><span>Curses</span>
+            <input
+              readonly
+              type="number"
+              value=""
+              name="attr_combat_combined_curses"
+            />
+            <button
+              type="roll"
+              value="Save vs. Curses: [[{d20+@{combat_combined_curses}}>14]]"
             />
           </label>
           <label

@@ -476,10 +476,17 @@ const COMBAT_KEYS = [
 ];
 const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
-  pe_bonus: ["magic", "poison", "disease", "torture", "fatigue", "toxins"],
+  pe_bonus: [
+    "magic",
+    "lethalpoison",
+    "nonlethalpoison",
+    "disease",
+    "pain",
+    "drugs",
+  ],
   pe_coma_bonus: ["comadeath"],
   perception: ["perceptioncheck"],
-  none: ["horrorfactor", "mindcontrol", "illusions", "possession"],
+  none: ["horrorfactor", "mindcontrol", "illusions", "possession", "curses"],
 };
 const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   (acc, cur) => acc.concat(cur),
