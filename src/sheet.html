@@ -805,6 +805,19 @@
             />
           </label>
           <label
+            ><span>Body Flip/Throw</span>
+            <input
+              readonly
+              type="number"
+              value="0"
+              name="attr_combat_combined_flipthrow"
+            />
+            <button
+              type="roll"
+              value="Body Flip/Throw: [[d20+@{combat_combined_flipthrow}]]"
+            />
+          </label>
+          <label
             ><span>Damage</span>
             <input
               readonly
@@ -1538,7 +1551,6 @@
   /* endinject */
 
   /**
-   * @todo Add Repeating Movement and Equipment to export
    * @todo add Bonus: Body Flip/Throw
    * @todo make calculated skill % readonly
    * @todo add Aimed and Called shot bonus fields

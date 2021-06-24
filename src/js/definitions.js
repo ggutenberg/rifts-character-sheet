@@ -473,6 +473,7 @@ const COMBAT_KEYS = [
   "critical",
   "knockout",
   "deathblow",
+  "flipthrow",
 ];
 const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
@@ -607,9 +608,12 @@ const CORE_KEYS = [
   "run_at_max",
   "leapup",
   "leapout",
+  "equipment",
 ];
 
 const MOVEMENT_KEYS = ["name", "mph", "ft_melee", "cruising", "dur_at_max"];
+
+const EQUIPMENT_KEYS = ["equipment"];
 
 const SECTIONS = {
   wp: WP_KEYS.wp,
@@ -619,4 +623,5 @@ const SECTIONS = {
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
+  // equipment: EQUIPMENT_KEYS,
 };

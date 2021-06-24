@@ -261,6 +261,7 @@ function combineCombat(rowIds) {
       "combat_combined_dodge_auto",
       "combat_combined_dodge_teleport",
       "combat_combined_dodge_motion",
+      "combat_combined_flipthrow",
     ],
     "bonuses",
     [
@@ -274,6 +275,7 @@ function combineCombat(rowIds) {
       "dodge_auto",
       "dodge_teleport",
       "dodge_motion",
+      "flipthrow",
     ],
     `filter:${rowIds.toString()}`,
     "pp_bonus"
