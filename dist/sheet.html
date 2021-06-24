@@ -1651,10 +1651,10 @@
         <input type="number" value="0" name="attr_bonus" />
         <input type="number" value="0" name="attr_perlevel" />
         <input type="number" value="1" name="attr_level" />
-        <input type="number" value="0" name="attr_total" />
+        <input type="number" value="0" name="attr_total" readonly />
         <button
           type="roll"
-          value="@{character_name} @{skill} check: [[d100<@{total}]]"
+          value="@{character_name} @{name} check: [[d100<@{total}]]"
         />
       </div>
       <details>
@@ -1726,7 +1726,7 @@
           value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
         />
         <input type="text" value="0" name="attr_duration" />
-        <input type="number" value="0" name="attr_percentage" />
+        <input type="number" value="0" name="attr_percentage" readonly />
         <button
           type="roll"
           value="@{character_name} @{name} check: [[d100<@{percentage}]]"
@@ -1863,7 +1863,7 @@
           value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
         />
         <input type="text" value="0" name="attr_duration" />
-        <input type="number" value="0" name="attr_percentage" />
+        <input type="number" value="0" name="attr_percentage" readonly />
         <button
           type="roll"
           value="@{character_name} @{name} check: [[d100<@{percentage}]]"
@@ -4015,7 +4015,6 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
-   * @todo add Bonus: Body Flip/Throw
    * @todo make calculated skill % readonly
    * @todo add Aimed and Called shot bonus fields
    * @todo add Disarm: Range field
