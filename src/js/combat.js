@@ -179,7 +179,6 @@ function combineCombat(rowIds) {
   // each of the sectionIds and aggregate them in the combined combat section
   // +PP +PS, and add a saving throws section with +ME +PE
 
-  console.log("combineCombat", rowIds);
   repeatingStringConcat({
     destinations: ["combat_combined_damage"],
     section: "bonuses",
@@ -283,15 +282,13 @@ function combineCombat(rowIds) {
   // Saving Throws
   Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
     ([attributeBonus, saves]) => {
-      // console.log(attributeBonus, saves);
       const destinations = saves.map((save) => `combat_combined_${save}`);
       const section = "bonuses";
       const fields = saves;
-      // console.log(attributeBonus, destinations, section, fields);
       repeatingSum(
         destinations,
         section,
-        saves,
+        fields,
         `filter:${rowIds.toString()}`,
         attributeBonus
       );
@@ -459,7 +456,6 @@ function aggregateBonuses() {
       (id) => `repeating_bonusselections_${id}_bonus_section`
     );
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
-    console.log(attrNames);
     getAttrs(attrNames, (a) => {
       console.log(a);
       const combatRowIds = ids.reduce((acc, id) => {

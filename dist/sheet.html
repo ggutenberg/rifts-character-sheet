@@ -3050,7 +3050,6 @@ function combineCombat(rowIds) {
   // each of the sectionIds and aggregate them in the combined combat section
   // +PP +PS, and add a saving throws section with +ME +PE
 
-  console.log("combineCombat", rowIds);
   repeatingStringConcat({
     destinations: ["combat_combined_damage"],
     section: "bonuses",
@@ -3154,15 +3153,13 @@ function combineCombat(rowIds) {
   // Saving Throws
   Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
     ([attributeBonus, saves]) => {
-      // console.log(attributeBonus, saves);
       const destinations = saves.map((save) => `combat_combined_${save}`);
       const section = "bonuses";
       const fields = saves;
-      // console.log(attributeBonus, destinations, section, fields);
       repeatingSum(
         destinations,
         section,
-        saves,
+        fields,
         `filter:${rowIds.toString()}`,
         attributeBonus
       );
@@ -3330,7 +3327,6 @@ function aggregateBonuses() {
       (id) => `repeating_bonusselections_${id}_bonus_section`
     );
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
-    console.log(attrNames);
     getAttrs(attrNames, (a) => {
       console.log(a);
       const combatRowIds = ids.reduce((acc, id) => {
@@ -3663,8 +3659,12 @@ function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
 }
 
 on("change:repeating_skills", (e) => {
+  console.log("change:repeating_skills", e);
   if (e.sourceAttribute.endsWith("_name")) return;
-  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const sourceParts = e.sourceAttribute.split("_");
+  // Return if no attribute is changed and it's the row itself
+  if (sourceParts.length < 4) return;
+  const [r, section, rowId] = sourceParts;
   updateSkill(rowId);
 });
 
@@ -3985,7 +3985,6 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
-   * @todo fix deleting a Skill row
    * @todo Add Repeating Movement and Equipment to export
    * @todo add Bonus: Body Flip/Throw
    * @todo make calculated skill % readonly
@@ -3996,6 +3995,7 @@ on("change:repeating_movement:ft_melee", (e) => {
    * @todo add MDC to Magic/Psionics
    * @todo add Ammo/Uses to Combat, Magic
    * @todo add Description field to Combat
+   * @todo when Aggregate Attacks change, recalculate ft/attack fields
    *
    * Questions
    * - Paratrooper gets a save vs. Torture. What is this?

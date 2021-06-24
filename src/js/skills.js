@@ -40,8 +40,12 @@ function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
 }
 
 on("change:repeating_skills", (e) => {
+  console.log("change:repeating_skills", e);
   if (e.sourceAttribute.endsWith("_name")) return;
-  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const sourceParts = e.sourceAttribute.split("_");
+  // Return if no attribute is changed and it's the row itself
+  if (sourceParts.length < 4) return;
+  const [r, section, rowId] = sourceParts;
   updateSkill(rowId);
 });
 
