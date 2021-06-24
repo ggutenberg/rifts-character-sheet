@@ -14,7 +14,6 @@
   function getRepeatingSectionArray(section, rowIds, attrNames, callback) {
     let sectionArray = [];
     getAttrs(attrNames, (attrs) => {
-      console.log(attrs);
       rowIds.forEach((rowId) => {
         const wpObj = Object.keys(attrs).reduce((acc, attr) => {
           if (attr.includes(rowId)) {
@@ -25,7 +24,6 @@
         }, {});
         sectionArray.push(wpObj);
       });
-      console.log(sectionArray);
       callback(sectionArray);
     });
   }
@@ -51,13 +49,16 @@
               getRepeatingRows("psionics", (psionicsSectionArray) => {
                 attrs.psionics = psionicsSectionArray;
 
-                getAttrs(CORE_KEYS, (coreAttrs) => {
-                  Object.entries(coreAttrs).forEach(
-                    ([key, val]) => (attrs[key] = val)
-                  );
+                getRepeatingRows("movement", (movementSectionArray) => {
+                  attrs.movement = movementSectionArray;
 
-                  console.log(attrs);
-                  setAttrs({ importexport: JSON.stringify(attrs, null, 2) });
+                  getAttrs(CORE_KEYS, (coreAttrs) => {
+                    Object.entries(coreAttrs).forEach(
+                      ([key, val]) => (attrs[key] = val)
+                    );
+
+                    setAttrs({ importexport: JSON.stringify(attrs, null, 2) });
+                  });
                 });
               });
             });
@@ -78,7 +79,6 @@
       });
       return acc;
     }, {});
-    console.log(attrs);
     setAttrs(attrs, {}, callback);
   }
 
@@ -99,8 +99,10 @@
                 delete data.magic;
                 setRepeatingRows("psionics", data.psionics, () => {
                   delete data.psionics;
-                  console.log(data);
-                  setAttrs(data);
+                  setRepeatingRows("movement", data.movement, () => {
+                    delete data.movement;
+                    setAttrs(data);
+                  });
                 });
               });
             });

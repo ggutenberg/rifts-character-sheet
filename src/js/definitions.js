@@ -609,6 +609,8 @@ const CORE_KEYS = [
   "leapout",
 ];
 
+const MOVEMENT_KEYS = ["name", "mph", "ft_melee", "cruising", "dur_at_max"];
+
 const SECTIONS = {
   wp: WP_KEYS.wp,
   wpmodern: WP_KEYS.wpmodern,
@@ -616,4 +618,5 @@ const SECTIONS = {
   combat: COMBAT_SAVE_KEYS,
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
+  movement: MOVEMENT_KEYS,
 };
