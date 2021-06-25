@@ -114,7 +114,7 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
   const wpLevelKey = `repeating_${section}_level`;
   setAttrs({ [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}` });
   getAttrs(["character_level", wpLevelKey], (a) => {
-    if (Boolean(a[wpLevelKey])) {
+    if (Boolean(a[wpLevelKey]) && +a[wpLevelKey] != 0) {
       setWp({
         section,
         wpName,
@@ -160,15 +160,38 @@ function addStrikeRangeToCombined() {
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
       "combat_combined_strike_range_burst",
+      "combat_combined_strike_range_aimed",
+      "combat_combined_strike_range_called",
     ],
     (a) => {
+      const strikeRangeSingle =
+        +a.combat_combined_strike_range +
+        +a.combat_combined_strike_range_single;
+      const strikeRangeBurst =
+        +a.combat_combined_strike_range + +a.combat_combined_strike_range_burst;
+      const strikeRangeAimedSingle =
+        strikeRangeSingle + +a.combat_combined_strike_range_aimed + 2;
+      const strikeRangeAimedPulse = Math.floor(strikeRangeAimedSingle / 2);
+      const strikeRangeCalledSingle =
+        strikeRangeSingle + a.combat_combined_strike_range_called;
+      const strikeRangeCalledPulse = Math.floor(strikeRangeCalledSingle / 2);
+      const strikeRangeAimedCalledSingle =
+        strikeRangeAimedSingle + +a.combat_combined_strike_range_called;
+      const strikeRangeAimedCalledPulse = Math.floor(
+        strikeRangeAimedCalledSingle / 2
+      );
+
       setAttrs({
-        combat_combined_strike_range_single:
-          +a.combat_combined_strike_range +
-          +a.combat_combined_strike_range_single,
-        combat_combined_strike_range_burst:
-          +a.combat_combined_strike_range +
-          +a.combat_combined_strike_range_burst,
+        combat_combined_strike_range_single: strikeRangeSingle,
+        combat_combined_strike_range_burst: strikeRangeBurst,
+        combat_combined_strike_range_aimed_single: strikeRangeAimedSingle,
+        combat_combined_strike_range_aimed_pulse: strikeRangeAimedPulse,
+        combat_combined_strike_range_called_single: strikeRangeCalledSingle,
+        combat_combined_strike_range_called_pulse: strikeRangeCalledPulse,
+        combat_combined_strike_range_aimed_called_single:
+          strikeRangeAimedCalledSingle,
+        combat_combined_strike_range_aimed_called_pulse:
+          strikeRangeAimedCalledPulse,
       });
     }
   );
@@ -215,6 +238,8 @@ function combineCombat(rowIds) {
       "combat_combined_strike_range",
       "combat_combined_strike_range_single",
       "combat_combined_strike_range_burst",
+      "combat_combined_strike_range_aimed",
+      "combat_combined_strike_range_called",
     ],
     "bonuses",
     [
@@ -225,6 +250,8 @@ function combineCombat(rowIds) {
       "strike_range",
       "strike_range_single",
       "strike_range_burst",
+      "strike_range_aimed",
+      "strike_range_called",
     ],
     `filter:${rowIds.toString()}`,
     {
