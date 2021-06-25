@@ -208,6 +208,7 @@ img.logo {
   cursor: pointer;
 }
 
+.combat-combined-bonuses label,
 .charsheet
   .combat-container
   .repcontainer[data-groupname="repeating_combat"]
@@ -217,11 +218,18 @@ img.logo {
   .combat-container
   .repcontainer[data-groupname="repeating_bonuses"]
   .repitem
-  label,
-.combat-combined-bonuses label {
+  label {
   display: grid;
   grid-template-columns: 1fr min-content 4rem;
   width: 100%;
+}
+
+.charsheet
+  .combat-container
+  .repcontainer[data-groupname="repeating_combat"]
+  .repitem
+  label.description {
+  display: block;
 }
 
 .charsheet

@@ -961,6 +961,10 @@
       <button type="roll" value="Save vs. Coma/Death: [[d100-@{comadeath}]]" />
     </label>
   </div>
+  <label class="description"
+    ><b>Description</b>
+    <textarea class="full" name="attr_description" value=""></textarea>
+  </label>
   <div class="macro-help">
     <label
       ><span><b>Row ID:</b></span>
@@ -1996,6 +2000,10 @@
       <button type="roll" value="Save vs. Coma/Death: [[d100-@{comadeath}]]" />
     </label>
   </div>
+  <label class="description"
+    ><b>Description</b>
+    <textarea class="full" name="attr_description" value=""></textarea>
+  </label>
   <div class="macro-help">
     <label
       ><span><b>Row ID:</b></span>
@@ -2849,6 +2857,7 @@ const COMBAT_KEYS = [
   "knockout",
   "deathblow",
   "flipthrow",
+  "description",
 ];
 const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
@@ -4436,12 +4445,10 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
-   * @todo add Disarm: Range field
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min
    * @todo add MDC to Magic/Psionics
    * @todo add Ammo/Uses to Combat, Magic
-   * @todo add Description field to Combat
    * @todo when Aggregate Attacks change, recalculate ft/attack fields
    *
    * Questions

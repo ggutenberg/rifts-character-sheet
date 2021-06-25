@@ -484,6 +484,7 @@ const COMBAT_KEYS = [
   "knockout",
   "deathblow",
   "flipthrow",
+  "description",
 ];
 const SAVE_KEYS_ATTRIBUTE_BONUSES = {
   me_bonus: ["psionics", "insanity"],
