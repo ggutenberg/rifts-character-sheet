@@ -1,0 +1,182 @@
+<div class="combat-combined-bonuses">
+  <label
+    ><span>Attacks</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_attacks"
+    />
+  </label>
+  <label
+    ><span>S.D.C.</span
+    ><input readonly type="number" value="0" name="attr_combat_combined_sdc"
+  /></label>
+  <label
+    ><span>M.D.C.</span
+    ><input readonly type="number" value="0" name="attr_combat_combined_mdc"
+  /></label>
+  <label
+    ><span>Initiative</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_initiative"
+    />
+    <button
+      type="roll"
+      value="Initiative: [[d20+@{combat_combined_initiative} &{tracker}]]"
+    />
+  </label>
+  <label
+    ><span>Strike</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike"
+    />
+    <button type="roll" value="Strike: [[d20+@{combat_combined_strike}]]" />
+  </label>
+  <label
+    ><span>Parry</span>
+    <input readonly type="number" value="0" name="attr_combat_combined_parry" />
+    <button type="roll" value="Parry: [[d20+@{combat_combined_parry}]]" />
+  </label>
+  <label
+    ><span>Dodge</span>
+    <input readonly type="number" value="0" name="attr_combat_combined_dodge" />
+    <button type="roll" value="Dodge: [[d20+@{combat_combined_dodge}]]" />
+  </label>
+  <label
+    ><span>Throw</span>
+    <input readonly type="number" value="0" name="attr_combat_combined_throw" />
+    <button type="roll" value="Throw: [[d20+@{combat_combined_throw}]]" />
+  </label>
+  <label
+    ><span>Disarm</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_disarm"
+    />
+    <button type="roll" value="Disarm: [[d20+@{combat_combined_disarm}]]" />
+  </label>
+  <label
+    ><span>Entangle</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_entangle"
+    />
+    <button type="roll" value="Entangle: [[d20+@{combat_combined_entangle}]]" />
+  </label>
+  <label
+    ><span>Pull Punch</span>
+    <input readonly type="number" value="0" name="attr_combat_combined_pull" />
+    <button type="roll" value="Pull Punch: [[d20+@{combat_combined_pull}]]" />
+  </label>
+  <label
+    ><span>Roll w/ Impact</span>
+    <input readonly type="number" value="0" name="attr_combat_combined_roll" />
+    <button
+      type="roll"
+      value="Roll w/ Impact: [[d20+@{combat_combined_roll}]]"
+    />
+  </label>
+  <label
+    ><span>Body Flip/Throw</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_flipthrow"
+    />
+    <button
+      type="roll"
+      value="Body Flip/Throw: [[d20+@{combat_combined_flipthrow}]]"
+    />
+  </label>
+  <label
+    ><span>Damage</span>
+    <input readonly type="text" value="0" name="attr_combat_combined_damage" />
+    <button
+      type="roll"
+      value="?{Add damage modifier?|
+                None,Damage: [[@{combat_combined_damage}]]|
+                Punch,Damage: [[@{combat_combined_damage}+@{punch}]]|
+                P.S. Bonus,Damage: [[@{combat_combined_damage}+@{ps_bonus}]]
+              }"
+    />
+  </label>
+  <label
+    ><span>Dodge: Flight</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_dodge_flight"
+    />
+    <button
+      type="roll"
+      value="Dodge in Flight: [[d20+@{combat_combined_dodge_flight}]]"
+    />
+  </label>
+  <label
+    ><span>Dodge: Auto</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_dodge_auto"
+    />
+    <button
+      type="roll"
+      value="Auto Dodge: [[d20+@{combat_combined_dodge_auto}]]"
+    />
+  </label>
+  <label
+    ><span>Dodge: Teleport</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_dodge_teleport"
+    />
+    <button
+      type="roll"
+      value="Teleport Dodge: [[d20+@{combat_combined_dodge_teleport}]]"
+    />
+  </label>
+  <label
+    ><span>Dodge: Motion</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_dodge_motion"
+    />
+    <button
+      type="roll"
+      value="Dodge in Motion: [[d20+@{combat_combined_dodge_motion}]]"
+    />
+  </label>
+</div>
+<hr />
+<div class="combat-combined-bonuses">
+  <label
+    ><span>Critical</span>
+    <input type="number" value="20" name="attr_combat_combined_critical"
+  /></label>
+  <label
+    ><span>Knockout</span>
+    <input type="number" value="0" name="attr_combat_combined_knockout"
+  /></label>
+  <label
+    ><span>Death Blow</span>
+    <input type="number" value="0" name="attr_combat_combined_deathblow"
+  /></label>
+</div>

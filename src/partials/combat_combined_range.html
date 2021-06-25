@@ -1,0 +1,192 @@
+<div class="combat-combined-bonuses">
+  <label
+    ><span>Strike: Range</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range"
+    />
+    <button
+      type="roll"
+      value="Range Strike: [[d20+@{combat_combined_strike_range}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Single<span title="Includes Strike: Range">&nbsp;&#9432;</span>
+    </span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_single"
+    />
+    <button
+      type="roll"
+      value="Range Strike - Single Shot: [[d20+@{combat_combined_strike_range_single}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Burst
+      <span title="Includes Strike: Range">&nbsp;&#9432;</span></span
+    >
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_burst"
+    />
+    <button
+      type="roll"
+      value="Range Strike - Burst: [[d20+@{combat_combined_strike_range_burst}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_aimed"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Strike: [[d20+@{combat_combined_strike_range_aimed}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Aimed Single<span title="Includes Range: Aimed"
+        >&nbsp;&#9432;</span
+      ></span
+    >
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_aimed_single"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Single Strike: [[d20+@{combat_combined_strike_range_aimed_single}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Aimed Pulse<span title="Includes Range: Aimed"
+        >&nbsp;&#9432;</span
+      ></span
+    >
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_aimed_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Pulse Strike: [[d20+@{combat_combined_strike_range_aimed_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Called</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_called"
+    />
+    <button
+      type="roll"
+      value="Range Called Strike: [[d20+@{combat_combined_strike_range_called}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Called Single<span title="Includes Range: Called"
+        >&nbsp;&#9432;</span
+      ></span
+    >
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_called_single"
+    />
+    <button
+      type="roll"
+      value="Range Called Single Strike: [[d20+@{combat_combined_strike_range_called_single}]]"
+    />
+  </label>
+  <label
+    ><span
+      >Range: Called Pulse<span title="Includes Range: Called"
+        >&nbsp;&#9432;</span
+      ></span
+    >
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_called_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Called Pulse Strike: [[d20+@{combat_combined_strike_range_called_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Called Single</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_aimed_called_single"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Called Single Strike: [[d20+@{combat_combined_strike_range_aimed_called_single}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Called Pulse</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_strike_range_aimed_called_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Called Pulse Strike: [[d20+@{combat_combined_strike_range_aimed_called_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Disarm: Range</span>
+    <input type="number" value="0" name="attr_combat_combined_disarm_range" />
+    <button
+      type="roll"
+      value="?{Add Called Shot modifier|
+                Called Single,Called Single Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_single}]]|
+                Called Pulse,Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_pulse}]]|
+                Aimed Called Single,Aimed Called Pulse Single: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_single}]]|
+                Aimed Called Pulse,Aimed Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_pulse}]]
+              }"
+    />
+  </label>
+  <label
+    ><span>Damage: Range</span>
+    <input
+      readonly
+      type="text"
+      value="0"
+      name="attr_combat_combined_damage_range"
+    />
+    <button
+      type="roll"
+      value="Range Damage: [[@{combat_combined_damage_range}]]"
+    />
+  </label>
+</div>

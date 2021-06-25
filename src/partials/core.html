@@ -1,0 +1,441 @@
+<div class="core">
+  <br />
+  <h1>Character Statistics</h1>
+  <div class="grid-container">
+    <div class="section-one character-background">
+      <label
+        ><span>Character Name</span>
+        <input
+          id="character-name"
+          type="text"
+          value=""
+          name="attr_character_name"
+      /></label>
+      <label
+        ><span>True Name</span>
+        <input type="text" value="" name="attr_truename_name"
+      /></label>
+      <label
+        ><span>Race</span>
+        <input type="text" value="" name="attr_character_race"
+      /></label>
+      <label
+        ><span>Character Class</span>
+        <input type="text" value="" name="attr_occ"
+      /></label>
+      <label
+        ><span>Strength Type</span>
+        <select class="" name="attr_ps_type" value="normal">
+          <option value="normal">Normal</option>
+          <option value="augmented">Augmented</option>
+          <option value="robotic">Robotic</option>
+          <option value="supernatural">Supernatural</option>
+        </select></label
+      >
+      <label
+        ><span>Level</span> <input type="number" name="attr_character_level"
+      /></label>
+      <label
+        ><span>Experience</span> <input type="number" name="attr_experience"
+      /></label>
+      <label
+        ><span>Alignment</span>
+        <select class="select" name="attr_alignment" value="0">
+          <option value="0"></option>
+          <option value="Principled">Principled</option>
+          <option value="Scrupulous">Scrupulous</option>
+          <option value="Unprincipled">Unprincipled</option>
+          <option value="Anarchist">Anarchist</option>
+          <option value="Taoist">Taoist</option>
+          <option value="Miscreant">Miscreant</option>
+          <option value="Abberant">Aberrant</option>
+          <option value="Diabolic">Diabolic</option>
+        </select></label
+      >
+      <label
+        ><span>Age</span>
+        <input
+          class="attribute"
+          type="number"
+          value=""
+          name="attr_character_age"
+      /></label>
+      <label
+        ><span>Gender</span>
+        <input type="text" value="" name="attr_character_gender"
+      /></label>
+      <label
+        ><span>Height</span>
+        <input type="text" value="" name="attr_character_height"
+      /></label>
+      <label
+        ><span>Weight</span>
+        <input type="text" value="" name="attr_character_weight"
+      /></label>
+      <label
+        ><span>Family Origin</span>
+        <input type="text" value="" name="attr_character_familyorigin"
+      /></label>
+      <label
+        ><span>Environment</span>
+        <input value="" name="attr_character_environment"
+      /></label>
+      <label
+        ><span>Native Language(s)</span>
+        <input type="text" value="" name="attr_character_languages"
+      /></label>
+      <label
+        ><span>Insanity, if any</span>
+        <input type="text" value="" name="attr_character_insanity"
+      /></label>
+      <label
+        ><span>Disposition</span>
+        <input type="text" value="" name="attr_character_disposition"
+      /></label>
+    </div>
+
+    <div class="section-two">
+      <div class="ss-2a">
+        <label for="iq">I.Q.</label>
+        <input
+          id="iq"
+          type="number"
+          value="0"
+          name="attr_iq"
+          title="Intelligence Quotient"
+        />
+        <input
+          class="attribute-bonus"
+          type="number"
+          value="0"
+          name="attr_iq_bonus"
+          title="+ Skills %"
+          readonly
+        />
+        <input
+          class="attribute-bonus"
+          type="number"
+          value="0"
+          name="attr_perception_bonus"
+          title="+ Perception (Rifter #13, p.16)"
+          readonly
+        />
+
+        <label for="mental-endurance">M.E.</label>
+        <input
+          id="mental-endurance"
+          type="number"
+          value="0"
+          name="attr_me"
+          title="Mental Endurance"
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_me_bonus"
+          title="+ Save vs. Psionics"
+          readonly
+        />
+        <div></div>
+
+        <label for="mental-affinity">M.A.</label>
+        <input
+          id="mental-affinity"
+          type="number"
+          value="0"
+          name="attr_ma"
+          title="Mental Affinity"
+        />
+        <input
+          type="number"
+          value="0"
+          name="attr_ma_bonus"
+          title="% Trust/Intimidate"
+          readonly
+        />
+        <div></div>
+
+        <label for="physical-strength">P.S.</label>
+        <input
+          id="physical-strength"
+          type="number"
+          value="0"
+          name="attr_ps"
+          title="Physical Strength"
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_ps_bonus"
+          title="+ SDC Damage"
+          readonly
+        />
+        <div></div>
+
+        <label for="physical-prowess">P.P</label>
+        <input
+          id="physical-prowess"
+          type="number"
+          value="0"
+          name="attr_pp"
+          title="Physical Prowess"
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_pp_bonus"
+          title="+ Strike/Parry/Dodge/Entangle/Disarm"
+          readonly
+        />
+        <div></div>
+
+        <label for="physical-endurance">P.E.</label>
+        <input
+          id="physical-endurance"
+          type="number"
+          value="0"
+          name="attr_pe"
+          title="Physical Endurance"
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_pe_bonus"
+          title="+ Magic/Poison/Toxins"
+          readonly
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_pe_coma_bonus"
+          title="+ Coma/Death %"
+          readonly
+        />
+
+        <label for="physical-beauty">P.B.</label>
+        <input
+          id="physical-beauty"
+          type="number"
+          value="0"
+          name="attr_pb"
+          title="Physical Beauty"
+        />
+        <input
+          class="attribute"
+          type="number"
+          value="0"
+          name="attr_pb_bonus"
+          title="% Charm/Impress"
+          readonly
+        />
+        <div></div>
+
+        <label for="speed">Spd</label>
+        <input
+          id="speed"
+          type="number"
+          value="0"
+          name="attr_spd"
+          title="Speed"
+        />
+      </div>
+      <div class="ss-2b">
+        <label for="trust-intimidate">Trust/Intimidate</label>
+        <input
+          id="trust-intimidate"
+          type="number"
+          value="0"
+          name="attr_trust_intimidate"
+        /><span>%</span>
+
+        <label for="charm-impress">Charm/Impress</label>
+        <input
+          id="charm-impress"
+          type="number"
+          value="0"
+          name="attr_charm_impress"
+        /><span>%</span>
+      </div>
+      <div class="ss-2c">
+        <label for="restrained-punch">Restrained Punch</label>
+        <input
+          id="restrained-punch"
+          type="text"
+          name="attr_restrained_punch"
+          value="0"
+        />
+        <select name="attr_restrained_punch_unit" value="sdc">
+          <option value="sdc">SDC</option>
+          <option value="mdc">MDC</option>
+        </select>
+
+        <label for="punch">Punch</label>
+        <input id="punch" type="text" name="attr_punch" value="0" />
+        <select name="attr_punch_unit" value="sdc">
+          <option value="sdc">SDC</option>
+          <option value="mdc">MDC</option>
+        </select>
+
+        <label for="power-punch">Power Punch</label>
+        <input id="power-punch" type="text" name="attr_power_punch" value="0" />
+        <select name="attr_power_punch_unit" value="sdc">
+          <option value="sdc">SDC</option>
+          <option value="mdc">MDC</option>
+        </select>
+
+        <label for="kick">Kick</label>
+        <input id="kick" type="text" name="attr_kick" value="0" />
+        <select name="attr_kick_unit" value="sdc">
+          <option value="sdc">SDC</option>
+          <option value="mdc">MDC</option>
+        </select>
+
+        <label for="leap-kick">Leap Kick</label>
+        <input id="leap-kick" type="text" name="attr_leap_kick" value="0" />
+        <select name="attr_leap_kick_unit" value="sdc">
+          <option value="sdc">SDC</option>
+          <option value="mdc">MDC</option>
+        </select>
+
+        <label for="lift">Lift</label>
+        <input id="lift" type="number" value="0" name="attr_lift" value="0" />
+        <div></div>
+
+        <label for="carry">Carry</label>
+        <input id="carry" type="number" value="0" name="attr_carry" value="0" />
+        <div></div>
+
+        <label for="throw">Throw</label>
+        <input id="throw" type="number" value="0" name="attr_throw" value="0" />
+        <div></div>
+
+        <label for="carry-max">Carry Max</label>
+        <input
+          id="carry-max"
+          type="number"
+          value="0"
+          name="attr_carry_max"
+        />Minutes
+
+        <label for="carry-running">Carry (Running)</label>
+        <input
+          id="carry-running"
+          type="number"
+          value="0"
+          name="attr_carry_running"
+        />Minutes
+
+        <label for="hold-max">Hold Max.</label>
+        <input
+          id="hold-max"
+          type="number"
+          value="0"
+          name="attr_hold_max"
+        />Melees
+      </div>
+    </div>
+    <div class="section-three">
+      <label
+        ><span>Hit Points</span>
+        <input type="number" value="0" name="attr_character_hp" />
+      </label>
+      <label>
+        <span>S.D.C.</span>
+        <input type="number" value="0" name="attr_character_sdc" />
+      </label>
+      <label
+        ><span>A.R.</span
+        ><input type="number" value="0" name="attr_character_ar"
+      /></label>
+      <label
+        ><span>M.D.C.</span>
+        <input type="number" value="0" name="attr_character_mdc" />
+      </label>
+      <label
+        ><span>P.P.E.</span>
+        <input type="number" value="0" name="attr_character_ppe" />
+      </label>
+      <label
+        ><span>I.S.P.</span
+        ><input type="number" value="0" name="attr_character_isp"
+      /></label>
+      <label
+        ><span>H.F.</span
+        ><input type="number" value="0" name="attr_character_hf"
+      /></label>
+      <label
+        ><span>Perception</span>
+        <input id="perception" type="number" value="0" name="attr_perception" />
+        <button type="roll" value="Perception: [[d20+@{perception}]]" />
+      </label>
+    </div>
+  </div>
+
+  <h2>Movement</h2>
+  <div class="movement-container">
+    <div></div>
+    <label for="mph">MPH</label>
+    <label for="ft-melee">Ft/Melee</label>
+    <label for="ft-attack">Ft/Attack</label>
+    <label for="cruising">Cruising</label>
+    <label for="run-at-max">Run at Max</label>
+    <label>Run</label>
+    <input id="mph" type="number" value="0" readonly name="attr_run_mph" />
+    <input
+      id="ft-melee"
+      type="number"
+      value="0"
+      readonly
+      name="attr_run_ft_melee"
+    />
+    <input
+      id="ft-attack"
+      type="number"
+      value="0"
+      readonly
+      name="attr_run_ft_attack"
+    />
+    <input id="cruising" type="number" value="0" name="attr_run_cruising" />
+    <div>
+      <input
+        id="run-at-max"
+        type="number"
+        value="@{pe}/2"
+        disabled="true"
+        name="attr_run_at_max"
+      />
+      minutes
+    </div>
+
+    <label>Leaping Distance</label>
+    <input type="number" name="attr_leapup" value="0" />
+    <div>feet up?</div>
+    <input type="number" name="attr_leapout" value="0" />
+    <div>feet out?</div>
+    <div></div>
+  </div>
+  <br />
+  <div class="repeating-movement">
+    <fieldset class="repeating_movement">
+      <h5>Additional Movement Type</h5>
+      <h5>MPH</h5>
+      <h5>Ft/Melee</h5>
+      <h5>Ft/Attack</h5>
+      <h5>Cruising</h5>
+      <h5>Max speed duration</h5>
+      <input type="text" value="" name="attr_name" />
+      <input type="number" value="0" name="attr_mph" />
+      <input type="number" value="0" name="attr_ft_melee" />
+      <input type="number" value="0" name="attr_ft_attack" readonly />
+      <input type="number" value="0" name="attr_cruising" />
+      <label
+        ><input type="number" value="0" name="attr_dur_at_max" /> minutes</label
+      >
+    </fieldset>
+  </div>
+</div>
