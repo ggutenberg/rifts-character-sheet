@@ -140,6 +140,21 @@ on(
   }
 );
 
+on(
+  "change:repeating_magic:dc_starting \
+  change:repeating_magic:dc_per_level \
+  change:repeating_magic:dc_unit \
+  change:repeating_psionics:dc_starting \
+  change:repeating_psionics:dc_per_level \
+  change:repeating_psionics:dc_unit",
+  (e) => {
+    console.log(e);
+    const [r, section] = e.sourceAttribute.split("_");
+    const row = `${r}_${section}_dc`;
+    calculateRangeDuration(row);
+  }
+);
+
 on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const attrs = {};
