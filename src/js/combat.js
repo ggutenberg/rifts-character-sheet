@@ -203,9 +203,9 @@ function combineCombat(rowIds) {
   // +PP +PS, and add a saving throws section with +ME +PE
 
   repeatingStringConcat({
-    destinations: ["combat_combined_damage"],
+    destinations: ["combat_combined_damage", "combat_combined_damage_range"],
     section: "bonuses",
-    fields: ["damage"],
+    fields: ["damage", "damage_range"],
     filter: rowIds,
     callback: () => {
       console.log("repeatingStringConcat callback");

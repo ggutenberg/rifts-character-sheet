@@ -334,6 +334,7 @@
             id="restrained-punch"
             type="text"
             name="attr_restrained_punch"
+            value="0"
           />
           <select name="attr_restrained_punch_unit" value="sdc">
             <option value="sdc">SDC</option>
@@ -341,43 +342,60 @@
           </select>
 
           <label for="punch">Punch</label>
-          <input id="punch" type="text" name="attr_punch" />
+          <input id="punch" type="text" name="attr_punch" value="0" />
           <select name="attr_punch_unit" value="sdc">
             <option value="sdc">SDC</option>
             <option value="mdc">MDC</option>
           </select>
 
           <label for="power-punch">Power Punch</label>
-          <input id="power-punch" type="text" name="attr_power_punch" />
+          <input
+            id="power-punch"
+            type="text"
+            name="attr_power_punch"
+            value="0"
+          />
           <select name="attr_power_punch_unit" value="sdc">
             <option value="sdc">SDC</option>
             <option value="mdc">MDC</option>
           </select>
 
           <label for="kick">Kick</label>
-          <input id="kick" type="text" name="attr_kick" />
+          <input id="kick" type="text" name="attr_kick" value="0" />
           <select name="attr_kick_unit" value="sdc">
             <option value="sdc">SDC</option>
             <option value="mdc">MDC</option>
           </select>
 
           <label for="leap-kick">Leap Kick</label>
-          <input id="leap-kick" type="text" name="attr_leap_kick" />
+          <input id="leap-kick" type="text" name="attr_leap_kick" value="0" />
           <select name="attr_leap_kick_unit" value="sdc">
             <option value="sdc">SDC</option>
             <option value="mdc">MDC</option>
           </select>
 
           <label for="lift">Lift</label>
-          <input id="lift" type="number" value="0" name="attr_lift" />
+          <input id="lift" type="number" value="0" name="attr_lift" value="0" />
           <div></div>
 
           <label for="carry">Carry</label>
-          <input id="carry" type="number" value="0" name="attr_carry" />
+          <input
+            id="carry"
+            type="number"
+            value="0"
+            name="attr_carry"
+            value="0"
+          />
           <div></div>
 
           <label for="throw">Throw</label>
-          <input id="throw" type="number" value="0" name="attr_throw" />
+          <input
+            id="throw"
+            type="number"
+            value="0"
+            name="attr_throw"
+            value="0"
+          />
           <div></div>
 
           <label for="carry-max">Carry Max</label>
@@ -886,6 +904,30 @@
               value="Dodge in Motion: [[d20+@{combat_combined_dodge_motion}]]"
             />
           </label>
+        </div>
+        <hr />
+        <div class="combat-combined-bonuses">
+          <label
+            ><span>Critical</span>
+            <input
+              type="number"
+              value="20"
+              name="attr_combat_combined_critical"
+          /></label>
+          <label
+            ><span>Knockout</span>
+            <input type="number" value="0" name="attr_combat_combined_knockout"
+          /></label>
+          <label
+            ><span>Death Blow</span>
+            <input
+              type="number"
+              value="0"
+              name="attr_combat_combined_deathblow"
+          /></label>
+        </div>
+        <hr />
+        <div class="combat-combined-bonuses">
           <label
             ><span>Strike: Range</span>
             <input
@@ -982,6 +1024,7 @@
           <label
             ><span>Range: Called</span>
             <input
+              readonly
               type="number"
               value="0"
               name="attr_combat_combined_strike_range_called"
@@ -1052,23 +1095,18 @@
             />
           </label>
           <label
-            ><span>Critical</span>
+            ><span>Damage: Range</span>
             <input
-              type="number"
-              value="20"
-              name="attr_combat_combined_critical"
-          /></label>
-          <label
-            ><span>Knockout</span>
-            <input type="number" value="0" name="attr_combat_combined_knockout"
-          /></label>
-          <label
-            ><span>Death Blow</span>
-            <input
-              type="number"
+              readonly
+              type="text"
               value="0"
-              name="attr_combat_combined_deathblow"
-          /></label>
+              name="attr_combat_combined_damage_range"
+            />
+            <button
+              type="roll"
+              value="Range Damage: [[@{combat_combined_damage_range}]]"
+            />
+          </label>
         </div>
         <hr />
         <h4>Saving Throws</h4>
@@ -1670,8 +1708,7 @@
   /* endinject */
 
   /**
-   * @todo fix issue with WPs setting level automatically since using 0 as a default
-   * @todo add Aimed and Called shot bonus fields
+   * @todo add Range: Damage field
    * @todo add Disarm: Range field
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min
