@@ -64,6 +64,35 @@
     <option value="Psionic: Sixth Sense"></option>
     <option value="Magic Amulet: Charm"></option>
   </datalist>
+  <datalist id="weapon-proficiencies">
+    <option value="W.P. Archery"></option>
+    <option value="W.P. Axe"></option>
+    <option value="W.P. Blunt"></option>
+    <option value="W.P. Chain"></option>
+    <option value="W.P. Forked"></option>
+    <option value="W.P. Knife"></option>
+    <option value="W.P. Grappling Hook"></option>
+    <option value="W.P. Pole Arm"></option>
+    <option value="W.P. Rope"></option>
+    <option value="W.P. Shield"></option>
+    <option value="W.P. Spear"></option>
+    <option value="W.P. Staff"></option>
+    <option value="W.P. Sword"></option>
+    <option value="W.P. Targeting"></option>
+    <option value="W.P. Whip"></option>
+  </datalist>
+  <datalist id="weapon-proficiencies-modern">
+    <option value="W.P. Handguns"></option>
+    <option value="W.P. Rifles"></option>
+    <option value="W.P. Energy Heavy"></option>
+    <option value="W.P. Energy Pistol"></option>
+    <option value="W.P. Energy Rifle"></option>
+    <option value="W.P. Heavy"></option>
+    <option value="W.P. Speargun"></option>
+    <option value="W.P. Shotgun"></option>
+    <option value="W.P. Submachinegun"></option>
+    <option value="W.P. Flamethrower"></option>
+  </datalist>
 
   <div class="core">
     <br />
@@ -545,24 +574,7 @@
         <h5>Level</h5>
         <h5>Row ID</h5>
         <input type="hidden" name="attr_bonus_id" value="" />
-        <input type="text" list="weaponProficiencies" name="attr_name" />
-        <datalist id="weaponProficiencies">
-          <option value="Archery"></option>
-          <option value="Axe"></option>
-          <option value="Blunt"></option>
-          <option value="Chain"></option>
-          <option value="Forked"></option>
-          <option value="Knife"></option>
-          <option value="Grappling Hook"></option>
-          <option value="Pole Arm"></option>
-          <option value="Rope"></option>
-          <option value="Shield"></option>
-          <option value="Spear"></option>
-          <option value="Staff"></option>
-          <option value="Sword"></option>
-          <option value="Targeting"></option>
-          <option value="Whip"></option>
-        </datalist>
+        <input type="text" list="weapon-proficiencies" name="attr_name" />
         <input type="number" value="0" name="attr_strike" />
         <input type="number" value="0" name="attr_parry" />
         <input type="number" value="0" name="attr_disarm" />
@@ -581,19 +593,11 @@
         <h5>Level</h5>
         <h5>Row ID</h5>
         <input type="hidden" name="attr_bonus_id" value="" />
-        <input type="text" list="weaponProficienciesModern" name="attr_name" />
-        <datalist id="weaponProficienciesModern">
-          <option value="Handguns"></option>
-          <option value="Rifles"></option>
-          <option value="Energy Heavy"></option>
-          <option value="Energy Pistol"></option>
-          <option value="Energy Rifle"></option>
-          <option value="Heavy"></option>
-          <option value="Speargun"></option>
-          <option value="Shotgun"></option>
-          <option value="Submachinegun"></option>
-          <option value="Flamethrower"></option>
-        </datalist>
+        <input
+          type="text"
+          list="weapon-proficiencies-modern"
+          name="attr_name"
+        />
         <input type="number" value="0" name="attr_strike_range_single" />
         <input type="number" value="0" name="attr_strike_range_burst" />
         <input type="number" value="0" name="attr_level" />

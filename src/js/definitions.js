@@ -1,5 +1,5 @@
 const WP = {
-  archery: [
+  "w.p. archery": [
     { strike: 1, parry: 1, rof: 2 },
     { strike: 1, disarm: 1, rof: 1 },
     {},
@@ -16,7 +16,7 @@ const WP = {
     { strike: 1, rof: 1 },
     { disarm: 1 },
   ],
-  axe: [
+  "w.p. axe": [
     {},
     { strike: 1, parry: 1 },
     {},
@@ -33,7 +33,7 @@ const WP = {
     {},
     { strike: 1, parry: 1 },
   ],
-  blunt: [
+  "w.p. blunt": [
     { strike: 1, parry: 1 },
     {},
     { strike: 1, parry: 1 },
@@ -50,7 +50,7 @@ const WP = {
     {},
     { throw: 1 },
   ],
-  chain: [
+  "w.p. chain": [
     { strike: 1 },
     {},
     { strike: 1 },
@@ -67,7 +67,7 @@ const WP = {
     {},
     {},
   ],
-  forked: [
+  "w.p. forked": [
     { strike: 1, parry: 1, entangle: 1 },
     {},
     { strike: 1, parry: 1, entangle: 1 },
@@ -84,7 +84,7 @@ const WP = {
     {},
     { throw: 1 },
   ],
-  knife: [
+  "w.p. knife": [
     { parry: 1, throw: 1 },
     { strike: 1 },
     { parry: 1, throw: 1 },
@@ -101,7 +101,7 @@ const WP = {
     {},
     {},
   ],
-  "grappling hook": [
+  "w.p. grappling hook": [
     {},
     {},
     { strike: 1, entangle: 1 },
@@ -118,7 +118,7 @@ const WP = {
     {},
     {},
   ],
-  "pole arm": [
+  "w.p. pole arm": [
     { strike: 1, parry: 1 },
     {},
     { strike: 1, parry: 1, throw: 1 },
@@ -135,7 +135,7 @@ const WP = {
     {},
     {},
   ],
-  rope: [
+  "w.p. rope": [
     { strike: 1, entangle: 1, disarm: 1 },
     {},
     {},
@@ -152,7 +152,7 @@ const WP = {
     {},
     { strike: 1 },
   ],
-  shield: [
+  "w.p. shield": [
     { parry: 1 },
     {},
     { parry: 1 },
@@ -169,7 +169,7 @@ const WP = {
     {},
     {},
   ],
-  spear: [
+  "w.p. spear": [
     { strike: 1, parry: 1 },
     {},
     { strike: 1, parry: 1, throw: 1 },
@@ -186,7 +186,7 @@ const WP = {
     { throw: 1 },
     {},
   ],
-  staff: [
+  "w.p. staff": [
     { strike: 1 },
     { parry: 1 },
     { strike: 1 },
@@ -203,7 +203,7 @@ const WP = {
     { parry: 1 },
     { throw: 1 },
   ],
-  sword: [
+  "w.p. sword": [
     { strike: 1 },
     { parry: 1 },
     { strike: 1 },
@@ -220,7 +220,7 @@ const WP = {
     {},
     { strike: 1 },
   ],
-  targeting: [
+  "w.p. targeting": [
     { strike: 1 },
     { damage: 1 },
     { strike: 1 },
@@ -237,7 +237,7 @@ const WP = {
     {},
     {},
   ],
-  whip: [
+  "w.p. whip": [
     {},
     { strike: 1, entangle: 1, disarm: 1, damage: 1 },
     {},
@@ -254,7 +254,7 @@ const WP = {
     {},
     {},
   ],
-  handguns: [
+  "w.p. handguns": [
     {},
     { strike_range_single: 1 },
     {},
@@ -271,7 +271,7 @@ const WP = {
     { strike_range_single: 1 },
     {},
   ],
-  rifles: [
+  "w.p. rifles": [
     { strike_range_single: 1 },
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
@@ -288,7 +288,7 @@ const WP = {
     {},
     {},
   ],
-  "energy heavy": [
+  "w.p. energy heavy": [
     {},
     { strike_range_single: 1 },
     {},
@@ -305,7 +305,7 @@ const WP = {
     {},
     {},
   ],
-  "energy pistol": [
+  "w.p. energy pistol": [
     { strike_range_single: 1 },
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
@@ -322,7 +322,7 @@ const WP = {
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
   ],
-  "energy rifle": [
+  "w.p. energy rifle": [
     {},
     { strike_range_single: 1 },
     {},
@@ -339,7 +339,7 @@ const WP = {
     { strike_range_single: 1 },
     {},
   ],
-  heavy: [
+  "w.p. heavy": [
     { strike_range_single: 1 },
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
@@ -356,7 +356,7 @@ const WP = {
     { strike_range_single: 1 },
     {},
   ],
-  speargun: [
+  "w.p. speargun": [
     {},
     { strike_range_single: 1 },
     {},
@@ -373,7 +373,7 @@ const WP = {
     {},
     { strike_range_single: 1 },
   ],
-  shotgun: [
+  "w.p. shotgun": [
     { strike_range_single: 1 },
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
@@ -390,7 +390,7 @@ const WP = {
     { strike_range_single: 1 },
     {},
   ],
-  submachinegun: [
+  "w.p. submachinegun": [
     { strike_range_single: 1 },
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
@@ -407,7 +407,7 @@ const WP = {
     {},
     { strike_range_single: 1, strike_range_burst: 1 },
   ],
-  flamethrower: [
+  "w.p. flamethrower": [
     {},
     { strike_range_single: 1 },
     {},
