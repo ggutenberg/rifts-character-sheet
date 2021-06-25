@@ -344,7 +344,7 @@ img.logo {
   .spells-list {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 1fr 4rem 8rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+  grid-template-columns: 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
 
 .charsheet
@@ -374,7 +374,7 @@ img.logo {
   .psionics-list {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 1fr 5rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+  grid-template-columns: 1fr 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
 
 .charsheet

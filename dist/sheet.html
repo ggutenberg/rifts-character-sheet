@@ -2190,21 +2190,23 @@
     <div class="psionics-list">
       <h5>Psionic</h5>
       <h5>Range</h5>
+      <h5>Duration</h5>
       <h5>Damage</h5>
       <h5></h5>
-      <h5>Duration</h5>
+      <h5 title="Damage Capacity">D.C.</h5>
       <h5>Skill</h5>
       <h5></h5>
       <h5>I.S.P.</h5>
       <h5></h5>
       <input type="text" value="" name="attr_name" />
       <input type="text" value="0" name="attr_range" />
+      <input type="text" value="0" name="attr_duration" />
       <input type="text" value="0" name="attr_damage" />
       <button
         type="roll"
         value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
       />
-      <input type="text" value="0" name="attr_duration" />
+      <input type="text" value="0" name="attr_dc" />
       <input type="number" value="0" name="attr_percentage" readonly />
       <button
         type="roll"
@@ -2236,6 +2238,23 @@
           />
         </label>
         <label
+          ><span>Starting duration</span
+          ><input type="number" value="0" name="attr_duration_starting"
+        /></label>
+        <label
+          ><span>Duration per level</span
+          ><input type="number" value="0" name="attr_duration_per_level"
+        /></label>
+        <label
+          ><span>Duration unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_duration_unit"
+            list="time-units"
+          />
+        </label>
+        <label
           ><span>Starting damage</span
           ><input type="text" value="0" name="attr_damage_starting"
         /></label>
@@ -2253,20 +2272,20 @@
           />
         </label>
         <label
-          ><span>Starting duration</span
-          ><input type="number" value="0" name="attr_duration_starting"
+          ><span>Starting D.C.</span
+          ><input type="number" value="0" name="attr_dc_starting"
         /></label>
         <label
-          ><span>Duration per level</span
-          ><input type="number" value="0" name="attr_duration_per_level"
+          ><span>D.C. per level</span
+          ><input type="number" value="0" name="attr_dc_per_level"
         /></label>
         <label
-          ><span>Duration unit</span
+          ><span>D.C. unit</span
           ><input
             type="text"
             value=""
-            name="attr_duration_unit"
-            list="time-units"
+            name="attr_dc_unit"
+            list="damage-units"
           />
         </label>
         <label
