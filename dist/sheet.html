@@ -848,6 +848,11 @@
       />
     </label>
     <label
+      ><span>Disarm: Range</span>
+      <input type="number" value="0" name="attr_disarm_range" />
+      <button type="roll" value="Range Disarm: [[d20+@{disarm_range}]]" />
+    </label>
+    <label
       ><span>Damage: Range</span>
       <input type="text" value="0" name="attr_damage_range" />
       <button type="roll" value="Range Damage: [[@{damage_range}]]" />
@@ -1421,6 +1426,23 @@
             />
           </label>
           <label
+            ><span>Disarm: Range</span>
+            <input
+              type="number"
+              value="0"
+              name="attr_combat_combined_disarm_range"
+            />
+            <button
+              type="roll"
+              value="?{Add Called Shot modifier|
+                Called Single,Called Single Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_single}]]|
+                Called Pulse,Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_pulse}]]|
+                Aimed Called Single,Aimed Called Pulse Single: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_single}]]|
+                Aimed Called Pulse,Aimed Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_pulse}]]
+              }"
+            />
+          </label>
+          <label
             ><span>Damage: Range</span>
             <input
               readonly
@@ -1859,6 +1881,11 @@
         type="roll"
         value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
       />
+    </label>
+    <label
+      ><span>Disarm: Range</span>
+      <input type="number" value="0" name="attr_disarm_range" />
+      <button type="roll" value="Range Disarm: [[d20+@{disarm_range}]]" />
     </label>
     <label
       ><span>Damage: Range</span>
@@ -2816,6 +2843,7 @@ const COMBAT_KEYS = [
   "strike_range_called_pulse",
   "strike_range_aimed_called_single",
   "strike_range_aimed_called_pulse",
+  "disarm_range",
   "damage_range",
   "critical",
   "knockout",
@@ -3503,6 +3531,7 @@ function combineCombat(rowIds) {
       "combat_combined_strike_range_burst",
       "combat_combined_strike_range_aimed",
       "combat_combined_strike_range_called",
+      "combat_combined_disarm_range",
     ],
     "bonuses",
     [
@@ -3515,6 +3544,7 @@ function combineCombat(rowIds) {
       "strike_range_burst",
       "strike_range_aimed",
       "strike_range_called",
+      "disarm_range",
     ],
     `filter:${rowIds.toString()}`,
     {
@@ -4406,7 +4436,6 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
-   * @todo add Range: Damage field
    * @todo add Disarm: Range field
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min

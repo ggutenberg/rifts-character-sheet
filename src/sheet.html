@@ -1095,6 +1095,23 @@
             />
           </label>
           <label
+            ><span>Disarm: Range</span>
+            <input
+              type="number"
+              value="0"
+              name="attr_combat_combined_disarm_range"
+            />
+            <button
+              type="roll"
+              value="?{Add Called Shot modifier|
+                Called Single,Called Single Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_single}]]|
+                Called Pulse,Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_pulse}]]|
+                Aimed Called Single,Aimed Called Pulse Single: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_single}]]|
+                Aimed Called Pulse,Aimed Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_pulse}]]
+              }"
+            />
+          </label>
+          <label
             ><span>Damage: Range</span>
             <input
               readonly
@@ -1708,7 +1725,6 @@
   /* endinject */
 
   /**
-   * @todo add Range: Damage field
    * @todo add Disarm: Range field
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min

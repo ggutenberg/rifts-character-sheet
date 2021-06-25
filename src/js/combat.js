@@ -240,6 +240,7 @@ function combineCombat(rowIds) {
       "combat_combined_strike_range_burst",
       "combat_combined_strike_range_aimed",
       "combat_combined_strike_range_called",
+      "combat_combined_disarm_range",
     ],
     "bonuses",
     [
@@ -252,6 +253,7 @@ function combineCombat(rowIds) {
       "strike_range_burst",
       "strike_range_aimed",
       "strike_range_called",
+      "disarm_range",
     ],
     `filter:${rowIds.toString()}`,
     {
