@@ -1172,15 +1172,27 @@
 <div class="combat-combined-bonuses">
   <label
     ><span>Critical</span>
-    <input type="number" value="20" name="attr_combat_combined_critical"
+    <input
+      readonly
+      type="number"
+      value="20"
+      name="attr_combat_combined_critical"
   /></label>
   <label
     ><span>Knockout</span>
-    <input type="number" value="0" name="attr_combat_combined_knockout"
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_knockout"
   /></label>
   <label
     ><span>Death Blow</span>
-    <input type="number" value="0" name="attr_combat_combined_deathblow"
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_combat_combined_deathblow"
   /></label>
 </div>
 
@@ -1382,9 +1394,9 @@
 
         <!-- endinject -->
         <hr />
-        <h4>Saving Throws</h4>
         <!-- inject:partials/combat_combined_saving_throws.html -->
-        <div class="combat-combined-bonuses">
+        <h4>Saving Throws</h4>
+<div class="combat-combined-bonuses">
   <label
     ><span>Perception</span>
     <input
@@ -4362,11 +4374,14 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
+   * @todo add MDC to Magic/Psionics
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min
-   * @todo add MDC to Magic/Psionics
    * @todo add Ammo/Uses to Combat, Magic
    * @todo when Aggregate Attacks change, recalculate ft/attack fields
+   * @todo add import status - add an attribute and update count on each callback, or just once at the end indicating completion
+   * @todo Import isn't setting Skill level properly, probably because it's already "1"
+   * @todo Skills list needs to be tighter - move Describe accordion to the end of the row?
    *
    * Questions
    * - Paratrooper gets a save vs. Torture. What is this?

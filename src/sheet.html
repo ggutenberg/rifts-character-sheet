@@ -117,7 +117,6 @@
         <!-- inject:partials/combat_combined_range.html -->
         <!-- endinject -->
         <hr />
-        <h4>Saving Throws</h4>
         <!-- inject:partials/combat_combined_saving_throws.html -->
         <!-- endinject -->
       </div>
@@ -207,11 +206,14 @@
   /* endinject */
 
   /**
+   * @todo add MDC to Magic/Psionics
    * @todo add tab for Powers/Abilities (like Psionics) - Skill %, Range, Duration, Damage, MDC,
    * - Regenerate | Damage: 1d6*5 | Duration: 1 min
-   * @todo add MDC to Magic/Psionics
    * @todo add Ammo/Uses to Combat, Magic
    * @todo when Aggregate Attacks change, recalculate ft/attack fields
+   * @todo add import status - add an attribute and update count on each callback, or just once at the end indicating completion
+   * @todo Import isn't setting Skill level properly, probably because it's already "1"
+   * @todo Skills list needs to be tighter - move Describe accordion to the end of the row?
    *
    * Questions
    * - Paratrooper gets a save vs. Torture. What is this?
