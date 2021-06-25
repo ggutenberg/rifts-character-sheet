@@ -4,6 +4,11 @@
   display: revert;
 }
 
+.charsheet .repcontainer[data-groupname="repeating_skills"] details,
+.charsheet .repcontainer[data-groupname="repeating_skills"] summary {
+  display: block;
+}
+
 .charsheet input,
 .charsheet textarea,
 .charsheet select,
@@ -23,6 +28,10 @@
 
 details {
   margin-bottom: 1rem;
+}
+
+.repcontainer[data-groupname="repeating_skills"] details {
+  margin-bottom: 0;
 }
 
 details summary {
@@ -141,7 +150,7 @@ img.logo {
   .values {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 1fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
+  grid-template-columns: 2.5rem 1fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
 }
 
 .charsheet .skills .repcontainer[data-groupname="repeating_skills"] .repitem h5,
@@ -208,6 +217,10 @@ img.logo {
   cursor: pointer;
 }
 
+.click-expand {
+  cursor: pointer;
+}
+
 .combat-combined-bonuses label,
 .charsheet
   .combat-container
@@ -248,6 +261,8 @@ img.logo {
 .spell-details label span {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 2px;
 }
 
 .charsheet main#megaverse .combat-container .combat-combined-bonuses input,
