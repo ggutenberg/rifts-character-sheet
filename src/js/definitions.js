@@ -565,7 +565,6 @@ const ABILITIES_KEYS = [
   "damage",
   "duration",
   "percentage",
-  "isp",
   "range_starting",
   "range_per_level",
   "range_units",
