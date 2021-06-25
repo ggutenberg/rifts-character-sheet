@@ -32,6 +32,7 @@ function calculateRangeDuration(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
+  console.log(attrNames);
   getAttrs(attrNames.concat(["character_level"]), (a) => {
     console.log(a);
     const value =
@@ -70,7 +71,7 @@ function calculateDamage(row) {
 }
 
 function updateMagicPsionicsLevels() {
-  ["magic", "psionics"].forEach((section) => {
+  ABILITIES_REPEATERS.forEach((section) => {
     getSectionIDs(section, (ids) => {
       ids.forEach((id) => {
         const row = `repeating_${section}_${id}`;
@@ -83,79 +84,57 @@ function updateMagicPsionicsLevels() {
   });
 }
 
-on(
-  "change:repeating_magic:damage_starting \
-  change:repeating_magic:damage_per_level \
-  change:repeating_magic:damage_unit \
-  change:repeating_psionics:damage_starting \
-  change:repeating_psionics:damage_per_level \
-  change:repeating_psionics:damage_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_damage`;
-    calculateDamage(row);
-  }
-);
+const nameListeners = ABILITIES_REPEATERS.map(
+  (repeater) => `change:repeating_${repeater}:name`
+).join(" ");
 
-on(
-  "change:repeating_magic:percentage_starting \
-  change:repeating_magic:percentage_per_level \
-  change:repeating_psionics:percentage_starting \
-  change:repeating_psionics:percentage_per_level",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_percentage`;
-    calculatePercentage(row);
-  }
-);
-on(
-  "change:repeating_magic:duration_starting \
-  change:repeating_magic:duration_per_level \
-  change:repeating_magic:duration_unit \
-  change:repeating_psionics:duration_starting \
-  change:repeating_psionics:duration_per_level \
-  change:repeating_psionics:duration_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_duration`;
-    calculateRangeDuration(row);
-  }
-);
+const damageListeners = ABILITIES_REPEATERS.reduce((acc, cur) => {
+  acc.push(`change:repeating_${cur}:damage_starting`);
+  acc.push(`change:repeating_${cur}:damage_unit`);
+  acc.push(`change:repeating_${cur}:damage_per_level`);
+  return acc;
+}, []).join(" ");
 
-on(
-  "change:repeating_magic:range_starting \
-  change:repeating_magic:range_per_level \
-  change:repeating_magic:range_unit \
-  change:repeating_psionics:range_starting \
-  change:repeating_psionics:range_per_level \
-  change:repeating_psionics:range_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_range`;
-    calculateRangeDuration(row);
-  }
-);
+const percentageListeners = ABILITIES_REPEATERS.reduce((acc, cur) => {
+  acc.push(`change:repeating_${cur}:percentage_starting`);
+  acc.push(`change:repeating_${cur}:percentage_per_level`);
+  return acc;
+}, []).join(" ");
 
-on(
-  "change:repeating_magic:dc_starting \
-  change:repeating_magic:dc_per_level \
-  change:repeating_magic:dc_unit \
-  change:repeating_psionics:dc_starting \
-  change:repeating_psionics:dc_per_level \
-  change:repeating_psionics:dc_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_dc`;
-    calculateRangeDuration(row);
-  }
-);
+const rangeDurationFrequencyDcListeners = ABILITIES_REPEATERS.reduce(
+  (acc, cur) => {
+    ["range", "duration", "frequency", "dc"].forEach((property) => {
+      acc.push(`change:repeating_${cur}:${property}_starting`);
+      acc.push(`change:repeating_${cur}:${property}_unit`);
+      acc.push(`change:repeating_${cur}:${property}_per_level`);
+    });
+    return acc;
+  },
+  []
+).join(" ");
 
-on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
+on(damageListeners, (e) => {
+  console.log(e);
+  const [r, section] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_damage`;
+  calculateDamage(row);
+});
+
+on(percentageListeners, (e) => {
+  console.log(e);
+  const [r, section] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_percentage`;
+  calculatePercentage(row);
+});
+
+on(rangeDurationFrequencyDcListeners, (e) => {
+  console.log(e);
+  const [r, section, rowId, property] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_${property}`;
+  calculateRangeDuration(row);
+});
+
+on(nameListeners, (e) => {
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const attrs = {};
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;

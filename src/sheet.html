@@ -1,6 +1,9 @@
 <main id="megaverse">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
+    <button class="metal linear" type="action" name="act_abilities">
+      Abilities
+    </button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
     <button class="metal linear" type="action" name="act_combat">Combat</button>
@@ -30,6 +33,9 @@
   <!-- endinject -->
 
   <br />
+
+  <!-- inject:partials/abilities.html -->
+  <!-- endinject -->
 
   <!-- inject:partials/weapon_proficiencies.html -->
   <!-- endinject -->
@@ -258,6 +264,7 @@
     "magic",
     "psionics",
     "importexport",
+    "abilities",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {

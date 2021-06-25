@@ -507,6 +507,8 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
+const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];
+
 const MAGIC_KEYS = [
   "name",
   "school",
@@ -522,6 +524,9 @@ const MAGIC_KEYS = [
   "damage_starting",
   "damage_per_level",
   "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
   "duration_starting",
   "duration_per_level",
   "duration_units",
@@ -543,9 +548,39 @@ const PSIONICS_KEYS = [
   "damage_starting",
   "damage_per_level",
   "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
   "duration_starting",
   "duration_per_level",
   "duration_units",
+  "percentage_starting",
+  "percentage_per_level",
+  "description",
+];
+
+const ABILITIES_KEYS = [
+  "name",
+  "range",
+  "damage",
+  "duration",
+  "percentage",
+  "isp",
+  "range_starting",
+  "range_per_level",
+  "range_units",
+  "damage_starting",
+  "damage_per_level",
+  "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
+  "duration_starting",
+  "duration_per_level",
+  "duration_units",
+  "frequency_starting",
+  "frequency_per_level",
+  "frequency_units",
   "percentage_starting",
   "percentage_per_level",
   "description",

@@ -1,6 +1,9 @@
 <main id="megaverse">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
+    <button class="metal linear" type="action" name="act_abilities">
+      Abilities
+    </button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
     <button class="metal linear" type="action" name="act_combat">Combat</button>
@@ -41,8 +44,19 @@
   <option value="minutes"></option>
   <option value="hours"></option>
   <option value="days"></option>
+  <option value="weeks"></option>
   <option value="months"></option>
   <option value="years"></option>
+</datalist>
+<datalist id="frequency-units">
+  <option value="per second"></option>
+  <option value="per melee"></option>
+  <option value="per minute"></option>
+  <option value="per hour"></option>
+  <option value="per day"></option>
+  <option value="per week"></option>
+  <option value="per month"></option>
+  <option value="per year"></option>
 </datalist>
 <datalist id="spell-schools">
   <option value="Invocation"></option>
@@ -542,6 +556,172 @@
   <!-- endinject -->
 
   <br />
+
+  <!-- inject:partials/abilities.html -->
+  <div class="abilities">
+  <h3>Natural Abilities / Powers</h3>
+  <details>
+    <summary><b>Instructions</b></summary>
+    <p>
+      Enter some natural abilities/powers that are neither magic nor psionic in
+      nature.
+    </p>
+    <p>
+      For Starting Damage and Damage per Level enter values that roll20 would
+      use for dice rolls. Ex. "4d6", "1d6", etc.
+    </p>
+    <p>
+      Don't forget to copy/paste the power description into the Description
+      field to make life easier for your GM. Also use that field for any macros
+      you may need like Strike with an arbitrary bonus.
+    </p>
+  </details>
+  <p>Click <b>Instructions</b> for detailed instructions.</p>
+  <fieldset class="repeating_abilities">
+    <details>
+      <summary>
+        <div class="abilities-list">
+          <h5>Info</h5>
+          <h5>Ability</h5>
+          <h5>Range</h5>
+          <h5>Duration</h5>
+          <h5>Frequency</h5>
+          <h5>Damage</h5>
+          <h5></h5>
+          <h5 title="Damage Capacity">D.C.</h5>
+          <h5>Skill</h5>
+          <h5></h5>
+          <b class="click-expand"
+            ><span title="Click for more info">&nbsp;&#9432;</span></b
+          >
+          <input type="text" value="" name="attr_name" />
+          <input type="text" value="0" name="attr_range" />
+          <input type="text" value="0" name="attr_duration" />
+          <input type="text" value="0" name="attr_frequency" />
+          <input type="text" value="0" name="attr_damage" />
+          <button
+            type="roll"
+            value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
+          />
+          <input type="text" value="0" name="attr_dc" />
+          <input type="number" value="0" name="attr_percentage" readonly />
+          <button
+            type="roll"
+            value="@{character_name} @{name} check: [[d100<@{percentage}]]"
+          />
+        </div>
+      </summary>
+      <div class="ability-details">
+        <label
+          ><span>Starting range</span
+          ><input type="number" value="0" name="attr_range_starting"
+        /></label>
+        <label
+          ><span>Range per level</span
+          ><input type="number" value="0" name="attr_range_per_level"
+        /></label>
+        <label
+          ><span>Range unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_range_unit"
+            list="distance-units"
+          />
+        </label>
+        <label
+          ><span>Starting duration</span
+          ><input type="number" value="0" name="attr_duration_starting"
+        /></label>
+        <label
+          ><span>Duration per level</span
+          ><input type="number" value="0" name="attr_duration_per_level"
+        /></label>
+        <label
+          ><span>Duration unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_duration_unit"
+            list="time-units"
+          />
+        </label>
+        <label
+          ><span>Starting frequency</span
+          ><input type="number" value="0" name="attr_frequency_starting"
+        /></label>
+        <label
+          ><span>Frequency per level</span
+          ><input type="number" value="0" name="attr_frequency_per_level"
+        /></label>
+        <label
+          ><span>Frequency unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_frequency_unit"
+            list="frequency-units"
+          />
+        </label>
+        <label
+          ><span>Starting damage</span
+          ><input type="text" value="0" name="attr_damage_starting"
+        /></label>
+        <label
+          ><span>Damage per level</span
+          ><input type="text" value="0" name="attr_damage_per_level"
+        /></label>
+        <label
+          ><span>Damage unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_damage_unit"
+            list="damage-units"
+          />
+        </label>
+        <label
+          ><span>Starting D.C.</span
+          ><input type="number" value="0" name="attr_dc_starting"
+        /></label>
+        <label
+          ><span>D.C. per level</span
+          ><input type="number" value="0" name="attr_dc_per_level"
+        /></label>
+        <label
+          ><span>D.C. unit</span
+          ><input
+            type="text"
+            value=""
+            name="attr_dc_unit"
+            list="damage-units"
+          />
+        </label>
+        <label
+          ><span>Starting skill %</span
+          ><input type="number" value="0" name="attr_percentage_starting"
+        /></label>
+        <label
+          ><span>Skill % per level</span
+          ><input type="number" value="0" name="attr_percentage_per_level"
+        /></label>
+        <label></label>
+      </div>
+      <label
+        ><b>Description</b>
+        <textarea class="full" name="attr_description" value=""></textarea>
+      </label>
+      <div class="macro-help">
+        <label
+          ><span><b>Row ID:</b></span>
+          <input type="text" readonly name="attr_rowid" value=""
+        /></label>
+      </div>
+    </details>
+  </fieldset>
+</div>
+
+  <!-- endinject -->
 
   <!-- inject:partials/weapon_proficiencies.html -->
   <div class="wp">
@@ -2856,6 +3036,8 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
 const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
+const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];
+
 const MAGIC_KEYS = [
   "name",
   "school",
@@ -2871,6 +3053,9 @@ const MAGIC_KEYS = [
   "damage_starting",
   "damage_per_level",
   "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
   "duration_starting",
   "duration_per_level",
   "duration_units",
@@ -2892,9 +3077,39 @@ const PSIONICS_KEYS = [
   "damage_starting",
   "damage_per_level",
   "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
   "duration_starting",
   "duration_per_level",
   "duration_units",
+  "percentage_starting",
+  "percentage_per_level",
+  "description",
+];
+
+const ABILITIES_KEYS = [
+  "name",
+  "range",
+  "damage",
+  "duration",
+  "percentage",
+  "isp",
+  "range_starting",
+  "range_per_level",
+  "range_units",
+  "damage_starting",
+  "damage_per_level",
+  "damage_units",
+  "dc_starting",
+  "dc_per_level",
+  "dc_units",
+  "duration_starting",
+  "duration_per_level",
+  "duration_units",
+  "frequency_starting",
+  "frequency_per_level",
+  "frequency_units",
   "percentage_starting",
   "percentage_per_level",
   "description",
@@ -4154,6 +4369,7 @@ function calculateRangeDuration(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
+  console.log(attrNames);
   getAttrs(attrNames.concat(["character_level"]), (a) => {
     console.log(a);
     const value =
@@ -4192,7 +4408,7 @@ function calculateDamage(row) {
 }
 
 function updateMagicPsionicsLevels() {
-  ["magic", "psionics"].forEach((section) => {
+  ABILITIES_REPEATERS.forEach((section) => {
     getSectionIDs(section, (ids) => {
       ids.forEach((id) => {
         const row = `repeating_${section}_${id}`;
@@ -4205,79 +4421,57 @@ function updateMagicPsionicsLevels() {
   });
 }
 
-on(
-  "change:repeating_magic:damage_starting \
-  change:repeating_magic:damage_per_level \
-  change:repeating_magic:damage_unit \
-  change:repeating_psionics:damage_starting \
-  change:repeating_psionics:damage_per_level \
-  change:repeating_psionics:damage_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_damage`;
-    calculateDamage(row);
-  }
-);
+const nameListeners = ABILITIES_REPEATERS.map(
+  (repeater) => `change:repeating_${repeater}:name`
+).join(" ");
 
-on(
-  "change:repeating_magic:percentage_starting \
-  change:repeating_magic:percentage_per_level \
-  change:repeating_psionics:percentage_starting \
-  change:repeating_psionics:percentage_per_level",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_percentage`;
-    calculatePercentage(row);
-  }
-);
-on(
-  "change:repeating_magic:duration_starting \
-  change:repeating_magic:duration_per_level \
-  change:repeating_magic:duration_unit \
-  change:repeating_psionics:duration_starting \
-  change:repeating_psionics:duration_per_level \
-  change:repeating_psionics:duration_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_duration`;
-    calculateRangeDuration(row);
-  }
-);
+const damageListeners = ABILITIES_REPEATERS.reduce((acc, cur) => {
+  acc.push(`change:repeating_${cur}:damage_starting`);
+  acc.push(`change:repeating_${cur}:damage_unit`);
+  acc.push(`change:repeating_${cur}:damage_per_level`);
+  return acc;
+}, []).join(" ");
 
-on(
-  "change:repeating_magic:range_starting \
-  change:repeating_magic:range_per_level \
-  change:repeating_magic:range_unit \
-  change:repeating_psionics:range_starting \
-  change:repeating_psionics:range_per_level \
-  change:repeating_psionics:range_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_range`;
-    calculateRangeDuration(row);
-  }
-);
+const percentageListeners = ABILITIES_REPEATERS.reduce((acc, cur) => {
+  acc.push(`change:repeating_${cur}:percentage_starting`);
+  acc.push(`change:repeating_${cur}:percentage_per_level`);
+  return acc;
+}, []).join(" ");
 
-on(
-  "change:repeating_magic:dc_starting \
-  change:repeating_magic:dc_per_level \
-  change:repeating_magic:dc_unit \
-  change:repeating_psionics:dc_starting \
-  change:repeating_psionics:dc_per_level \
-  change:repeating_psionics:dc_unit",
-  (e) => {
-    console.log(e);
-    const [r, section] = e.sourceAttribute.split("_");
-    const row = `${r}_${section}_dc`;
-    calculateRangeDuration(row);
-  }
-);
+const rangeDurationFrequencyDcListeners = ABILITIES_REPEATERS.reduce(
+  (acc, cur) => {
+    ["range", "duration", "frequency", "dc"].forEach((property) => {
+      acc.push(`change:repeating_${cur}:${property}_starting`);
+      acc.push(`change:repeating_${cur}:${property}_unit`);
+      acc.push(`change:repeating_${cur}:${property}_per_level`);
+    });
+    return acc;
+  },
+  []
+).join(" ");
 
-on("change:repeating_magic:name change:repeating_psionics:name", (e) => {
+on(damageListeners, (e) => {
+  console.log(e);
+  const [r, section] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_damage`;
+  calculateDamage(row);
+});
+
+on(percentageListeners, (e) => {
+  console.log(e);
+  const [r, section] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_percentage`;
+  calculatePercentage(row);
+});
+
+on(rangeDurationFrequencyDcListeners, (e) => {
+  console.log(e);
+  const [r, section, rowId, property] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_${property}`;
+  calculateRangeDuration(row);
+});
+
+on(nameListeners, (e) => {
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const attrs = {};
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;
@@ -4488,6 +4682,7 @@ on("change:repeating_movement:ft_melee", (e) => {
     "magic",
     "psionics",
     "importexport",
+    "abilities",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {

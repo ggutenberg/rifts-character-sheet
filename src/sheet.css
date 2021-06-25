@@ -4,6 +4,8 @@
   display: revert;
 }
 
+.charsheet .repcontainer[data-groupname="repeating_abilities"] details,
+.charsheet .repcontainer[data-groupname="repeating_abilities"] summary,
 .charsheet .repcontainer[data-groupname="repeating_skills"] details,
 .charsheet .repcontainer[data-groupname="repeating_skills"] summary {
   display: block;
@@ -30,6 +32,7 @@ details {
   margin-bottom: 1rem;
 }
 
+.repcontainer[data-groupname="repeating_abilities"] details,
 .repcontainer[data-groupname="repeating_skills"] details {
   margin-bottom: 0;
 }
@@ -50,6 +53,7 @@ details summary {
 .psionics,
 .importexport,
 .bonuses,
+.abilities,
 .combat {
   display: none;
 }
@@ -63,6 +67,7 @@ details summary {
 .tabstoggle[value="psionics"] ~ div.psionics,
 .tabstoggle[value="importexport"] ~ div.importexport,
 .tabstoggle[value="bonuses"] ~ div.bonuses,
+.tabstoggle[value="abilities"] ~ div.abilities,
 .tabstoggle[value="combat"] ~ div.combat {
   display: block;
 }
@@ -144,6 +149,16 @@ img.logo {
 }
 
 .charsheet
+  .abilities
+  .repcontainer[data-groupname="repeating_abilities"]
+  .repitem
+  .abilities-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 2.5rem 1fr 5rem 8rem 10rem 8rem 4rem 8rem 4rem 4rem;
+}
+
+.charsheet
   .skills
   .repcontainer[data-groupname="repeating_skills"]
   .repitem
@@ -186,6 +201,7 @@ img.logo {
 .charsheet .repeating-movement .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .magic .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .skills .repcontainer .repitem:not(:first-of-type) h5,
+.charsheet .abilities .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {
   display: none;
 }
@@ -219,6 +235,8 @@ img.logo {
 
 .click-expand {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .combat-combined-bonuses label,
@@ -393,6 +411,11 @@ img.logo {
 }
 
 .charsheet
+  .abilities
+  .repcontainer[data-groupname="repeating_abilities"]
+  .repitem
+  .ability-details,
+.charsheet
   .psionics
   .repcontainer[data-groupname="repeating_psionics"]
   .repitem
@@ -402,9 +425,10 @@ img.logo {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.ability-details label,
 .psionic-details label {
   display: grid;
-  grid-template-columns: 1fr min-content;
+  grid-template-columns: 1fr 12rem;
   width: 100%;
 }
 
