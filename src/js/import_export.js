@@ -93,8 +93,8 @@
           delete data.wpmodern;
           setRepeatingRows("skills", data.skills, () => {
             delete data.skills;
-            setRepeatingRows("combat", data.combat, () => {
-              delete data.combat;
+            setRepeatingRows("modifiers", data.modifiers, () => {
+              delete data.modifiers;
               setRepeatingRows("magic", data.magic, () => {
                 delete data.magic;
                 setRepeatingRows("psionics", data.psionics, () => {

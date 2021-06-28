@@ -6,7 +6,9 @@
     </button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
-    <button class="metal linear" type="action" name="act_combat">Combat</button>
+    <button class="metal linear" type="action" name="act_combat">
+      Modifiers
+    </button>
     <button class="metal linear" type="action" name="act_bonuses">
       Bonuses
     </button>
@@ -768,9 +770,9 @@
 
   <!-- endinject -->
 
-  <div class="combat">
-    <div class="combat-container">
-      <h3>Combat Modifiers</h3>
+  <div class="modifiers">
+    <div class="bonuses-container">
+      <h3>Modifiers</h3>
       <details>
         <summary><b>Instructions</b></summary>
         <p>
@@ -791,11 +793,11 @@
         </p>
       </details>
       <p>Click <b>Instructions</b> for detailed instructions.</p>
-      <fieldset class="repeating_combat">
+      <fieldset class="repeating_modifiers">
         <input type="hidden" name="attr_bonus_id" value="" />
         <div class="bonus-thing-heading">
           <label
-            ><span>Thing</span>
+            ><span>Modifier</span>
             <input type="text" list="combat-modifiers" name="attr_name" />
           </label>
           <label
@@ -1145,7 +1147,7 @@
   </div>
 
   <div class="bonuses">
-    <div class="combat-container">
+    <div class="bonuses-container">
       <h3>Aggregated Bonuses</h3>
       <div class="combat-combined">
         <details>
@@ -1761,7 +1763,7 @@
 
         <!-- endinject -->
       </div>
-      <div class="hidden">
+      <div class="">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <div class="bonus-type-container">
@@ -3193,7 +3195,8 @@ const SECTIONS = {
   wp: WP_KEYS.wp,
   wpmodern: WP_KEYS.wpmodern,
   skills: SKILL_KEYS,
-  combat: COMBAT_SAVE_KEYS,
+  combat: COMBAT_SAVE_KEYS, // deprecated
+  modifiers: COMBAT_SAVE_KEYS,
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
@@ -3817,35 +3820,6 @@ function combineCombat(rowIds) {
   );
 }
 
-function addThingToBonuses(section, rowId) {
-  console.log("addThingToBonuses", section, rowId);
-  if (!section || !rowId) {
-    return;
-  }
-
-  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
-  const thingAttrs = COMBAT_SAVE_KEYS.map(
-    (key) => `repeating_${section}_${rowId}_${key}`
-  );
-  thingAttrs.push(thingBonusId);
-  getAttrs(thingAttrs, (a) => {
-    console.log(a);
-    const attrs = {};
-    let bonusRowId;
-    if (a[thingBonusId]) {
-      bonusRowId = a[thingBonusId];
-    } else {
-      bonusRowId = generateRowID();
-      attrs[thingBonusId] = bonusRowId;
-    }
-    COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
-        a[`repeating_${section}_${rowId}_${key}`] || 0;
-    });
-    setAttrs(attrs);
-  });
-}
-
 function addWpToBonuses(section, rowId, wpName) {
   console.log("addWpToBonuses", section, rowId);
   if (!section || !rowId || !wpName) {
@@ -3873,15 +3847,6 @@ function addWpToBonuses(section, rowId, wpName) {
     setAttrs(attrs);
   });
 }
-
-on("change:repeating_combat", (e) => {
-  console.log("change:repeating_combat", e);
-  const sourceParts = e.sourceAttribute.split("_");
-  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
-  const [r, section, rowId] = sourceParts;
-  addThingToBonuses(section, rowId);
-  setAttrs({ [`repeating_combat_rowid`]: `repeating_combat_${rowId}_` });
-});
 
 /**
  * This function assumes its indices match up with bonusselections indices.
@@ -3945,13 +3910,6 @@ on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
   removeBonusRows(bonusRowId);
 });
 
-on("remove:repeating_combat", (e) => {
-  console.log("remove:repeating_combat", e);
-  // remove repeating_bonusselections row with the same index
-  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  removeBonusRows(bonusRowId);
-});
-
 on("remove:repeating_bonuses", (e) => {
   console.log("remove:repeating_bonuses", e);
   // remove repeating_selections row with the same index
@@ -3997,6 +3955,61 @@ on("change:repeating_bonusselections:enabled change:repeating_bonuses", (e) => {
     e
   );
   aggregateBonuses();
+});
+
+  /* endinject */
+
+  /* inject:js/modifiers.js */
+  /**
+ * User adds a thing to repeating_modifiers
+ * -> addModifierToBonuses
+ * -> triggers "change:repeating_bonuses:name"
+ * -> addBonusToSelections
+ */
+
+function addModifierToBonuses(section, rowId) {
+  console.log("addThingToBonuses", section, rowId);
+  if (!section || !rowId) {
+    return;
+  }
+
+  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
+  const thingAttrs = COMBAT_SAVE_KEYS.map(
+    (key) => `repeating_${section}_${rowId}_${key}`
+  );
+  thingAttrs.push(thingBonusId);
+  getAttrs(thingAttrs, (a) => {
+    console.log(a);
+    const attrs = {};
+    let bonusRowId;
+    if (a[thingBonusId]) {
+      bonusRowId = a[thingBonusId];
+    } else {
+      bonusRowId = generateRowID();
+      attrs[thingBonusId] = bonusRowId;
+    }
+    COMBAT_SAVE_KEYS.forEach((key) => {
+      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
+        a[`repeating_${section}_${rowId}_${key}`] || 0;
+    });
+    setAttrs(attrs);
+  });
+}
+
+on("change:repeating_modifiers", (e) => {
+  console.log("change:repeating_modifiers", e);
+  const sourceParts = e.sourceAttribute.split("_");
+  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
+  const [r, section, rowId] = sourceParts;
+  addModifierToBonuses(section, rowId);
+  setAttrs({ [`repeating_modifiers_rowid`]: `repeating_modifiers_${rowId}_` });
+});
+
+on("remove:repeating_modifiers", (e) => {
+  console.log("remove:repeating_modifiers", e);
+  // remove repeating_bonusselections row with the same index
+  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+  removeBonusRows(bonusRowId);
 });
 
   /* endinject */
@@ -4606,8 +4619,8 @@ on("change:repeating_movement:ft_melee", (e) => {
           delete data.wpmodern;
           setRepeatingRows("skills", data.skills, () => {
             delete data.skills;
-            setRepeatingRows("combat", data.combat, () => {
-              delete data.combat;
+            setRepeatingRows("modifiers", data.modifiers, () => {
+              delete data.modifiers;
               setRepeatingRows("magic", data.magic, () => {
                 delete data.magic;
                 setRepeatingRows("psionics", data.psionics, () => {
