@@ -4629,6 +4629,20 @@ on("change:repeating_movement:ft_melee", (e) => {
   /* endinject */
 
   /**
+   * Add attributes, PS type, ISP, PPE, HP, SDC, MDC, etc. to Bonuses
+   * Make Bonus Selections repeatable - each has its own aggregate bonuses, to allow for different character "profiles"
+   *
+   * Change repeating_combat to repeating_modifiers, and tab Combat to Modifiers
+   *
+   * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
+   *    modifies PS type, modifies PPE
+   * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
+   * @todo Psionics - include checkbox beside each psionic to add it as a row on the Combat tab
+   * @todo Armor tab / repeater; Armor checkboxes in Aggregate Bonuses, and Armor list (name, MDC) underneath
+   *    Aggregate Bonuses checkboxes that show and hide based on the check
+   *    - Magic and Psionics also provide armor. so you have to add the spell and then have a button to add it to the Armor tab
+   *      Hitting "cast" should use up the PPE and check the checkbox. This should also apply to spell which have a duration and provide bonuses.
+   *      Buttons: Cast | Cast and add to modifiers | Cast and add to armor
    * @todo add Ammo/Uses to Combat, Magic
    * @todo add import status - add an attribute and update count on each callback, or just once at the end indicating completion
    *
@@ -4645,10 +4659,6 @@ on("change:repeating_movement:ft_melee", (e) => {
    *    - track ammo (roll20 has something for this)
    *    - track MDC - for each aggregate MDC modifier, track it separately in a repeater. allow the user to reorder, and deduct from bottom to top
    *
-   * @todo Magic - include checkbox beside each spell to add it as a row on the Combat tab
-   * @todo Psionics - include checkbox beside each psionic to add it as a row on the Combat tab
-   * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
-   *    modifies PS type,
    * @todo combat row `level` needs to populate when `skill` does
    * @todo combat row `level` needs to adjust with Character level like WPs do
    *
