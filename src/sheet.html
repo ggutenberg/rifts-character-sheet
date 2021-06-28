@@ -6,7 +6,9 @@
     </button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
-    <button class="metal linear" type="action" name="act_combat">Combat</button>
+    <button class="metal linear" type="action" name="act_combat">
+      Modifiers
+    </button>
     <button class="metal linear" type="action" name="act_bonuses">
       Bonuses
     </button>
@@ -42,7 +44,7 @@
 
   <div class="combat">
     <div class="combat-container">
-      <h3>Combat Modifiers</h3>
+      <h3>Modifiers</h3>
       <details>
         <summary><b>Instructions</b></summary>
         <p>
@@ -63,11 +65,11 @@
         </p>
       </details>
       <p>Click <b>Instructions</b> for detailed instructions.</p>
-      <fieldset class="repeating_combat">
+      <fieldset class="repeating_modifiers">
         <input type="hidden" name="attr_bonus_id" value="" />
         <div class="bonus-thing-heading">
           <label
-            ><span>Thing</span>
+            ><span>Modifier</span>
             <input type="text" list="combat-modifiers" name="attr_name" />
           </label>
           <label
@@ -126,7 +128,7 @@
         <!-- inject:partials/combat_combined_saving_throws.html -->
         <!-- endinject -->
       </div>
-      <div class="hidden">
+      <div class="">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <div class="bonus-type-container">
@@ -194,6 +196,9 @@
   /* endinject */
 
   /* inject:js/combat.js */
+  /* endinject */
+
+  /* inject:js/modifiers.js */
   /* endinject */
 
   /* inject:js/attributes.js */

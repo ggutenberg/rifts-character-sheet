@@ -242,7 +242,7 @@ img.logo {
 .combat-combined-bonuses label,
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem
   label,
 .charsheet
@@ -257,7 +257,7 @@ img.logo {
 
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem
   label.description {
   display: block;
@@ -265,7 +265,7 @@ img.logo {
 
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem
   label
   span,
@@ -289,7 +289,7 @@ img.logo {
   width: 5rem;
 }
 
-.charsheet
+/* .charsheet
   .bonuses
   .repcontainer[data-groupname="repeating_bonusselections"]
   button.repcontrol_del,
@@ -298,12 +298,12 @@ img.logo {
   .repcontrol[data-groupname="repeating_bonusselections"]
   button.repcontrol_add {
   display: none !important;
-}
+} */
 
 .charsheet .combat-container .combat-combined-bonuses,
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem
   .bonus-type-container,
 .charsheet
@@ -331,7 +331,7 @@ img.logo {
 
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem:not(:last-of-type),
 .charsheet
   .combat-container
@@ -355,7 +355,7 @@ img.logo {
   label,
 .charsheet
   .combat-container
-  .repcontainer[data-groupname="repeating_combat"]
+  .repcontainer[data-groupname="repeating_modifiers"]
   .repitem
   .macro-help
   label,

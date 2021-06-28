@@ -327,35 +327,6 @@ function combineCombat(rowIds) {
   );
 }
 
-function addThingToBonuses(section, rowId) {
-  console.log("addThingToBonuses", section, rowId);
-  if (!section || !rowId) {
-    return;
-  }
-
-  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
-  const thingAttrs = COMBAT_SAVE_KEYS.map(
-    (key) => `repeating_${section}_${rowId}_${key}`
-  );
-  thingAttrs.push(thingBonusId);
-  getAttrs(thingAttrs, (a) => {
-    console.log(a);
-    const attrs = {};
-    let bonusRowId;
-    if (a[thingBonusId]) {
-      bonusRowId = a[thingBonusId];
-    } else {
-      bonusRowId = generateRowID();
-      attrs[thingBonusId] = bonusRowId;
-    }
-    COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
-        a[`repeating_${section}_${rowId}_${key}`] || 0;
-    });
-    setAttrs(attrs);
-  });
-}
-
 function addWpToBonuses(section, rowId, wpName) {
   console.log("addWpToBonuses", section, rowId);
   if (!section || !rowId || !wpName) {
@@ -383,15 +354,6 @@ function addWpToBonuses(section, rowId, wpName) {
     setAttrs(attrs);
   });
 }
-
-on("change:repeating_combat", (e) => {
-  console.log("change:repeating_combat", e);
-  const sourceParts = e.sourceAttribute.split("_");
-  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
-  const [r, section, rowId] = sourceParts;
-  addThingToBonuses(section, rowId);
-  setAttrs({ [`repeating_combat_rowid`]: `repeating_combat_${rowId}_` });
-});
 
 /**
  * This function assumes its indices match up with bonusselections indices.
@@ -451,13 +413,6 @@ function removeBonusRows(bonusRowId, callback = null) {
 on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
   console.log("remove wp", e);
   // const [r, section, rowId] = e.sourceAttribute.split('_');
-  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  removeBonusRows(bonusRowId);
-});
-
-on("remove:repeating_combat", (e) => {
-  console.log("remove:repeating_combat", e);
-  // remove repeating_bonusselections row with the same index
   const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
   removeBonusRows(bonusRowId);
 });
