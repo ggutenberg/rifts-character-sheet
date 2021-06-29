@@ -116,7 +116,6 @@
           ></label>
           <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_bonus_id" value="" />
-          <input type="hidden" name="attr_bonus_section" value="" />
         </fieldset>
         <hr />
         <!-- inject:partials/combat_combined_melee.html -->
@@ -132,7 +131,7 @@
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <div class="bonus-type-container">
-            <input type="hidden" name="attr_bonus_selection_id" value="" />
+            <input type="hidden" name="attr_selection_id" value="" />
             <label
               ><span>Skill</span>
               <input type="text" list="combat-modifiers" name="attr_name" />
@@ -195,7 +194,10 @@
   /* inject:js/utils.js */
   /* endinject */
 
-  /* inject:js/combat.js */
+  /* inject:js/bonuses.js */
+  /* endinject */
+
+  /* inject:js/wps.js */
   /* endinject */
 
   /* inject:js/modifiers.js */

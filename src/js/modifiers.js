@@ -6,7 +6,7 @@
  */
 
 function addModifierToBonuses(section, rowId) {
-  console.log("addThingToBonuses", section, rowId);
+  console.log("addModifierToBonuses", section, rowId);
   if (!section || !rowId) {
     return;
   }
@@ -37,10 +37,20 @@ function addModifierToBonuses(section, rowId) {
 on("change:repeating_modifiers", (e) => {
   console.log("change:repeating_modifiers", e);
   const sourceParts = e.sourceAttribute.split("_");
-  if (e.sourceAttribute.endsWith("_bonus_id") || sourceParts.length < 4) return;
+  if (
+    e.sourceAttribute.endsWith("_bonus_id") ||
+    e.sourceAttribute.endsWith("_rowid") ||
+    sourceParts.length < 4
+  ) {
+    return;
+  }
   const [r, section, rowId] = sourceParts;
-  addModifierToBonuses(section, rowId);
-  setAttrs({ [`repeating_modifiers_rowid`]: `repeating_modifiers_${rowId}_` });
+  //   addModifierToBonuses(section, rowId);
+  setAttrs(
+    { [`repeating_modifiers_rowid`]: `repeating_modifiers_${rowId}_` },
+    {},
+    () => addModifierToBonuses(section, rowId)
+  );
 });
 
 on("remove:repeating_modifiers", (e) => {

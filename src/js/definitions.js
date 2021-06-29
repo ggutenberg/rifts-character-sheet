@@ -447,7 +447,7 @@ const WP_KEYS = {
 };
 
 const COMBAT_KEYS = [
-  "selection_id",
+  // "selection_id",
   "name",
   "level",
   "attacks",

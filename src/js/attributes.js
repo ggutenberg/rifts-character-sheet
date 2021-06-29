@@ -5,6 +5,7 @@ on("change:iq", (e) => {
 });
 
 on("change:me change:pp change:pe", (e) => {
+  console.log("change:me change:pp change:pe");
   const bonus = getBiAttributeBonus(e.newValue);
   const attrs = {};
   attrs[`${e.sourceAttribute}_bonus`] = bonus;
