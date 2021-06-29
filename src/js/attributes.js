@@ -35,10 +35,10 @@ on("change:ma", (e) => {
   setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
 });
 
-on("change:ps change:ps_type", (e) => {
-  getAttrs(["ps", "ps_type"], (a) => {
+on("change:ps change:character_ps_type", (e) => {
+  getAttrs(["ps", "character_ps_type"], (a) => {
     const ps = a.ps;
-    const ps_type = a.ps_type;
+    const ps_type = a.character_ps_type;
     const ps_bonus = ps > 15 ? ps - 15 : 0;
 
     let restrained_punch = (punch = power_punch = kick = leap_kick = "");

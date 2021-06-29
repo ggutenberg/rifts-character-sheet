@@ -5,22 +5,14 @@
 .charsheet summary {
   display: revert;
 }
-.charsheet details {
-  margin-bottom: 1rem;
-}
-.charsheet details summary {
-  cursor: pointer;
-}
+
 .charsheet .repcontainer[data-groupname=repeating_abilities] details,
 .charsheet .repcontainer[data-groupname=repeating_abilities] summary,
 .charsheet .repcontainer[data-groupname=repeating_skills] details,
 .charsheet .repcontainer[data-groupname=repeating_skills] summary {
   display: block;
 }
-.charsheet .repcontainer[data-groupname=repeating_abilities] details,
-.charsheet .repcontainer[data-groupname=repeating_skills] details {
-  margin-bottom: 0;
-}
+
 .charsheet input,
 .charsheet textarea,
 .charsheet select,
@@ -28,67 +20,27 @@
   width: auto;
   margin-bottom: 0;
 }
+
 .charsheet main#megaverse input[type=number] {
   width: auto;
 }
+
 .charsheet main#megaverse label {
   margin-bottom: 0;
   font-size: 1.3rem;
 }
-.charsheet main#megaverse .bonuses-container .combat-combined-bonuses {
-  margin-top: 1rem;
+
+details {
   margin-bottom: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+.repcontainer[data-groupname=repeating_abilities] details,
+.repcontainer[data-groupname=repeating_skills] details {
+  margin-bottom: 0;
 }
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label {
-  display: grid;
-  grid-template-columns: 1fr min-content 4rem;
-  width: 100%;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.select,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.select {
-  grid-template-columns: max-content 1fr 4rem;
-  align-items: center;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .macro-help label,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .macro-help label {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 7fr;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.description,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.description {
-  display: block;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-thing-heading,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-thing-heading {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 3fr 1fr;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-thing-heading label,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-thing-heading label {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: max-content 1fr;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.abs,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.abs {
-  align-items: center;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.abs input[type=checkbox],
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.abs input[type=checkbox] {
-  width: 1rem;
-  margin: 0 0.5rem;
+
+details summary {
+  cursor: pointer;
 }
 
 /* End Resets */
@@ -264,10 +216,16 @@ img.logo {
   align-items: center;
 }
 
-.combat-combined-bonuses label {
+.combat-combined-bonuses label,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label {
   display: grid;
   grid-template-columns: 1fr min-content 4rem;
   width: 100%;
+}
+
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.description {
+  display: block;
 }
 
 .charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label span,
@@ -297,9 +255,61 @@ img.logo {
   button.repcontrol_add {
   display: none !important;
 } */
+.charsheet .bonuses-container .repcontainer .repitem .bonus-attributes-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.charsheet .bonuses-container .repcontainer .repitem .bonus-attributes-container div {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  width: 100%;
+}
+
+.charsheet .bonuses-container .repcontainer .repitem .bonus-attributes-container label {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  width: 100%;
+}
+
+.charsheet .bonuses-container .combat-combined-bonuses,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.charsheet .bonuses-container .repcontainer .repitem .bonus-thing-heading label {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: max-content 1fr;
+}
+
+.charsheet .bonuses-container .repcontainer .repitem .bonus-thing-heading {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 3fr 1fr;
+}
+
 .charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem:not(:last-of-type),
 .charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem:not(:last-of-type) {
   margin-bottom: 1rem;
+}
+
+.charsheet .repcontainer .repitem .macro-help label,
+.charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .macro-help label,
+.charsheet .psionics .repcontainer[data-groupname=repeating_psionics] .repitem .macro-help label,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .macro-help label,
+.charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .macro-help label {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 7fr;
 }
 
 .charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .spells-list {
@@ -356,16 +366,16 @@ img.logo {
 /* Metal Buttons */
 /*****************/
 .dialog.characterviewer {
-  background-color: #e6e6e6;
-  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  background-color: hsla(0, 0%, 90%, 1);
+  background-image: linear-gradient(-45deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.05));
   background-size: 5px;
 }
 
 /* globals */
 html {
   font: 62.5%/1 "Droid Sans", "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
-  background-color: #e6e6e6;
-  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  background-color: hsla(0, 0%, 90%, 1);
+  background-image: linear-gradient(-45deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.05));
   background-size: 5px;
 }
 
@@ -385,10 +395,10 @@ a {
   outline: none;
   font: bold 6em/2em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   text-align: center;
-  color: #333333;
-  text-shadow: rgba(102, 102, 102, 0.5) 0 -1px 0, rgba(255, 255, 255, 0.6) 0 2px 1px;
-  background-color: #e6e6e6;
-  box-shadow: inset #262626 0 0px 0px 1px, inset rgba(38, 38, 38, 0.8) 0 -1px 5px 1px, inset rgba(0, 0, 0, 0.25) 0 -1px 0px 2px, inset rgba(255, 255, 255, 0.7) 0 2px 1px 1px, rgba(0, 0, 0, 0.15) 0 -5px 6px -2px, rgba(255, 255, 255, 0.5) 0 5px 6px 4px;
+  color: hsla(0, 0%, 20%, 1);
+  text-shadow: hsla(0, 0%, 40%, 0.5) 0 -1px 0, hsla(0, 0%, 100%, 0.6) 0 2px 1px;
+  background-color: hsl(0, 0%, 90%);
+  box-shadow: inset hsla(0, 0%, 15%, 1) 0 0px 0px 1px, inset hsla(0, 0%, 15%, 0.8) 0 -1px 5px 1px, inset hsla(0, 0%, 0%, 0.25) 0 -1px 0px 2px, inset hsla(0, 0%, 100%, 0.7) 0 2px 1px 1px, hsla(0, 0%, 0%, 0.15) 0 -5px 6px -2px, hsla(0, 0%, 100%, 0.5) 0 5px 6px 4px;
   /* outer HL */
   transition: color 0.2s;
 }
@@ -399,7 +409,7 @@ a {
   height: 160px;
   line-height: 160px;
   border-radius: 80px;
-  background-image: -webkit-radial-gradient(50% 0%, 8% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%), -webkit-radial-gradient(50% 100%, 12% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%), -webkit-radial-gradient(0% 50%, 50% 7%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%), -webkit-radial-gradient(100% 50%, 50% 5%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 3%, rgba(0, 0, 0, 0.1) 3.5%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 6%, rgba(255, 255, 255, 0.1) 7.5%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 1.2%, rgba(255, 255, 255, 0.2) 2.2%), -webkit-radial-gradient(50% 50%, 200% 50%, #e6e6e6 5%, #d9d9d9 30%, #999999 100%);
+  background-image: -webkit-radial-gradient(50% 0%, 8% 50%, hsla(0, 0%, 100%, 0.5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient(50% 100%, 12% 50%, hsla(0, 0%, 100%, 0.6) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient(0% 50%, 50% 7%, hsla(0, 0%, 100%, 0.5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient(100% 50%, 50% 5%, hsla(0, 0%, 100%, 0.5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0) 3%, hsla(0, 0%, 0%, 0.1) 3.5%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 6%, hsla(0, 0%, 100%, 0.1) 7.5%), -webkit-repeating-radial-gradient(50% 50%, 100% 100%, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, 0.2) 2.2%), -webkit-radial-gradient(50% 50%, 200% 50%, hsla(0, 0%, 90%, 1) 5%, hsla(0, 0%, 85%, 1) 30%, hsla(0, 0%, 60%, 1) 100%);
 }
 
 .metal.radial:before,
@@ -412,7 +422,7 @@ a {
   height: inherit;
   border-radius: inherit;
   /* fake conical gradients */
-  background-image: -webkit-radial-gradient(50% 0%, 10% 50%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%), -webkit-radial-gradient(50% 100%, 10% 50%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%), -webkit-radial-gradient(0% 50%, 50% 10%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%), -webkit-radial-gradient(100% 50%, 50% 6%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -webkit-radial-gradient(50% 0%, 10% 50%, hsla(0, 0%, 0%, 0.1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient(50% 100%, 10% 50%, hsla(0, 0%, 0%, 0.1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient(0% 50%, 50% 10%, hsla(0, 0%, 0%, 0.1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient(100% 50%, 50% 6%, hsla(0, 0%, 0%, 0.1) 0%, hsla(0, 0%, 0%, 0) 100%);
 }
 
 .metal.radial:before {
@@ -430,7 +440,7 @@ a {
   font-size: 1.1em;
   height: 40px;
   border-radius: 0.5em;
-  background-image: -webkit-repeating-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 6%, rgba(255, 255, 255, 0.1) 7.5%), -webkit-repeating-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, 0.03) 4.5%), -webkit-repeating-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 1.2%, rgba(255, 255, 255, 0.15) 2.2%), linear-gradient(180deg, #c7c7c7 0%, #e6e6e6 47%, #c7c7c7 53%, #b3b3b3 100%);
+  background-image: -webkit-repeating-linear-gradient(left, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 6%, hsla(0, 0%, 100%, 0.1) 7.5%), -webkit-repeating-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0) 4%, hsla(0, 0%, 0%, 0.03) 4.5%), -webkit-repeating-linear-gradient(left, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, 0.15) 2.2%), linear-gradient(180deg, hsl(0, 0%, 78%) 0%, hsl(0, 0%, 90%) 47%, hsl(0, 0%, 78%) 53%, hsl(0, 0%, 70%) 100%);
 }
 
 /* Oval ------------------------- */
@@ -445,8 +455,10 @@ a {
 
 /* active ------------------------- */
 .metal:active {
-  color: #0066cc;
-  text-shadow: rgba(0, 51, 102, 0.3) 0 -1px 0, #b3d9ff 0 2px 1px, #99ddff 0 0 5px, rgba(0, 128, 255, 0.6) 0 0 20px;
-  box-shadow: inset #004d99 0 0px 0px 4px, inset rgba(0, 38, 77, 0.4) 0 -1px 5px 4px, inset rgba(0, 51, 102, 0.25) 0 -1px 0px 7px, inset rgba(255, 255, 255, 0.7) 0 2px 1px 7px, rgba(128, 191, 255, 0.8) 0 0px 3px 2px, rgba(51, 102, 153, 0.25) 0 -5px 6px 4px, #e8f2fc 0 5px 6px 4px;
+  color: hsl(210, 100%, 40%);
+  text-shadow: hsla(210, 100%, 20%, 0.3) 0 -1px 0, hsl(210, 100%, 85%) 0 2px 1px, hsla(200, 100%, 80%, 1) 0 0 5px, hsla(210, 100%, 50%, 0.6) 0 0 20px;
+  box-shadow: inset hsla(210, 100%, 30%, 1) 0 0px 0px 4px, inset hsla(210, 100%, 15%, 0.4) 0 -1px 5px 4px, inset hsla(210, 100%, 20%, 0.25) 0 -1px 0px 7px, inset hsla(210, 100%, 100%, 0.7) 0 2px 1px 7px, hsla(210, 100%, 75%, 0.8) 0 0px 3px 2px, hsla(210, 50%, 40%, 0.25) 0 -5px 6px 4px, hsla(210, 80%, 95%, 1) 0 5px 6px 4px;
   /* outer HL */
 }
+
+/*# sourceMappingURL=sheet.css.map */

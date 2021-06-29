@@ -3,6 +3,7 @@ const replace = require("gulp-replace");
 const del = require("del");
 const tap = require("gulp-tap");
 const inject = require("gulp-inject");
+const sass = require("gulp-sass")(require("sass"));
 
 const paths = {
   html: {
@@ -10,8 +11,8 @@ const paths = {
     dest: "dist/",
   },
   styles: {
-    src: "src/**/*.css",
-    dest: "dist/",
+    src: "src/scss/**/*.scss",
+    dest: "dist",
   },
   js: {
     src: "src/**/*.js",
@@ -24,7 +25,10 @@ const clean = () => {
 };
 
 const buildStyles = () => {
-  return gulp.src(paths.styles.src).pipe(gulp.dest(paths.styles.dest));
+  return gulp
+    .src(paths.styles.src)
+    .pipe(sass().on("error", sass.logError))
+    .pipe(gulp.dest(paths.styles.dest));
 };
 
 const buildHtml = () => {

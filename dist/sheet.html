@@ -140,7 +140,7 @@
       /></label>
       <label
         ><span>Strength Type</span>
-        <select class="" name="attr_ps_type" value="normal">
+        <select class="" name="attr_character_ps_type" value="normal">
           <option value="normal">Normal</option>
           <option value="augmented">Augmented</option>
           <option value="robotic">Robotic</option>
@@ -810,17 +810,130 @@
   <summary>
     <b>Expand <span name="attr_name"></span></b>
   </summary>
+  <h3>Attributes</h3>
+  <div class="bonus-type-container">
+    <label
+      ><span>I.Q.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_iq"
+        title="Intelligence Quotient"
+      />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
+      >
+    </label>
+    <label
+      ><span>M.E.</span>
+      <input type="number" value="0" name="attr_me" title="Mental Endurance" />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
+      >
+    </label>
+    <label
+      ><span>M.A.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_ma"
+        title="Mental Affinity"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.S.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_ps"
+        title="Physical Strength"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.P.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pp"
+        title="Physical Prowess"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.E.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pe"
+        title="Physical Endurance"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.B.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pb"
+        title="Physical Beauty"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>Spd</span>
+      <input type="number" value="0" name="attr_spd" title="Speed" /><label
+        class="abs"
+        ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span title="Hit Points">H.P.</span
+      ><input type="number" value="0" name="attr_hp"
+    /></label>
+    <label
+      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
+    /></label>
+    <label
+      ><span>A.R.</span><input type="number" value="0" name="attr_ar"
+    /></label>
+    <label
+      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
+    /></label>
+    <label class="select"
+      ><span>PS Type</span>
+      <select class="" name="attr_ps_type" value="normal">
+        <option value="normal">Normal</option>
+        <option value="augmented">Augmented</option>
+        <option value="robotic">Robotic</option>
+        <option value="supernatural">Supernatural</option>
+      </select></label
+    >
+    <label
+      ><span>P.P.E.</span><input type="number" value="0" name="attr_ppe"
+    /></label>
+    <label
+      ><span>I.S.P.</span><input type="number" value="0" name="attr_isp"
+    /></label>
+    <label
+      ><span>H.F.</span><input type="number" value="0" name="attr_hf" /><label
+        class="abs"
+        ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
+      ></label
+    >
+  </div>
+  <h3>Combat</h3>
   <div class="bonus-type-container">
     <label
       ><span>Attacks</span>
       <input type="number" value="0" name="attr_attacks" />
     </label>
-    <label
-      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
-    /></label>
-    <label
-      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
-    /></label>
     <label
       ><span>Initiative</span>
       <input type="number" value="0" name="attr_initiative" />
@@ -1036,7 +1149,7 @@
       <input type="number" value="0" name="attr_deathblow"
     /></label>
   </div>
-  <h4>Saving Throws</h4>
+  <h3>Saving Throws</h3>
   <div class="bonus-type-container">
     <label
       ><span>Perception</span>
@@ -1784,17 +1897,130 @@
   <summary>
     <b>Expand <span name="attr_name"></span></b>
   </summary>
+  <h3>Attributes</h3>
+  <div class="bonus-type-container">
+    <label
+      ><span>I.Q.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_iq"
+        title="Intelligence Quotient"
+      />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
+      >
+    </label>
+    <label
+      ><span>M.E.</span>
+      <input type="number" value="0" name="attr_me" title="Mental Endurance" />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
+      >
+    </label>
+    <label
+      ><span>M.A.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_ma"
+        title="Mental Affinity"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.S.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_ps"
+        title="Physical Strength"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.P.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pp"
+        title="Physical Prowess"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.E.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pe"
+        title="Physical Endurance"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>P.B.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_pb"
+        title="Physical Beauty"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span>Spd</span>
+      <input type="number" value="0" name="attr_spd" title="Speed" /><label
+        class="abs"
+        ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
+      ></label
+    >
+    <label
+      ><span title="Hit Points">H.P.</span
+      ><input type="number" value="0" name="attr_hp"
+    /></label>
+    <label
+      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
+    /></label>
+    <label
+      ><span>A.R.</span><input type="number" value="0" name="attr_ar"
+    /></label>
+    <label
+      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
+    /></label>
+    <label class="select"
+      ><span>PS Type</span>
+      <select class="" name="attr_ps_type" value="normal">
+        <option value="normal">Normal</option>
+        <option value="augmented">Augmented</option>
+        <option value="robotic">Robotic</option>
+        <option value="supernatural">Supernatural</option>
+      </select></label
+    >
+    <label
+      ><span>P.P.E.</span><input type="number" value="0" name="attr_ppe"
+    /></label>
+    <label
+      ><span>I.S.P.</span><input type="number" value="0" name="attr_isp"
+    /></label>
+    <label
+      ><span>H.F.</span><input type="number" value="0" name="attr_hf" /><label
+        class="abs"
+        ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
+      ></label
+    >
+  </div>
+  <h3>Combat</h3>
   <div class="bonus-type-container">
     <label
       ><span>Attacks</span>
       <input type="number" value="0" name="attr_attacks" />
     </label>
-    <label
-      ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
-    /></label>
-    <label
-      ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
-    /></label>
     <label
       ><span>Initiative</span>
       <input type="number" value="0" name="attr_initiative" />
@@ -2010,7 +2236,7 @@
       <input type="number" value="0" name="attr_deathblow"
     /></label>
   </div>
-  <h4>Saving Throws</h4>
+  <h3>Saving Throws</h3>
   <div class="bonus-type-container">
     <label
       ><span>Perception</span>
@@ -3121,7 +3347,7 @@ const CORE_KEYS = [
   "truename_name",
   "character_race",
   "occ",
-  "ps_type",
+  "character_ps_type",
   "character_level",
   "experience",
   "alignment",
@@ -4052,10 +4278,10 @@ on("change:ma", (e) => {
   setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
 });
 
-on("change:ps change:ps_type", (e) => {
-  getAttrs(["ps", "ps_type"], (a) => {
+on("change:ps change:character_ps_type", (e) => {
+  getAttrs(["ps", "character_ps_type"], (a) => {
     const ps = a.ps;
-    const ps_type = a.ps_type;
+    const ps_type = a.character_ps_type;
     const ps_bonus = ps > 15 ? ps - 15 : 0;
 
     let restrained_punch = (punch = power_punch = kick = leap_kick = "");
@@ -4643,9 +4869,12 @@ on("change:repeating_movement:ft_melee", (e) => {
 
   /**
    * Add attributes, PS type, ISP, PPE, HP, SDC, MDC, etc. to Bonuses
-   * Make Bonus Selections repeatable - each has its own aggregate bonuses, to allow for different character "profiles"
+   * Allow for an "absolute" value
+   * Aggregate Logic:
+   * - PS includes type
+   * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
+   * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
-   * Change repeating_combat to repeating_modifiers, and tab Combat to Modifiers
    *
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type, modifies PPE

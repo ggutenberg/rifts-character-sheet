@@ -218,9 +218,12 @@
 
   /**
    * Add attributes, PS type, ISP, PPE, HP, SDC, MDC, etc. to Bonuses
-   * Make Bonus Selections repeatable - each has its own aggregate bonuses, to allow for different character "profiles"
+   * Allow for an "absolute" value
+   * Aggregate Logic:
+   * - PS includes type
+   * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
+   * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
-   * Change repeating_combat to repeating_modifiers, and tab Combat to Modifiers
    *
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type, modifies PPE

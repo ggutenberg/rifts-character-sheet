@@ -1,44 +1,112 @@
 /* Resets */
-.charsheet details,
-.charsheet summary {
-  display: revert;
-}
 
-.charsheet .repcontainer[data-groupname="repeating_abilities"] details,
-.charsheet .repcontainer[data-groupname="repeating_abilities"] summary,
-.charsheet .repcontainer[data-groupname="repeating_skills"] details,
-.charsheet .repcontainer[data-groupname="repeating_skills"] summary {
-  display: block;
-}
+.charsheet {
+  details,
+  summary {
+    display: revert;
+  }
 
-.charsheet input,
-.charsheet textarea,
-.charsheet select,
-.charsheet .uneditable-input {
-  width: auto;
-  margin-bottom: 0;
-}
+  details {
+    margin-bottom: 1rem;
+    summary {
+      cursor: pointer;
+    }
+  }
 
-.charsheet main#megaverse input[type="number"] {
-  width: auto;
-}
+  .repcontainer[data-groupname="repeating_abilities"] details,
+  .repcontainer[data-groupname="repeating_abilities"] summary,
+  .repcontainer[data-groupname="repeating_skills"] details,
+  .repcontainer[data-groupname="repeating_skills"] summary {
+    display: block;
+  }
 
-.charsheet main#megaverse label {
-  margin-bottom: 0;
-  font-size: 1.3rem;
-}
+  .repcontainer[data-groupname="repeating_abilities"] details,
+  .repcontainer[data-groupname="repeating_skills"] details {
+    margin-bottom: 0;
+  }
 
-details {
-  margin-bottom: 1rem;
-}
+  input,
+  textarea,
+  select,
+  .uneditable-input {
+    width: auto;
+    margin-bottom: 0;
+  }
 
-.repcontainer[data-groupname="repeating_abilities"] details,
-.repcontainer[data-groupname="repeating_skills"] details {
-  margin-bottom: 0;
-}
+  main#megaverse {
+    input[type="number"] {
+      width: auto;
+    }
 
-details summary {
-  cursor: pointer;
+    label {
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .bonuses-container {
+      .combat-combined-bonuses {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .repcontainer[data-groupname="repeating_modifiers"],
+      .repcontainer[data-groupname="repeating_bonuses"] {
+        .repitem {
+          .bonus-type-container {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+          }
+
+          label {
+            display: grid;
+            grid-template-columns: 1fr min-content 4rem;
+            width: 100%;
+          }
+
+          label.select {
+            grid-template-columns: max-content 1fr 4rem;
+            align-items: center;
+          }
+
+          .macro-help {
+            label {
+              display: grid;
+              gap: 0.5rem;
+              grid-template-columns: 1fr 7fr;
+            }
+          }
+
+          label.description {
+            display: block;
+          }
+
+          .bonus-thing-heading {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 3fr 1fr;
+
+            label {
+              display: grid;
+              gap: 0.5rem;
+              grid-template-columns: max-content 1fr;
+            }
+          }
+
+          label.abs {
+            align-items: center;
+            input[type="checkbox"] {
+              width: 1rem;
+              margin: 0 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /* End Resets */
@@ -239,28 +307,10 @@ img.logo {
   align-items: center;
 }
 
-.combat-combined-bonuses label,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem
-  label,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_bonuses"]
-  .repitem
-  label {
+.combat-combined-bonuses label {
   display: grid;
   grid-template-columns: 1fr min-content 4rem;
   width: 100%;
-}
-
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem
-  label.description {
-  display: block;
 }
 
 .charsheet
@@ -303,74 +353,6 @@ img.logo {
 
 .charsheet
   .bonuses-container
-  .repcontainer
-  .repitem
-  .bonus-attributes-container {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.charsheet
-  .bonuses-container
-  .repcontainer
-  .repitem
-  .bonus-attributes-container
-  div {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  width: 100%;
-}
-
-.charsheet
-  .bonuses-container
-  .repcontainer
-  .repitem
-  .bonus-attributes-container
-  label {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  width: 100%;
-}
-
-.charsheet .bonuses-container .combat-combined-bonuses,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem
-  .bonus-type-container,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_bonuses"]
-  .repitem
-  .bonus-type-container {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.charsheet
-  .bonuses-container
-  .repcontainer
-  .repitem
-  .bonus-thing-heading
-  label {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: max-content 1fr;
-}
-.charsheet .bonuses-container .repcontainer .repitem .bonus-thing-heading {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 3fr 1fr;
-}
-
-.charsheet
-  .bonuses-container
   .repcontainer[data-groupname="repeating_modifiers"]
   .repitem:not(:last-of-type),
 .charsheet
@@ -380,35 +362,35 @@ img.logo {
   margin-bottom: 1rem;
 }
 
-.charsheet .repcontainer .repitem .macro-help label,
-.charsheet
-  .magic
-  .repcontainer[data-groupname="repeating_magic"]
-  .repitem
-  .macro-help
-  label,
-.charsheet
-  .psionics
-  .repcontainer[data-groupname="repeating_psionics"]
-  .repitem
-  .macro-help
-  label,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem
-  .macro-help
-  label,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_bonuses"]
-  .repitem
-  .macro-help
-  label {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 7fr;
-}
+// .charsheet .repcontainer .repitem .macro-help label,
+// .charsheet
+//   .magic
+//   .repcontainer[data-groupname="repeating_magic"]
+//   .repitem
+//   .macro-help
+//   label,
+// .charsheet
+//   .psionics
+//   .repcontainer[data-groupname="repeating_psionics"]
+//   .repitem
+//   .macro-help
+//   label,
+// .charsheet
+//   .bonuses-container
+//   .repcontainer[data-groupname="repeating_modifiers"]
+//   .repitem
+//   .macro-help
+//   label,
+// .charsheet
+//   .bonuses-container
+//   .repcontainer[data-groupname="repeating_bonuses"]
+//   .repitem
+//   .macro-help
+//   label {
+//   display: grid;
+//   gap: 0.5rem;
+//   grid-template-columns: 1fr 7fr;
+// }
 
 .charsheet
   .magic
