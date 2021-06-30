@@ -108,7 +108,7 @@
           <input type="hidden" name="attr_bonus_id" value="" />
         </fieldset>
         <b>Selected IDs</b>
-        <textarea class="full" name="attr_bonus_ids_output" value=""></textarea>
+        <input class="full" type="text" name="attr_bonus_ids_output" value="" />
         <hr />
         <h3>Profiles</h3>
         <fieldset class="repeating_profiles">
@@ -116,16 +116,18 @@
           <!-- endinject -->
         </fieldset>
         <hr />
-        <!-- inject:partials/combat_combined_melee.html -->
-        <!-- endinject -->
-        <hr />
-        <!-- inject:partials/combat_combined_range.html -->
-        <!-- endinject -->
-        <hr />
-        <!-- inject:partials/combat_combined_saving_throws.html -->
-        <!-- endinject -->
+        <div class="hidden">
+          <!-- inject:partials/combat_combined_melee.html -->
+          <!-- endinject -->
+          <hr />
+          <!-- inject:partials/combat_combined_range.html -->
+          <!-- endinject -->
+          <hr />
+          <!-- inject:partials/combat_combined_saving_throws.html -->
+          <!-- endinject -->
+        </div>
       </div>
-      <div class="">
+      <div class="hidden">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />
@@ -210,6 +212,7 @@
   /**
    * Add attributes, PS type, ISP, PPE, HP, SDC, MDC, etc. to Bonuses
    * Allow for an "absolute" value
+   * Use a "text" input and allow for values like `*2` or `/2`
    * Aggregate Logic:
    * - PS includes type
    * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
