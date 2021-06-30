@@ -30,6 +30,9 @@
 .charsheet .repcontainer[data-groupname=repeating_skills] details {
   margin-bottom: 0;
 }
+.charsheet .full {
+  width: 100% !important;
+}
 .charsheet input,
 .charsheet textarea,
 .charsheet select,
@@ -56,6 +59,9 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer:not([data-groupname=repeating_profiles]) .profile-management {
+  display: none;
 }
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
@@ -126,12 +132,10 @@
   width: 1rem;
   margin: 0 0.5rem;
 }
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem span[name=attr_bonus_name],
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem span[name=attr_bonus_name],
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem span[name=attr_bonus_name] {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: min-content min-content;
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .profile-management,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .profile-management,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .profile-management {
+  display: block;
 }
 
 /* End Resets */
@@ -374,10 +378,6 @@ img.logo {
 
 .charsheet .tall {
   height: 300px;
-}
-
-.charsheet .full {
-  width: 100%;
 }
 
 /*****************/

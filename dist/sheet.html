@@ -812,9 +812,12 @@
       </label>
     </div>
   </summary>
-  <input type="text" class="full" name="attr_bonus_ids" />
-  <input type="hidden" name="attr_bonus_names" />
-  <span name="attr_bonus_names"></span>
+  <div class="profile-management">
+    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <input type="text" class="full" name="attr_bonus_ids" />
+    <input type="hidden" name="attr_bonus_names" />
+    <span name="attr_bonus_names"></span>
+  </div>
   <h3>Attributes</h3>
   <div class="bonus-type-container">
     <label
@@ -1325,9 +1328,12 @@
       </label>
     </div>
   </summary>
-  <input type="text" class="full" name="attr_bonus_ids" />
-  <input type="hidden" name="attr_bonus_names" />
-  <span name="attr_bonus_names"></span>
+  <div class="profile-management">
+    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <input type="text" class="full" name="attr_bonus_ids" />
+    <input type="hidden" name="attr_bonus_names" />
+    <span name="attr_bonus_names"></span>
+  </div>
   <h3>Attributes</h3>
   <div class="bonus-type-container">
     <label
@@ -2382,9 +2388,12 @@
       </label>
     </div>
   </summary>
-  <input type="text" class="full" name="attr_bonus_ids" />
-  <input type="hidden" name="attr_bonus_names" />
-  <span name="attr_bonus_names"></span>
+  <div class="profile-management">
+    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <input type="text" class="full" name="attr_bonus_ids" />
+    <input type="hidden" name="attr_bonus_names" />
+    <span name="attr_bonus_names"></span>
+  </div>
   <h3>Attributes</h3>
   <div class="bonus-type-container">
     <label
@@ -4753,11 +4762,18 @@ on("remove:repeating_modifiers", (e) => {
   const bonusIds = e.newValue.split(",");
   const bonusNameKeys = bonusIds.map((id) => `repeating_bonuses_${id}_name`);
   getAttrs(bonusNameKeys, (a) => {
-    console.log(a);
     const names = Object.values(a).reduce((acc, cur) => `${acc} ${cur}`, "");
     setAttrs({ repeating_profiles_bonus_names: names });
   });
-  //   setAttrs({ repeating_profiles_bonus_names: "abc" });
+});
+
+on("clicked:repeating_profiles:copybonusids", (e) => {
+  console.log("clicked:copybonusids", e);
+  getAttrs(["bonus_ids_output"], (a) => {
+    const attrs = {};
+    attrs[`repeating_profiles_bonus_ids`] = a.bonus_ids_output;
+    setAttrs(attrs);
+  });
 });
 
   /* endinject */

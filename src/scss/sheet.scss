@@ -34,6 +34,10 @@
     margin-bottom: 0;
   }
 
+  .full {
+    width: 100% !important;
+  }
+
   input,
   textarea,
   select,
@@ -66,6 +70,12 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .repcontainer:not([data-groupname="repeating_profiles"]) {
+        .profile-management {
+          display: none;
+        }
       }
 
       .repcontainer[data-groupname="repeating_profiles"],
@@ -131,10 +141,8 @@
             }
           }
 
-          span[name="attr_bonus_name"] {
-            display: grid;
-            gap: 0.5rem;
-            grid-template-columns: min-content min-content;
+          .profile-management {
+            display: block;
           }
         }
       }
@@ -458,10 +466,6 @@ img.logo {
 
 .charsheet .tall {
   height: 300px;
-}
-
-.charsheet .full {
-  width: 100%;
 }
 
 /*****************/
