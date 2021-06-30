@@ -11,12 +11,21 @@
 .charsheet details summary {
   cursor: pointer;
 }
+.charsheet .repcontainer[data-groupname=repeating_profiles] details,
+.charsheet .repcontainer[data-groupname=repeating_profiles] summary,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] details,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] summary,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] details,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] summary,
 .charsheet .repcontainer[data-groupname=repeating_abilities] details,
 .charsheet .repcontainer[data-groupname=repeating_abilities] summary,
 .charsheet .repcontainer[data-groupname=repeating_skills] details,
 .charsheet .repcontainer[data-groupname=repeating_skills] summary {
   display: block;
 }
+.charsheet .repcontainer[data-groupname=repeating_profiles] details,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] details,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] details,
 .charsheet .repcontainer[data-groupname=repeating_abilities] details,
 .charsheet .repcontainer[data-groupname=repeating_skills] details {
   margin-bottom: 0;
@@ -27,6 +36,12 @@
 .charsheet .uneditable-input {
   width: auto;
   margin-bottom: 0;
+}
+.charsheet .combat-combined-bonuses label span,
+.charsheet .spell-details label span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .charsheet main#megaverse input[type=number] {
   width: auto;
@@ -42,53 +57,81 @@
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label {
   display: grid;
   grid-template-columns: 1fr min-content 4rem;
   width: 100%;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label span,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label span,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label.select,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.select,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.select {
   grid-template-columns: max-content 1fr 4rem;
   align-items: center;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .macro-help label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .macro-help label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .macro-help label {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 1fr 7fr;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label.description,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.description,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.description {
   display: block;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-thing-heading,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-thing-heading,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-thing-heading {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2.5rem 1fr min-content;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-thing-heading label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-thing-heading label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-thing-heading label {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: max-content 1fr;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-thing-heading label input[name=attr_name],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-thing-heading label input[name=attr_name],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-thing-heading label input[name=attr_name] {
+  width: auto;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label.abs,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.abs,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.abs {
   align-items: center;
 }
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label.abs input[type=checkbox],
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.abs input[type=checkbox],
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.abs input[type=checkbox] {
   width: 1rem;
   margin: 0 0.5rem;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem span[name=attr_bonus_name],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem span[name=attr_bonus_name],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem span[name=attr_bonus_name] {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: min-content min-content;
 }
 
 /* End Resets */
@@ -270,16 +313,6 @@ img.logo {
   width: 100%;
 }
 
-.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label span,
-.charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label span,
-.combat-combined-bonuses label span,
-.spell-details label span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 2px;
-}
-
 .charsheet main#megaverse .bonuses-container .combat-combined-bonuses input,
 .charsheet main#megaverse .bonuses-container details div:not(.macro-help) input,
 .charsheet main#megaverse .bonuses-container input[type=number] {
@@ -297,11 +330,6 @@ img.logo {
   button.repcontrol_add {
   display: none !important;
 } */
-.charsheet .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem:not(:last-of-type),
-.charsheet .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem:not(:last-of-type) {
-  margin-bottom: 1rem;
-}
-
 .charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .spells-list {
   display: grid;
   gap: 0.5rem;

@@ -67,16 +67,6 @@
       <p>Click <b>Instructions</b> for detailed instructions.</p>
       <fieldset class="repeating_modifiers">
         <input type="hidden" name="attr_bonus_id" value="" />
-        <div class="bonus-thing-heading">
-          <label
-            ><span>Modifier</span>
-            <input type="text" list="combat-modifiers" name="attr_name" />
-          </label>
-          <label
-            ><span>Level</span>
-            <input type="number" value="1" name="attr_level" />
-          </label>
-        </div>
         <!-- inject:partials/repeating_bonuses_details.html -->
         <!-- endinject -->
       </fieldset>
@@ -117,6 +107,14 @@
           <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_bonus_id" value="" />
         </fieldset>
+        <b>Selected IDs</b>
+        <textarea class="full" name="attr_bonus_ids_output" value=""></textarea>
+        <hr />
+        <h3>Profiles</h3>
+        <fieldset class="repeating_profiles">
+          <!-- inject:partials/repeating_bonuses_details.html -->
+          <!-- endinject -->
+        </fieldset>
         <hr />
         <!-- inject:partials/combat_combined_melee.html -->
         <!-- endinject -->
@@ -130,19 +128,7 @@
       <div class="">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
-          <div class="bonus-type-container">
-            <input type="hidden" name="attr_selection_id" value="" />
-            <label
-              ><span>Skill</span>
-              <input type="text" list="combat-modifiers" name="attr_name" />
-            </label>
-            <label
-              ><span>Level</span>
-              <input type="number" value="1" name="attr_level" />
-            </label>
-            <div></div>
-            <div></div>
-          </div>
+          <input type="hidden" name="attr_selection_id" value="" />
           <!-- inject:partials/repeating_bonuses_details.html -->
           <!-- endinject -->
         </fieldset>
@@ -201,6 +187,9 @@
   /* endinject */
 
   /* inject:js/modifiers.js */
+  /* endinject */
+
+  /* inject:js/profiles.js */
   /* endinject */
 
   /* inject:js/attributes.js */

@@ -1,7 +1,22 @@
 <details>
   <summary>
-    <b>Expand <span name="attr_name"></span></b>
+    <div class="bonus-thing-heading">
+      <b class="click-expand"
+        ><span title="Click for more info">&nbsp;&#9432;</span></b
+      >
+      <label
+        ><span>Name</span>
+        <input type="text" list="combat-modifiers" name="attr_name" />
+      </label>
+      <label
+        ><span>Level</span>
+        <input type="number" value="1" name="attr_level" />
+      </label>
+    </div>
   </summary>
+  <input type="text" class="full" name="attr_bonus_ids" />
+  <input type="hidden" name="attr_bonus_names" />
+  <span name="attr_bonus_names"></span>
   <h3>Attributes</h3>
   <div class="bonus-type-container">
     <label

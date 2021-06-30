@@ -253,14 +253,17 @@ function aggregateBonuses() {
     const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
     getAttrs(attrNames, (a) => {
       console.log(a);
-      const combatRowIds = ids.reduce((acc, id) => {
+      const bonusRowIds = ids.reduce((acc, id) => {
         const prefix = `repeating_bonusselections_${id}`;
         if (Boolean(Number(a[`${prefix}_enabled`])) == true) {
           acc.push(a[`${prefix}_bonus_id`]);
         }
         return acc;
       }, []);
-      combineCombat(combatRowIds);
+      setAttrs({ bonus_ids_output: bonusRowIds.toString() }, {}, () =>
+        combineCombat(bonusRowIds)
+      );
+      // combineCombat(bonusRowIds);
     });
   });
 }

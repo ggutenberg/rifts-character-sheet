@@ -13,6 +13,12 @@
     }
   }
 
+  .repcontainer[data-groupname="repeating_profiles"] details,
+  .repcontainer[data-groupname="repeating_profiles"] summary,
+  .repcontainer[data-groupname="repeating_bonuses"] details,
+  .repcontainer[data-groupname="repeating_bonuses"] summary,
+  .repcontainer[data-groupname="repeating_modifiers"] details,
+  .repcontainer[data-groupname="repeating_modifiers"] summary,
   .repcontainer[data-groupname="repeating_abilities"] details,
   .repcontainer[data-groupname="repeating_abilities"] summary,
   .repcontainer[data-groupname="repeating_skills"] details,
@@ -20,6 +26,9 @@
     display: block;
   }
 
+  .repcontainer[data-groupname="repeating_profiles"] details,
+  .repcontainer[data-groupname="repeating_bonuses"] details,
+  .repcontainer[data-groupname="repeating_modifiers"] details,
   .repcontainer[data-groupname="repeating_abilities"] details,
   .repcontainer[data-groupname="repeating_skills"] details {
     margin-bottom: 0;
@@ -31,6 +40,13 @@
   .uneditable-input {
     width: auto;
     margin-bottom: 0;
+  }
+
+  .combat-combined-bonuses label span,
+  .spell-details label span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   main#megaverse {
@@ -52,6 +68,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
       }
 
+      .repcontainer[data-groupname="repeating_profiles"],
       .repcontainer[data-groupname="repeating_modifiers"],
       .repcontainer[data-groupname="repeating_bonuses"] {
         .repitem {
@@ -65,6 +82,12 @@
             display: grid;
             grid-template-columns: 1fr min-content 4rem;
             width: 100%;
+
+            span {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
           }
 
           label.select {
@@ -87,12 +110,16 @@
           .bonus-thing-heading {
             display: grid;
             gap: 1rem;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 2.5rem 1fr min-content;
 
             label {
               display: grid;
               gap: 0.5rem;
               grid-template-columns: max-content 1fr;
+
+              input[name="attr_name"] {
+                width: auto;
+              }
             }
           }
 
@@ -102,6 +129,12 @@
               width: 1rem;
               margin: 0 0.5rem;
             }
+          }
+
+          span[name="attr_bonus_name"] {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: min-content min-content;
           }
         }
       }
@@ -313,26 +346,6 @@ img.logo {
   width: 100%;
 }
 
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem
-  label
-  span,
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_bonuses"]
-  .repitem
-  label
-  span,
-.combat-combined-bonuses label span,
-.spell-details label span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 2px;
-}
-
 .charsheet main#megaverse .bonuses-container .combat-combined-bonuses input,
 .charsheet main#megaverse .bonuses-container details div:not(.macro-help) input,
 .charsheet main#megaverse .bonuses-container input[type="number"] {
@@ -350,17 +363,6 @@ img.logo {
   button.repcontrol_add {
   display: none !important;
 } */
-
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_modifiers"]
-  .repitem:not(:last-of-type),
-.charsheet
-  .bonuses-container
-  .repcontainer[data-groupname="repeating_bonuses"]
-  .repitem:not(:last-of-type) {
-  margin-bottom: 1rem;
-}
 
 // .charsheet .repcontainer .repitem .macro-help label,
 // .charsheet
