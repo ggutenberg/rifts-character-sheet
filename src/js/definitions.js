@@ -446,6 +446,32 @@ const WP_KEYS = {
   ],
 };
 
+const ATTRIBUTE_KEYS = [
+  "mod_iq",
+  "iq_abs",
+  "mod_me",
+  "me_abs",
+  "mod_ma",
+  "ma_abs",
+  "mod_ps",
+  "ps_abs",
+  "mod_pe",
+  "pe_abs",
+  "mod_pb",
+  "pb_abs",
+  "mod_spd",
+  "spd_abs",
+  "hp",
+  "sdc",
+  "ar",
+  "mdc",
+  "ps_type",
+  "ppe",
+  "isp",
+  "hf",
+  "hf_abs",
+];
+
 const COMBAT_KEYS = [
   // "selection_id",
   "name",
@@ -504,7 +530,7 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   (acc, cur) => acc.concat(cur),
   []
 );
-const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
+const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS, ATTRIBUTE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
 const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];

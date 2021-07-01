@@ -114,22 +114,33 @@ async function combineBonuses(rowIds, destinationPrefix) {
     filter: rowIds,
   });
 
+  const psType = (await getAttrsAsync(["character_ps_type"]))[
+    "character_ps_type"
+  ];
   await repeatingPickBestAsync({
     destinations: [
+      `${destinationPrefix}_ar`,
+      `${destinationPrefix}_hf`,
+      `${destinationPrefix}_ps_type`,
       `${destinationPrefix}_critical`,
       `${destinationPrefix}_knockout`,
       `${destinationPrefix}_deathblow`,
     ],
     section: "bonuses",
-    fields: ["critical", "knockout", "deathblow"],
-    defaultValues: [20, 0, 0],
-    ranks: ["low", "low", "low"],
+    fields: ["ar", "hf", "ps_type", "critical", "knockout", "deathblow"],
+    defaultValues: [0, 0, psType, 20, 0, 0],
+    ranks: ["high", "high", "high", "low", "low", "low"],
     filter: rowIds,
   });
 
   // No attribute bonuses.
   await repeatingSumAsync(
     [
+      `${destinationPrefix}_hp`,
+      `${destinationPrefix}_sdc`,
+      `${destinationPrefix}_mdc`,
+      `${destinationPrefix}_ppe`,
+      `${destinationPrefix}_isp`,
       `${destinationPrefix}_attacks`,
       `${destinationPrefix}_initiative`,
       `${destinationPrefix}_pull`,

@@ -51,11 +51,11 @@ on("change:ps change:character_ps_type", (e) => {
         "sdc");
 
     switch (ps_type) {
-      case "normal":
+      case "1":
         punch = "1D4";
         kick = "1D4";
         break;
-      case "augmented":
+      case "2":
         if (ps < 24) {
           // nop
         } else if (ps == 24) {
@@ -84,7 +84,7 @@ on("change:ps change:character_ps_type", (e) => {
           power_punch_unit = "mdc";
         }
         break;
-      case "robotic":
+      case "3":
         if (ps <= 15) {
           restrained_punch = "1D6";
           punch = "2D6";
@@ -167,7 +167,7 @@ on("change:ps change:character_ps_type", (e) => {
               "mdc";
         }
         break;
-      case "supernatural":
+      case "4":
         if (ps <= 15) {
           restrained_punch = "1D6";
           punch = "4D6";

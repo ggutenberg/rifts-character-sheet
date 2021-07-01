@@ -141,10 +141,10 @@
       <label
         ><span>Strength Type</span>
         <select class="" name="attr_character_ps_type" value="normal">
-          <option value="normal">Normal</option>
-          <option value="augmented">Augmented</option>
-          <option value="robotic">Robotic</option>
-          <option value="supernatural">Supernatural</option>
+          <option value="1">Normal</option>
+          <option value="2">Augmented</option>
+          <option value="3">Robotic</option>
+          <option value="4">Supernatural</option>
         </select></label
       >
       <label
@@ -926,10 +926,10 @@
     <label class="select"
       ><span>PS Type</span>
       <select class="" name="attr_ps_type" value="normal">
-        <option value="normal">Normal</option>
-        <option value="augmented">Augmented</option>
-        <option value="robotic">Robotic</option>
-        <option value="supernatural">Supernatural</option>
+        <option value="1">Normal</option>
+        <option value="2">Augmented</option>
+        <option value="3">Robotic</option>
+        <option value="4">Supernatural</option>
       </select></label
     >
     <label
@@ -1446,10 +1446,10 @@
     <label class="select"
       ><span>PS Type</span>
       <select class="" name="attr_ps_type" value="normal">
-        <option value="normal">Normal</option>
-        <option value="augmented">Augmented</option>
-        <option value="robotic">Robotic</option>
-        <option value="supernatural">Supernatural</option>
+        <option value="1">Normal</option>
+        <option value="2">Augmented</option>
+        <option value="3">Robotic</option>
+        <option value="4">Supernatural</option>
       </select></label
     >
     <label
@@ -2512,10 +2512,10 @@
     <label class="select"
       ><span>PS Type</span>
       <select class="" name="attr_ps_type" value="normal">
-        <option value="normal">Normal</option>
-        <option value="augmented">Augmented</option>
-        <option value="robotic">Robotic</option>
-        <option value="supernatural">Supernatural</option>
+        <option value="1">Normal</option>
+        <option value="2">Augmented</option>
+        <option value="3">Robotic</option>
+        <option value="4">Supernatural</option>
       </select></label
     >
     <label
@@ -3814,6 +3814,32 @@ const WP_KEYS = {
   ],
 };
 
+const ATTRIBUTE_KEYS = [
+  "mod_iq",
+  "iq_abs",
+  "mod_me",
+  "me_abs",
+  "mod_ma",
+  "ma_abs",
+  "mod_ps",
+  "ps_abs",
+  "mod_pe",
+  "pe_abs",
+  "mod_pb",
+  "pb_abs",
+  "mod_spd",
+  "spd_abs",
+  "hp",
+  "sdc",
+  "ar",
+  "mdc",
+  "ps_type",
+  "ppe",
+  "isp",
+  "hf",
+  "hf_abs",
+];
+
 const COMBAT_KEYS = [
   // "selection_id",
   "name",
@@ -3872,7 +3898,7 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   (acc, cur) => acc.concat(cur),
   []
 );
-const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS);
+const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS, ATTRIBUTE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
 const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];
@@ -4377,6 +4403,7 @@ async function repeatingPickBestAsync({
     );
   }
   const a = await getAttrsAsync(filteredAttrArray);
+  console.log(a);
   const output = destinations.reduce((acc, cur, i) => {
     acc[cur] = Object.keys(a)
       .filter((val) => {
@@ -4386,6 +4413,7 @@ async function repeatingPickBestAsync({
         return attr == fields[i];
       })
       .reduce((accVal, attrCur) => {
+        console.log(accVal, attrCur, a[attrCur]);
         if (+a[attrCur] == 0) {
           return accVal;
         }
@@ -4402,6 +4430,7 @@ async function repeatingPickBestAsync({
       }, defaultValues[i]);
     return acc;
   }, {});
+  console.log(output);
   await setAttrsAsync(output);
 }
 
@@ -4685,22 +4714,33 @@ async function combineBonuses(rowIds, destinationPrefix) {
     filter: rowIds,
   });
 
+  const psType = (await getAttrsAsync(["character_ps_type"]))[
+    "character_ps_type"
+  ];
   await repeatingPickBestAsync({
     destinations: [
+      `${destinationPrefix}_ar`,
+      `${destinationPrefix}_hf`,
+      `${destinationPrefix}_ps_type`,
       `${destinationPrefix}_critical`,
       `${destinationPrefix}_knockout`,
       `${destinationPrefix}_deathblow`,
     ],
     section: "bonuses",
-    fields: ["critical", "knockout", "deathblow"],
-    defaultValues: [20, 0, 0],
-    ranks: ["low", "low", "low"],
+    fields: ["ar", "hf", "ps_type", "critical", "knockout", "deathblow"],
+    defaultValues: [0, 0, psType, 20, 0, 0],
+    ranks: ["high", "high", "high", "low", "low", "low"],
     filter: rowIds,
   });
 
   // No attribute bonuses.
   await repeatingSumAsync(
     [
+      `${destinationPrefix}_hp`,
+      `${destinationPrefix}_sdc`,
+      `${destinationPrefix}_mdc`,
+      `${destinationPrefix}_ppe`,
+      `${destinationPrefix}_isp`,
       `${destinationPrefix}_attacks`,
       `${destinationPrefix}_initiative`,
       `${destinationPrefix}_pull`,
@@ -5286,11 +5326,11 @@ on("change:ps change:character_ps_type", (e) => {
         "sdc");
 
     switch (ps_type) {
-      case "normal":
+      case "1":
         punch = "1D4";
         kick = "1D4";
         break;
-      case "augmented":
+      case "2":
         if (ps < 24) {
           // nop
         } else if (ps == 24) {
@@ -5319,7 +5359,7 @@ on("change:ps change:character_ps_type", (e) => {
           power_punch_unit = "mdc";
         }
         break;
-      case "robotic":
+      case "3":
         if (ps <= 15) {
           restrained_punch = "1D6";
           punch = "2D6";
@@ -5402,7 +5442,7 @@ on("change:ps change:character_ps_type", (e) => {
               "mdc";
         }
         break;
-      case "supernatural":
+      case "4":
         if (ps <= 15) {
           restrained_punch = "1D6";
           punch = "4D6";

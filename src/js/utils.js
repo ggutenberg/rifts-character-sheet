@@ -332,6 +332,7 @@ async function repeatingPickBestAsync({
     );
   }
   const a = await getAttrsAsync(filteredAttrArray);
+  console.log(a);
   const output = destinations.reduce((acc, cur, i) => {
     acc[cur] = Object.keys(a)
       .filter((val) => {
@@ -341,6 +342,7 @@ async function repeatingPickBestAsync({
         return attr == fields[i];
       })
       .reduce((accVal, attrCur) => {
+        console.log(accVal, attrCur, a[attrCur]);
         if (+a[attrCur] == 0) {
           return accVal;
         }
@@ -357,6 +359,7 @@ async function repeatingPickBestAsync({
       }, defaultValues[i]);
     return acc;
   }, {});
+  console.log(output);
   await setAttrsAsync(output);
 }
 
