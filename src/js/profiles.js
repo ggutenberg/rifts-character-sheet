@@ -16,3 +16,13 @@ on("clicked:repeating_profiles:copybonusids", (e) => {
     setAttrs(attrs);
   });
 });
+
+on("clicked:repeating_profiles:updateprofile", async (e) => {
+  console.log("clicked:repeating_profiles:updateprofile", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const bonusIds = (
+    await getAttrsAsync(["repeating_profiles_bonus_ids"])
+  ).repeating_profiles_bonus_ids.split(",");
+  console.log(bonusIds);
+  await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
+});

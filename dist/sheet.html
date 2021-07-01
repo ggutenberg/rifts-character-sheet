@@ -814,6 +814,10 @@
   </summary>
   <div class="profile-management">
     <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button>
+    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
     <span name="attr_bonus_names"></span>
@@ -1330,6 +1334,10 @@
   </summary>
   <div class="profile-management">
     <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button>
+    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
     <span name="attr_bonus_names"></span>
@@ -2392,6 +2400,10 @@
   </summary>
   <div class="profile-management">
     <button type="action" name="act_copybonusids">Copy Selected IDs</button>
+    <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button>
+    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
     <span name="attr_bonus_names"></span>
@@ -3258,6 +3270,101 @@
 <script type="text/worker">
   // Change from javascript to worker before upload
 
+  /* inject:js/async.js */
+  function setActiveCharacterId(charId) {
+  var oldAcid = getActiveCharacterId();
+  var ev = new CustomEvent("message");
+  ev.data = { id: "0", type: "setActiveCharacter", data: charId };
+  self.dispatchEvent(ev);
+  return oldAcid;
+}
+var _sIn = setInterval;
+setInterval = function (callback, timeout) {
+  var acid = getActiveCharacterId();
+  _sIn(function () {
+    var prevAcid = setActiveCharacterId(acid);
+    callback();
+    setActiveCharacterId(prevAcid);
+  }, timeout);
+};
+var _sto = setTimeout;
+setTimeout = function (callback, timeout) {
+  var acid = getActiveCharacterId();
+  _sto(function () {
+    var prevAcid = setActiveCharacterId(acid);
+    callback();
+    setActiveCharacterId(prevAcid);
+  }, timeout);
+};
+function getAttrsAsync(props) {
+  var acid = getActiveCharacterId(); //save the current activeCharacterID in case it has changed when the promise runs
+  var prevAcid = null; //local variable defined here, because it needs to be shared across the promise callbacks defined below
+  return new Promise((resolve, reject) => {
+    prevAcid = setActiveCharacterId(acid); //in case the activeCharacterId has changed, restore it to what we were expecting and save the current value to restore later
+    try {
+      getAttrs(props, (values) => {
+        resolve(values);
+      });
+    } catch {
+      reject();
+    }
+  }).finally(() => {
+    setActiveCharacterId(prevAcid); //restore activeCharcterId to what it was when the promise first ran
+  });
+}
+//use the same pattern for each of the following...
+function setAttrsAsync(propObj, options) {
+  var acid = getActiveCharacterId();
+  var prevAcid = null;
+  return new Promise((resolve, reject) => {
+    prevAcid = setActiveCharacterId(acid);
+    try {
+      setAttrs(propObj, options, (values) => {
+        resolve(values);
+      });
+    } catch {
+      reject();
+    }
+  }).finally(() => {
+    setActiveCharacterId(prevAcid);
+  });
+}
+
+function getSectionIDsAsync(sectionName) {
+  var acid = getActiveCharacterId();
+  var prevAcid = null;
+  return new Promise((resolve, reject) => {
+    prevAcid = setActiveCharacterId(acid);
+    try {
+      getSectionIDs(sectionName, (values) => {
+        resolve(values);
+      });
+    } catch {
+      reject();
+    }
+  }).finally(() => {
+    setActiveCharacterId(prevAcid);
+  });
+}
+function getSingleAttrAsync(prop) {
+  var acid = getActiveCharacterId();
+  var prevAcid = null;
+  return new Promise((resolve, reject) => {
+    prevAcid = setActiveCharacterId(acid);
+    try {
+      getAttrs([prop], (values) => {
+        resolve(values[prop]);
+      });
+    } catch {
+      reject();
+    }
+  }).finally(() => {
+    setActiveCharacterId(prevAcid);
+  });
+}
+
+  /* endinject */
+
   /* inject:js/definitions.js */
   const WP = {
   "w.p. archery": [
@@ -3945,6 +4052,150 @@ const SECTIONS = {
  * If an extra is an object, it will be used for extendedProps.
  * Currently this only includes `callback` which gets run after `setAttrs()`
  */
+async function repeatingSumAsync(destinations, section, fields, ...extras) {
+  const isNumber = (value) => parseFloat(value).toString() === value.toString();
+  const isOption = (value) =>
+    [...checks.valid, ...checks.roundtypes].includes(value);
+  const isRounding = (value) => checks.roundtypes.includes(value);
+  const isFraction = (value) =>
+    value.includes("/") && !(value.includes(",") || value.includes("|"));
+  const getTrimmed = (value) => value.toLowerCase().replace(/\s/g, "");
+  const getRounded = (type, value, pow) =>
+    (Math[type](value * Math.pow(10, pow)) / Math.pow(10, pow)).toFixed(
+      Math.max(0, pow)
+    );
+  const getFraction = (value /*{ console.log(`value: ${value}`); */) =>
+    parseInt(value.split("/")[0]) / parseInt(value.split("/")[1]);
+  const getMultiplier = (value, rounding = 1) =>
+    "undefined" === typeof value
+      ? rounding
+        ? 0
+        : 1
+      : isNumber(value)
+      ? parseFloat(value)
+      : isFraction(value)
+      ? getFraction(value)
+      : value;
+  if (!Array.isArray(destinations)) destinations = [getTrimmed(destinations)];
+  if (!Array.isArray(fields)) fields = [getTrimmed(fields)];
+  const fields_trimmed = fields.map((field) => getTrimmed(field).split(":")[0]);
+  const subfields = fields_trimmed.slice(0, destinations.length);
+  const checks = {
+    valid: ["multiplier"],
+    roundtypes: ["ceil", "round", "floor"],
+  };
+  let properties = { attributes: {}, options: {} };
+  let extendedProps = {};
+  extras.forEach((extra) => {
+    if (extra.constructor.name === "Object") {
+      extendedProps = extra;
+      return;
+    }
+    const [prop, v] = getTrimmed(extra).split(":");
+    const multiplier_maybe = getMultiplier(v, isRounding(prop));
+    const obj = isNumber(multiplier_maybe)
+      ? subfields.reduce((obj, field) => {
+          obj[field] = multiplier_maybe;
+          return obj;
+        }, {})
+      : multiplier_maybe.split(",").reduce((obj, item) => {
+          const [stat, value] = item.split("|");
+          const multiplier = getMultiplier(value, isRounding(prop));
+          obj[stat] = multiplier;
+          return obj;
+        }, {});
+    properties[isOption(prop) ? "options" : "attributes"][prop] = obj;
+  });
+  const idArray = await getSectionIDsAsync(`repeating_${section}`);
+  const attrArray = idArray.reduce(
+    (m, id) => [
+      ...m,
+      ...fields_trimmed.map((field) => `repeating_${section}_${id}_${field}`),
+    ],
+    []
+  );
+  let filteredAttrArray = attrArray;
+  if (properties.attributes.filter) {
+    filteredAttrArray = attrArray.filter((attr) =>
+      Object.keys(properties.attributes.filter).some(
+        (sectionId) => sectionId && attr.includes(sectionId)
+      )
+    );
+  }
+  const v = await getAttrsAsync([
+    ...filteredAttrArray,
+    ...Object.keys(properties.attributes),
+  ]);
+  const getValue = (section, id, field) =>
+    v[`repeating_${section}_${id}_${field}`] === "on"
+      ? 1
+      : parseFloat(v[`repeating_${section}_${id}_${field}`]) || 0;
+  const commonMultipliers =
+    fields.length <= destinations.length
+      ? []
+      : fields.splice(destinations.length, fields.length - destinations.length);
+  const output = destinations.reduce((obj, destination, index) => {
+    let sumTotal = idArray.reduce(
+      (total, id) =>
+        total +
+        getValue(section, id, fields_trimmed[index]) *
+          commonMultipliers.reduce(
+            (subtotal, mult) =>
+              subtotal *
+              (!mult.includes(":") ||
+              mult.split(":")[1].split(",").includes(fields_trimmed[index])
+                ? getValue(section, id, mult.split(":")[0])
+                : 1),
+            1
+          ),
+      0
+    );
+    sumTotal *=
+      properties.options.hasOwnProperty("multiplier") &&
+      Object.keys(properties.options.multiplier).includes(fields_trimmed[index])
+        ? parseFloat(properties.options.multiplier[fields_trimmed[index]]) || 0
+        : 1;
+    sumTotal += Object.entries(properties.attributes).reduce(
+      (total, [key, value]) =>
+        (total += value.hasOwnProperty(fields_trimmed[index])
+          ? parseFloat(v[key] || 0) *
+            (parseFloat(value[fields_trimmed[index]]) || 1)
+          : 0),
+      0
+    );
+    checks.roundtypes.forEach((type) => {
+      if (properties.options.hasOwnProperty(type)) {
+        if (
+          Object.keys(properties.options[type]).includes(fields_trimmed[index])
+        ) {
+          sumTotal = getRounded(
+            type,
+            sumTotal,
+            +properties.options[type][fields_trimmed[index]] || 0
+          );
+        } else if (
+          properties.options[type] == "0" ||
+          !isNaN(+properties.options[type] || "x")
+        ) {
+          sumTotal = getRounded(type, sumTotal, +properties.options[type]);
+        }
+      }
+    });
+    obj[destination] = sumTotal;
+    return obj;
+  }, {});
+  await setAttrsAsync(output);
+}
+
+/**
+ * Aggregates repeating values
+ * @param {string[]} destinations An array of field names to output to
+ * @param {string} section A repeating section name
+ * @param {string[]} fields An array of fields to aggregate into the associated destination
+ * @param  {...any} extras Some extra stuff
+ * If an extra is an object, it will be used for extendedProps.
+ * Currently this only includes `callback` which gets run after `setAttrs()`
+ */
 function repeatingSum(destinations, section, fields, ...extras) {
   const isNumber = (value) => parseFloat(value).toString() === value.toString();
   const isOption = (value) =>
@@ -4102,6 +4353,58 @@ function repeatingSum(destinations, section, fields, ...extras) {
   });
 }
 
+async function repeatingPickBestAsync({
+  destinations,
+  section,
+  fields,
+  defaultValues,
+  ranks,
+  filter,
+}) {
+  console.log(defaultValues);
+  const sectionIds = await getSectionIDsAsync(`repeating_${section}`);
+  const attrArray = sectionIds.reduce(
+    (m, id) => [
+      ...m,
+      ...fields.map((field) => `repeating_${section}_${id}_${field}`),
+    ],
+    []
+  );
+  let filteredAttrArray = attrArray;
+  if (filter) {
+    filteredAttrArray = attrArray.filter((attr) =>
+      filter.some((sectionId) => sectionId && attr.includes(sectionId))
+    );
+  }
+  const a = await getAttrsAsync(filteredAttrArray);
+  const output = destinations.reduce((acc, cur, i) => {
+    acc[cur] = Object.keys(a)
+      .filter((val) => {
+        // the 4th part of `val` needs to match fields[i]
+        const [, , , ...attrParts] = val.split("_");
+        const attr = attrParts.join("_");
+        return attr == fields[i];
+      })
+      .reduce((accVal, attrCur) => {
+        if (+a[attrCur] == 0) {
+          return accVal;
+        }
+
+        if (+accVal != 0) {
+          if (ranks[i] === "high") {
+            return +a[attrCur] > +accVal ? a[attrCur] : accVal;
+          } else {
+            return +a[attrCur] < +accVal ? a[attrCur] : accVal;
+          }
+        } else {
+          return a[attrCur];
+        }
+      }, defaultValues[i]);
+    return acc;
+  }, {});
+  await setAttrsAsync(output);
+}
+
 function repeatingPickBest({
   destinations,
   section,
@@ -4155,6 +4458,51 @@ function repeatingPickBest({
       setAttrs(output, {}, callback ? callback : () => {});
     });
   });
+}
+
+async function repeatingStringConcatAsync({
+  destinations,
+  section,
+  fields,
+  filter,
+}) {
+  console.log({
+    destinations,
+    section,
+    fields,
+    filter,
+  });
+  const sectionIds = await getSectionIDsAsync(`repeating_${section}`);
+  const attrArray = sectionIds.reduce(
+    (m, id) => [
+      ...m,
+      ...fields.map((field) => `repeating_${section}_${id}_${field}`),
+    ],
+    []
+  );
+  let filteredAttrArray = attrArray;
+  if (filter) {
+    filteredAttrArray = attrArray.filter((attr) =>
+      filter.some((sectionId) => sectionId && attr.includes(sectionId))
+    );
+  }
+  const a = await getAttrsAsync(filteredAttrArray);
+  const output = destinations.reduce((acc, cur, i) => {
+    acc[cur] = Object.keys(a)
+      .filter((val) => {
+        // the 4th part of `val` needs to match fields[i]
+        const [, , , ...attrParts] = val.split("_");
+        const attr = attrParts.join("_");
+        return attr == fields[i];
+      })
+      .reduce((attrAcc, attrCur) => {
+        return a[attrCur] == "" || a[attrCur] == "0"
+          ? attrAcc
+          : `${a[attrCur]}+${attrAcc}`.replace(/\+$/, "");
+      }, "");
+    return acc;
+  }, {});
+  await setAttrsAsync(output);
 }
 
 function repeatingStringConcat({
@@ -4245,6 +4593,44 @@ function mergeAndAddObjects(data) {
   });
 });
 
+async function addStrikeRangeToCombinedAsync(rowPrefix) {
+  const a = await getAttrsAsync([
+    `${rowPrefix}_strike_range`,
+    `${rowPrefix}_strike_range_single`,
+    `${rowPrefix}_strike_range_burst`,
+    `${rowPrefix}_strike_range_aimed`,
+    `${rowPrefix}_strike_range_called`,
+  ]);
+  const strikeRangeSingle =
+    +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_single`];
+  const strikeRangeBurst =
+    +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_burst`];
+  const strikeRangeAimedSingle =
+    strikeRangeSingle + +a[`${rowPrefix}_strike_range_aimed`] + 2;
+  const strikeRangeAimedPulse = Math.floor(strikeRangeAimedSingle / 2);
+  const strikeRangeCalledSingle =
+    strikeRangeSingle + a[`${rowPrefix}_strike_range_called`];
+  const strikeRangeCalledPulse = Math.floor(strikeRangeCalledSingle / 2);
+  const strikeRangeAimedCalledSingle =
+    strikeRangeAimedSingle + +a[`${rowPrefix}_strike_range_called`];
+  const strikeRangeAimedCalledPulse = Math.floor(
+    strikeRangeAimedCalledSingle / 2
+  );
+  const attrs = {
+    [`${rowPrefix}_strike_range_single`]: strikeRangeSingle,
+    [`${rowPrefix}_strike_range_burst`]: strikeRangeBurst,
+    [`${rowPrefix}_strike_range_aimed_single`]: strikeRangeAimedSingle,
+    [`${rowPrefix}_strike_range_aimed_pulse`]: strikeRangeAimedPulse,
+    [`${rowPrefix}_strike_range_called_single`]: strikeRangeCalledSingle,
+    [`${rowPrefix}_strike_range_called_pulse`]: strikeRangeCalledPulse,
+    [`${rowPrefix}_strike_range_aimed_called_single`]:
+      strikeRangeAimedCalledSingle,
+    [`${rowPrefix}_strike_range_aimed_called_pulse`]:
+      strikeRangeAimedCalledPulse,
+  };
+  await setAttrsAsync(attrs);
+}
+
 function addStrikeRangeToCombined() {
   getAttrs(
     [
@@ -4286,6 +4672,62 @@ function addStrikeRangeToCombined() {
       });
     }
   );
+}
+
+async function combineBonuses(rowIds, destinationPrefix) {
+  await repeatingStringConcatAsync({
+    destinations: [
+      `${destinationPrefix}_damage`,
+      `${destinationPrefix}_damage_range`,
+    ],
+    section: "bonuses",
+    fields: ["damage", "damage_range"],
+    filter: rowIds,
+  });
+
+  await repeatingPickBestAsync({
+    destinations: [
+      `${destinationPrefix}_critical`,
+      `${destinationPrefix}_knockout`,
+      `${destinationPrefix}_deathblow`,
+    ],
+    section: "bonuses",
+    fields: ["critical", "knockout", "deathblow"],
+    defaultValues: [20, 0, 0],
+    ranks: ["low", "low", "low"],
+    filter: rowIds,
+  });
+
+  // No attribute bonuses.
+  await repeatingSumAsync(
+    [
+      `${destinationPrefix}_attacks`,
+      `${destinationPrefix}_initiative`,
+      `${destinationPrefix}_pull`,
+      `${destinationPrefix}_roll`,
+      `${destinationPrefix}_strike_range`,
+      `${destinationPrefix}_strike_range_single`,
+      `${destinationPrefix}_strike_range_burst`,
+      `${destinationPrefix}_strike_range_aimed`,
+      `${destinationPrefix}_strike_range_called`,
+      `${destinationPrefix}_disarm_range`,
+    ],
+    "bonuses",
+    [
+      "attacks",
+      "initiative",
+      "pull",
+      "roll",
+      "strike_range",
+      "strike_range_single",
+      "strike_range_burst",
+      "strike_range_aimed",
+      "strike_range_called",
+      "disarm_range",
+    ],
+    `filter:${rowIds.toString()}`
+  );
+  await addStrikeRangeToCombinedAsync(destinationPrefix);
 }
 
 function combineCombat(rowIds) {
@@ -4776,6 +5218,16 @@ on("clicked:repeating_profiles:copybonusids", (e) => {
     attrs[`repeating_profiles_bonus_ids`] = a.bonus_ids_output;
     setAttrs(attrs);
   });
+});
+
+on("clicked:repeating_profiles:updateprofile", async (e) => {
+  console.log("clicked:repeating_profiles:updateprofile", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const bonusIds = (
+    await getAttrsAsync(["repeating_profiles_bonus_ids"])
+  ).repeating_profiles_bonus_ids.split(",");
+  console.log(bonusIds);
+  await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
 });
 
   /* endinject */

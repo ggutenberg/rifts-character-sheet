@@ -22,6 +22,44 @@ on("change:combat_combined_attacks", (e) => {
   });
 });
 
+async function addStrikeRangeToCombinedAsync(rowPrefix) {
+  const a = await getAttrsAsync([
+    `${rowPrefix}_strike_range`,
+    `${rowPrefix}_strike_range_single`,
+    `${rowPrefix}_strike_range_burst`,
+    `${rowPrefix}_strike_range_aimed`,
+    `${rowPrefix}_strike_range_called`,
+  ]);
+  const strikeRangeSingle =
+    +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_single`];
+  const strikeRangeBurst =
+    +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_burst`];
+  const strikeRangeAimedSingle =
+    strikeRangeSingle + +a[`${rowPrefix}_strike_range_aimed`] + 2;
+  const strikeRangeAimedPulse = Math.floor(strikeRangeAimedSingle / 2);
+  const strikeRangeCalledSingle =
+    strikeRangeSingle + a[`${rowPrefix}_strike_range_called`];
+  const strikeRangeCalledPulse = Math.floor(strikeRangeCalledSingle / 2);
+  const strikeRangeAimedCalledSingle =
+    strikeRangeAimedSingle + +a[`${rowPrefix}_strike_range_called`];
+  const strikeRangeAimedCalledPulse = Math.floor(
+    strikeRangeAimedCalledSingle / 2
+  );
+  const attrs = {
+    [`${rowPrefix}_strike_range_single`]: strikeRangeSingle,
+    [`${rowPrefix}_strike_range_burst`]: strikeRangeBurst,
+    [`${rowPrefix}_strike_range_aimed_single`]: strikeRangeAimedSingle,
+    [`${rowPrefix}_strike_range_aimed_pulse`]: strikeRangeAimedPulse,
+    [`${rowPrefix}_strike_range_called_single`]: strikeRangeCalledSingle,
+    [`${rowPrefix}_strike_range_called_pulse`]: strikeRangeCalledPulse,
+    [`${rowPrefix}_strike_range_aimed_called_single`]:
+      strikeRangeAimedCalledSingle,
+    [`${rowPrefix}_strike_range_aimed_called_pulse`]:
+      strikeRangeAimedCalledPulse,
+  };
+  await setAttrsAsync(attrs);
+}
+
 function addStrikeRangeToCombined() {
   getAttrs(
     [
@@ -63,6 +101,62 @@ function addStrikeRangeToCombined() {
       });
     }
   );
+}
+
+async function combineBonuses(rowIds, destinationPrefix) {
+  await repeatingStringConcatAsync({
+    destinations: [
+      `${destinationPrefix}_damage`,
+      `${destinationPrefix}_damage_range`,
+    ],
+    section: "bonuses",
+    fields: ["damage", "damage_range"],
+    filter: rowIds,
+  });
+
+  await repeatingPickBestAsync({
+    destinations: [
+      `${destinationPrefix}_critical`,
+      `${destinationPrefix}_knockout`,
+      `${destinationPrefix}_deathblow`,
+    ],
+    section: "bonuses",
+    fields: ["critical", "knockout", "deathblow"],
+    defaultValues: [20, 0, 0],
+    ranks: ["low", "low", "low"],
+    filter: rowIds,
+  });
+
+  // No attribute bonuses.
+  await repeatingSumAsync(
+    [
+      `${destinationPrefix}_attacks`,
+      `${destinationPrefix}_initiative`,
+      `${destinationPrefix}_pull`,
+      `${destinationPrefix}_roll`,
+      `${destinationPrefix}_strike_range`,
+      `${destinationPrefix}_strike_range_single`,
+      `${destinationPrefix}_strike_range_burst`,
+      `${destinationPrefix}_strike_range_aimed`,
+      `${destinationPrefix}_strike_range_called`,
+      `${destinationPrefix}_disarm_range`,
+    ],
+    "bonuses",
+    [
+      "attacks",
+      "initiative",
+      "pull",
+      "roll",
+      "strike_range",
+      "strike_range_single",
+      "strike_range_burst",
+      "strike_range_aimed",
+      "strike_range_called",
+      "disarm_range",
+    ],
+    `filter:${rowIds.toString()}`
+  );
+  await addStrikeRangeToCombinedAsync(destinationPrefix);
 }
 
 function combineCombat(rowIds) {
