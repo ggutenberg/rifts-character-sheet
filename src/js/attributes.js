@@ -1,7 +1,15 @@
-on("change:iq", (e) => {
-  const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
-  const perception_bonus = getBiAttributeBonus(e.newValue);
-  setAttrs({ iq_bonus, perception_bonus }, {}, updateSkills);
+async function iqBonus(value, suffix = "") {
+  const iq_bonus = value > 15 ? value - 14 : 0;
+  const perception_bonus = getBiAttributeBonus(value);
+  await setAttrsAsync({ iq_bonus, perception_bonus });
+  await updateSkills();
+}
+
+on("change:iq", async (e) => {
+  await iqBonus(e.newValue);
+  // const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
+  // const perception_bonus = getBiAttributeBonus(e.newValue);
+  // setAttrs({ iq_bonus, perception_bonus }, {}, updateSkills);
 });
 
 on("change:me change:pp change:pe", (e) => {

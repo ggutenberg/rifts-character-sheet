@@ -1,27 +1,25 @@
-function updateSkill(rowId) {
+async function updateSkill(rowId, iqBonusKey = "iq_bonus") {
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
   console.log(skillAttrs);
-  getAttrs(skillAttrs.concat(["iq_bonus"]), (a) => {
-    console.log(a);
-    const attrs = {};
-    const total =
-      +a[`${row}_base`] +
-      +a["iq_bonus"] +
-      +a[`${row}_bonus`] +
-      (+a[`${row}_level`] - 1) * +a[`${row}_perlevel`];
-    console.log(total);
-    attrs[`${row}_total`] = total;
-    setAttrs(attrs);
-  });
+  const a = await getAttrsAsync(skillAttrs.concat([iqBonusKey]));
+  console.log(a);
+  const attrs = {};
+  const total =
+    +a[`${row}_base`] +
+    +a[iqBonusKey] +
+    +a[`${row}_bonus`] +
+    (+a[`${row}_level`] - 1) * +a[`${row}_perlevel`];
+  console.log(total);
+  attrs[`${row}_total`] = total;
+  await setAttrsAsync(attrs);
 }
 
-function updateSkills() {
-  getSectionIDs("skills", (ids) => {
-    ids.forEach((id) => {
-      updateSkill(id);
-    });
-  });
+async function updateSkills() {
+  const ids = await getSectionIDsAsync("skills");
+  for (const id of ids) {
+    await updateSkill(id);
+  }
 }
 
 function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
