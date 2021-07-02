@@ -6,7 +6,7 @@ async function updateProfile(rowId) {
   const bonusNameKeys = bonusIds.map((id) => `repeating_bonuses_${id}_name`);
   const a = await getAttrsAsync(bonusNameKeys);
   const names = Object.values(a).reduce((acc, cur) => `${acc} ${cur}`, "");
-  await setAttrsAsync({ repeating_profiles_bonus_names: names });
+  await setAttrsAsync({ [`repeating_profiles_${rowId}_bonus_names`]: names });
   await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
 }
 

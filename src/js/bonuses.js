@@ -7,7 +7,7 @@ on("change:repeating_profiles:attacks", async (e) => {
   const attrNames = movementIds.map(
     (id) => `repeating_movement_${id}_ft_melee`
   );
-  console.log(attrNames);
+  const attrs = {};
   const a = await getAttrsAsync(attrNames.concat(["run_ft_melee"]));
   attrs.run_ft_attack = Math.round(a.run_ft_melee / e.newValue);
   movementIds.forEach((id) => {
@@ -21,6 +21,7 @@ on("change:repeating_profiles:attacks", async (e) => {
 });
 
 async function addStrikeRangeToCombinedAsync(rowPrefix) {
+  console.log("addStrikeRangeToCombinedAsync", rowPrefix);
   const a = await getAttrsAsync([
     `${rowPrefix}_strike_range`,
     `${rowPrefix}_strike_range_single`,
@@ -28,7 +29,6 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
     `${rowPrefix}_strike_range_aimed`,
     `${rowPrefix}_strike_range_called`,
   ]);
-  console.log("addStrikeRangeToCombinedAsync", a);
   const strikeRangeSingle =
     +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_single`];
   const strikeRangeBurst =
@@ -61,6 +61,7 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
 }
 
 async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
+  console.log("repeatingAbsoluteAttributes", rowIds, destinationPrefix);
   const fields = ["iq", "me", "ma", "ps", "pp", "pe", "pb", "spd", "hf"];
   const fieldNames = rowIds.reduce((acc, rowId) => {
     const absFieldNames = fields.map(
@@ -71,9 +72,7 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
     );
     return acc.concat(absFieldNames, attFieldNames);
   }, []);
-  console.log(fieldNames);
   const a = await getAttrsAsync(fieldNames);
-  console.log(a);
 
   fields.forEach(async (field) => {
     let fieldAbsValue = null;
@@ -97,7 +96,6 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       // repeatingSum
       const rsaDestinations = [`${destinationPrefix}_${field}_mod`];
       const rsaFields = [`${field}_mod`];
-      console.log(rsaDestinations, rsaFields, field);
       await repeatingSumAsync(
         rsaDestinations,
         "bonuses",
@@ -114,24 +112,9 @@ async function combineBonuses(rowIds, destinationPrefix) {
   // each of the sectionIds and aggregate them in the combined combat section
   // +PP +PS, and add a saving throws section with +ME +PE
 
+  console.log("combineBonuses", rowIds, destinationPrefix);
+
   await repeatingAbsoluteAttributes(rowIds, destinationPrefix);
-  return;
-  const absFields = [
-    "iq_abs",
-    "me_abs",
-    "ma_abs",
-    "ps_abs",
-    "pe_abs",
-    "pb_abs",
-    "spd_abs",
-    "hf_abs",
-  ];
-  const rowAbsFields = absFields.map((f) => `${destinationPrefix}_${f}`);
-  const absCheckboxes = await getAttrsAsync(absFields);
-  console.log(absCheckboxes);
-  const absKeys = [];
-  const addKeys = [];
-  return;
 
   await repeatingStringConcatAsync({
     destinations: [

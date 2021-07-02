@@ -24,6 +24,17 @@
   .repcontainer[data-groupname="repeating_skills"] details,
   .repcontainer[data-groupname="repeating_skills"] summary {
     display: block;
+
+    details.default {
+      display: revert;
+      summary {
+        display: revert;
+
+        h3 {
+          display: inline-block;
+        }
+      }
+    }
   }
 
   .repcontainer[data-groupname="repeating_profiles"] details,
@@ -63,6 +74,45 @@
       font-size: 1.3rem;
     }
 
+    .modifiers {
+      .bonuses-container {
+        .repcontainer {
+          .repitem {
+            .bonus-ps-container,
+            .profile-management {
+              display: none !important;
+            }
+          }
+        }
+      }
+    }
+
+    .bonuses {
+      .bonuses-container {
+        .repcontainer {
+          .repitem {
+            .bonus-ps-container {
+              display: grid;
+              gap: 0.5rem;
+              grid-template-columns: 1fr 1fr 1fr 1fr;
+
+              label {
+                align-items: center;
+                gap: 0.5rem;
+                grid-template-columns: 1fr min-content 6rem;
+
+                &.select {
+                  select {
+                    grid-column: 2 / 3;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     .bonuses-container {
       .combat-combined-bonuses {
         margin-top: 1rem;
@@ -70,12 +120,6 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-
-      .repcontainer:not([data-groupname="repeating_profiles"]) {
-        .profile-management {
-          display: none;
-        }
       }
 
       .repcontainer[data-groupname="repeating_profiles"],
@@ -86,6 +130,23 @@
             display: grid;
             gap: 1rem;
             grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            &.attributes {
+              > label {
+                display: grid;
+                gap: 0.5rem;
+                grid-template-columns: 4rem 4rem 4rem 4rem;
+
+                input[type="number"],
+                input[type="text"] {
+                  width: auto;
+                }
+              }
+              label.abs {
+                display: none;
+                // grid-template-columns: min-content min-content;
+              }
+            }
           }
 
           label {

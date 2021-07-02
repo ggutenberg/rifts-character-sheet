@@ -23,6 +23,42 @@
 .charsheet .repcontainer[data-groupname=repeating_skills] summary {
   display: block;
 }
+.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default,
+.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default,
+.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default,
+.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default,
+.charsheet .repcontainer[data-groupname=repeating_skills] details details.default,
+.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default {
+  display: revert;
+}
+.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_skills] details details.default summary,
+.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default summary {
+  display: revert;
+}
+.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_skills] details details.default summary h3,
+.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default summary h3 {
+  display: inline-block;
+}
 .charsheet .repcontainer[data-groupname=repeating_profiles] details,
 .charsheet .repcontainer[data-groupname=repeating_bonuses] details,
 .charsheet .repcontainer[data-groupname=repeating_modifiers] details,
@@ -53,6 +89,23 @@
   margin-bottom: 0;
   font-size: 1.3rem;
 }
+.charsheet main#megaverse .modifiers .bonuses-container .repcontainer .repitem .bonus-ps-container,
+.charsheet main#megaverse .modifiers .bonuses-container .repcontainer .repitem .profile-management {
+  display: none !important;
+}
+.charsheet main#megaverse .bonuses .bonuses-container .repcontainer .repitem .bonus-ps-container {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.charsheet main#megaverse .bonuses .bonuses-container .repcontainer .repitem .bonus-ps-container label {
+  align-items: center;
+  gap: 0.5rem;
+  grid-template-columns: 1fr min-content 6rem;
+}
+.charsheet main#megaverse .bonuses .bonuses-container .repcontainer .repitem .bonus-ps-container label.select select {
+  grid-column: 2/3;
+}
 .charsheet main#megaverse .bonuses-container .combat-combined-bonuses {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -60,15 +113,32 @@
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.charsheet main#megaverse .bonuses-container .repcontainer:not([data-groupname=repeating_profiles]) .profile-management {
-  display: none;
-}
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container.attributes > label,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container.attributes > label {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 4rem 4rem 4rem 4rem;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label input[type=number],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label input[type=text],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container.attributes > label input[type=number],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container.attributes > label input[type=text],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container.attributes > label input[type=number],
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container.attributes > label input[type=text] {
+  width: auto;
+}
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes label.abs,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container.attributes label.abs,
+.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .bonus-type-container.attributes label.abs {
+  display: none;
 }
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label,

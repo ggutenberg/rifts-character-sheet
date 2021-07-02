@@ -316,7 +316,14 @@ async function repeatingPickBestAsync({
   ranks,
   filter,
 }) {
-  console.log(defaultValues);
+  console.log("repeatingPickBestAsync", {
+    destinations,
+    section,
+    fields,
+    defaultValues,
+    ranks,
+    filter,
+  });
   const sectionIds = await getSectionIDsAsync(`repeating_${section}`);
   const attrArray = sectionIds.reduce(
     (m, id) => [
@@ -332,7 +339,6 @@ async function repeatingPickBestAsync({
     );
   }
   const a = await getAttrsAsync(filteredAttrArray);
-  console.log(a);
   const output = destinations.reduce((acc, cur, i) => {
     acc[cur] = Object.keys(a)
       .filter((val) => {
@@ -342,7 +348,6 @@ async function repeatingPickBestAsync({
         return attr == fields[i];
       })
       .reduce((accVal, attrCur) => {
-        console.log(accVal, attrCur, a[attrCur]);
         if (+a[attrCur] == 0) {
           return accVal;
         }
@@ -359,63 +364,7 @@ async function repeatingPickBestAsync({
       }, defaultValues[i]);
     return acc;
   }, {});
-  console.log(output);
   await setAttrsAsync(output);
-}
-
-function repeatingPickBest({
-  destinations,
-  section,
-  fields,
-  defaultValues,
-  ranks,
-  filter,
-  callback,
-}) {
-  console.log(defaultValues);
-  getSectionIDs(`repeating_${section}`, (sectionIds) => {
-    const attrArray = sectionIds.reduce(
-      (m, id) => [
-        ...m,
-        ...fields.map((field) => `repeating_${section}_${id}_${field}`),
-      ],
-      []
-    );
-    let filteredAttrArray = attrArray;
-    if (filter) {
-      filteredAttrArray = attrArray.filter((attr) =>
-        filter.some((sectionId) => sectionId && attr.includes(sectionId))
-      );
-    }
-    getAttrs(filteredAttrArray, (a) => {
-      const output = destinations.reduce((acc, cur, i) => {
-        acc[cur] = Object.keys(a)
-          .filter((val) => {
-            // the 4th part of `val` needs to match fields[i]
-            const [, , , ...attrParts] = val.split("_");
-            const attr = attrParts.join("_");
-            return attr == fields[i];
-          })
-          .reduce((accVal, attrCur) => {
-            if (+a[attrCur] == 0) {
-              return accVal;
-            }
-
-            if (+accVal != 0) {
-              if (ranks[i] === "high") {
-                return +a[attrCur] > +accVal ? a[attrCur] : accVal;
-              } else {
-                return +a[attrCur] < +accVal ? a[attrCur] : accVal;
-              }
-            } else {
-              return a[attrCur];
-            }
-          }, defaultValues[i]);
-        return acc;
-      }, {});
-      setAttrs(output, {}, callback ? callback : () => {});
-    });
-  });
 }
 
 async function repeatingStringConcatAsync({
@@ -461,48 +410,6 @@ async function repeatingStringConcatAsync({
     return acc;
   }, {});
   await setAttrsAsync(output);
-}
-
-function repeatingStringConcat({
-  destinations,
-  section,
-  fields,
-  filter,
-  callback,
-}) {
-  getSectionIDs(`repeating_${section}`, (sectionIds) => {
-    const attrArray = sectionIds.reduce(
-      (m, id) => [
-        ...m,
-        ...fields.map((field) => `repeating_${section}_${id}_${field}`),
-      ],
-      []
-    );
-    let filteredAttrArray = attrArray;
-    if (filter) {
-      filteredAttrArray = attrArray.filter((attr) =>
-        filter.some((sectionId) => sectionId && attr.includes(sectionId))
-      );
-    }
-    getAttrs(filteredAttrArray, (a) => {
-      const output = destinations.reduce((acc, cur, i) => {
-        acc[cur] = Object.keys(a)
-          .filter((val) => {
-            // the 4th part of `val` needs to match fields[i]
-            const [, , , ...attrParts] = val.split("_");
-            const attr = attrParts.join("_");
-            return attr == fields[i];
-          })
-          .reduce((attrAcc, attrCur) => {
-            return a[attrCur] == "" || a[attrCur] == "0"
-              ? attrAcc
-              : `${a[attrCur]}+${attrAcc}`.replace(/\+$/, "");
-          }, "");
-        return acc;
-      }, {});
-      setAttrs(output, {}, callback ? callback : () => {});
-    });
-  });
 }
 
 function getBiAttributeBonus(attr) {
