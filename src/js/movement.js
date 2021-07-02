@@ -3,6 +3,8 @@
  * Which profile's attack count do we use?
  * Have one selected as "active" or "default"?
  * Or select within the Movement section which profile to refer to?
+ * I like the idea of radio buttons in the Movement section
+ * that let you select a profile
  */
 
 on("change:repeating_movement:mph", (e) => {

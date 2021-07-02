@@ -1,3 +1,6 @@
+/**
+ * @todo same issue as in movement.js - which profile takes precedence?
+ */
 on("change:repeating_profiles:attacks", async (e) => {
   console.log("change:repeating_profiles:attacks", e);
   const movementIds = await getSectionIDsAsync("movement");
