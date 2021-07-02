@@ -1,3 +1,10 @@
+/**
+ * @todo how is this going to work with multiple profiles?
+ * Which profile's attack count do we use?
+ * Have one selected as "active" or "default"?
+ * Or select within the Movement section which profile to refer to?
+ */
+
 on("change:repeating_movement:mph", (e) => {
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = Math.round((e.newValue * 5280) / 60 / 4);

@@ -1,25 +1,20 @@
-on("change:combat_combined_attacks", (e) => {
-  getAttrs(["run_ft_melee"], (a) => {
-    setAttrs({ run_ft_attack: Math.round(a.run_ft_melee / e.newValue) });
+on("change:repeating_profiles:attacks", async (e) => {
+  console.log("change:repeating_profiles:attacks", e);
+  const movementIds = await getSectionIDsAsync("movement");
+  const attrNames = movementIds.map(
+    (id) => `repeating_movement_${id}_ft_melee`
+  );
+  console.log(attrNames);
+  const a = await getAttrsAsync(attrNames.concat(["run_ft_melee"]));
+  attrs.run_ft_attack = Math.round(a.run_ft_melee / e.newValue);
+  movementIds.forEach((id) => {
+    const row = `repeating_movement_${id}`;
+    const feetPerMelee = a[`${row}_ft_melee`] || 0;
+    if (feetPerMelee) {
+      attrs[`${row}_ft_attack`] = Math.round(feetPerMelee / e.newValue);
+    }
   });
-  getSectionIDs("movement", (ids) => {
-    const attrNames = ids.map(
-      (id) => `repeating_movement_${id}_movement_ft_melee`
-    );
-    getAttrs(attrNames, (a) => {
-      const attrs = {};
-      ids.forEach((id) => {
-        const row = `repeating_movement_${id}`;
-        const feetPerMelee = a[`${row}_movement_ft_melee`] || 0;
-        if (feetPerMelee) {
-          attrs[`${row}_movement_ft_attack`] = Math.round(
-            feetPerMelee / e.newValue
-          );
-        }
-      });
-      setAttrs(attrs);
-    });
-  });
+  await setAttrsAsync(attrs);
 });
 
 async function addStrikeRangeToCombinedAsync(rowPrefix) {
@@ -30,6 +25,7 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
     `${rowPrefix}_strike_range_aimed`,
     `${rowPrefix}_strike_range_called`,
   ]);
+  console.log("addStrikeRangeToCombinedAsync", a);
   const strikeRangeSingle =
     +a[`${rowPrefix}_strike_range`] + +a[`${rowPrefix}_strike_range_single`];
   const strikeRangeBurst =
@@ -57,53 +53,15 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
     [`${rowPrefix}_strike_range_aimed_called_pulse`]:
       strikeRangeAimedCalledPulse,
   };
+  console.log(attrs);
   await setAttrsAsync(attrs);
 }
 
-function addStrikeRangeToCombined() {
-  getAttrs(
-    [
-      "combat_combined_strike_range",
-      "combat_combined_strike_range_single",
-      "combat_combined_strike_range_burst",
-      "combat_combined_strike_range_aimed",
-      "combat_combined_strike_range_called",
-    ],
-    (a) => {
-      const strikeRangeSingle =
-        +a.combat_combined_strike_range +
-        +a.combat_combined_strike_range_single;
-      const strikeRangeBurst =
-        +a.combat_combined_strike_range + +a.combat_combined_strike_range_burst;
-      const strikeRangeAimedSingle =
-        strikeRangeSingle + +a.combat_combined_strike_range_aimed + 2;
-      const strikeRangeAimedPulse = Math.floor(strikeRangeAimedSingle / 2);
-      const strikeRangeCalledSingle =
-        strikeRangeSingle + a.combat_combined_strike_range_called;
-      const strikeRangeCalledPulse = Math.floor(strikeRangeCalledSingle / 2);
-      const strikeRangeAimedCalledSingle =
-        strikeRangeAimedSingle + +a.combat_combined_strike_range_called;
-      const strikeRangeAimedCalledPulse = Math.floor(
-        strikeRangeAimedCalledSingle / 2
-      );
-
-      setAttrs({
-        combat_combined_strike_range_single: strikeRangeSingle,
-        combat_combined_strike_range_burst: strikeRangeBurst,
-        combat_combined_strike_range_aimed_single: strikeRangeAimedSingle,
-        combat_combined_strike_range_aimed_pulse: strikeRangeAimedPulse,
-        combat_combined_strike_range_called_single: strikeRangeCalledSingle,
-        combat_combined_strike_range_called_pulse: strikeRangeCalledPulse,
-        combat_combined_strike_range_aimed_called_single:
-          strikeRangeAimedCalledSingle,
-        combat_combined_strike_range_aimed_called_pulse:
-          strikeRangeAimedCalledPulse,
-      });
-    }
-  );
-}
-
 async function combineBonuses(rowIds, destinationPrefix) {
+  // we need to combine the values of each repeated attribute within
+  // each of the sectionIds and aggregate them in the combined combat section
+  // +PP +PS, and add a saving throws section with +ME +PE
+
   await repeatingStringConcatAsync({
     destinations: [
       `${destinationPrefix}_damage`,
@@ -114,182 +72,80 @@ async function combineBonuses(rowIds, destinationPrefix) {
     filter: rowIds,
   });
 
-  const psType = (await getAttrsAsync(["character_ps_type"]))[
-    "character_ps_type"
+  const pickBestFields = [
+    "ar",
+    "hf",
+    "ps_type",
+    "critical",
+    "knockout",
+    "deathblow",
   ];
+  const psType = (await getAttrsAsync(["character_ps_type"])).character_ps_type;
   await repeatingPickBestAsync({
-    destinations: [
-      `${destinationPrefix}_ar`,
-      `${destinationPrefix}_hf`,
-      `${destinationPrefix}_ps_type`,
-      `${destinationPrefix}_critical`,
-      `${destinationPrefix}_knockout`,
-      `${destinationPrefix}_deathblow`,
-    ],
+    destinations: pickBestFields.map(
+      (field) => `${destinationPrefix}_${field}`
+    ),
     section: "bonuses",
-    fields: ["ar", "hf", "ps_type", "critical", "knockout", "deathblow"],
+    fields: pickBestFields,
     defaultValues: [0, 0, psType, 20, 0, 0],
     ranks: ["high", "high", "high", "low", "low", "low"],
     filter: rowIds,
   });
 
+  const noAttributeBonusFields = [
+    "hp",
+    "sdc",
+    "mdc",
+    "ppe",
+    "isp",
+    "attacks",
+    "initiative",
+    "pull",
+    "roll",
+    "strike_range",
+    "strike_range_single",
+    "strike_range_burst",
+    "strike_range_aimed",
+    "strike_range_called",
+    "disarm_range",
+  ];
   // No attribute bonuses.
   await repeatingSumAsync(
-    [
-      `${destinationPrefix}_hp`,
-      `${destinationPrefix}_sdc`,
-      `${destinationPrefix}_mdc`,
-      `${destinationPrefix}_ppe`,
-      `${destinationPrefix}_isp`,
-      `${destinationPrefix}_attacks`,
-      `${destinationPrefix}_initiative`,
-      `${destinationPrefix}_pull`,
-      `${destinationPrefix}_roll`,
-      `${destinationPrefix}_strike_range`,
-      `${destinationPrefix}_strike_range_single`,
-      `${destinationPrefix}_strike_range_burst`,
-      `${destinationPrefix}_strike_range_aimed`,
-      `${destinationPrefix}_strike_range_called`,
-      `${destinationPrefix}_disarm_range`,
-    ],
+    noAttributeBonusFields.map((field) => `${destinationPrefix}_${field}`),
     "bonuses",
-    [
-      "attacks",
-      "initiative",
-      "pull",
-      "roll",
-      "strike_range",
-      "strike_range_single",
-      "strike_range_burst",
-      "strike_range_aimed",
-      "strike_range_called",
-      "disarm_range",
-    ],
+    noAttributeBonusFields,
     `filter:${rowIds.toString()}`
   );
   await addStrikeRangeToCombinedAsync(destinationPrefix);
-}
 
-function combineCombat(rowIds) {
-  // we need to combine the values of each repeated attribute within
-  // each of the sectionIds and aggregate them in the combined combat section
-  // +PP +PS, and add a saving throws section with +ME +PE
-
-  repeatingStringConcat({
-    destinations: ["combat_combined_damage", "combat_combined_damage_range"],
-    section: "bonuses",
-    fields: ["damage", "damage_range"],
-    filter: rowIds,
-    callback: () => {
-      console.log("repeatingStringConcat callback");
-    },
-  });
-
-  repeatingPickBest({
-    destinations: [
-      "combat_combined_critical",
-      "combat_combined_knockout",
-      "combat_combined_deathblow",
-    ],
-    section: "bonuses",
-    fields: ["critical", "knockout", "deathblow"],
-    defaultValues: [20, 0, 0],
-    ranks: ["low", "low", "low"],
-    filter: rowIds,
-    callback: () => {
-      console.log("repeatingPickBest callback");
-    },
-  });
-
-  // No attribute bonuses.
-  repeatingSum(
-    [
-      "combat_combined_attacks",
-      "combat_combined_initiative",
-      "combat_combined_pull",
-      "combat_combined_roll",
-      "combat_combined_strike_range",
-      "combat_combined_strike_range_single",
-      "combat_combined_strike_range_burst",
-      "combat_combined_strike_range_aimed",
-      "combat_combined_strike_range_called",
-      "combat_combined_disarm_range",
-    ],
+  const ppBonusFields = [
+    "strike",
+    "parry",
+    "dodge",
+    "throw",
+    "disarm",
+    "entangle",
+    "dodge_flight",
+    "dodge_auto",
+    "dodge_teleport",
+    "dodge_motion",
+    "flipthrow",
+  ];
+  await repeatingSumAsync(
+    ppBonusFields.map((field) => `${destinationPrefix}_${field}`),
     "bonuses",
-    [
-      "attacks",
-      "initiative",
-      "pull",
-      "roll",
-      "strike_range",
-      "strike_range_single",
-      "strike_range_burst",
-      "strike_range_aimed",
-      "strike_range_called",
-      "disarm_range",
-    ],
-    `filter:${rowIds.toString()}`,
-    {
-      callback: addStrikeRangeToCombined,
-    }
-  );
-
-  repeatingSum(
-    ["combat_combined_sdc"],
-    "bonuses",
-    ["sdc"],
-    `filter:${rowIds.toString()}`,
-    "character_sdc"
-  );
-
-  repeatingSum(
-    ["combat_combined_mdc"],
-    "bonuses",
-    ["mdc"],
-    `filter:${rowIds.toString()}`,
-    "character_mdc"
-  );
-
-  // PP Bonus
-  repeatingSum(
-    [
-      "combat_combined_strike",
-      "combat_combined_parry",
-      "combat_combined_dodge",
-      "combat_combined_throw",
-      "combat_combined_disarm",
-      "combat_combined_entangle",
-      "combat_combined_dodge_flight",
-      "combat_combined_dodge_auto",
-      "combat_combined_dodge_teleport",
-      "combat_combined_dodge_motion",
-      "combat_combined_flipthrow",
-    ],
-    "bonuses",
-    [
-      "strike",
-      "parry",
-      "dodge",
-      "throw",
-      "disarm",
-      "entangle",
-      "dodge_flight",
-      "dodge_auto",
-      "dodge_teleport",
-      "dodge_motion",
-      "flipthrow",
-    ],
+    ppBonusFields,
     `filter:${rowIds.toString()}`,
     "pp_bonus"
   );
 
   // Saving Throws
   Object.entries(SAVE_KEYS_ATTRIBUTE_BONUSES).forEach(
-    ([attributeBonus, saves]) => {
-      const destinations = saves.map((save) => `combat_combined_${save}`);
+    async ([attributeBonus, saves]) => {
+      const destinations = saves.map((save) => `${destinationPrefix}_${save}`);
       const section = "bonuses";
       const fields = saves;
-      repeatingSum(
+      await repeatingSumAsync(
         destinations,
         section,
         fields,
@@ -307,7 +163,6 @@ function removeBonusSelectionsRow(bonusRowId, callback = null) {
         a[`repeating_bonuses_${bonusRowId}_selection_id`]
       }`
     );
-    // aggregateBonuses();
     if (typeof callback == "function") {
       callback();
     }
@@ -342,40 +197,29 @@ on("change:_reorder:combat", (e) => {
   console.log("change:_reorder:combat", e);
 });
 
-function aggregateBonuses() {
-  console.log("aggregateBonuses");
-  getSectionIDs("bonusselections", (ids) => {
-    const checkboxNames = ids.map(
-      (id) => `repeating_bonusselections_${id}_enabled`
-    );
-    const combatIdNames = ids.map(
-      (id) => `repeating_bonusselections_${id}_bonus_id`
-    );
-    const bonusSectionNames = [];
-    // const bonusSectionNames = ids.map(
-    //   (id) => `repeating_bonusselections_${id}_bonus_section`
-    // );
-    const attrNames = checkboxNames.concat(combatIdNames, bonusSectionNames);
-    getAttrs(attrNames, (a) => {
-      console.log(a);
-      const bonusRowIds = ids.reduce((acc, id) => {
-        const prefix = `repeating_bonusselections_${id}`;
-        if (Boolean(Number(a[`${prefix}_enabled`])) == true) {
-          acc.push(a[`${prefix}_bonus_id`]);
-        }
-        return acc;
-      }, []);
-      setAttrs({ bonus_ids_output: bonusRowIds.toString() }, {}, () =>
-        combineCombat(bonusRowIds)
-      );
-      // combineCombat(bonusRowIds);
-    });
-  });
+async function outputSelectedBonusIds() {
+  const bonusselectionsIds = await getSectionIDsAsync("bonusselections");
+  const checkboxNames = bonusselectionsIds.map(
+    (id) => `repeating_bonusselections_${id}_enabled`
+  );
+  const bonusIdNames = bonusselectionsIds.map(
+    (id) => `repeating_bonusselections_${id}_bonus_id`
+  );
+  const attrNames = checkboxNames.concat(bonusIdNames);
+  const a = await getAttrsAsync(attrNames);
+  const bonusRowIds = bonusselectionsIds.reduce((acc, id) => {
+    const prefix = `repeating_bonusselections_${id}`;
+    if (Boolean(Number(a[`${prefix}_enabled`])) == true) {
+      acc.push(a[`${prefix}_bonus_id`]);
+    }
+    return acc;
+  }, []);
+  await setAttrsAsync({ bonus_ids_output: bonusRowIds.toString() });
 }
 
-on("change:repeating_bonusselections:enabled", (e) => {
+on("change:repeating_bonusselections:enabled", async (e) => {
   console.log("change:repeating_bonusselections:enabled", e);
-  aggregateBonuses();
+  outputSelectedBonusIds();
 });
 
 function insertSelection(name, bonusRowId) {
