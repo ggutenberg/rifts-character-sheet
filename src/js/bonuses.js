@@ -60,10 +60,78 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
   await setAttrsAsync(attrs);
 }
 
+async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
+  const fields = ["iq", "me", "ma", "ps", "pp", "pe", "pb", "spd", "hf"];
+  const fieldNames = rowIds.reduce((acc, rowId) => {
+    const absFieldNames = fields.map(
+      (f) => `repeating_bonuses_${rowId}_${f}_abs`
+    );
+    const attFieldNames = fields.map(
+      (f) => `repeating_bonuses_${rowId}_${f}_mod`
+    );
+    return acc.concat(absFieldNames, attFieldNames);
+  }, []);
+  console.log(fieldNames);
+  const a = await getAttrsAsync(fieldNames);
+  console.log(a);
+
+  fields.forEach(async (field) => {
+    let fieldAbsValue = null;
+    rowIds.forEach((rowId) => {
+      const rowFieldAbs = a[`repeating_bonuses_${rowId}_${field}_abs`];
+      if (Boolean(Number(rowFieldAbs)) == true) {
+        rowFieldValue = a[`repeating_bonuses_${rowId}_${field}_mod`];
+        fieldAbsValue =
+          fieldAbsValue > rowFieldValue ? fieldAbsValue : rowFieldValue;
+      }
+    });
+    if (fieldAbsValue) {
+      // compare the modified absolute value against the original attribute
+      const coreValue = (await getAttrsAsync([field]))[field];
+      const newValue = coreValue > fieldAbsValue ? coreValue : fieldAbsValue;
+      const attr = {
+        [`${destinationPrefix}_${field}_mod`]: newValue,
+      };
+      await setAttrsAsync(attr);
+    } else {
+      // repeatingSum
+      const rsaDestinations = [`${destinationPrefix}_${field}_mod`];
+      const rsaFields = [`${field}_mod`];
+      console.log(rsaDestinations, rsaFields, field);
+      await repeatingSumAsync(
+        rsaDestinations,
+        "bonuses",
+        rsaFields,
+        `filter:${rowIds.toString()}`,
+        field
+      );
+    }
+  });
+}
+
 async function combineBonuses(rowIds, destinationPrefix) {
   // we need to combine the values of each repeated attribute within
   // each of the sectionIds and aggregate them in the combined combat section
   // +PP +PS, and add a saving throws section with +ME +PE
+
+  await repeatingAbsoluteAttributes(rowIds, destinationPrefix);
+  return;
+  const absFields = [
+    "iq_abs",
+    "me_abs",
+    "ma_abs",
+    "ps_abs",
+    "pe_abs",
+    "pb_abs",
+    "spd_abs",
+    "hf_abs",
+  ];
+  const rowAbsFields = absFields.map((f) => `${destinationPrefix}_${f}`);
+  const absCheckboxes = await getAttrsAsync(absFields);
+  console.log(absCheckboxes);
+  const absKeys = [];
+  const addKeys = [];
+  return;
 
   await repeatingStringConcatAsync({
     destinations: [
