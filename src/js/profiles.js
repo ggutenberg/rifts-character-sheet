@@ -5,7 +5,11 @@ async function updateProfile(rowId) {
   console.log(bonusIds);
   const bonusNameKeys = bonusIds.map((id) => `repeating_bonuses_${id}_name`);
   const a = await getAttrsAsync(bonusNameKeys);
-  const names = Object.values(a).reduce((acc, cur) => `${acc} ${cur}`, "");
+  const names = Object.values(a).reduce(
+    // using Em Space https://www.compart.com/en/unicode/U+2003
+    (acc, cur) => `${acc}   ✔︎ ${cur}`.trim(),
+    ""
+  );
   await setAttrsAsync({ [`repeating_profiles_${rowId}_bonus_names`]: names });
   await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
 }
