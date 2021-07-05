@@ -253,6 +253,7 @@
       </div>
     </div>
   </div>
+
   <div class="magic">
     <h3>Magic</h3>
     <details>
@@ -294,8 +295,45 @@
     </fieldset>
   </div>
 
-  <!-- inject:partials/psionics.html -->
-  <!-- endinject -->
+  <div class="psionics">
+    <h3>Psionics</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Psionic name and its ISP. Then expand the Details, and fill in
+        the applicable values. They will calculate and populate Range, Damage,
+        Duration, and Skill if applicable.
+      </p>
+      <p>
+        For Starting Damage and Damage per Level enter values that roll20 would
+        use for dice rolls. Ex. "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Use button to remove the ISP from the Current ISP input field.
+        Click Reset ISP to set Current ISP back to the value on the Core tab.
+        Note the roll button beside Damage and Skill.
+      </p>
+      <p>
+        Don't forget to copy/paste the power description into the Description
+        field to make life easier for your GM. Also use that field for any
+        macros you may need like Strike with an arbitrary bonus.
+      </p>
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current I.S.P.</span>
+      <input type="number" name="attr_currentisp" value="0" />
+      <button type="action" name="act_resetisp">Reset I.S.P.</button>
+    </label>
+    <fieldset class="repeating_psionics">
+      <details class="info">
+        <!-- inject:partials/psionics.html -->
+        <!-- endinject -->
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <!-- endinject -->
+      </details>
+    </fieldset>
+  </div>
 
   <div class="equipment">
     <h3>Equipment</h3>

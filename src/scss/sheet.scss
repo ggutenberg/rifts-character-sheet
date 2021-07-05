@@ -209,6 +209,14 @@
         grid-template-columns: 2.5rem 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
       }
     }
+
+    .psionics {
+      .psionics-list {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 2.5rem 1fr 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+      }
+    }
   }
 }
 
@@ -426,16 +434,6 @@ img.logo {
 
 .charsheet .spells-list input[name="attr_school"] {
   max-width: 10rem;
-}
-
-.charsheet
-  .psionics
-  .repcontainer[data-groupname="repeating_psionics"]
-  .repitem
-  .psionics-list {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
 
 .charsheet

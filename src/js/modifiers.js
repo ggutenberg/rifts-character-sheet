@@ -36,13 +36,15 @@ async function addModifierToBonusesAsync(section, rowId) {
 on(
   "change:repeating_modifiers \
   change:repeating_abilities \
-  change:repeating_magic",
+  change:repeating_magic \
+  change:repeating_psionics",
   async (e) => {
     console.log("change:repeating_modifiers", e);
     const sourceParts = e.sourceAttribute.split("_");
     if (
       e.sourceAttribute.endsWith("_bonus_id") ||
       e.sourceAttribute.endsWith("_rowid") ||
+      e.sourceAttribute.endsWith("_addtobonuses") ||
       sourceParts.length < 4
     ) {
       return;
