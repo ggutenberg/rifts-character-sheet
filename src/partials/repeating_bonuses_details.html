@@ -199,6 +199,7 @@
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
+          <option value="3.5">Giant Robotic</option>
           <option value="4">Supernatural</option>
         </select></label
       >
@@ -250,20 +251,25 @@
       <label
         >Lift
         <input type="number" value="0" name="attr_mod_lift" value="0" />
-        <div></div>
+        <div>lbs</div>
       </label>
 
       <label
         >Carry
         <input type="number" value="0" name="attr_mod_carry" value="0" />
-        <div></div
-      ></label>
+        <div>lbs</div></label
+      >
 
       <label
-        >Throw
-        <input type="number" value="0" name="attr_mod_throw" value="0" />
-        <div></div
-      ></label>
+        >Throw (&frac12; Carry)
+        <input
+          type="number"
+          value="0"
+          name="attr_mod_throw_distance"
+          value="0"
+        />
+        <div>Feet</div></label
+      >
 
       <label
         >Carry Max

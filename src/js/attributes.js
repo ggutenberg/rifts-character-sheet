@@ -45,8 +45,13 @@ async function maBonus(value, prefix = "") {
 }
 
 async function psBonus(prefix = "") {
-  const a = await getAttrsAsync([`${prefix}ps`, `${prefix}character_ps_type`]);
-  const ps = a[`${prefix}ps`];
+  const a = await getAttrsAsync([
+    `${prefix}ps`,
+    `${prefix}character_ps_type`,
+    `${prefix}pe`,
+  ]);
+  const ps = +a[`${prefix}ps`];
+  const pe = +a[`${prefix}pe`];
   const ps_type = a[`${prefix}character_ps_type`];
   const ps_bonus = ps > 15 ? ps - 15 : 0;
 
@@ -58,12 +63,18 @@ async function psBonus(prefix = "") {
     leap_kick_unit =
       "sdc");
 
+  let carry = ps < 17 ? ps * 10 : ps * 20;
+  let lift = carry * 2;
+  let hold_max = Math.round((pe * 3) / 15);
+  let throw_distance = ps;
+
   switch (ps_type) {
-    case "1":
+    case "1": // normal
       punch = "1D4";
       kick = "1D4";
       break;
-    case "2":
+    case "2": // augmented
+      throw_distance = ps * 2;
       if (ps < 24) {
         // nop
       } else if (ps == 24) {
@@ -92,7 +103,17 @@ async function psBonus(prefix = "") {
         power_punch_unit = "mdc";
       }
       break;
-    case "3":
+    case "3": // robotic
+    case "3.5": // giant robotic
+      if (ps >= 17) {
+        if (ps_type == "3") {
+          lift = carry = ps * 25;
+        } else {
+          lift = carry = ps * 100;
+        }
+      }
+      hold_max = 0;
+      throw_distance = ps * 3;
       if (ps <= 15) {
         restrained_punch = "1D6";
         punch = "2D6";
@@ -175,7 +196,19 @@ async function psBonus(prefix = "") {
             "mdc";
       }
       break;
-    case "4":
+    case "4": // supernatural
+      if (ps >= 18) {
+        carry = ps * 50;
+      } else {
+        carry = ps * 20;
+      }
+      lift = carry * 2;
+      hold_max = pe * 4;
+      if (ps <= 16) {
+        throw_distance = ps * 3;
+      } else {
+        throw_distance = ps * 5;
+      }
       if (ps <= 15) {
         restrained_punch = "1D6";
         punch = "4D6";
@@ -238,7 +271,12 @@ async function psBonus(prefix = "") {
     [`${prefix}power_punch_unit`]: power_punch_unit,
     [`${prefix}kick_unit`]: kick_unit,
     [`${prefix}leap_kick_unit`]: leap_kick_unit,
+    [`${prefix}lift`]: lift,
+    [`${prefix}carry`]: carry,
+    [`${prefix}hold_max`]: hold_max,
+    [`${prefix}throw_distance`]: throw_distance,
   };
+  console.log(attrs);
   await setAttrsAsync(attrs);
 }
 

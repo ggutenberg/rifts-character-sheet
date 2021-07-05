@@ -364,6 +364,7 @@ async function repeatingPickBestAsync({
       }, defaultValues[i]);
     return acc;
   }, {});
+  console.log(output);
   await setAttrsAsync(output);
 }
 

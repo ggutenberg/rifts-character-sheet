@@ -87,24 +87,22 @@
       }
     }
 
-    .bonuses {
-      .bonuses-container {
-        .repcontainer {
-          .repitem {
-            .bonus-ps-container {
-              display: grid;
+    .bonuses-container {
+      .repcontainer {
+        .repitem {
+          .bonus-ps-container {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            label {
+              align-items: center;
               gap: 0.5rem;
-              grid-template-columns: 1fr 1fr 1fr 1fr;
+              grid-template-columns: 1fr min-content 6rem;
 
-              label {
-                align-items: center;
-                gap: 0.5rem;
-                grid-template-columns: 1fr min-content 6rem;
-
-                &.select {
-                  select {
-                    grid-column: 2 / 3;
-                  }
+              &.select {
+                select {
+                  grid-column: 2 / 3;
                 }
               }
             }
