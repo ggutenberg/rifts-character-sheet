@@ -992,7 +992,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_mod_ps_type" value="normal">
+        <select class="" name="attr_mod_character_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -1001,7 +1001,7 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <input type="text" name="attr_mod_restrained_punch" value="0" />
         <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
@@ -1690,7 +1690,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_mod_ps_type" value="normal">
+        <select class="" name="attr_mod_character_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -1699,7 +1699,7 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <input type="text" name="attr_mod_restrained_punch" value="0" />
         <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
@@ -2926,7 +2926,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_mod_ps_type" value="normal">
+        <select class="" name="attr_mod_character_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -2935,7 +2935,7 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <input type="text" name="attr_mod_restrained_punch" value="0" />
         <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
@@ -4357,12 +4357,17 @@ const ATTRIBUTE_KEYS = [
   "pb_abs",
   "mod_spd",
   "spd_abs",
-  "mod_ps_type",
+  "mod_character_ps_type",
   "mod_restrained_punch",
+  "mod_restrained_punch_unit",
   "mod_punch",
+  "mod_punch_unit",
   "mod_power_punch",
+  "mod_power_punch_unit",
   "mod_kick",
+  "mod_kick_unit",
   "mod_leap_kick",
+  "mod_leap_kick_unit",
   "mod_lift",
   "mod_carry",
   "mod_throw",
@@ -5173,23 +5178,25 @@ async function combineBonuses(rowIds, destinationPrefix) {
     filter: rowIds,
   });
 
-  const pickBestFields = [
+  const pickBestFieldsBase = [
     "ar",
-    "hf",
-    "ps_type",
     "critical",
     "knockout",
     "deathblow",
+    "mod_hf",
+    "mod_character_ps_type",
   ];
-  const psType = (await getAttrsAsync(["character_ps_type"])).character_ps_type;
+  const pickBestDestinations = pickBestFieldsBase.map(
+    (field) => `${destinationPrefix}_${field}`
+  );
+  const pickBestFields = pickBestFieldsBase;
+  const core = await getAttrsAsync(["character_ps_type", "hf"]);
   await repeatingPickBestAsync({
-    destinations: pickBestFields.map(
-      (field) => `${destinationPrefix}_${field}`
-    ),
+    destinations: pickBestDestinations,
     section: "bonuses",
     fields: pickBestFields,
-    defaultValues: [0, 0, psType, 20, 0, 0],
-    ranks: ["high", "high", "high", "low", "low", "low"],
+    defaultValues: [0, 20, 0, 0, core.hf, core.character_ps_type],
+    ranks: ["high", "low", "low", "low", "high", "high"],
     filter: rowIds,
   });
 
@@ -5403,6 +5410,16 @@ on("change:repeating_profiles:mod_ma", async (e) => {
   console.log("change:repeating_profiles:mod_ma", e);
   await maBonus(e.newValue, "repeating_profiles_mod_");
 });
+
+on(
+  "change:repeating_profiles:mod_ps \
+  change:repeating_profiles:mod_character_ps_type",
+  async (e) => {
+    console.log("change:repeating_profiles:mod_ps", e);
+    const [r, section, rowId] = e.sourceAttribute.split("_");
+    await psBonus(`${r}_${section}_${rowId}_mod_`);
+  }
+);
 
   /* endinject */
 
@@ -5714,6 +5731,204 @@ async function maBonus(value, prefix = "") {
   });
 }
 
+async function psBonus(prefix = "") {
+  const a = await getAttrsAsync([`${prefix}ps`, `${prefix}character_ps_type`]);
+  const ps = a[`${prefix}ps`];
+  const ps_type = a[`${prefix}character_ps_type`];
+  const ps_bonus = ps > 15 ? ps - 15 : 0;
+
+  let restrained_punch = (punch = power_punch = kick = leap_kick = "");
+  let restrained_punch_unit =
+    (punch_unit =
+    power_punch_unit =
+    kick_unit =
+    leap_kick_unit =
+      "sdc");
+
+  switch (ps_type) {
+    case "1":
+      punch = "1D4";
+      kick = "1D4";
+      break;
+    case "2":
+      if (ps < 24) {
+        // nop
+      } else if (ps == 24) {
+        power_punch = "1";
+        power_punch_unit = "mdc";
+      } else if (ps <= 27) {
+        power_punch = "1D4";
+        power_punch_unit = "mdc";
+      } else if (ps <= 30) {
+        power_punch = "1D6";
+        power_punch_unit = "mdc";
+      } else if (ps <= 40) {
+        power_punch = "2D4";
+        power_punch_unit = "mdc";
+      } else if (ps <= 50) {
+        restrained_punch = "3D6";
+        punch = "1D4";
+        punch_unit = "mdc";
+        power_punch = "3D4";
+        power_punch_unit = "mdc";
+      } else {
+        restrained_punch = "4D6";
+        punch = "1D8";
+        punch_unit = "mdc";
+        power_punch = "4D4";
+        power_punch_unit = "mdc";
+      }
+      break;
+    case "3":
+      if (ps <= 15) {
+        restrained_punch = "1D6";
+        punch = "2D6";
+        power_punch = "4D6";
+        kick = "2D6";
+        leap_kick = "3D6";
+      } else if (ps <= 20) {
+        restrained_punch = "2D6";
+        punch = "1";
+        power_punch = "1D6";
+        kick = "1D4";
+        leap_kick = "2D4";
+        punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
+      } else if (ps <= 25) {
+        restrained_punch = "6D6";
+        punch = "1D4";
+        power_punch = "2D4";
+        kick = "1D6";
+        leap_kick = "2D6";
+        punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
+      } else if (ps <= 30) {
+        restrained_punch = "1D4";
+        punch = "1D6";
+        power_punch = "2D6";
+        kick = "2D4";
+        leap_kick = "2D8";
+        restrained_punch_unit =
+          punch_unit =
+          power_punch_unit =
+          kick_unit =
+          leap_kick_unit =
+            "mdc";
+      } else if (ps <= 35) {
+        restrained_punch = "1D4";
+        punch = "2D4";
+        power_punch = "4D4";
+        kick = "2D8";
+        leap_kick = "4D8";
+        restrained_punch_unit =
+          punch_unit =
+          power_punch_unit =
+          kick_unit =
+          leap_kick_unit =
+            "mdc";
+      } else if (ps <= 40) {
+        restrained_punch = "1D4";
+        punch = "2D6";
+        power_punch = "4D6";
+        kick = "3D8";
+        leap_kick = "5D8";
+        restrained_punch_unit =
+          punch_unit =
+          power_punch_unit =
+          kick_unit =
+          leap_kick_unit =
+            "mdc";
+      } else if (ps <= 50) {
+        restrained_punch = "1D6";
+        punch = "3D6";
+        power_punch = "1D6*10";
+        kick = "5D8";
+        leap_kick = "1D8*10";
+        restrained_punch_unit =
+          punch_unit =
+          power_punch_unit =
+          kick_unit =
+          leap_kick_unit =
+            "mdc";
+      } else {
+        restrained_punch = "2D6";
+        punch = "6D6";
+        power_punch = "2D6*10";
+        kick = "6D8";
+        leap_kick = "2D6*10";
+        restrained_punch_unit =
+          punch_unit =
+          power_punch_unit =
+          kick_unit =
+          leap_kick_unit =
+            "mdc";
+      }
+      break;
+    case "4":
+      if (ps <= 15) {
+        restrained_punch = "1D6";
+        punch = "4D6";
+        power_punch = "1D4";
+        power_punch_unit = "mdc";
+      } else if (ps <= 20) {
+        restrained_punch = "3D6";
+        punch = "1D6";
+        power_punch = "2D6";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 25) {
+        restrained_punch = "4D6";
+        punch = "2D6";
+        power_punch = "4D6";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 30) {
+        restrained_punch = "5D6";
+        punch = "3D6";
+        power_punch = "6D6";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 35) {
+        restrained_punch = "5D6";
+        punch = "4D6";
+        power_punch = "1D4*10";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 40) {
+        restrained_punch = "6D6";
+        punch = "5D6";
+        power_punch = "1D6*10";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 50) {
+        restrained_punch = "1D6*10";
+        punch = "6D6";
+        power_punch = "2D4*10";
+        punch_unit = power_punch_unit = "mdc";
+      } else if (ps <= 60) {
+        restrained_punch = "1D6";
+        punch = "1D6*10";
+        power_punch = "2D6*10";
+        restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
+      } else {
+        // > 60
+        const extra = Math.ceil((ps - 60) / 10) * 10;
+        restrained_punch = "1D6";
+        punch = `1D6*10+${extra}`;
+        power_punch = `2D6*10+${extra * 2}`;
+        restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
+      }
+      break;
+  }
+  const attrs = {
+    [`${prefix}ps_bonus`]: ps_bonus,
+    [`${prefix}restrained_punch`]: restrained_punch,
+    [`${prefix}punch`]: punch,
+    [`${prefix}power_punch`]: power_punch,
+    [`${prefix}kick`]: kick,
+    [`${prefix}leap_kick`]: leap_kick,
+    [`${prefix}restrained_punch_unit`]: restrained_punch_unit,
+    [`${prefix}punch_unit`]: punch_unit,
+    [`${prefix}power_punch_unit`]: power_punch_unit,
+    [`${prefix}kick_unit`]: kick_unit,
+    [`${prefix}leap_kick_unit`]: leap_kick_unit,
+  };
+  await setAttrsAsync(attrs);
+}
+
 on("change:iq", async (e) => {
   await iqBonus(e.newValue);
 });
@@ -5724,216 +5939,10 @@ on("change:me change:pp change:pe", async (e) => {
 
 on("change:ma", async (e) => {
   await maBonus(e.newValue);
-  // const ma_bonus =
-  //   e.newValue >= 16
-  //     ? e.newValue <= 24
-  //       ? 40 + (e.newValue - 16) * 5
-  //       : e.newValue <= 27
-  //       ? 80 + (e.newValue - 24) * 4
-  //       : e.newValue <= 29
-  //       ? 92 + (e.newValue - 27) * 2
-  //       : 97
-  //     : 0;
-  // setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
 });
 
-on("change:ps change:character_ps_type", (e) => {
-  getAttrs(["ps", "character_ps_type"], (a) => {
-    const ps = a.ps;
-    const ps_type = a.character_ps_type;
-    const ps_bonus = ps > 15 ? ps - 15 : 0;
-
-    let restrained_punch = (punch = power_punch = kick = leap_kick = "");
-    let restrained_punch_unit =
-      (punch_unit =
-      power_punch_unit =
-      kick_unit =
-      leap_kick_unit =
-        "sdc");
-
-    switch (ps_type) {
-      case "1":
-        punch = "1D4";
-        kick = "1D4";
-        break;
-      case "2":
-        if (ps < 24) {
-          // nop
-        } else if (ps == 24) {
-          power_punch = "1";
-          power_punch_unit = "mdc";
-        } else if (ps <= 27) {
-          power_punch = "1D4";
-          power_punch_unit = "mdc";
-        } else if (ps <= 30) {
-          power_punch = "1D6";
-          power_punch_unit = "mdc";
-        } else if (ps <= 40) {
-          power_punch = "2D4";
-          power_punch_unit = "mdc";
-        } else if (ps <= 50) {
-          restrained_punch = "3D6";
-          punch = "1D4";
-          punch_unit = "mdc";
-          power_punch = "3D4";
-          power_punch_unit = "mdc";
-        } else {
-          restrained_punch = "4D6";
-          punch = "1D8";
-          punch_unit = "mdc";
-          power_punch = "4D4";
-          power_punch_unit = "mdc";
-        }
-        break;
-      case "3":
-        if (ps <= 15) {
-          restrained_punch = "1D6";
-          punch = "2D6";
-          power_punch = "4D6";
-          kick = "2D6";
-          leap_kick = "3D6";
-        } else if (ps <= 20) {
-          restrained_punch = "2D6";
-          punch = "1";
-          power_punch = "1D6";
-          kick = "1D4";
-          leap_kick = "2D4";
-          punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
-        } else if (ps <= 25) {
-          restrained_punch = "6D6";
-          punch = "1D4";
-          power_punch = "2D4";
-          kick = "1D6";
-          leap_kick = "2D6";
-          punch_unit = power_punch_unit = kick_unit = leap_kick_unit = "mdc";
-        } else if (ps <= 30) {
-          restrained_punch = "1D4";
-          punch = "1D6";
-          power_punch = "2D6";
-          kick = "2D4";
-          leap_kick = "2D8";
-          restrained_punch_unit =
-            punch_unit =
-            power_punch_unit =
-            kick_unit =
-            leap_kick_unit =
-              "mdc";
-        } else if (ps <= 35) {
-          restrained_punch = "1D4";
-          punch = "2D4";
-          power_punch = "4D4";
-          kick = "2D8";
-          leap_kick = "4D8";
-          restrained_punch_unit =
-            punch_unit =
-            power_punch_unit =
-            kick_unit =
-            leap_kick_unit =
-              "mdc";
-        } else if (ps <= 40) {
-          restrained_punch = "1D4";
-          punch = "2D6";
-          power_punch = "4D6";
-          kick = "3D8";
-          leap_kick = "5D8";
-          restrained_punch_unit =
-            punch_unit =
-            power_punch_unit =
-            kick_unit =
-            leap_kick_unit =
-              "mdc";
-        } else if (ps <= 50) {
-          restrained_punch = "1D6";
-          punch = "3D6";
-          power_punch = "1D6*10";
-          kick = "5D8";
-          leap_kick = "1D8*10";
-          restrained_punch_unit =
-            punch_unit =
-            power_punch_unit =
-            kick_unit =
-            leap_kick_unit =
-              "mdc";
-        } else {
-          restrained_punch = "2D6";
-          punch = "6D6";
-          power_punch = "2D6*10";
-          kick = "6D8";
-          leap_kick = "2D6*10";
-          restrained_punch_unit =
-            punch_unit =
-            power_punch_unit =
-            kick_unit =
-            leap_kick_unit =
-              "mdc";
-        }
-        break;
-      case "4":
-        if (ps <= 15) {
-          restrained_punch = "1D6";
-          punch = "4D6";
-          power_punch = "1D4";
-          power_punch_unit = "mdc";
-        } else if (ps <= 20) {
-          restrained_punch = "3D6";
-          punch = "1D6";
-          power_punch = "2D6";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 25) {
-          restrained_punch = "4D6";
-          punch = "2D6";
-          power_punch = "4D6";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 30) {
-          restrained_punch = "5D6";
-          punch = "3D6";
-          power_punch = "6D6";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 35) {
-          restrained_punch = "5D6";
-          punch = "4D6";
-          power_punch = "1D4*10";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 40) {
-          restrained_punch = "6D6";
-          punch = "5D6";
-          power_punch = "1D6*10";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 50) {
-          restrained_punch = "1D6*10";
-          punch = "6D6";
-          power_punch = "2D4*10";
-          punch_unit = power_punch_unit = "mdc";
-        } else if (ps <= 60) {
-          restrained_punch = "1D6";
-          punch = "1D6*10";
-          power_punch = "2D6*10";
-          restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
-        } else {
-          // > 60
-          const extra = Math.ceil((ps - 60) / 10) * 10;
-          restrained_punch = "1D6";
-          punch = `1D6*10+${extra}`;
-          power_punch = `2D6*10+${extra * 2}`;
-          restrained_punch_unit = punch_unit = power_punch_unit = "mdc";
-        }
-        break;
-    }
-    const attrs = {
-      ps_bonus,
-      restrained_punch,
-      punch,
-      power_punch,
-      kick,
-      leap_kick,
-      restrained_punch_unit,
-      punch_unit,
-      power_punch_unit,
-      kick_unit,
-      leap_kick_unit,
-    };
-    setAttrs(attrs);
-  });
+on("change:ps change:character_ps_type", async (e) => {
+  await psBonus();
 });
 
 on("change:pb", (e) => {

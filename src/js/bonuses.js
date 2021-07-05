@@ -126,23 +126,25 @@ async function combineBonuses(rowIds, destinationPrefix) {
     filter: rowIds,
   });
 
-  const pickBestFields = [
+  const pickBestFieldsBase = [
     "ar",
-    "hf",
-    "ps_type",
     "critical",
     "knockout",
     "deathblow",
+    "mod_hf",
+    "mod_character_ps_type",
   ];
-  const psType = (await getAttrsAsync(["character_ps_type"])).character_ps_type;
+  const pickBestDestinations = pickBestFieldsBase.map(
+    (field) => `${destinationPrefix}_${field}`
+  );
+  const pickBestFields = pickBestFieldsBase;
+  const core = await getAttrsAsync(["character_ps_type", "hf"]);
   await repeatingPickBestAsync({
-    destinations: pickBestFields.map(
-      (field) => `${destinationPrefix}_${field}`
-    ),
+    destinations: pickBestDestinations,
     section: "bonuses",
     fields: pickBestFields,
-    defaultValues: [0, 0, psType, 20, 0, 0],
-    ranks: ["high", "high", "high", "low", "low", "low"],
+    defaultValues: [0, 20, 0, 0, core.hf, core.character_ps_type],
+    ranks: ["high", "low", "low", "low", "high", "high"],
     filter: rowIds,
   });
 
@@ -356,3 +358,13 @@ on("change:repeating_profiles:mod_ma", async (e) => {
   console.log("change:repeating_profiles:mod_ma", e);
   await maBonus(e.newValue, "repeating_profiles_mod_");
 });
+
+on(
+  "change:repeating_profiles:mod_ps \
+  change:repeating_profiles:mod_character_ps_type",
+  async (e) => {
+    console.log("change:repeating_profiles:mod_ps", e);
+    const [r, section, rowId] = e.sourceAttribute.split("_");
+    await psBonus(`${r}_${section}_${rowId}_mod_`);
+  }
+);
