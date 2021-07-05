@@ -105,7 +105,6 @@
   width: auto;
   margin-bottom: 0;
 }
-.charsheet .combat-combined-bonuses label span,
 .charsheet .spell-details label span {
   display: flex;
   align-items: center;
@@ -423,13 +422,6 @@ img.logo {
   align-items: center;
 }
 
-.combat-combined-bonuses label {
-  display: grid;
-  grid-template-columns: 1fr min-content 4rem;
-  width: 100%;
-}
-
-.charsheet main#megaverse .bonuses-container .combat-combined-bonuses input,
 .charsheet main#megaverse .bonuses-container details div:not(.macro-help) input,
 .charsheet main#megaverse .bonuses-container input[type=number] {
   width: 5rem;
