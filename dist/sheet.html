@@ -831,7 +831,7 @@
         <input
           type="number"
           value="0"
-          name="attr_iq_mod"
+          name="attr_mod_iq"
           title="Intelligence Quotient"
         />
         <label class="abs"
@@ -841,7 +841,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_iq_bonus_mod"
+          name="attr_mod_iq_bonus"
           title="+ Skills %"
           readonly
         />
@@ -849,7 +849,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_perception_bonus_mod"
+          name="attr_mod_perception_bonus"
           title="+ Perception (Rifter #13, p.16)"
           readonly
         />
@@ -859,7 +859,7 @@
         <input
           type="number"
           value="0"
-          name="attr_me_mod"
+          name="attr_mod_me"
           title="Mental Endurance"
         />
         <label class="abs"
@@ -869,7 +869,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_me_bonus_mod"
+          name="attr_mod_me_bonus"
           title="+ Save vs. Psionics"
           readonly
         />
@@ -879,7 +879,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_mod"
+          name="attr_mod_ma"
           title="Mental Affinity"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
@@ -887,7 +887,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_bonus_mod"
+          name="attr_mod_ma_bonus"
           title="% Trust/Intimidate"
           readonly
         />
@@ -897,7 +897,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ps_mod"
+          name="attr_mod_ps"
           title="Physical Strength"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
@@ -906,7 +906,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_ps_bonus_mod"
+          name="attr_mod_ps_bonus"
           title="+ SDC Damage"
           readonly
         />
@@ -916,7 +916,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pp_mod"
+          name="attr_mod_pp"
           title="Physical Prowess"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
@@ -925,7 +925,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pp_bonus_mod"
+          name="attr_mod_pp_bonus"
           title="+ Strike/Parry/Dodge/Entangle/Disarm"
           readonly
         />
@@ -935,7 +935,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pe_mod"
+          name="attr_mod_pe"
           title="Physical Endurance"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
@@ -944,7 +944,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_bonus_mod"
+          name="attr_mod_pe_bonus"
           title="+ Magic/Poison/Toxins"
           readonly
         />
@@ -952,7 +952,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_coma_bonus_mod"
+          name="attr_mod_pe_coma_bonus"
           title="+ Coma/Death %"
           readonly
         />
@@ -962,7 +962,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pb_mod"
+          name="attr_mod_pb"
           title="Physical Beauty"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
@@ -971,7 +971,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pb_bonus_mod"
+          name="attr_mod_pb_bonus"
           title="% Charm/Impress"
           readonly
         />
@@ -981,7 +981,7 @@
         <input
           type="number"
           value="0"
-          name="attr_spd_mod"
+          name="attr_mod_spd"
           title="Speed"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
@@ -992,7 +992,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_ps_type_mod" value="normal">
+        <select class="" name="attr_mod_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -1001,8 +1001,8 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_restrained_punch_mod" value="0" />
-        <select name="attr_restrained_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1010,8 +1010,8 @@
 
       <label
         >Punch
-        <input type="text" name="attr_punch_mod" value="0" />
-        <select name="attr_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_punch" value="0" />
+        <select name="attr_mod_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1019,8 +1019,8 @@
 
       <label
         >Power Punch
-        <input type="text" name="attr_power_punch_mod" value="0" />
-        <select name="attr_power_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_power_punch" value="0" />
+        <select name="attr_mod_power_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1028,8 +1028,8 @@
 
       <label
         >Kick
-        <input type="text" name="attr_kick_mod" value="0" />
-        <select name="attr_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_kick" value="0" />
+        <select name="attr_mod_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1037,8 +1037,8 @@
 
       <label
         >Leap Kick
-        <input type="text" name="attr_leap_kick_mod" value="0" />
-        <select name="attr_leap_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_leap_kick" value="0" />
+        <select name="attr_mod_leap_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select>
@@ -1046,39 +1046,39 @@
 
       <label
         >Lift
-        <input type="number" value="0" name="attr_lift_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_lift" value="0" />
         <div></div>
       </label>
 
       <label
         >Carry
-        <input type="number" value="0" name="attr_carry_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_carry" value="0" />
         <div></div
       ></label>
 
       <label
         >Throw
-        <input type="number" value="0" name="attr_throw_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_throw" value="0" />
         <div></div
       ></label>
 
       <label
         >Carry Max
-        <input type="number" value="0" name="attr_carry_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_max" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Carry (Running)
-        <input type="number" value="0" name="attr_carry_running_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_running" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Hold Max.
-        <input type="number" value="0" name="attr_hold_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_hold_max" /><span
           >Melees</span
         ></label
       >
@@ -1107,7 +1107,7 @@
     /></label>
     <label
       ><span>H.F.</span
-      ><input type="number" value="0" name="attr_hf_mod" /><label class="abs"
+      ><input type="number" value="0" name="attr_mod_hf" /><label class="abs"
         ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
       ></label
     >
@@ -1483,6 +1483,14 @@
         <input class="full" type="text" name="attr_bonus_ids_output" value="" />
         <hr />
         <h3>Profiles</h3>
+        <fieldset class="repeating_profileselections">
+          <label>
+            <input type="radio" name="attr_enabled" value="1" />
+            <span name="attr_name"></span
+          ></label>
+          <input type="hidden" name="attr_name" value="" />
+          <input type="hidden" name="attr_profile_id" value="" />
+        </fieldset>
         <fieldset class="repeating_profiles">
           <!-- inject:partials/repeating_bonuses_details.html -->
           <details>
@@ -1521,7 +1529,7 @@
         <input
           type="number"
           value="0"
-          name="attr_iq_mod"
+          name="attr_mod_iq"
           title="Intelligence Quotient"
         />
         <label class="abs"
@@ -1531,7 +1539,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_iq_bonus_mod"
+          name="attr_mod_iq_bonus"
           title="+ Skills %"
           readonly
         />
@@ -1539,7 +1547,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_perception_bonus_mod"
+          name="attr_mod_perception_bonus"
           title="+ Perception (Rifter #13, p.16)"
           readonly
         />
@@ -1549,7 +1557,7 @@
         <input
           type="number"
           value="0"
-          name="attr_me_mod"
+          name="attr_mod_me"
           title="Mental Endurance"
         />
         <label class="abs"
@@ -1559,7 +1567,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_me_bonus_mod"
+          name="attr_mod_me_bonus"
           title="+ Save vs. Psionics"
           readonly
         />
@@ -1569,7 +1577,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_mod"
+          name="attr_mod_ma"
           title="Mental Affinity"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
@@ -1577,7 +1585,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_bonus_mod"
+          name="attr_mod_ma_bonus"
           title="% Trust/Intimidate"
           readonly
         />
@@ -1587,7 +1595,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ps_mod"
+          name="attr_mod_ps"
           title="Physical Strength"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
@@ -1596,7 +1604,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_ps_bonus_mod"
+          name="attr_mod_ps_bonus"
           title="+ SDC Damage"
           readonly
         />
@@ -1606,7 +1614,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pp_mod"
+          name="attr_mod_pp"
           title="Physical Prowess"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
@@ -1615,7 +1623,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pp_bonus_mod"
+          name="attr_mod_pp_bonus"
           title="+ Strike/Parry/Dodge/Entangle/Disarm"
           readonly
         />
@@ -1625,7 +1633,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pe_mod"
+          name="attr_mod_pe"
           title="Physical Endurance"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
@@ -1634,7 +1642,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_bonus_mod"
+          name="attr_mod_pe_bonus"
           title="+ Magic/Poison/Toxins"
           readonly
         />
@@ -1642,7 +1650,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_coma_bonus_mod"
+          name="attr_mod_pe_coma_bonus"
           title="+ Coma/Death %"
           readonly
         />
@@ -1652,7 +1660,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pb_mod"
+          name="attr_mod_pb"
           title="Physical Beauty"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
@@ -1661,7 +1669,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pb_bonus_mod"
+          name="attr_mod_pb_bonus"
           title="% Charm/Impress"
           readonly
         />
@@ -1671,7 +1679,7 @@
         <input
           type="number"
           value="0"
-          name="attr_spd_mod"
+          name="attr_mod_spd"
           title="Speed"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
@@ -1682,7 +1690,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_ps_type_mod" value="normal">
+        <select class="" name="attr_mod_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -1691,8 +1699,8 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_restrained_punch_mod" value="0" />
-        <select name="attr_restrained_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1700,8 +1708,8 @@
 
       <label
         >Punch
-        <input type="text" name="attr_punch_mod" value="0" />
-        <select name="attr_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_punch" value="0" />
+        <select name="attr_mod_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1709,8 +1717,8 @@
 
       <label
         >Power Punch
-        <input type="text" name="attr_power_punch_mod" value="0" />
-        <select name="attr_power_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_power_punch" value="0" />
+        <select name="attr_mod_power_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1718,8 +1726,8 @@
 
       <label
         >Kick
-        <input type="text" name="attr_kick_mod" value="0" />
-        <select name="attr_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_kick" value="0" />
+        <select name="attr_mod_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -1727,8 +1735,8 @@
 
       <label
         >Leap Kick
-        <input type="text" name="attr_leap_kick_mod" value="0" />
-        <select name="attr_leap_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_leap_kick" value="0" />
+        <select name="attr_mod_leap_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select>
@@ -1736,39 +1744,39 @@
 
       <label
         >Lift
-        <input type="number" value="0" name="attr_lift_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_lift" value="0" />
         <div></div>
       </label>
 
       <label
         >Carry
-        <input type="number" value="0" name="attr_carry_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_carry" value="0" />
         <div></div
       ></label>
 
       <label
         >Throw
-        <input type="number" value="0" name="attr_throw_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_throw" value="0" />
         <div></div
       ></label>
 
       <label
         >Carry Max
-        <input type="number" value="0" name="attr_carry_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_max" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Carry (Running)
-        <input type="number" value="0" name="attr_carry_running_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_running" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Hold Max.
-        <input type="number" value="0" name="attr_hold_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_hold_max" /><span
           >Melees</span
         ></label
       >
@@ -1797,7 +1805,7 @@
     /></label>
     <label
       ><span>H.F.</span
-      ><input type="number" value="0" name="attr_hf_mod" /><label class="abs"
+      ><input type="number" value="0" name="attr_mod_hf" /><label class="abs"
         ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
       ></label
     >
@@ -2757,7 +2765,7 @@
         <input
           type="number"
           value="0"
-          name="attr_iq_mod"
+          name="attr_mod_iq"
           title="Intelligence Quotient"
         />
         <label class="abs"
@@ -2767,7 +2775,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_iq_bonus_mod"
+          name="attr_mod_iq_bonus"
           title="+ Skills %"
           readonly
         />
@@ -2775,7 +2783,7 @@
           class="attribute-bonus"
           type="number"
           value="0"
-          name="attr_perception_bonus_mod"
+          name="attr_mod_perception_bonus"
           title="+ Perception (Rifter #13, p.16)"
           readonly
         />
@@ -2785,7 +2793,7 @@
         <input
           type="number"
           value="0"
-          name="attr_me_mod"
+          name="attr_mod_me"
           title="Mental Endurance"
         />
         <label class="abs"
@@ -2795,7 +2803,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_me_bonus_mod"
+          name="attr_mod_me_bonus"
           title="+ Save vs. Psionics"
           readonly
         />
@@ -2805,7 +2813,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_mod"
+          name="attr_mod_ma"
           title="Mental Affinity"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
@@ -2813,7 +2821,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ma_bonus_mod"
+          name="attr_mod_ma_bonus"
           title="% Trust/Intimidate"
           readonly
         />
@@ -2823,7 +2831,7 @@
         <input
           type="number"
           value="0"
-          name="attr_ps_mod"
+          name="attr_mod_ps"
           title="Physical Strength"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
@@ -2832,7 +2840,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_ps_bonus_mod"
+          name="attr_mod_ps_bonus"
           title="+ SDC Damage"
           readonly
         />
@@ -2842,7 +2850,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pp_mod"
+          name="attr_mod_pp"
           title="Physical Prowess"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
@@ -2851,7 +2859,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pp_bonus_mod"
+          name="attr_mod_pp_bonus"
           title="+ Strike/Parry/Dodge/Entangle/Disarm"
           readonly
         />
@@ -2861,7 +2869,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pe_mod"
+          name="attr_mod_pe"
           title="Physical Endurance"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
@@ -2870,7 +2878,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_bonus_mod"
+          name="attr_mod_pe_bonus"
           title="+ Magic/Poison/Toxins"
           readonly
         />
@@ -2878,7 +2886,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pe_coma_bonus_mod"
+          name="attr_mod_pe_coma_bonus"
           title="+ Coma/Death %"
           readonly
         />
@@ -2888,7 +2896,7 @@
         <input
           type="number"
           value="0"
-          name="attr_pb_mod"
+          name="attr_mod_pb"
           title="Physical Beauty"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
@@ -2897,7 +2905,7 @@
           class="attribute"
           type="number"
           value="0"
-          name="attr_pb_bonus_mod"
+          name="attr_mod_pb_bonus"
           title="% Charm/Impress"
           readonly
         />
@@ -2907,7 +2915,7 @@
         <input
           type="number"
           value="0"
-          name="attr_spd_mod"
+          name="attr_mod_spd"
           title="Speed"
         /><label class="abs"
           ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
@@ -2918,7 +2926,7 @@
     <div class="bonus-ps-container">
       <label class="select"
         ><span>PS Type</span>
-        <select class="" name="attr_ps_type_mod" value="normal">
+        <select class="" name="attr_mod_ps_type" value="normal">
           <option value="1">Normal</option>
           <option value="2">Augmented</option>
           <option value="3">Robotic</option>
@@ -2927,8 +2935,8 @@
       >
       <label
         >Restrained Punch
-        <input type="text" name="attr_restrained_punch_mod" value="0" />
-        <select name="attr_restrained_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_rmod_estrained_punch" value="0" />
+        <select name="attr_mod_restrained_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -2936,8 +2944,8 @@
 
       <label
         >Punch
-        <input type="text" name="attr_punch_mod" value="0" />
-        <select name="attr_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_punch" value="0" />
+        <select name="attr_mod_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -2945,8 +2953,8 @@
 
       <label
         >Power Punch
-        <input type="text" name="attr_power_punch_mod" value="0" />
-        <select name="attr_power_punch_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_power_punch" value="0" />
+        <select name="attr_mod_power_punch_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -2954,8 +2962,8 @@
 
       <label
         >Kick
-        <input type="text" name="attr_kick_mod" value="0" />
-        <select name="attr_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_kick" value="0" />
+        <select name="attr_mod_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select></label
@@ -2963,8 +2971,8 @@
 
       <label
         >Leap Kick
-        <input type="text" name="attr_leap_kick_mod" value="0" />
-        <select name="attr_leap_kick_unit_mod" value="sdc">
+        <input type="text" name="attr_mod_leap_kick" value="0" />
+        <select name="attr_mod_leap_kick_unit" value="sdc">
           <option value="sdc">SDC</option>
           <option value="mdc">MDC</option>
         </select>
@@ -2972,39 +2980,39 @@
 
       <label
         >Lift
-        <input type="number" value="0" name="attr_lift_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_lift" value="0" />
         <div></div>
       </label>
 
       <label
         >Carry
-        <input type="number" value="0" name="attr_carry_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_carry" value="0" />
         <div></div
       ></label>
 
       <label
         >Throw
-        <input type="number" value="0" name="attr_throw_mod" value="0" />
+        <input type="number" value="0" name="attr_mod_throw" value="0" />
         <div></div
       ></label>
 
       <label
         >Carry Max
-        <input type="number" value="0" name="attr_carry_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_max" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Carry (Running)
-        <input type="number" value="0" name="attr_carry_running_mod" /><span
+        <input type="number" value="0" name="attr_mod_carry_running" /><span
           >Minutes</span
         ></label
       >
 
       <label
         >Hold Max.
-        <input type="number" value="0" name="attr_hold_max_mod" /><span
+        <input type="number" value="0" name="attr_mod_hold_max" /><span
           >Melees</span
         ></label
       >
@@ -3033,7 +3041,7 @@
     /></label>
     <label
       ><span>H.F.</span
-      ><input type="number" value="0" name="attr_hf_mod" /><label class="abs"
+      ><input type="number" value="0" name="attr_mod_hf" /><label class="abs"
         ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
       ></label
     >
@@ -4324,43 +4332,43 @@ const WP_KEYS = {
 };
 
 const ATTRIBUTE_KEYS = [
-  "iq_mod",
+  "mod_iq",
   "iq_abs",
-  "iq_bonus_mod",
-  "perception_bonus_mod",
-  "me_mod",
-  "me_bonus_mod",
+  "mod_iq_bonus",
+  "mod_perception_bonus",
+  "mod_me",
+  "mod_me_bonus",
   "me_abs",
-  "ma_mod",
-  "ma_bonus_mod",
+  "mod_ma",
+  "mod_ma_bonus",
   "ma_abs",
-  "ps_mod",
-  "ps_bonus_mod",
+  "mod_ps",
+  "mod_ps_bonus",
   "ps_abs",
-  "pp_mod",
-  "pp_bonus_mod",
+  "mod_pp",
+  "mod_pp_bonus",
   "pp_abs",
-  "pe_mod",
-  "pe_bonus_mod",
-  "pe_coma_bonus_mod",
+  "mod_pe",
+  "mod_pe_bonus",
+  "mod_pe_coma_bonus",
   "pe_abs",
-  "pb_mod",
-  "pb_bonus_mod",
+  "mod_pb",
+  "mod_pb_bonus",
   "pb_abs",
-  "spd_mod",
+  "mod_spd",
   "spd_abs",
-  "ps_type_mod",
-  "restrained_punch_mod",
-  "punch_mod",
-  "power_punch_mod",
-  "kick_mod",
-  "leap_kick_mod",
-  "lift_mod",
-  "carry_mod",
-  "throw_mod",
-  "carry_max_mod",
-  "carry_running_mod",
-  "hold_max_mod",
+  "mod_ps_type",
+  "mod_restrained_punch",
+  "mod_punch",
+  "mod_power_punch",
+  "mod_kick",
+  "mod_leap_kick",
+  "mod_lift",
+  "mod_carry",
+  "mod_throw",
+  "mod_carry_max",
+  "mod_carry_running",
+  "mod_hold_max",
   "hp",
   "sdc",
   "ar",
@@ -4368,7 +4376,7 @@ const ATTRIBUTE_KEYS = [
   "ps_type",
   "ppe",
   "isp",
-  "hf_mod",
+  "mod_hf",
   "hf_abs",
 ];
 
@@ -5107,7 +5115,7 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       (f) => `repeating_bonuses_${rowId}_${f}_abs`
     );
     const attFieldNames = fields.map(
-      (f) => `repeating_bonuses_${rowId}_${f}_mod`
+      (f) => `repeating_bonuses_${rowId}_mod_${f}`
     );
     return acc.concat(absFieldNames, attFieldNames);
   }, []);
@@ -5118,7 +5126,7 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
     rowIds.forEach((rowId) => {
       const rowFieldAbs = a[`repeating_bonuses_${rowId}_${field}_abs`];
       if (Boolean(Number(rowFieldAbs)) == true) {
-        rowFieldValue = a[`repeating_bonuses_${rowId}_${field}_mod`];
+        rowFieldValue = a[`repeating_bonuses_${rowId}_mod_${field}`];
         fieldAbsValue =
           fieldAbsValue > rowFieldValue ? fieldAbsValue : rowFieldValue;
       }
@@ -5128,13 +5136,13 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       const coreValue = (await getAttrsAsync([field]))[field];
       const newValue = coreValue > fieldAbsValue ? coreValue : fieldAbsValue;
       const attr = {
-        [`${destinationPrefix}_${field}_mod`]: newValue,
+        [`${destinationPrefix}_mod_${field}`]: newValue,
       };
       await setAttrsAsync(attr);
     } else {
       // repeatingSum
-      const rsaDestinations = [`${destinationPrefix}_${field}_mod`];
-      const rsaFields = [`${field}_mod`];
+      const rsaDestinations = [`${destinationPrefix}_mod_${field}`];
+      const rsaFields = [`mod_${field}`];
       await repeatingSumAsync(
         rsaDestinations,
         "bonuses",
@@ -5315,7 +5323,21 @@ on("change:repeating_bonusselections:enabled", async (e) => {
   outputSelectedBonusIds();
 });
 
-function insertSelection(name, bonusRowId) {
+/**
+ * Not done!
+ * @param {*} name
+ * @param {*} prefix
+ * @param {*} refRowId
+ */
+function insertSelection(name, prefix, refRowId) {
+  console.log("insertSelection", name, prefix, rowId);
+  const selectionRowId = generateRowID();
+  const attrs = {};
+  attrs[`${prefix}_${selectionRowId}_ref_id`] = refRowId;
+  attrs[`${prefix}_${selectionRowId}_name`] = name;
+}
+
+function insertSelectionSync(name, bonusRowId) {
   console.log("insertSelection", name, bonusRowId);
   const selectionRowId = generateRowID();
   const attrs = {};
@@ -5326,8 +5348,15 @@ function insertSelection(name, bonusRowId) {
   setAttrs(attrs);
 }
 
-function updateSelection(name, selectionRowId) {
-  console.log("updateSelection", selectionRowId, name);
+async function updateSelection(name, prefix) {
+  console.log("updateSelection", name, prefix);
+  const attrs = {};
+  attrs[`${prefix}_name`] = name;
+  await setAttrsAsync(attrs);
+}
+
+function updateSelectionSync(name, selectionRowId) {
+  console.log("updateSelectionSync", selectionRowId, name);
   const attrs = {};
   attrs[`repeating_bonusselections_${selectionRowId}_name`] = name;
   setAttrs(attrs);
@@ -5340,11 +5369,25 @@ on("change:repeating_bonuses:name", (e) => {
   getAttrs([selectionIdKey], (a) => {
     console.log(a);
     if (a[selectionIdKey]) {
-      updateSelection(e.newValue, a[selectionIdKey]);
+      updateSelectionSync(e.newValue, a[selectionIdKey]);
     } else {
-      insertSelection(e.newValue, rowId);
+      insertSelectionSync(e.newValue, rowId);
     }
   });
+});
+
+on("change:repeating_profiles:name", async (e) => {
+  console.log("change:repeating_profiles:name", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const selectionIdKey = `${r}_${section}_${rowId}_selection_id`;
+  const a = await getAttrsAsync([selectionIdKey]);
+  console.log(a);
+  // ???
+});
+
+on("change:repeating_profiles:mod_iq", async (e) => {
+  console.log("change:repeating_profiles:mod_iq", e);
+  await iqBonus(e.newValue, "repeating_profiles_mod_");
 });
 
   /* endinject */
@@ -5611,10 +5654,13 @@ on(
   /* endinject */
 
   /* inject:js/attributes.js */
-  async function iqBonus(value, suffix = "") {
+  async function iqBonus(value, prefix = "") {
   const iq_bonus = value > 15 ? value - 14 : 0;
   const perception_bonus = getBiAttributeBonus(value);
-  await setAttrsAsync({ iq_bonus, perception_bonus });
+  await setAttrsAsync({
+    [`${prefix}iq_bonus`]: iq_bonus,
+    [`${prefix}perception_bonus`]: perception_bonus,
+  });
   await updateSkills();
 }
 

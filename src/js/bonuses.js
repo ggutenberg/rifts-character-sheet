@@ -68,7 +68,7 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       (f) => `repeating_bonuses_${rowId}_${f}_abs`
     );
     const attFieldNames = fields.map(
-      (f) => `repeating_bonuses_${rowId}_${f}_mod`
+      (f) => `repeating_bonuses_${rowId}_mod_${f}`
     );
     return acc.concat(absFieldNames, attFieldNames);
   }, []);
@@ -79,7 +79,7 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
     rowIds.forEach((rowId) => {
       const rowFieldAbs = a[`repeating_bonuses_${rowId}_${field}_abs`];
       if (Boolean(Number(rowFieldAbs)) == true) {
-        rowFieldValue = a[`repeating_bonuses_${rowId}_${field}_mod`];
+        rowFieldValue = a[`repeating_bonuses_${rowId}_mod_${field}`];
         fieldAbsValue =
           fieldAbsValue > rowFieldValue ? fieldAbsValue : rowFieldValue;
       }
@@ -89,13 +89,13 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       const coreValue = (await getAttrsAsync([field]))[field];
       const newValue = coreValue > fieldAbsValue ? coreValue : fieldAbsValue;
       const attr = {
-        [`${destinationPrefix}_${field}_mod`]: newValue,
+        [`${destinationPrefix}_mod_${field}`]: newValue,
       };
       await setAttrsAsync(attr);
     } else {
       // repeatingSum
-      const rsaDestinations = [`${destinationPrefix}_${field}_mod`];
-      const rsaFields = [`${field}_mod`];
+      const rsaDestinations = [`${destinationPrefix}_mod_${field}`];
+      const rsaFields = [`mod_${field}`];
       await repeatingSumAsync(
         rsaDestinations,
         "bonuses",
@@ -276,7 +276,21 @@ on("change:repeating_bonusselections:enabled", async (e) => {
   outputSelectedBonusIds();
 });
 
-function insertSelection(name, bonusRowId) {
+/**
+ * Not done!
+ * @param {*} name
+ * @param {*} prefix
+ * @param {*} refRowId
+ */
+function insertSelection(name, prefix, refRowId) {
+  console.log("insertSelection", name, prefix, rowId);
+  const selectionRowId = generateRowID();
+  const attrs = {};
+  attrs[`${prefix}_${selectionRowId}_ref_id`] = refRowId;
+  attrs[`${prefix}_${selectionRowId}_name`] = name;
+}
+
+function insertSelectionSync(name, bonusRowId) {
   console.log("insertSelection", name, bonusRowId);
   const selectionRowId = generateRowID();
   const attrs = {};
@@ -287,8 +301,15 @@ function insertSelection(name, bonusRowId) {
   setAttrs(attrs);
 }
 
-function updateSelection(name, selectionRowId) {
-  console.log("updateSelection", selectionRowId, name);
+async function updateSelection(name, prefix) {
+  console.log("updateSelection", name, prefix);
+  const attrs = {};
+  attrs[`${prefix}_name`] = name;
+  await setAttrsAsync(attrs);
+}
+
+function updateSelectionSync(name, selectionRowId) {
+  console.log("updateSelectionSync", selectionRowId, name);
   const attrs = {};
   attrs[`repeating_bonusselections_${selectionRowId}_name`] = name;
   setAttrs(attrs);
@@ -301,9 +322,23 @@ on("change:repeating_bonuses:name", (e) => {
   getAttrs([selectionIdKey], (a) => {
     console.log(a);
     if (a[selectionIdKey]) {
-      updateSelection(e.newValue, a[selectionIdKey]);
+      updateSelectionSync(e.newValue, a[selectionIdKey]);
     } else {
-      insertSelection(e.newValue, rowId);
+      insertSelectionSync(e.newValue, rowId);
     }
   });
+});
+
+on("change:repeating_profiles:name", async (e) => {
+  console.log("change:repeating_profiles:name", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const selectionIdKey = `${r}_${section}_${rowId}_selection_id`;
+  const a = await getAttrsAsync([selectionIdKey]);
+  console.log(a);
+  // ???
+});
+
+on("change:repeating_profiles:mod_iq", async (e) => {
+  console.log("change:repeating_profiles:mod_iq", e);
+  await iqBonus(e.newValue, "repeating_profiles_mod_");
 });

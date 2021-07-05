@@ -1,7 +1,10 @@
-async function iqBonus(value, suffix = "") {
+async function iqBonus(value, prefix = "") {
   const iq_bonus = value > 15 ? value - 14 : 0;
   const perception_bonus = getBiAttributeBonus(value);
-  await setAttrsAsync({ iq_bonus, perception_bonus });
+  await setAttrsAsync({
+    [`${prefix}iq_bonus`]: iq_bonus,
+    [`${prefix}perception_bonus`]: perception_bonus,
+  });
   await updateSkills();
 }
 
