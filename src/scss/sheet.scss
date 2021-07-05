@@ -3,47 +3,6 @@
 /* Resets */
 
 .charsheet {
-  details {
-    display: revert;
-    margin-bottom: 1rem;
-
-    summary {
-      display: revert;
-      cursor: pointer;
-
-      & > h3 {
-        display: inline-block;
-      }
-    }
-  }
-
-  details.info {
-    display: block;
-    margin-bottom: 0;
-
-    & > summary {
-      display: block;
-    }
-  }
-
-  .full {
-    width: 100% !important;
-  }
-
-  input,
-  textarea,
-  select,
-  .uneditable-input {
-    width: auto;
-    margin-bottom: 0;
-  }
-
-  .spell-details label span {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   main#megaverse {
     &:not(.debug) {
       .bonuses {
@@ -59,6 +18,47 @@
           display: none;
         }
       }
+    }
+
+    details {
+      display: revert;
+      margin-bottom: 1rem;
+
+      summary {
+        display: revert;
+        cursor: pointer;
+
+        & > h3 {
+          display: inline-block;
+        }
+      }
+    }
+
+    details.info {
+      display: block;
+      margin-bottom: 0;
+
+      & > summary {
+        display: block;
+      }
+    }
+
+    .full {
+      width: 100% !important;
+    }
+
+    input,
+    textarea,
+    select,
+    .uneditable-input {
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    .spell-details label span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     input[type="number"] {
@@ -78,58 +78,103 @@
       }
     }
 
-    .modifiers {
-      .bonuses-container {
-        .repcontainer {
-          .repitem {
-            // .bonus-ps-container,
-            .profile-management {
-              display: none !important;
-            }
+    .bonus-ps-container {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      label {
+        display: grid;
+        align-items: center;
+        gap: 0.5rem;
+        grid-template-columns: 8rem 4rem min-content;
+
+        &.select {
+          select {
+            grid-column: 2 / span 2;
           }
+        }
+
+        input {
+          width: 4rem;
         }
       }
     }
 
-    // .bonuses {
-    //   &:not(.debug) {
-    //     // WHY ISN'T THIS WORKING with :not(.debug)???
-    //     [data-groupname="repeating_bonusselections"] {
-    //       button.repcontrol_del,
-    //       button.repcontrol_add {
-    //         display: none !important;
-    //       }
-    //     }
-    //     .bonus-sources,
-    //     [name="attr_bonus_ids_output"] {
-    //       display: none;
-    //     }
-    //   }
-    // }
+    .bonus-type-container {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
 
-    .bonuses-container {
-      .repcontainer {
-        .repitem {
-          .bonus-ps-container {
-            display: grid;
-            gap: 0.5rem;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+      &.attributes {
+        > label {
+          display: grid;
+          gap: 0.2rem;
+          grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
 
-            label {
-              align-items: center;
-              gap: 0.5rem;
-              grid-template-columns: 1fr min-content 6rem;
-
-              &.select {
-                select {
-                  grid-column: 2 / 3;
-                }
-              }
-            }
+          input[type="number"],
+          input[type="text"] {
+            width: auto;
           }
         }
       }
 
+      input {
+        width: 5rem;
+      }
+
+      label {
+        display: grid;
+        gap: 0.2rem;
+        grid-template-columns: 1fr min-content 4rem;
+        width: 100%;
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
+
+      label.select {
+        grid-template-columns: max-content 1fr 4rem;
+        align-items: center;
+      }
+
+      label.description {
+        display: block;
+      }
+
+      .bonus-thing-heading {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 2.5rem 1fr min-content;
+
+        label {
+          display: grid;
+          gap: 0.5rem;
+          grid-template-columns: max-content 1fr;
+
+          input[name="attr_name"] {
+            width: auto;
+          }
+        }
+      }
+
+      label.abs {
+        align-items: center;
+        input[type="checkbox"] {
+          width: 1rem;
+          margin: 0 0.2rem 0 0;
+        }
+      }
+
+      .profile-management {
+        display: block;
+      }
+    }
+
+    .bonuses-container {
       .profiles {
         .repcontainer[data-groupname="repeating_profiles"] {
           .repitem {
@@ -166,77 +211,73 @@
       .repcontainer[data-groupname="repeating_modifiers"],
       .repcontainer[data-groupname="repeating_bonuses"] {
         .repitem {
-          .bonus-type-container {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+          // .bonus-type-container {
+          //   display: grid;
+          //   gap: 1rem;
+          //   grid-template-columns: 1fr 1fr 1fr 1fr;
 
-            &.attributes {
-              > label {
-                display: grid;
-                gap: 0.2rem;
-                grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
+          //   &.attributes {
+          //     > label {
+          //       display: grid;
+          //       gap: 0.2rem;
+          //       grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
 
-                input[type="number"],
-                input[type="text"] {
-                  width: auto;
-                }
-              }
-              // label.abs {
-              //   // display: none;
-              //   // grid-template-columns: min-content min-content;
-              // }
-            }
-          }
+          //       input[type="number"],
+          //       input[type="text"] {
+          //         width: auto;
+          //       }
+          //     }
+          //   }
+          // }
 
-          label {
-            display: grid;
-            grid-template-columns: 1fr min-content 4rem;
-            width: 100%;
+          // label {
+          //   display: grid;
+          //   grid-template-columns: 1fr min-content 4rem;
+          //   width: 100%;
 
-            span {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            }
-          }
+          //   span {
+          //     display: flex;
+          //     align-items: center;
+          //     justify-content: space-between;
+          //   }
+          // }
 
-          label.select {
-            grid-template-columns: max-content 1fr 4rem;
-            align-items: center;
-          }
+          // label.select {
+          //   grid-template-columns: max-content 1fr 4rem;
+          //   align-items: center;
+          // }
 
-          label.description {
-            display: block;
-          }
+          // label.description {
+          //   display: block;
+          // }
 
-          .bonus-thing-heading {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: 2.5rem 1fr min-content;
+          // .bonus-thing-heading {
+          //   display: grid;
+          //   gap: 1rem;
+          //   grid-template-columns: 2.5rem 1fr min-content;
 
-            label {
-              display: grid;
-              gap: 0.5rem;
-              grid-template-columns: max-content 1fr;
+          //   label {
+          //     display: grid;
+          //     gap: 0.5rem;
+          //     grid-template-columns: max-content 1fr;
 
-              input[name="attr_name"] {
-                width: auto;
-              }
-            }
-          }
+          //     input[name="attr_name"] {
+          //       width: auto;
+          //     }
+          //   }
+          // }
 
-          label.abs {
-            align-items: center;
-            input[type="checkbox"] {
-              width: 1rem;
-              margin: 0 0.2rem 0 0;
-            }
-          }
+          // label.abs {
+          //   align-items: center;
+          //   input[type="checkbox"] {
+          //     width: 1rem;
+          //     margin: 0 0.2rem 0 0;
+          //   }
+          // }
 
-          .profile-management {
-            display: block;
-          }
+          // .profile-management {
+          //   display: block;
+          // }
         }
       }
     }
