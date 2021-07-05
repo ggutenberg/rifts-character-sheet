@@ -1509,9 +1509,10 @@
           <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_profile_id" value="" />
         </fieldset>
-        <fieldset class="repeating_profiles">
-          <!-- inject:partials/repeating_bonuses_details.html -->
-          <details>
+        <div class="profiles">
+          <fieldset class="repeating_profiles">
+            <!-- inject:partials/repeating_bonuses_details.html -->
+            <details>
   <summary>
     <div class="bonus-thing-heading">
       <b class="click-expand"
@@ -2162,8 +2163,9 @@
   </div>
 </details>
 
-          <!-- endinject -->
-        </fieldset>
+            <!-- endinject -->
+          </fieldset>
+        </div>
         <hr />
         <div class="hidden">
           <!-- inject:partials/combat_combined_melee.html -->
@@ -5091,23 +5093,6 @@ async function getSectionIDsOrderedAsync(sectionName) {
     ];
   return ids;
 }
-
-var getSectionIDsOrdered = function (sectionName, callback) {
-  "use strict";
-  getAttrs([`_reporder_${sectionName}`], function (v) {
-    getSectionIDs(sectionName, function (idArray) {
-      let reporderArray = v[`_reporder_${sectionName}`]
-          ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
-          : [],
-        ids = [
-          ...new Set(
-            reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
-          ),
-        ];
-      callback(ids);
-    });
-  });
-};
 
   /* endinject */
 

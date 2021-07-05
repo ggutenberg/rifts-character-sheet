@@ -88,6 +88,14 @@
     }
 
     .bonuses-container {
+      .combat-combined-bonuses {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
       .repcontainer {
         .repitem {
           .bonus-ps-container {
@@ -109,15 +117,29 @@
           }
         }
       }
-    }
 
-    .bonuses-container {
-      .combat-combined-bonuses {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+      .profiles {
+        .repcontainer[data-groupname="repeating_profiles"] {
+          .repitem {
+            .bonus-type-container {
+              &.attributes {
+                > label {
+                  display: grid;
+                  gap: 0.5rem;
+                  grid-template-columns: 4rem 4rem 4rem 4rem;
+
+                  input[type="number"],
+                  input[type="text"] {
+                    width: auto;
+                  }
+                }
+              }
+              label.abs {
+                display: none;
+              }
+            }
+          }
+        }
       }
 
       .repcontainer[data-groupname="repeating_profiles"],
@@ -132,18 +154,18 @@
             &.attributes {
               > label {
                 display: grid;
-                gap: 0.5rem;
-                grid-template-columns: 4rem 4rem 4rem 4rem;
+                gap: 0.2rem;
+                grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
 
                 input[type="number"],
                 input[type="text"] {
                   width: auto;
                 }
               }
-              label.abs {
-                display: none;
-                // grid-template-columns: min-content min-content;
-              }
+              // label.abs {
+              //   // display: none;
+              //   // grid-template-columns: min-content min-content;
+              // }
             }
           }
 
@@ -196,7 +218,7 @@
             align-items: center;
             input[type="checkbox"] {
               width: 1rem;
-              margin: 0 0.5rem;
+              margin: 0 0.2rem 0 0;
             }
           }
 
