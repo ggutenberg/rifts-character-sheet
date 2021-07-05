@@ -8,6 +8,24 @@ async function iqBonus(value, prefix = "") {
   await updateSkills();
 }
 
+async function mePpPeBonus(attribute, value, prefix = "") {
+  console.log("mePpPeBonus", attribute, value, prefix);
+  const bonus = getBiAttributeBonus(value);
+  const attrs = {};
+  attrs[`${prefix}${attribute}_bonus`] = bonus;
+  if (attribute.endsWith("pe")) {
+    attrs[`${prefix}pe_coma_bonus`] =
+      value >= 16
+        ? value <= 18
+          ? 4 + (value - 16)
+          : value <= 30
+          ? 8 + (value - 19) * 2
+          : 30 + (value - 30)
+        : 0;
+  }
+  await setAttrsAsync(attrs);
+}
+
 on("change:iq", async (e) => {
   await iqBonus(e.newValue);
   // const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
@@ -15,22 +33,8 @@ on("change:iq", async (e) => {
   // setAttrs({ iq_bonus, perception_bonus }, {}, updateSkills);
 });
 
-on("change:me change:pp change:pe", (e) => {
-  console.log("change:me change:pp change:pe");
-  const bonus = getBiAttributeBonus(e.newValue);
-  const attrs = {};
-  attrs[`${e.sourceAttribute}_bonus`] = bonus;
-  if (e.sourceAttribute == "pe") {
-    attrs["pe_coma_bonus"] =
-      e.newValue >= 16
-        ? e.newValue <= 18
-          ? 4 + (e.newValue - 16)
-          : e.newValue <= 30
-          ? 8 + (e.newValue - 19) * 2
-          : 30 + (e.newValue - 30)
-        : 0;
-  }
-  setAttrs(attrs);
+on("change:me change:pp change:pe", async (e) => {
+  await mePpPeBonus(e.sourceAttribute, e.newValue);
 });
 
 on("change:ma", (e) => {

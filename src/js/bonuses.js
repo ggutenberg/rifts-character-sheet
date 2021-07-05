@@ -342,3 +342,12 @@ on("change:repeating_profiles:mod_iq", async (e) => {
   console.log("change:repeating_profiles:mod_iq", e);
   await iqBonus(e.newValue, "repeating_profiles_mod_");
 });
+
+on(
+  "change:repeating_profiles:mod_me \
+  change:repeating_profiles:mod_pp \
+  change:repeating_profiles:mod_pe",
+  async (e) => {
+    await mePpPeBonus(e.sourceAttribute, e.newValue);
+  }
+);
