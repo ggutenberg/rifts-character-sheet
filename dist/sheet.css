@@ -156,13 +156,13 @@
   display: grid;
   align-items: center;
   gap: 0.5rem;
-  grid-template-columns: 8rem 4rem min-content;
+  grid-template-columns: 6.5rem 6rem min-content;
 }
 .charsheet main#megaverse .bonus-ps-container label.select select {
   grid-column: 2/span 2;
 }
 .charsheet main#megaverse .bonus-ps-container label input {
-  width: 4rem;
+  width: 6rem;
 }
 .charsheet main#megaverse .bonus-type-container {
   display: grid;
