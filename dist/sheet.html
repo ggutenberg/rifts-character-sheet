@@ -5328,24 +5328,10 @@ async function outputSelectedBonusIds() {
 
 on("change:repeating_bonusselections:enabled", async (e) => {
   console.log("change:repeating_bonusselections:enabled", e);
-  outputSelectedBonusIds();
+  await outputSelectedBonusIds();
 });
 
-/**
- * Not done!
- * @param {*} name
- * @param {*} prefix
- * @param {*} refRowId
- */
-function insertSelection(name, prefix, refRowId) {
-  console.log("insertSelection", name, prefix, rowId);
-  const selectionRowId = generateRowID();
-  const attrs = {};
-  attrs[`${prefix}_${selectionRowId}_ref_id`] = refRowId;
-  attrs[`${prefix}_${selectionRowId}_name`] = name;
-}
-
-function insertSelectionSync(name, bonusRowId) {
+async function insertSelection(name, bonusRowId) {
   console.log("insertSelection", name, bonusRowId);
   const selectionRowId = generateRowID();
   const attrs = {};
@@ -5353,35 +5339,27 @@ function insertSelectionSync(name, bonusRowId) {
   attrs[`repeating_bonusselections_${selectionRowId}_name`] = name;
   attrs[`repeating_bonuses_${bonusRowId}_selection_id`] = selectionRowId;
   console.log(attrs);
-  setAttrs(attrs);
-}
-
-async function updateSelection(name, prefix) {
-  console.log("updateSelection", name, prefix);
-  const attrs = {};
-  attrs[`${prefix}_name`] = name;
   await setAttrsAsync(attrs);
 }
 
-function updateSelectionSync(name, selectionRowId) {
-  console.log("updateSelectionSync", selectionRowId, name);
+async function updateSelection(name, selectionRowId) {
+  console.log("updateSelection", name, selectionRowId);
   const attrs = {};
   attrs[`repeating_bonusselections_${selectionRowId}_name`] = name;
-  setAttrs(attrs);
+  await setAttrsAsync(attrs);
 }
 
-on("change:repeating_bonuses:name", (e) => {
+on("change:repeating_bonuses:name", async (e) => {
   console.log("change:repeating_bonuses:name", e);
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const selectionIdKey = `repeating_bonuses_${rowId}_selection_id`;
-  getAttrs([selectionIdKey], (a) => {
-    console.log(a);
-    if (a[selectionIdKey]) {
-      updateSelectionSync(e.newValue, a[selectionIdKey]);
-    } else {
-      insertSelectionSync(e.newValue, rowId);
-    }
-  });
+  const a = await getAttrsAsync([selectionIdKey]);
+  console.log(a);
+  if (a[selectionIdKey]) {
+    await updateSelection(e.newValue, a[selectionIdKey]);
+  } else {
+    await insertSelection(e.newValue, rowId);
+  }
 });
 
 on("change:repeating_profiles:name", async (e) => {
