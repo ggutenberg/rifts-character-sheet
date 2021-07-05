@@ -430,3 +430,34 @@ function mergeAndAddObjects(data) {
   });
   return result;
 }
+
+async function getSectionIDsOrderedAsync(sectionName) {
+  const v = await getAttrsAsync([`_reporder_${sectionName}`]);
+  const idArray = await getSectionIDsAsync(sectionName);
+  let reporderArray = v[`_reporder_${sectionName}`]
+      ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
+      : [],
+    ids = [
+      ...new Set(
+        reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
+      ),
+    ];
+  return ids;
+}
+
+var getSectionIDsOrdered = function (sectionName, callback) {
+  "use strict";
+  getAttrs([`_reporder_${sectionName}`], function (v) {
+    getSectionIDs(sectionName, function (idArray) {
+      let reporderArray = v[`_reporder_${sectionName}`]
+          ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
+          : [],
+        ids = [
+          ...new Set(
+            reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
+          ),
+        ];
+      callback(ids);
+    });
+  });
+};

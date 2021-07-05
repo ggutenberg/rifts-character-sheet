@@ -1469,6 +1469,11 @@
             prompts to add Punch damage. Crit/Knockout/Death Blow use the lowest
             of the available options (ex. Crit: 17 is better than Crit: 19).
           </p>
+          <p>
+            The first Profile in the list is considered the
+            <b>Default</b> profile and is used to perform global calculations
+            like speed over time and skill bonuses.
+          </p>
         </details>
         <p>Click <b>Instructions</b> for detailed instructions.</p>
         <fieldset class="repeating_bonusselections">
@@ -5047,6 +5052,37 @@ function mergeAndAddObjects(data) {
   return result;
 }
 
+async function getSectionIDsOrderedAsync(sectionName) {
+  const v = await getAttrsAsync([`_reporder_${sectionName}`]);
+  const idArray = await getSectionIDsAsync(sectionName);
+  let reporderArray = v[`_reporder_${sectionName}`]
+      ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
+      : [],
+    ids = [
+      ...new Set(
+        reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
+      ),
+    ];
+  return ids;
+}
+
+var getSectionIDsOrdered = function (sectionName, callback) {
+  "use strict";
+  getAttrs([`_reporder_${sectionName}`], function (v) {
+    getSectionIDs(sectionName, function (idArray) {
+      let reporderArray = v[`_reporder_${sectionName}`]
+          ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
+          : [],
+        ids = [
+          ...new Set(
+            reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
+          ),
+        ];
+      callback(ids);
+    });
+  });
+};
+
   /* endinject */
 
   /* inject:js/bonuses.js */
@@ -5402,7 +5438,7 @@ on(
   change:repeating_profiles:mod_pp \
   change:repeating_profiles:mod_pe",
   async (e) => {
-    await mePpPeBonus(e.sourceAttribute, e.newValue);
+    await mePpPeBonus(e.sourceAttribute, e.newValue, "repeating_profiles_mod_");
   }
 );
 
@@ -5420,6 +5456,11 @@ on(
     await psBonus(`${r}_${section}_${rowId}_mod_`);
   }
 );
+
+on("change:repeating_profiles:mod_pb", async (e) => {
+  console.log("change:repeating_profiles:mod_pb", e);
+  await pbBonus(e.newValue, "repeating_profiles_mod_");
+});
 
   /* endinject */
 
@@ -5929,6 +5970,39 @@ async function psBonus(prefix = "") {
   await setAttrsAsync(attrs);
 }
 
+async function pbBonus(value, prefix = "") {
+  const pb_bonus =
+    value >= 16
+      ? value <= 26
+        ? 30 + (value - 16) * 5
+        : value <= 28
+        ? 80 + (value - 26) * 3
+        : value == 29
+        ? 90
+        : 92
+      : 0;
+  await setAttrsAsync({
+    [`${prefix}pb_bonus`]: pb_bonus,
+    [`${prefix}charm_impress`]: pb_bonus,
+  });
+}
+
+async function spdBonus(value) {
+  const orderedSectionIds = await getSectionIDsOrderedAsync("profiles");
+  const a = await getAttrsAsync([
+    `repeating_profiles_${orderedSectionIds[0]}_attacks`,
+  ]);
+  const feetPerMelee = value * 15;
+  const attrs = {
+    run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
+    run_ft_melee: feetPerMelee,
+    run_ft_attack: Math.round(
+      feetPerMelee / a[`repeating_profiles_${orderedSectionIds[0]}_attacks`]
+    ),
+  };
+  await setAttrsAsync(attrs);
+}
+
 on("change:iq", async (e) => {
   await iqBonus(e.newValue);
 });
@@ -5945,21 +6019,13 @@ on("change:ps change:character_ps_type", async (e) => {
   await psBonus();
 });
 
-on("change:pb", (e) => {
-  const pb_bonus =
-    e.newValue >= 16
-      ? e.newValue <= 26
-        ? 30 + (e.newValue - 16) * 5
-        : e.newValue <= 28
-        ? 80 + (e.newValue - 26) * 3
-        : e.newValue == 29
-        ? 90
-        : 92
-      : 0;
-  setAttrs({ pb_bonus, charm_impress: pb_bonus });
+on("change:pb", async (e) => {
+  await pbBonus(e.newValue);
 });
 
-on("change:spd", (e) => {
+on("change:spd", async (e) => {
+  await spdBonus(e.newValue);
+  return;
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = e.newValue * 15;
     const attrs = {

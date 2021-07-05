@@ -242,6 +242,39 @@ async function psBonus(prefix = "") {
   await setAttrsAsync(attrs);
 }
 
+async function pbBonus(value, prefix = "") {
+  const pb_bonus =
+    value >= 16
+      ? value <= 26
+        ? 30 + (value - 16) * 5
+        : value <= 28
+        ? 80 + (value - 26) * 3
+        : value == 29
+        ? 90
+        : 92
+      : 0;
+  await setAttrsAsync({
+    [`${prefix}pb_bonus`]: pb_bonus,
+    [`${prefix}charm_impress`]: pb_bonus,
+  });
+}
+
+async function spdBonus(value) {
+  const orderedSectionIds = await getSectionIDsOrderedAsync("profiles");
+  const a = await getAttrsAsync([
+    `repeating_profiles_${orderedSectionIds[0]}_attacks`,
+  ]);
+  const feetPerMelee = value * 15;
+  const attrs = {
+    run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
+    run_ft_melee: feetPerMelee,
+    run_ft_attack: Math.round(
+      feetPerMelee / a[`repeating_profiles_${orderedSectionIds[0]}_attacks`]
+    ),
+  };
+  await setAttrsAsync(attrs);
+}
+
 on("change:iq", async (e) => {
   await iqBonus(e.newValue);
 });
@@ -258,21 +291,13 @@ on("change:ps change:character_ps_type", async (e) => {
   await psBonus();
 });
 
-on("change:pb", (e) => {
-  const pb_bonus =
-    e.newValue >= 16
-      ? e.newValue <= 26
-        ? 30 + (e.newValue - 16) * 5
-        : e.newValue <= 28
-        ? 80 + (e.newValue - 26) * 3
-        : e.newValue == 29
-        ? 90
-        : 92
-      : 0;
-  setAttrs({ pb_bonus, charm_impress: pb_bonus });
+on("change:pb", async (e) => {
+  await pbBonus(e.newValue);
 });
 
-on("change:spd", (e) => {
+on("change:spd", async (e) => {
+  await spdBonus(e.newValue);
+  return;
   getAttrs(["combat_combined_attacks"], (a) => {
     const feetPerMelee = e.newValue * 15;
     const attrs = {

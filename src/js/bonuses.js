@@ -350,7 +350,7 @@ on(
   change:repeating_profiles:mod_pp \
   change:repeating_profiles:mod_pe",
   async (e) => {
-    await mePpPeBonus(e.sourceAttribute, e.newValue);
+    await mePpPeBonus(e.sourceAttribute, e.newValue, "repeating_profiles_mod_");
   }
 );
 
@@ -368,3 +368,8 @@ on(
     await psBonus(`${r}_${section}_${rowId}_mod_`);
   }
 );
+
+on("change:repeating_profiles:mod_pb", async (e) => {
+  console.log("change:repeating_profiles:mod_pb", e);
+  await pbBonus(e.newValue, "repeating_profiles_mod_");
+});
