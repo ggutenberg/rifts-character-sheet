@@ -5,6 +5,34 @@
  * -> addBonusToSelections
  */
 
+async function addModifierToBonusesAsync(section, rowId) {
+  console.log("addModifierToBonusesAsync", section, rowId);
+  if (!section || !rowId) {
+    return;
+  }
+
+  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
+  const thingAttrs = COMBAT_SAVE_KEYS.map(
+    (key) => `repeating_${section}_${rowId}_${key}`
+  );
+  thingAttrs.push(thingBonusId);
+  const a = await getAttrsAsync(thingAttrs);
+  console.log(a);
+  const attrs = {};
+  let bonusRowId;
+  if (a[thingBonusId]) {
+    bonusRowId = a[thingBonusId];
+  } else {
+    bonusRowId = generateRowID();
+    attrs[thingBonusId] = bonusRowId;
+  }
+  COMBAT_SAVE_KEYS.forEach((key) => {
+    attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
+      a[`repeating_${section}_${rowId}_${key}`] || 0;
+  });
+  await setAttrsAsync(attrs);
+}
+
 function addModifierToBonuses(section, rowId) {
   console.log("addModifierToBonuses", section, rowId);
   if (!section || !rowId) {

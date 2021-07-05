@@ -212,6 +212,22 @@ async function combineBonuses(rowIds, destinationPrefix) {
   );
 }
 
+async function removeBonusSelectionsRowAsync(bonusRowId) {
+  const a = await getAttrsAsync([
+    `repeating_bonuses_${bonusRowId}_selection_id`,
+  ]);
+  removeRepeatingRow(
+    `repeating_bonusselections_${
+      a[`repeating_bonuses_${bonusRowId}_selection_id`]
+    }`
+  );
+}
+
+async function removeBonusRowsAsync(bonusRowId) {
+  await removeBonusSelectionsRowAsync(bonusRowId);
+  removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
+}
+
 function removeBonusSelectionsRow(bonusRowId, callback = null) {
   getAttrs([`repeating_bonuses_${bonusRowId}_selection_id`], (a) => {
     removeRepeatingRow(

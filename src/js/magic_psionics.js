@@ -140,3 +140,28 @@ on(nameListeners, (e) => {
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;
   setAttrs(attrs);
 });
+
+on("change:repeating_abilities:addtobonuses", async (e) => {
+  console.log("change:repeating_abilities:addtobonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const enabled = Boolean(Number(e.newValue));
+  if (enabled) {
+    addModifierToBonusesAsync(section, rowId);
+  } else {
+    const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
+    await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
+  }
+});
+
+on("clicked:repeating_abilities:addtobonuses", async (e) => {
+  console.log("clicked:repeating_abilities:addtobonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  await addModifierToBonusesAsync(section, rowId);
+});
+
+on("clicked:repeating_abilities:removefrombonuses", async (e) => {
+  console.log("clicked:repeating_abilities:removefrombonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
+  await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
+});

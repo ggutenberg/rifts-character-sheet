@@ -671,6 +671,18 @@
     />
   </div>
 </summary>
+<br />
+<label
+  ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
+  Bonuses</label
+>
+<hr />
+<!-- <button type="action" class="metal linear small" name="act_addtobonuses">
+  Add to Bonuses
+</button>
+<button type="action" class="metal linear small" name="act_removefrombonuses">
+  Remove from Bonuses
+</button> -->
 <div class="ability-details">
   <label
     ><span>Starting range</span
@@ -747,20 +759,11 @@
   /></label>
   <label></label>
 </div>
-<label
-  ><b>Description</b>
-  <textarea class="full" name="attr_description" value=""></textarea>
-</label>
-<div class="macro-help">
-  <label
-    ><span><b>Row ID:</b></span>
-    <input type="text" readonly name="attr_rowid" value=""
-  /></label>
-</div>
 
           <!-- endinject -->
           <!-- inject:partials/repeating_bonuses_details.html -->
-          <details>
+          <input type="hidden" name="attr_bonus_id" value="" />
+<details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -1442,7 +1445,6 @@
       <p>Click <b>Instructions</b> for detailed instructions.</p>
       <div class="repeating-bonuses-outer">
         <fieldset class="repeating_modifiers">
-          <input type="hidden" name="attr_bonus_id" value="" />
           <details class="info">
             <summary>
               <div class="bonus-thing-heading">
@@ -1460,7 +1462,8 @@
               </div>
             </summary>
             <!-- inject:partials/repeating_bonuses_details.html -->
-            <details>
+            <input type="hidden" name="attr_bonus_id" value="" />
+<details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -2170,7 +2173,8 @@
                 </button>
               </div>
               <!-- inject:partials/repeating_bonuses_details.html -->
-              <details>
+              <input type="hidden" name="attr_bonus_id" value="" />
+<details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -2803,7 +2807,8 @@
               </div>
             </summary>
             <!-- inject:partials/repeating_bonuses_details.html -->
-            <details>
+            <input type="hidden" name="attr_bonus_id" value="" />
+<details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -5265,6 +5270,22 @@ async function combineBonuses(rowIds, destinationPrefix) {
   );
 }
 
+async function removeBonusSelectionsRowAsync(bonusRowId) {
+  const a = await getAttrsAsync([
+    `repeating_bonuses_${bonusRowId}_selection_id`,
+  ]);
+  removeRepeatingRow(
+    `repeating_bonusselections_${
+      a[`repeating_bonuses_${bonusRowId}_selection_id`]
+    }`
+  );
+}
+
+async function removeBonusRowsAsync(bonusRowId) {
+  await removeBonusSelectionsRowAsync(bonusRowId);
+  removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
+}
+
 function removeBonusSelectionsRow(bonusRowId, callback = null) {
   getAttrs([`repeating_bonuses_${bonusRowId}_selection_id`], (a) => {
     removeRepeatingRow(
@@ -5579,6 +5600,34 @@ on("change:repeating_wp:name change:repeating_wpmodern:name", (e) => {
  * -> triggers "change:repeating_bonuses:name"
  * -> addBonusToSelections
  */
+
+async function addModifierToBonusesAsync(section, rowId) {
+  console.log("addModifierToBonusesAsync", section, rowId);
+  if (!section || !rowId) {
+    return;
+  }
+
+  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
+  const thingAttrs = COMBAT_SAVE_KEYS.map(
+    (key) => `repeating_${section}_${rowId}_${key}`
+  );
+  thingAttrs.push(thingBonusId);
+  const a = await getAttrsAsync(thingAttrs);
+  console.log(a);
+  const attrs = {};
+  let bonusRowId;
+  if (a[thingBonusId]) {
+    bonusRowId = a[thingBonusId];
+  } else {
+    bonusRowId = generateRowID();
+    attrs[thingBonusId] = bonusRowId;
+  }
+  COMBAT_SAVE_KEYS.forEach((key) => {
+    attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
+      a[`repeating_${section}_${rowId}_${key}`] || 0;
+  });
+  await setAttrsAsync(attrs);
+}
 
 function addModifierToBonuses(section, rowId) {
   console.log("addModifierToBonuses", section, rowId);
@@ -6234,6 +6283,31 @@ on(nameListeners, (e) => {
   const attrs = {};
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;
   setAttrs(attrs);
+});
+
+on("change:repeating_abilities:addtobonuses", async (e) => {
+  console.log("change:repeating_abilities:addtobonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const enabled = Boolean(Number(e.newValue));
+  if (enabled) {
+    addModifierToBonusesAsync(section, rowId);
+  } else {
+    const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
+    await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
+  }
+});
+
+on("clicked:repeating_abilities:addtobonuses", async (e) => {
+  console.log("clicked:repeating_abilities:addtobonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  await addModifierToBonusesAsync(section, rowId);
+});
+
+on("clicked:repeating_abilities:removefrombonuses", async (e) => {
+  console.log("clicked:repeating_abilities:removefrombonuses", e);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
+  await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
 });
 
   /* endinject */
