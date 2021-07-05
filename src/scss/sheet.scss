@@ -78,6 +78,26 @@
       }
     }
 
+    .bonus-thing-heading {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 2.5rem 1fr min-content;
+
+      label {
+        align-items: center;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: max-content 1fr;
+
+        input[name="attr_name"] {
+          width: auto;
+        }
+        input[name="attr_level"] {
+          width: 5rem;
+        }
+      }
+    }
+
     .bonus-ps-container {
       display: grid;
       gap: 0.5rem;
@@ -143,22 +163,6 @@
 
       label.description {
         display: block;
-      }
-
-      .bonus-thing-heading {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 2.5rem 1fr min-content;
-
-        label {
-          display: grid;
-          gap: 0.5rem;
-          grid-template-columns: max-content 1fr;
-
-          input[name="attr_name"] {
-            width: auto;
-          }
-        }
       }
 
       label.abs {
@@ -493,10 +497,10 @@ img.logo {
   align-items: center;
 }
 
-.charsheet main#megaverse .bonuses-container details div:not(.macro-help) input,
-.charsheet main#megaverse .bonuses-container input[type="number"] {
-  width: 5rem;
-}
+// .charsheet main#megaverse .bonuses-container details div:not(.macro-help) input,
+// .charsheet main#megaverse .bonuses-container input[type="number"] {
+//   width: 5rem;
+// }
 
 /* @todo uncomment me to hide checkbox add/remove buttons */
 /* .charsheet
