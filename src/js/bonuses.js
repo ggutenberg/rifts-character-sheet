@@ -351,3 +351,8 @@ on(
     await mePpPeBonus(e.sourceAttribute, e.newValue);
   }
 );
+
+on("change:repeating_profiles:mod_ma", async (e) => {
+  console.log("change:repeating_profiles:mod_ma", e);
+  await maBonus(e.newValue, "repeating_profiles_mod_");
+});

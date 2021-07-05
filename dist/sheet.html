@@ -5399,6 +5399,11 @@ on(
   }
 );
 
+on("change:repeating_profiles:mod_ma", async (e) => {
+  console.log("change:repeating_profiles:mod_ma", e);
+  await maBonus(e.newValue, "repeating_profiles_mod_");
+});
+
   /* endinject */
 
   /* inject:js/wps.js */
@@ -5670,6 +5675,7 @@ on(
     [`${prefix}iq_bonus`]: iq_bonus,
     [`${prefix}perception_bonus`]: perception_bonus,
   });
+  // @todo this should check and only get called if the default (top) profile changes
   await updateSkills();
 }
 
@@ -5691,29 +5697,44 @@ async function mePpPeBonus(attribute, value, prefix = "") {
   await setAttrsAsync(attrs);
 }
 
+async function maBonus(value, prefix = "") {
+  const ma_bonus =
+    value >= 16
+      ? value <= 24
+        ? 40 + (value - 16) * 5
+        : value <= 27
+        ? 80 + (value - 24) * 4
+        : value <= 29
+        ? 92 + (value - 27) * 2
+        : 97
+      : 0;
+  setAttrs({
+    [`${prefix}ma_bonus`]: ma_bonus,
+    [`${prefix}trust_intimidate`]: ma_bonus,
+  });
+}
+
 on("change:iq", async (e) => {
   await iqBonus(e.newValue);
-  // const iq_bonus = e.newValue > 15 ? e.newValue - 14 : 0;
-  // const perception_bonus = getBiAttributeBonus(e.newValue);
-  // setAttrs({ iq_bonus, perception_bonus }, {}, updateSkills);
 });
 
 on("change:me change:pp change:pe", async (e) => {
   await mePpPeBonus(e.sourceAttribute, e.newValue);
 });
 
-on("change:ma", (e) => {
-  const ma_bonus =
-    e.newValue >= 16
-      ? e.newValue <= 24
-        ? 40 + (e.newValue - 16) * 5
-        : e.newValue <= 27
-        ? 80 + (e.newValue - 24) * 4
-        : e.newValue <= 29
-        ? 92 + (e.newValue - 27) * 2
-        : 97
-      : 0;
-  setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
+on("change:ma", async (e) => {
+  await maBonus(e.newValue);
+  // const ma_bonus =
+  //   e.newValue >= 16
+  //     ? e.newValue <= 24
+  //       ? 40 + (e.newValue - 16) * 5
+  //       : e.newValue <= 27
+  //       ? 80 + (e.newValue - 24) * 4
+  //       : e.newValue <= 29
+  //       ? 92 + (e.newValue - 27) * 2
+  //       : 97
+  //     : 0;
+  // setAttrs({ ma_bonus, trust_intimidate: ma_bonus });
 });
 
 on("change:ps change:character_ps_type", (e) => {
