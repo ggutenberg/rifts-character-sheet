@@ -1,5 +1,5 @@
 <!-- Add class="debug" to <main> for debugging -->
-<main id="megaverse" class="notdebug">
+<main id="megaverse" class="debug">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_abilities">
@@ -37,8 +37,36 @@
 
   <br />
 
-  <!-- inject:partials/abilities.html -->
-  <!-- endinject -->
+  <div class="abilities">
+    <h3>Natural Abilities / Powers</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter some natural abilities/powers that are neither magic nor psionic
+        in nature.
+      </p>
+      <p>
+        For Starting Damage and Damage per Level enter values that roll20 would
+        use for dice rolls. Ex. "4d6", "1d6", etc.
+      </p>
+      <p>
+        Don't forget to copy/paste the power description into the Description
+        field to make life easier for your GM. Also use that field for any
+        macros you may need like Strike with an arbitrary bonus.
+      </p>
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <fieldset class="repeating_abilities">
+      <details>
+        <!-- inject:partials/abilities.html -->
+        <!-- endinject -->
+        <div class="repeating-bonuses-container">
+          <!-- inject:partials/repeating_bonuses_details.html -->
+          <!-- endinject -->
+        </div>
+      </details>
+    </fieldset>
+  </div>
 
   <!-- inject:partials/weapon_proficiencies.html -->
   <!-- endinject -->
@@ -66,11 +94,30 @@
         </p>
       </details>
       <p>Click <b>Instructions</b> for detailed instructions.</p>
-      <fieldset class="repeating_modifiers">
-        <input type="hidden" name="attr_bonus_id" value="" />
-        <!-- inject:partials/repeating_bonuses_details.html -->
-        <!-- endinject -->
-      </fieldset>
+      <div class="repeating-bonuses-container">
+        <fieldset class="repeating_modifiers">
+          <input type="hidden" name="attr_bonus_id" value="" />
+          <details>
+            <summary>
+              <div class="bonus-thing-heading">
+                <b class="click-expand"
+                  ><span title="Click for more info">&nbsp;&#9432;</span></b
+                >
+                <label
+                  ><span>Name</span>
+                  <input type="text" list="combat-modifiers" name="attr_name" />
+                </label>
+                <label
+                  ><span>Level</span>
+                  <input type="number" value="1" name="attr_level" />
+                </label>
+              </div>
+            </summary>
+            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- endinject -->
+          </details>
+        </fieldset>
+      </div>
     </div>
   </div>
 
@@ -124,20 +171,82 @@
         </div>
         <hr />
         <h3>Profiles</h3>
-        <div class="profiles">
+        <div class="profiles repeating-bonuses-container">
           <fieldset class="repeating_profiles">
-            <!-- inject:partials/repeating_bonuses_details.html -->
-            <!-- endinject -->
+            <details>
+              <summary>
+                <div class="bonus-thing-heading">
+                  <b class="click-expand"
+                    ><span title="Click for more info">&nbsp;&#9432;</span></b
+                  >
+                  <label
+                    ><span>Name</span>
+                    <input
+                      type="text"
+                      list="combat-modifiers"
+                      name="attr_name"
+                    />
+                  </label>
+                  <label
+                    ><span>Level</span>
+                    <input type="number" value="1" name="attr_level" />
+                  </label>
+                </div>
+              </summary>
+              <div class="profile-management">
+                <input type="text" class="full" name="attr_bonus_ids" />
+                <input type="hidden" name="attr_bonus_names" />
+                <div class="bonus-names">
+                  <span name="attr_bonus_names"></span>
+                </div>
+                <button
+                  type="action"
+                  name="act_copybonusids"
+                  class="metal linear small"
+                >
+                  Apply Checked Modifiers to this Profile
+                </button>
+                <!-- <button type="action" name="act_checkbonusids">
+                  Apply this Profile to Selected IDs
+                </button> -->
+                <button
+                  type="action"
+                  name="act_updateprofile"
+                  class="metal linear small"
+                >
+                  Update Profile if Attributes or Modifiers have changed
+                </button>
+              </div>
+              <!-- inject:partials/repeating_bonuses_details.html -->
+              <!-- endinject -->
+            </details>
           </fieldset>
         </div>
         <hr />
       </div>
-      <div class="bonus-sources">
+      <div class="bonus-sources repeating-bonuses-container">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />
-          <!-- inject:partials/repeating_bonuses_details.html -->
-          <!-- endinject -->
+          <details>
+            <summary>
+              <div class="bonus-thing-heading">
+                <b class="click-expand"
+                  ><span title="Click for more info">&nbsp;&#9432;</span></b
+                >
+                <label
+                  ><span>Name</span>
+                  <input type="text" list="combat-modifiers" name="attr_name" />
+                </label>
+                <label
+                  ><span>Level</span>
+                  <input type="number" value="1" name="attr_level" />
+                </label>
+              </div>
+            </summary>
+            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- endinject -->
+          </details>
         </fieldset>
       </div>
     </div>
