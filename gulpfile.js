@@ -11,7 +11,7 @@ const paths = {
     dest: "dist/",
   },
   styles: {
-    src: "src/scss/**/*.scss",
+    src: "src/scss/sheet.scss",
     dest: "dist",
   },
   js: {

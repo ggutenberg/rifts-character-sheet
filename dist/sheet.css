@@ -87,6 +87,9 @@
 .charsheet details summary {
   cursor: pointer;
 }
+.charsheet details.info {
+  display: block;
+}
 .charsheet .repcontainer[data-groupname=repeating_profiles] details,
 .charsheet .repcontainer[data-groupname=repeating_profiles] summary,
 .charsheet .repcontainer[data-groupname=repeating_bonuses] details,
@@ -181,13 +184,6 @@
 }
 .charsheet main#megaverse .modifiers .bonuses-container .repcontainer .repitem .profile-management {
   display: none !important;
-}
-.charsheet main#megaverse .bonuses-container .combat-combined-bonuses {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .charsheet main#megaverse .bonuses-container .repcontainer .repitem .bonus-ps-container {
   display: grid;

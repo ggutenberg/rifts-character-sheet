@@ -585,10 +585,11 @@
       </p>
     </details>
     <p>Click <b>Instructions</b> for detailed instructions.</p>
-    <fieldset class="repeating_abilities">
-      <details>
-        <!-- inject:partials/abilities.html -->
-        <summary>
+    <div class="repeating-bonuses-outer">
+      <fieldset class="repeating_abilities">
+        <details class="info">
+          <!-- inject:partials/abilities.html -->
+          <summary>
   <div class="abilities-list">
     <h5>Info</h5>
     <h5>Ability</h5>
@@ -707,8 +708,7 @@
   /></label>
 </div>
 
-        <!-- endinject -->
-        <div class="repeating-bonuses-container">
+          <!-- endinject -->
           <!-- inject:partials/repeating_bonuses_details.html -->
           <details class="default">
   <summary>
@@ -1316,9 +1316,9 @@
 </div>
 
           <!-- endinject -->
-        </div>
-      </details>
-    </fieldset>
+        </details>
+      </fieldset>
+    </div>
   </div>
 
   <!-- inject:partials/weapon_proficiencies.html -->
@@ -1389,7 +1389,7 @@
         </p>
       </details>
       <p>Click <b>Instructions</b> for detailed instructions.</p>
-      <div class="repeating-bonuses-container">
+      <div class="repeating-bonuses-outer">
         <fieldset class="repeating_modifiers">
           <input type="hidden" name="attr_bonus_id" value="" />
           <details>
@@ -2070,8 +2070,8 @@
           />
         </div>
         <hr />
-        <h3>Profiles</h3>
-        <div class="profiles repeating-bonuses-container">
+        <div class="profiles repeating-bonuses-outer">
+          <h3>Profiles</h3>
           <fieldset class="repeating_profiles">
             <details>
               <summary>
@@ -2729,7 +2729,7 @@
         </div>
         <hr />
       </div>
-      <div class="bonus-sources repeating-bonuses-container">
+      <div class="bonus-sources repeating-bonuses-outer">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />

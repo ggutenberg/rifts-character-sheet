@@ -15,6 +15,10 @@
     }
   }
 
+  details.info {
+    display: block;
+  }
+
   .repcontainer[data-groupname="repeating_profiles"] details,
   .repcontainer[data-groupname="repeating_profiles"] summary,
   .repcontainer[data-groupname="repeating_bonuses"] details,
@@ -130,14 +134,6 @@
     // }
 
     .bonuses-container {
-      .combat-combined-bonuses {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-
       .repcontainer {
         .repitem {
           .bonus-ps-container {
