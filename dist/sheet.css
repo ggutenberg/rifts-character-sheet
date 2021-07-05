@@ -399,17 +399,6 @@ img.logo {
   align-items: center;
 }
 
-/* @todo uncomment me to hide checkbox add/remove buttons */
-/* .charsheet
-  .bonuses
-  .repcontainer[data-groupname="repeating_bonusselections"]
-  button.repcontrol_del,
-.charsheet
-  .bonuses
-  .repcontrol[data-groupname="repeating_bonusselections"]
-  button.repcontrol_add {
-  display: none !important;
-} */
 .charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .spells-list {
   display: grid;
   gap: 0.5rem;

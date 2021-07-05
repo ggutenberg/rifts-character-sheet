@@ -350,7 +350,7 @@ on(
   change:repeating_profiles:mod_pp \
   change:repeating_profiles:mod_pe",
   async (e) => {
-    await mePpPeBonus(e.sourceAttribute, e.newValue, "repeating_profiles_mod_");
+    await mePpPeBonus(e.sourceAttribute, e.newValue);
   }
 );
 

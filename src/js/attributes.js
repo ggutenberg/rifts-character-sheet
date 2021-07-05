@@ -24,6 +24,7 @@ async function mePpPeBonus(attribute, value, prefix = "") {
           : 30 + (value - 30)
         : 0;
   }
+  console.log(attrs);
   await setAttrsAsync(attrs);
 }
 
