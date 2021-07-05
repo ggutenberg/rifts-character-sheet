@@ -334,15 +334,15 @@ on("change:repeating_bonuses:name", (e) => {
 on("change:repeating_profiles:name", async (e) => {
   console.log("change:repeating_profiles:name", e);
   const [r, section, rowId] = e.sourceAttribute.split("_");
-  const selectionIdKey = `${r}_${section}_${rowId}_selection_id`;
-  const a = await getAttrsAsync([selectionIdKey]);
-  console.log(a);
-  // ???
+  await setAttrsAsync({
+    repeating_profiles_rowid: `${r}_${section}_${rowId}_`,
+  });
 });
 
 on("change:repeating_profiles:mod_iq", async (e) => {
   console.log("change:repeating_profiles:mod_iq", e);
-  await iqBonus(e.newValue, "repeating_profiles_mod_");
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  await iqBonus(e.newValue, `${r}_${section}_${rowId}_mod_`);
 });
 
 on(
@@ -356,7 +356,8 @@ on(
 
 on("change:repeating_profiles:mod_ma", async (e) => {
   console.log("change:repeating_profiles:mod_ma", e);
-  await maBonus(e.newValue, "repeating_profiles_mod_");
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  await maBonus(e.newValue, `${r}_${section}_${rowId}_mod_`);
 });
 
 on(
@@ -371,5 +372,6 @@ on(
 
 on("change:repeating_profiles:mod_pb", async (e) => {
   console.log("change:repeating_profiles:mod_pb", e);
-  await pbBonus(e.newValue, "repeating_profiles_mod_");
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  await pbBonus(e.newValue, `${r}_${section}_${rowId}_mod_`);
 });

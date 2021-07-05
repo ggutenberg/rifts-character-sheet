@@ -1,12 +1,19 @@
 async function iqBonus(value, prefix = "") {
+  console.log("iqBonus", value, prefix);
   const iq_bonus = value > 15 ? value - 14 : 0;
   const perception_bonus = getBiAttributeBonus(value);
-  await setAttrsAsync({
+  const attrs = {
     [`${prefix}iq_bonus`]: iq_bonus,
     [`${prefix}perception_bonus`]: perception_bonus,
-  });
-  // @todo this should check and only get called if the default (top) profile changes
-  await updateSkills();
+  };
+  console.log(attrs);
+  await setAttrsAsync(attrs);
+
+  // this should check and only get called if the default (top) profile changes
+  const profilesSections = await getSectionIDsOrderedAsync("profiles");
+  if (!profilesSections || prefix.includes(profilesSections[0])) {
+    await updateSkills();
+  }
 }
 
 async function mePpPeBonus(attribute, value, prefix = "") {
