@@ -1,4 +1,5 @@
-<main id="megaverse">
+<!-- Add class="debug" to <main> for debugging -->
+<main id="megaverse" class="notdebug">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_abilities">
@@ -819,14 +820,20 @@
     </div>
   </summary>
   <div class="profile-management">
-    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
-    <button type="action" name="act_checkbonusids">
-      Apply this Profile to Selected IDs
-    </button>
-    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
-    <span name="attr_bonus_names"></span>
+    <div class="bonus-names">
+      <span name="attr_bonus_names"></span>
+    </div>
+    <button type="action" name="act_copybonusids" class="metal linear small">
+      Apply Checked Modifiers to this Profile
+    </button>
+    <!-- <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button> -->
+    <button type="action" name="act_updateprofile" class="metal linear small">
+      Update Profile if Attributes or Modifiers have changed
+    </button>
   </div>
   <details class="default">
     <summary>
@@ -1464,10 +1471,10 @@
       <div class="combat-combined">
         <details>
           <summary><b>Instructions</b></summary>
+          <p></p>
           <p>
-            Any combat modifiers you add on the Combat tab will appear as
-            checkboxes. Toggling them will recalculate the bonuses for all
-            checked items.
+            Any modifiers you add on the Modifiers tab will appear as checkboxes
+            here.
           </p>
           <p>
             Any Weapon Proficiencies you add on the WPs tab will appear on this
@@ -1497,8 +1504,15 @@
           <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_bonus_id" value="" />
         </fieldset>
-        <b>Selected IDs</b>
-        <input class="full" type="text" name="attr_bonus_ids_output" value="" />
+        <div class="selected-ids">
+          <b>Selected IDs</b>
+          <input
+            class="full"
+            type="text"
+            name="attr_bonus_ids_output"
+            value=""
+          />
+        </div>
         <hr />
         <h3>Profiles</h3>
         <div class="profiles">
@@ -1521,14 +1535,20 @@
     </div>
   </summary>
   <div class="profile-management">
-    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
-    <button type="action" name="act_checkbonusids">
-      Apply this Profile to Selected IDs
-    </button>
-    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
-    <span name="attr_bonus_names"></span>
+    <div class="bonus-names">
+      <span name="attr_bonus_names"></span>
+    </div>
+    <button type="action" name="act_copybonusids" class="metal linear small">
+      Apply Checked Modifiers to this Profile
+    </button>
+    <!-- <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button> -->
+    <button type="action" name="act_updateprofile" class="metal linear small">
+      Update Profile if Attributes or Modifiers have changed
+    </button>
   </div>
   <details class="default">
     <summary>
@@ -2159,590 +2179,8 @@
           </fieldset>
         </div>
         <hr />
-        <div class="hidden">
-          <!-- inject:partials/combat_combined_melee.html -->
-          <div class="combat-combined-bonuses">
-  <label
-    ><span>Attacks</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_attacks"
-    />
-  </label>
-  <label
-    ><span>S.D.C.</span
-    ><input readonly type="number" value="0" name="attr_combat_combined_sdc"
-  /></label>
-  <label
-    ><span>M.D.C.</span
-    ><input readonly type="number" value="0" name="attr_combat_combined_mdc"
-  /></label>
-  <label
-    ><span>Initiative</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_initiative"
-    />
-    <button
-      type="roll"
-      value="Initiative: [[d20+@{combat_combined_initiative} &{tracker}]]"
-    />
-  </label>
-  <label
-    ><span>Strike</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike"
-    />
-    <button type="roll" value="Strike: [[d20+@{combat_combined_strike}]]" />
-  </label>
-  <label
-    ><span>Parry</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_parry" />
-    <button type="roll" value="Parry: [[d20+@{combat_combined_parry}]]" />
-  </label>
-  <label
-    ><span>Dodge</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_dodge" />
-    <button type="roll" value="Dodge: [[d20+@{combat_combined_dodge}]]" />
-  </label>
-  <label
-    ><span>Throw</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_throw" />
-    <button type="roll" value="Throw: [[d20+@{combat_combined_throw}]]" />
-  </label>
-  <label
-    ><span>Disarm</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_disarm"
-    />
-    <button type="roll" value="Disarm: [[d20+@{combat_combined_disarm}]]" />
-  </label>
-  <label
-    ><span>Entangle</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_entangle"
-    />
-    <button type="roll" value="Entangle: [[d20+@{combat_combined_entangle}]]" />
-  </label>
-  <label
-    ><span>Pull Punch</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_pull" />
-    <button type="roll" value="Pull Punch: [[d20+@{combat_combined_pull}]]" />
-  </label>
-  <label
-    ><span>Roll w/ Impact</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_roll" />
-    <button
-      type="roll"
-      value="Roll w/ Impact: [[d20+@{combat_combined_roll}]]"
-    />
-  </label>
-  <label
-    ><span>Body Flip/Throw</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_flipthrow"
-    />
-    <button
-      type="roll"
-      value="Body Flip/Throw: [[d20+@{combat_combined_flipthrow}]]"
-    />
-  </label>
-  <label
-    ><span>Damage</span>
-    <input readonly type="text" value="0" name="attr_combat_combined_damage" />
-    <button
-      type="roll"
-      value="?{Add damage modifier?|
-                None,Damage: [[@{combat_combined_damage}]]|
-                Punch,Damage: [[@{combat_combined_damage}+@{punch}]]|
-                P.S. Bonus,Damage: [[@{combat_combined_damage}+@{ps_bonus}]]
-              }"
-    />
-  </label>
-  <label
-    ><span>Dodge: Flight</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_dodge_flight"
-    />
-    <button
-      type="roll"
-      value="Dodge in Flight: [[d20+@{combat_combined_dodge_flight}]]"
-    />
-  </label>
-  <label
-    ><span>Dodge: Auto</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_dodge_auto"
-    />
-    <button
-      type="roll"
-      value="Auto Dodge: [[d20+@{combat_combined_dodge_auto}]]"
-    />
-  </label>
-  <label
-    ><span>Dodge: Teleport</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_dodge_teleport"
-    />
-    <button
-      type="roll"
-      value="Teleport Dodge: [[d20+@{combat_combined_dodge_teleport}]]"
-    />
-  </label>
-  <label
-    ><span>Dodge: Motion</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_dodge_motion"
-    />
-    <button
-      type="roll"
-      value="Dodge in Motion: [[d20+@{combat_combined_dodge_motion}]]"
-    />
-  </label>
-</div>
-<hr />
-<div class="combat-combined-bonuses">
-  <label
-    ><span>Critical</span>
-    <input
-      readonly
-      type="number"
-      value="20"
-      name="attr_combat_combined_critical"
-  /></label>
-  <label
-    ><span>Knockout</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_knockout"
-  /></label>
-  <label
-    ><span>Death Blow</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_deathblow"
-  /></label>
-</div>
-
-          <!-- endinject -->
-          <hr />
-          <!-- inject:partials/combat_combined_range.html -->
-          <div class="combat-combined-bonuses">
-  <label
-    ><span>Strike: Range</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range"
-    />
-    <button
-      type="roll"
-      value="Range Strike: [[d20+@{combat_combined_strike_range}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Single<span title="Includes Strike: Range">&nbsp;&#9432;</span>
-    </span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_single"
-    />
-    <button
-      type="roll"
-      value="Range Strike - Single Shot: [[d20+@{combat_combined_strike_range_single}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Burst
-      <span title="Includes Strike: Range">&nbsp;&#9432;</span></span
-    >
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_burst"
-    />
-    <button
-      type="roll"
-      value="Range Strike - Burst: [[d20+@{combat_combined_strike_range_burst}]]"
-    />
-  </label>
-  <label
-    ><span>Range: Aimed</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_aimed"
-    />
-    <button
-      type="roll"
-      value="Range Aimed Strike: [[d20+@{combat_combined_strike_range_aimed}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Aimed Single<span title="Includes Range: Aimed"
-        >&nbsp;&#9432;</span
-      ></span
-    >
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_aimed_single"
-    />
-    <button
-      type="roll"
-      value="Range Aimed Single Strike: [[d20+@{combat_combined_strike_range_aimed_single}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Aimed Pulse<span title="Includes Range: Aimed"
-        >&nbsp;&#9432;</span
-      ></span
-    >
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_aimed_pulse"
-    />
-    <button
-      type="roll"
-      value="Range Aimed Pulse Strike: [[d20+@{combat_combined_strike_range_aimed_pulse}]]"
-    />
-  </label>
-  <label
-    ><span>Range: Called</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_called"
-    />
-    <button
-      type="roll"
-      value="Range Called Strike: [[d20+@{combat_combined_strike_range_called}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Called Single<span title="Includes Range: Called"
-        >&nbsp;&#9432;</span
-      ></span
-    >
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_called_single"
-    />
-    <button
-      type="roll"
-      value="Range Called Single Strike: [[d20+@{combat_combined_strike_range_called_single}]]"
-    />
-  </label>
-  <label
-    ><span
-      >Range: Called Pulse<span title="Includes Range: Called"
-        >&nbsp;&#9432;</span
-      ></span
-    >
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_called_pulse"
-    />
-    <button
-      type="roll"
-      value="Range Called Pulse Strike: [[d20+@{combat_combined_strike_range_called_pulse}]]"
-    />
-  </label>
-  <label
-    ><span>Range: Aimed Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_aimed_called_single"
-    />
-    <button
-      type="roll"
-      value="Range Aimed Called Single Strike: [[d20+@{combat_combined_strike_range_aimed_called_single}]]"
-    />
-  </label>
-  <label
-    ><span>Range: Aimed Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_strike_range_aimed_called_pulse"
-    />
-    <button
-      type="roll"
-      value="Range Aimed Called Pulse Strike: [[d20+@{combat_combined_strike_range_aimed_called_pulse}]]"
-    />
-  </label>
-  <label
-    ><span>Disarm: Range</span>
-    <input type="number" value="0" name="attr_combat_combined_disarm_range" />
-    <button
-      type="roll"
-      value="?{Add Called Shot modifier|
-                Called Single,Called Single Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_single}]]|
-                Called Pulse,Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_called_pulse}]]|
-                Aimed Called Single,Aimed Called Pulse Single: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_single}]]|
-                Aimed Called Pulse,Aimed Called Pulse Disarm: [[d20+@{combat_combined_disarm_range}+@{combat_combined_strike_range_aimed_called_pulse}]]
-              }"
-    />
-  </label>
-  <label
-    ><span>Damage: Range</span>
-    <input
-      readonly
-      type="text"
-      value="0"
-      name="attr_combat_combined_damage_range"
-    />
-    <button
-      type="roll"
-      value="Range Damage: [[@{combat_combined_damage_range}]]"
-    />
-  </label>
-</div>
-
-          <!-- endinject -->
-          <hr />
-          <!-- inject:partials/combat_combined_saving_throws.html -->
-          <h4>Saving Throws</h4>
-<div class="combat-combined-bonuses">
-  <label
-    ><span>Perception</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_perceptioncheck"
-    />
-    <button
-      type="roll"
-      value="Perception Check: [[d20+@{combat_combined_perceptioncheck}]]"
-    />
-  </label>
-  <label
-    ><span>Psionics</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_psionics"
-    />
-    <button
-      type="roll"
-      value="Save vs. Psionics: [[d20+@{combat_combined_psionics}]]"
-    />
-  </label>
-  <label
-    ><span>Magic</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_magic" />
-    <button
-      type="roll"
-      value="Save vs. Magic: [[d20+@{combat_combined_magic}]]"
-    />
-  </label>
-  <label
-    ><span>Horror Factor</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_horrorfactor"
-    />
-    <button
-      type="roll"
-      value="Save vs. Horror Factor: [[d20+@{combat_combined_horrorfactor}]]"
-    />
-  </label>
-  <label
-    ><span>Mind Control</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_mindcontrol"
-    />
-    <button
-      type="roll"
-      value="Save vs. Mind Control: [[d20+@{combat_combined_mindcontrol}]]"
-    />
-  </label>
-  <label
-    ><span>Disease</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_disease"
-    />
-    <button
-      type="roll"
-      value="Save vs. Disease: [[{d20+@{combat_combined_disease}}>13]]"
-    />
-  </label>
-  <label
-    ><span>Illusions</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_illusions"
-    />
-    <button
-      type="roll"
-      value="Save vs. Illusions: [[d20+@{combat_combined_illusions}]]"
-    />
-  </label>
-  <label
-    ><span>Possession</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_possession"
-    />
-    <button
-      type="roll"
-      value="Save vs. Possession: [[d20+@{combat_combined_possession}]]"
-    />
-  </label>
-  <label
-    ><span>Insanity</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_insanity"
-    />
-    <button
-      type="roll"
-      value="Save vs. Insanity: [[d20+@{combat_combined_insanity}]]"
-    />
-  </label>
-  <label
-    ><span>Pain</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_pain" />
-    <button
-      type="roll"
-      value="Save vs. Pain: [[d20+@{combat_combined_pain}]]"
-    />
-  </label>
-  <label
-    ><span>Lethal Poison</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_lethalpoison"
-    />
-    <button
-      type="roll"
-      value="Save vs. Lethal Poison: [[{d20+@{combat_combined_lethalpoison}}>13]]"
-    />
-  </label>
-  <label
-    ><span>Non-Lethal Poison</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_nonlethalpoison"
-    />
-    <button
-      type="roll"
-      value="Save vs. Non-Lethal Poison: [[{d20+@{combat_combined_nonlethalpoison}}>15]]"
-    />
-  </label>
-  <label
-    ><span>Drugs</span>
-    <input readonly type="number" value="0" name="attr_combat_combined_drugs" />
-    <button
-      type="roll"
-      value="Save vs. Drugs: [[{d20+@{combat_combined_drugs}}>14]]"
-    />
-  </label>
-  <label
-    ><span>Curses</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_curses"
-    />
-    <button
-      type="roll"
-      value="Save vs. Curses: [[{d20+@{combat_combined_curses}}>14]]"
-    />
-  </label>
-  <label
-    ><span>Coma/Death</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_combat_combined_comadeath"
-    />
-    <button
-      type="roll"
-      value="Save vs. Coma/Death: [[d100-@{combat_combined_comadeath}]]"
-    />
-  </label>
-</div>
-
-          <!-- endinject -->
-        </div>
       </div>
-      <div class="">
+      <div class="bonus-sources">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />
@@ -2764,14 +2202,20 @@
     </div>
   </summary>
   <div class="profile-management">
-    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
-    <button type="action" name="act_checkbonusids">
-      Apply this Profile to Selected IDs
-    </button>
-    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
-    <span name="attr_bonus_names"></span>
+    <div class="bonus-names">
+      <span name="attr_bonus_names"></span>
+    </div>
+    <button type="action" name="act_copybonusids" class="metal linear small">
+      Apply Checked Modifiers to this Profile
+    </button>
+    <!-- <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button> -->
+    <button type="action" name="act_updateprofile" class="metal linear small">
+      Update Profile if Attributes or Modifiers have changed
+    </button>
   </div>
   <details class="default">
     <summary>
@@ -5705,10 +5149,13 @@ on("remove:repeating_modifiers", (e) => {
   const a = await getAttrsAsync(bonusNameKeys);
   const names = Object.values(a).reduce(
     // using Em Space https://www.compart.com/en/unicode/U+2003
-    (acc, cur) => `${acc}   ✔︎ ${cur}`.trim(),
+    (acc, cur) => `${acc}     ✔︎ ${cur}`.trim(),
     ""
   );
-  await setAttrsAsync({ [`repeating_profiles_${rowId}_bonus_names`]: names });
+  await setAttrsAsync({
+    [`repeating_profiles_${rowId}_bonus_names`]: names,
+    [`repeating_profiles_${rowId}_rowid`]: `repeating_profiles_${rowId}_`,
+  });
   await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
 }
 
@@ -6070,16 +5517,6 @@ on("change:pb", async (e) => {
 
 on("change:spd", async (e) => {
   await spdBonus(e.newValue);
-  return;
-  getAttrs(["combat_combined_attacks"], (a) => {
-    const feetPerMelee = e.newValue * 15;
-    const attrs = {
-      run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
-      run_ft_melee: feetPerMelee,
-      run_ft_attack: Math.round(feetPerMelee / a.combat_combined_attacks),
-    };
-    setAttrs(attrs);
-  });
 });
 
   /* endinject */

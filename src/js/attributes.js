@@ -335,14 +335,4 @@ on("change:pb", async (e) => {
 
 on("change:spd", async (e) => {
   await spdBonus(e.newValue);
-  return;
-  getAttrs(["combat_combined_attacks"], (a) => {
-    const feetPerMelee = e.newValue * 15;
-    const attrs = {
-      run_mph: ((feetPerMelee * 4 * 60) / 5280).toFixed(1),
-      run_ft_melee: feetPerMelee,
-      run_ft_attack: Math.round(feetPerMelee / a.combat_combined_attacks),
-    };
-    setAttrs(attrs);
-  });
 });

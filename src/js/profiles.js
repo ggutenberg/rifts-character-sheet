@@ -7,10 +7,13 @@ async function updateProfile(rowId) {
   const a = await getAttrsAsync(bonusNameKeys);
   const names = Object.values(a).reduce(
     // using Em Space https://www.compart.com/en/unicode/U+2003
-    (acc, cur) => `${acc}   ✔︎ ${cur}`.trim(),
+    (acc, cur) => `${acc}     ✔︎ ${cur}`.trim(),
     ""
   );
-  await setAttrsAsync({ [`repeating_profiles_${rowId}_bonus_names`]: names });
+  await setAttrsAsync({
+    [`repeating_profiles_${rowId}_bonus_names`]: names,
+    [`repeating_profiles_${rowId}_rowid`]: `repeating_profiles_${rowId}_`,
+  });
   await combineBonuses(bonusIds, `repeating_profiles_${rowId}`);
 }
 

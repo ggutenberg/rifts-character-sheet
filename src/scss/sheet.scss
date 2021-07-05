@@ -65,6 +65,22 @@
   }
 
   main#megaverse {
+    &:not(.debug) {
+      .bonuses {
+        [data-groupname="repeating_bonusselections"] {
+          button.repcontrol_del,
+          button.repcontrol_add {
+            display: none !important;
+          }
+        }
+        .bonus-sources,
+        .selected-ids,
+        [name="attr_bonus_ids"] {
+          display: none;
+        }
+      }
+    }
+
     input[type="number"] {
       width: auto;
     }
@@ -72,6 +88,14 @@
     label {
       margin-bottom: 0;
       font-size: 1.3rem;
+    }
+
+    .macro-help {
+      label {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 1fr 7fr !important;
+      }
     }
 
     .modifiers {
@@ -86,6 +110,22 @@
         }
       }
     }
+
+    // .bonuses {
+    //   &:not(.debug) {
+    //     // WHY ISN'T THIS WORKING with :not(.debug)???
+    //     [data-groupname="repeating_bonusselections"] {
+    //       button.repcontrol_del,
+    //       button.repcontrol_add {
+    //         display: none !important;
+    //       }
+    //     }
+    //     .bonus-sources,
+    //     [name="attr_bonus_ids_output"] {
+    //       display: none;
+    //     }
+    //   }
+    // }
 
     .bonuses-container {
       .combat-combined-bonuses {
@@ -138,6 +178,14 @@
                 display: none;
               }
             }
+            .profile-management {
+              margin: 0.5rem 0;
+
+              .bonus-names {
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+              }
+            }
           }
         }
       }
@@ -186,14 +234,6 @@
             align-items: center;
           }
 
-          .macro-help {
-            label {
-              display: grid;
-              gap: 0.5rem;
-              grid-template-columns: 1fr 7fr;
-            }
-          }
-
           label.description {
             display: block;
           }
@@ -232,6 +272,17 @@
 }
 
 /* End Resets */
+
+// .charsheet
+//   .bonuses
+//   .repcontainer[data-groupname="repeating_bonusselections"]
+//   button.repcontrol_del,
+// .charsheet
+//   .bonuses
+//   .repcontrol[data-groupname="repeating_bonusselections"]
+//   button.repcontrol_add {
+//   display: none !important;
+// }
 
 /* Tabs */
 /* Configure the tab buttons */
@@ -714,10 +765,15 @@ a {
 /* Linear ------------------------- */
 
 .metal.linear {
+  &.small {
+    font-size: 1.1rem;
+    height: 2.5rem;
+  }
   /* width: 80px; */
   padding: 0 1rem;
   font-size: 1.1em;
-  height: 40px;
+  // height: 40px;
+  height: 4rem;
   border-radius: 0.5em;
   background-image: -webkit-repeating-linear-gradient(
       left,

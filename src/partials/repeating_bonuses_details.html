@@ -15,14 +15,20 @@
     </div>
   </summary>
   <div class="profile-management">
-    <button type="action" name="act_copybonusids">Copy Selected IDs</button>
-    <button type="action" name="act_checkbonusids">
-      Apply this Profile to Selected IDs
-    </button>
-    <button type="action" name="act_updateprofile">Update Profile</button>
     <input type="text" class="full" name="attr_bonus_ids" />
     <input type="hidden" name="attr_bonus_names" />
-    <span name="attr_bonus_names"></span>
+    <div class="bonus-names">
+      <span name="attr_bonus_names"></span>
+    </div>
+    <button type="action" name="act_copybonusids" class="metal linear small">
+      Apply Checked Modifiers to this Profile
+    </button>
+    <!-- <button type="action" name="act_checkbonusids">
+      Apply this Profile to Selected IDs
+    </button> -->
+    <button type="action" name="act_updateprofile" class="metal linear small">
+      Update Profile if Attributes or Modifiers have changed
+    </button>
   </div>
   <details class="default">
     <summary>

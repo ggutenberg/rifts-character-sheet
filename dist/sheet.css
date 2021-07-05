@@ -82,12 +82,26 @@
   align-items: center;
   justify-content: space-between;
 }
+.charsheet main#megaverse:not(.debug) .bonuses [data-groupname=repeating_bonusselections] button.repcontrol_del,
+.charsheet main#megaverse:not(.debug) .bonuses [data-groupname=repeating_bonusselections] button.repcontrol_add {
+  display: none !important;
+}
+.charsheet main#megaverse:not(.debug) .bonuses .bonus-sources,
+.charsheet main#megaverse:not(.debug) .bonuses .selected-ids,
+.charsheet main#megaverse:not(.debug) .bonuses [name=attr_bonus_ids] {
+  display: none;
+}
 .charsheet main#megaverse input[type=number] {
   width: auto;
 }
 .charsheet main#megaverse label {
   margin-bottom: 0;
   font-size: 1.3rem;
+}
+.charsheet main#megaverse .macro-help label {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 7fr !important;
 }
 .charsheet main#megaverse .modifiers .bonuses-container .repcontainer .repitem .profile-management {
   display: none !important;
@@ -123,6 +137,13 @@
 }
 .charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container label.abs {
   display: none;
+}
+.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .profile-management {
+  margin: 0.5rem 0;
+}
+.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .profile-management .bonus-names {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .bonus-type-container,
@@ -165,13 +186,6 @@
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem label.select {
   grid-template-columns: max-content 1fr 4rem;
   align-items: center;
-}
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem .macro-help label,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem .macro-help label,
-.charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_bonuses] .repitem .macro-help label {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 7fr;
 }
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_profiles] .repitem label.description,
 .charsheet main#megaverse .bonuses-container .repcontainer[data-groupname=repeating_modifiers] .repitem label.description,
@@ -532,9 +546,13 @@ a {
   /* width: 80px; */
   padding: 0 1rem;
   font-size: 1.1em;
-  height: 40px;
+  height: 4rem;
   border-radius: 0.5em;
   background-image: -webkit-repeating-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 6%, rgba(255, 255, 255, 0.1) 7.5%), -webkit-repeating-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 4%, rgba(0, 0, 0, 0.03) 4.5%), -webkit-repeating-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 1.2%, rgba(255, 255, 255, 0.15) 2.2%), linear-gradient(180deg, #c7c7c7 0%, #e6e6e6 47%, #c7c7c7 53%, #b3b3b3 100%);
+}
+.metal.linear.small {
+  font-size: 1.1rem;
+  height: 2.5rem;
 }
 
 /* Oval ------------------------- */

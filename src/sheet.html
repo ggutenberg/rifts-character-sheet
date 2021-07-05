@@ -1,4 +1,5 @@
-<main id="megaverse">
+<!-- Add class="debug" to <main> for debugging -->
+<main id="megaverse" class="notdebug">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_abilities">
@@ -79,10 +80,10 @@
       <div class="combat-combined">
         <details>
           <summary><b>Instructions</b></summary>
+          <p></p>
           <p>
-            Any combat modifiers you add on the Combat tab will appear as
-            checkboxes. Toggling them will recalculate the bonuses for all
-            checked items.
+            Any modifiers you add on the Modifiers tab will appear as checkboxes
+            here.
           </p>
           <p>
             Any Weapon Proficiencies you add on the WPs tab will appear on this
@@ -112,8 +113,15 @@
           <input type="hidden" name="attr_name" value="" />
           <input type="hidden" name="attr_bonus_id" value="" />
         </fieldset>
-        <b>Selected IDs</b>
-        <input class="full" type="text" name="attr_bonus_ids_output" value="" />
+        <div class="selected-ids">
+          <b>Selected IDs</b>
+          <input
+            class="full"
+            type="text"
+            name="attr_bonus_ids_output"
+            value=""
+          />
+        </div>
         <hr />
         <h3>Profiles</h3>
         <div class="profiles">
@@ -123,18 +131,8 @@
           </fieldset>
         </div>
         <hr />
-        <div class="hidden">
-          <!-- inject:partials/combat_combined_melee.html -->
-          <!-- endinject -->
-          <hr />
-          <!-- inject:partials/combat_combined_range.html -->
-          <!-- endinject -->
-          <hr />
-          <!-- inject:partials/combat_combined_saving_throws.html -->
-          <!-- endinject -->
-        </div>
       </div>
-      <div class="">
+      <div class="bonus-sources">
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />
