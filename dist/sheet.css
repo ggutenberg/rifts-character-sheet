@@ -1,4 +1,3 @@
-/* Resets */
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 @import url(prefixes.css);
 /* Metal ------------------------- */
@@ -207,29 +206,27 @@
   width: 1rem;
   margin: 0 0.2rem 0 0;
 }
-.charsheet main#megaverse .bonus-type-container .profile-management {
+.charsheet main#megaverse .profile-management {
   display: block;
+  margin: 0.5rem 0;
 }
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label {
+.charsheet main#megaverse .profile-management .bonus-names {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.charsheet main#megaverse .profiles .bonus-type-container.attributes > label {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 4rem 4rem 4rem 4rem;
 }
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label input[type=number],
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container.attributes > label input[type=text] {
+.charsheet main#megaverse .profiles .bonus-type-container.attributes > label input[type=number],
+.charsheet main#megaverse .profiles .bonus-type-container.attributes > label input[type=text] {
   width: auto;
 }
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .bonus-type-container label.abs {
+.charsheet main#megaverse .profiles .bonus-type-container label.abs {
   display: none;
 }
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .profile-management {
-  margin: 0.5rem 0;
-}
-.charsheet main#megaverse .bonuses-container .profiles .repcontainer[data-groupname=repeating_profiles] .repitem .profile-management .bonus-names {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-/* End Resets */
+
 /* Tabs */
 /* Configure the tab buttons */
 .core,

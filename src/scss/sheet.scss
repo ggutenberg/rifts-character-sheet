@@ -1,7 +1,5 @@
 @use 'metal-buttons';
 
-/* Resets */
-
 .charsheet {
   main#megaverse {
     &:not(.debug) {
@@ -172,134 +170,39 @@
           margin: 0 0.2rem 0 0;
         }
       }
+    }
 
-      .profile-management {
-        display: block;
+    .profile-management {
+      display: block;
+      margin: 0.5rem 0;
+
+      .bonus-names {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
       }
     }
 
-    .bonuses-container {
-      .profiles {
-        .repcontainer[data-groupname="repeating_profiles"] {
-          .repitem {
-            .bonus-type-container {
-              &.attributes {
-                > label {
-                  display: grid;
-                  gap: 0.5rem;
-                  grid-template-columns: 4rem 4rem 4rem 4rem;
+    .profiles {
+      .bonus-type-container {
+        &.attributes {
+          > label {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 4rem 4rem 4rem 4rem;
 
-                  input[type="number"],
-                  input[type="text"] {
-                    width: auto;
-                  }
-                }
-              }
-              label.abs {
-                display: none;
-              }
-            }
-            .profile-management {
-              margin: 0.5rem 0;
-
-              .bonus-names {
-                font-weight: bold;
-                margin-bottom: 0.5rem;
-              }
+            input[type="number"],
+            input[type="text"] {
+              width: auto;
             }
           }
         }
-      }
-
-      .repcontainer[data-groupname="repeating_profiles"],
-      .repcontainer[data-groupname="repeating_modifiers"],
-      .repcontainer[data-groupname="repeating_bonuses"] {
-        .repitem {
-          // .bonus-type-container {
-          //   display: grid;
-          //   gap: 1rem;
-          //   grid-template-columns: 1fr 1fr 1fr 1fr;
-
-          //   &.attributes {
-          //     > label {
-          //       display: grid;
-          //       gap: 0.2rem;
-          //       grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
-
-          //       input[type="number"],
-          //       input[type="text"] {
-          //         width: auto;
-          //       }
-          //     }
-          //   }
-          // }
-
-          // label {
-          //   display: grid;
-          //   grid-template-columns: 1fr min-content 4rem;
-          //   width: 100%;
-
-          //   span {
-          //     display: flex;
-          //     align-items: center;
-          //     justify-content: space-between;
-          //   }
-          // }
-
-          // label.select {
-          //   grid-template-columns: max-content 1fr 4rem;
-          //   align-items: center;
-          // }
-
-          // label.description {
-          //   display: block;
-          // }
-
-          // .bonus-thing-heading {
-          //   display: grid;
-          //   gap: 1rem;
-          //   grid-template-columns: 2.5rem 1fr min-content;
-
-          //   label {
-          //     display: grid;
-          //     gap: 0.5rem;
-          //     grid-template-columns: max-content 1fr;
-
-          //     input[name="attr_name"] {
-          //       width: auto;
-          //     }
-          //   }
-          // }
-
-          // label.abs {
-          //   align-items: center;
-          //   input[type="checkbox"] {
-          //     width: 1rem;
-          //     margin: 0 0.2rem 0 0;
-          //   }
-          // }
-
-          // .profile-management {
-          //   display: block;
-          // }
+        label.abs {
+          display: none;
         }
       }
     }
   }
 }
-
-/* End Resets */
-
-// .charsheet
-//   .bonuses
-//   .repcontainer[data-groupname="repeating_bonusselections"]
-//   button.repcontrol_del,
-// .charsheet
-//   .bonuses
-//   .repcontrol[data-groupname="repeating_bonusselections"]
-//   button.repcontrol_add {
-//   display: none !important;
-// }
 
 /* Tabs */
 /* Configure the tab buttons */
