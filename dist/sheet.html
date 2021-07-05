@@ -566,6 +566,56 @@
 
   <br />
 
+  <!-- inject:partials/skills.html -->
+  <div class="skills">
+  <h3>Skills</h3>
+  <p>Note that skills include IQ bonus.</p>
+  <fieldset class="repeating_skills">
+    <details class="info">
+      <summary>
+        <div class="values">
+          <h5>Info</h5>
+          <h5>Skill</h5>
+          <h5>Category</h5>
+          <h5>Base</h5>
+          <h5>Bonus</h5>
+          <h5>Per Level</h5>
+          <h5>Level</h5>
+          <h5>Total</h5>
+          <h5></h5>
+          <b class="click-expand"
+            ><span title="Click for more info">&nbsp;&#9432;</span></b
+          >
+          <input type="text" value="" name="attr_name" />
+          <select name="attr_category" value="occ">
+            <option value="occ">O.C.C.</option>
+            <option value="related">O.C.C. Related</option>
+            <option value="secondary">Secondary</option>
+          </select>
+          <input type="number" value="0" name="attr_base" />
+          <input type="number" value="0" name="attr_bonus" />
+          <input type="number" value="0" name="attr_perlevel" />
+          <input type="number" value="1" name="attr_level" />
+          <input type="number" value="0" name="attr_total" readonly />
+          <button
+            type="roll"
+            value="@{character_name} @{name} check: [[d100<@{total}]]"
+          />
+        </div>
+      </summary>
+      <textarea name="attr_description" value=""></textarea>
+      <div class="macro-help">
+        <label
+          ><span><b>Row ID:</b></span>
+          <input type="text" readonly name="attr_rowid" value=""
+        /></label>
+      </div>
+    </details>
+  </fieldset>
+</div>
+
+  <!-- endinject -->
+
   <div class="abilities">
     <h3>Natural Abilities / Powers</h3>
     <details>
@@ -710,7 +760,7 @@
 
           <!-- endinject -->
           <!-- inject:partials/repeating_bonuses_details.html -->
-          <details class="default">
+          <details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -1392,7 +1442,7 @@
       <div class="repeating-bonuses-outer">
         <fieldset class="repeating_modifiers">
           <input type="hidden" name="attr_bonus_id" value="" />
-          <details>
+          <details class="info">
             <summary>
               <div class="bonus-thing-heading">
                 <b class="click-expand"
@@ -1409,7 +1459,7 @@
               </div>
             </summary>
             <!-- inject:partials/repeating_bonuses_details.html -->
-            <details class="default">
+            <details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -2073,7 +2123,7 @@
         <div class="profiles repeating-bonuses-outer">
           <h3>Profiles</h3>
           <fieldset class="repeating_profiles">
-            <details>
+            <details class="info">
               <summary>
                 <div class="bonus-thing-heading">
                   <b class="click-expand"
@@ -2118,7 +2168,7 @@
                 </button>
               </div>
               <!-- inject:partials/repeating_bonuses_details.html -->
-              <details class="default">
+              <details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -2733,7 +2783,7 @@
         <h3>Bonus Sources</h3>
         <fieldset class="repeating_bonuses">
           <input type="hidden" name="attr_selection_id" value="" />
-          <details>
+          <details class="info">
             <summary>
               <div class="bonus-thing-heading">
                 <b class="click-expand"
@@ -2750,7 +2800,7 @@
               </div>
             </summary>
             <!-- inject:partials/repeating_bonuses_details.html -->
-            <details class="default">
+            <details>
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -3361,56 +3411,6 @@
       </div>
     </div>
   </div>
-
-  <!-- inject:partials/skills.html -->
-  <div class="skills">
-  <h3>Skills</h3>
-  <p>Note that skills include IQ bonus.</p>
-  <fieldset class="repeating_skills">
-    <details>
-      <summary>
-        <div class="values">
-          <h5>Info</h5>
-          <h5>Skill</h5>
-          <h5>Category</h5>
-          <h5>Base</h5>
-          <h5>Bonus</h5>
-          <h5>Per Level</h5>
-          <h5>Level</h5>
-          <h5>Total</h5>
-          <h5></h5>
-          <b class="click-expand"
-            ><span title="Click for more info">&nbsp;&#9432;</span></b
-          >
-          <input type="text" value="" name="attr_name" />
-          <select name="attr_category" value="occ">
-            <option value="occ">O.C.C.</option>
-            <option value="related">O.C.C. Related</option>
-            <option value="secondary">Secondary</option>
-          </select>
-          <input type="number" value="0" name="attr_base" />
-          <input type="number" value="0" name="attr_bonus" />
-          <input type="number" value="0" name="attr_perlevel" />
-          <input type="number" value="1" name="attr_level" />
-          <input type="number" value="0" name="attr_total" readonly />
-          <button
-            type="roll"
-            value="@{character_name} @{name} check: [[d100<@{total}]]"
-          />
-        </div>
-      </summary>
-      <textarea name="attr_description" value=""></textarea>
-      <div class="macro-help">
-        <label
-          ><span><b>Row ID:</b></span>
-          <input type="text" readonly name="attr_rowid" value=""
-        /></label>
-      </div>
-    </details>
-  </fieldset>
-</div>
-
-  <!-- endinject -->
 
   <!-- inject:partials/magic.html -->
   <div class="magic">

@@ -3,52 +3,27 @@
 /* Resets */
 
 .charsheet {
-  details,
-  summary {
-    display: revert;
-  }
-
   details {
+    display: revert;
     margin-bottom: 1rem;
+
     summary {
+      display: revert;
       cursor: pointer;
+
+      & > h3 {
+        display: inline-block;
+      }
     }
   }
 
   details.info {
     display: block;
-  }
-
-  .repcontainer[data-groupname="repeating_profiles"] details,
-  .repcontainer[data-groupname="repeating_profiles"] summary,
-  .repcontainer[data-groupname="repeating_bonuses"] details,
-  .repcontainer[data-groupname="repeating_bonuses"] summary,
-  .repcontainer[data-groupname="repeating_modifiers"] details,
-  .repcontainer[data-groupname="repeating_modifiers"] summary,
-  .repcontainer[data-groupname="repeating_abilities"] details,
-  .repcontainer[data-groupname="repeating_abilities"] summary,
-  .repcontainer[data-groupname="repeating_skills"] details,
-  .repcontainer[data-groupname="repeating_skills"] summary {
-    display: block;
-
-    details.default {
-      display: revert;
-      summary {
-        display: revert;
-
-        h3 {
-          display: inline-block;
-        }
-      }
-    }
-  }
-
-  .repcontainer[data-groupname="repeating_profiles"] details,
-  .repcontainer[data-groupname="repeating_bonuses"] details,
-  .repcontainer[data-groupname="repeating_modifiers"] details,
-  .repcontainer[data-groupname="repeating_abilities"] details,
-  .repcontainer[data-groupname="repeating_skills"] details {
     margin-bottom: 0;
+
+    & > summary {
+      display: block;
+    }
   }
 
   .full {

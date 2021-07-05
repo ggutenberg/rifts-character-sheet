@@ -77,73 +77,23 @@
   /* outer HL */
 }
 
-.charsheet details,
-.charsheet summary {
-  display: revert;
-}
 .charsheet details {
+  display: revert;
   margin-bottom: 1rem;
 }
 .charsheet details summary {
+  display: revert;
   cursor: pointer;
+}
+.charsheet details summary > h3 {
+  display: inline-block;
 }
 .charsheet details.info {
   display: block;
-}
-.charsheet .repcontainer[data-groupname=repeating_profiles] details,
-.charsheet .repcontainer[data-groupname=repeating_profiles] summary,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] details,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] summary,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] details,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] summary,
-.charsheet .repcontainer[data-groupname=repeating_abilities] details,
-.charsheet .repcontainer[data-groupname=repeating_abilities] summary,
-.charsheet .repcontainer[data-groupname=repeating_skills] details,
-.charsheet .repcontainer[data-groupname=repeating_skills] summary {
-  display: block;
-}
-.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default,
-.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default,
-.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default,
-.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default,
-.charsheet .repcontainer[data-groupname=repeating_skills] details details.default,
-.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default {
-  display: revert;
-}
-.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_skills] details details.default summary,
-.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default summary {
-  display: revert;
-}
-.charsheet .repcontainer[data-groupname=repeating_profiles] details details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_profiles] summary details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] details details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] summary details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] details details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] summary details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_abilities] details details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_abilities] summary details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_skills] details details.default summary h3,
-.charsheet .repcontainer[data-groupname=repeating_skills] summary details.default summary h3 {
-  display: inline-block;
-}
-.charsheet .repcontainer[data-groupname=repeating_profiles] details,
-.charsheet .repcontainer[data-groupname=repeating_bonuses] details,
-.charsheet .repcontainer[data-groupname=repeating_modifiers] details,
-.charsheet .repcontainer[data-groupname=repeating_abilities] details,
-.charsheet .repcontainer[data-groupname=repeating_skills] details {
   margin-bottom: 0;
+}
+.charsheet details.info > summary {
+  display: block;
 }
 .charsheet .full {
   width: 100% !important;
