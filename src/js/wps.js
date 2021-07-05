@@ -18,7 +18,7 @@ function addWpToBonuses(section, rowId, wpName) {
       combatRowId = generateRowID();
       attrs[wpCombatId] = combatRowId;
     }
-    COMBAT_SAVE_KEYS.forEach((key) => {
+    REPEATING_BONUS_KEYS.forEach((key) => {
       attrs[`repeating_bonuses_${combatRowId}_${key}`] =
         a[`repeating_${section}_${rowId}_${key}`] || 0;
     });

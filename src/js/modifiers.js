@@ -12,7 +12,7 @@ async function addModifierToBonusesAsync(section, rowId) {
   }
 
   const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
-  const thingAttrs = COMBAT_SAVE_KEYS.map(
+  const thingAttrs = REPEATING_BONUS_KEYS.map(
     (key) => `repeating_${section}_${rowId}_${key}`
   );
   thingAttrs.push(thingBonusId);
@@ -26,7 +26,7 @@ async function addModifierToBonusesAsync(section, rowId) {
     bonusRowId = generateRowID();
     attrs[thingBonusId] = bonusRowId;
   }
-  COMBAT_SAVE_KEYS.forEach((key) => {
+  REPEATING_BONUS_KEYS.forEach((key) => {
     attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
       a[`repeating_${section}_${rowId}_${key}`] || 0;
   });

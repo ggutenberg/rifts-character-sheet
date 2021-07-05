@@ -558,12 +558,12 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
   (acc, cur) => acc.concat(cur),
   []
 );
-const COMBAT_SAVE_KEYS = COMBAT_KEYS.concat(SAVE_KEYS, ATTRIBUTE_KEYS);
+const REPEATING_BONUS_KEYS = COMBAT_KEYS.concat(SAVE_KEYS, ATTRIBUTE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
 const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];
 
-const MAGIC_KEYS = [
+const MAGIC_KEYS = REPEATING_BONUS_KEYS.concat([
   "name",
   "school",
   "spell_level",
@@ -586,10 +586,9 @@ const MAGIC_KEYS = [
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
-  "description",
-];
+]);
 
-const PSIONICS_KEYS = [
+const PSIONICS_KEYS = REPEATING_BONUS_KEYS.concat([
   "name",
   "range",
   "damage",
@@ -610,10 +609,9 @@ const PSIONICS_KEYS = [
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
-  "description",
-];
+]);
 
-const ABILITIES_KEYS = [
+const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
   "name",
   "range",
   "damage",
@@ -636,8 +634,7 @@ const ABILITIES_KEYS = [
   "frequency_units",
   "percentage_starting",
   "percentage_per_level",
-  "description",
-];
+]);
 
 const CORE_KEYS = [
   "character_name",
@@ -718,8 +715,8 @@ const SECTIONS = {
   wp: WP_KEYS.wp,
   wpmodern: WP_KEYS.wpmodern,
   skills: SKILL_KEYS,
-  combat: COMBAT_SAVE_KEYS, // deprecated
-  modifiers: COMBAT_SAVE_KEYS,
+  combat: REPEATING_BONUS_KEYS, // deprecated
+  modifiers: REPEATING_BONUS_KEYS,
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
