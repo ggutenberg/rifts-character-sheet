@@ -1,165 +1,104 @@
-<div class="magic">
-  <h3>Magic</h3>
-  <details>
-    <summary><b>Instructions</b></summary>
-    <p>
-      Enter a Spell name and its PPE. Optionally set the School and Spell Level.
-      Then expand the Details, and fill in the applicable values. They will
-      calculate and populate Range, Damage, Duration, and Skill if applicable.
-    </p>
-    <p>
-      For Starting Damage and Damage per Level enter values that roll20 would
-      use for dice rolls. Ex. "4d6", "1d6", etc.
-    </p>
-    <p>
-      Press the Cast button to remove the PPE from the Current PPE input field.
-      Click Reset PPE to set Current PPE back to the value on the Core tab. Note
-      the roll button beside Damage and Skill.
-    </p>
-    <p>
-      Don't forget to copy/paste the spell description into the Description
-      field to make life easier for your GM. Also use that field for any macros
-      you may need like Strike with an arbitrary bonus.
-    </p>
-  </details>
-  <p>Click <b>Instructions</b> for detailed instructions.</p>
+<summary>
+  <div class="spells-list">
+    <h5>Info</h5>
+    <h5>Spell</h5>
+    <h5>Spell Level</h5>
+    <h5>Range</h5>
+    <h5>Duration</h5>
+    <h5>Damage</h5>
+    <h5></h5>
+    <h5 title="Damage Capacity">D.C.</h5>
+    <h5>Skill</h5>
+    <h5></h5>
+    <h5>P.P.E.</h5>
+    <h5></h5>
+    <b class="click-expand"
+      ><span title="Click for more info">&nbsp;&#9432;</span></b
+    >
+    <input type="text" value="" name="attr_name" />
+    <input type="number" value="1" name="attr_spell_level" />
+    <input type="text" value="0" name="attr_range" />
+    <input type="text" value="0" name="attr_duration" />
+    <input type="text" value="0" name="attr_damage" />
+    <button
+      type="roll"
+      value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
+    />
+    <input type="text" value="0" name="attr_dc" />
+    <input type="number" value="0" name="attr_percentage" readonly />
+    <button
+      type="roll"
+      value="@{character_name} @{name} check: [[d100<@{percentage}]]"
+    />
+    <input type="number" value="0" name="attr_ppe" />
+    <button type="action" name="act_usespell">Cast</button>
+  </div>
+</summary>
+<br />
+<label
+  ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
+  Bonuses</label
+>
+<br />
+<div class="spell-details">
   <label
-    ><span>Current P.P.E.</span>
-    <input type="number" name="attr_currentppe" value="0" />
-    <button type="action" name="act_resetppe">Reset P.P.E.</button>
+    ><span>Starting range</span
+    ><input type="number" value="0" name="attr_range_starting"
+  /></label>
+  <label
+    ><span>Range per level</span
+    ><input type="number" value="0" name="attr_range_per_level"
+  /></label>
+  <label
+    ><span>Range unit</span
+    ><input type="text" value="" name="attr_range_unit" list="distance-units" />
   </label>
-  <fieldset class="repeating_magic">
-    <div class="spells-list">
-      <h5>Spell</h5>
-      <h5>Spell Level</h5>
-      <h5>Range</h5>
-      <h5>Duration</h5>
-      <h5>Damage</h5>
-      <h5></h5>
-      <h5 title="Damage Capacity">D.C.</h5>
-      <h5>Skill</h5>
-      <h5></h5>
-      <h5>P.P.E.</h5>
-      <h5></h5>
-      <input type="text" value="" name="attr_name" />
-      <input type="number" value="1" name="attr_spell_level" />
-      <input type="text" value="0" name="attr_range" />
-      <input type="text" value="0" name="attr_duration" />
-      <input type="text" value="0" name="attr_damage" />
-      <button
-        type="roll"
-        value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
-      />
-      <input type="text" value="0" name="attr_dc" />
-      <input type="number" value="0" name="attr_percentage" readonly />
-      <button
-        type="roll"
-        value="@{character_name} @{name} check: [[d100<@{percentage}]]"
-      />
-      <input type="number" value="0" name="attr_ppe" />
-      <button type="action" name="act_usespell">Cast</button>
-    </div>
-    <details>
-      <summary>
-        <b>Details for <span name="attr_name"></span></b>
-      </summary>
-      <div class="spell-details">
-        <label
-          ><span>Starting range</span
-          ><input type="number" value="0" name="attr_range_starting"
-        /></label>
-        <label
-          ><span>Range per level</span
-          ><input type="number" value="0" name="attr_range_per_level"
-        /></label>
-        <label
-          ><span>Range unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_range_unit"
-            list="distance-units"
-          />
-        </label>
-        <label
-          ><span>Starting duration</span
-          ><input type="number" value="0" name="attr_duration_starting"
-        /></label>
-        <label
-          ><span>Duration per level</span
-          ><input type="number" value="0" name="attr_duration_per_level"
-        /></label>
-        <label
-          ><span>Duration unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_duration_unit"
-            list="time-units"
-          />
-        </label>
-        <label
-          ><span>Starting damage</span
-          ><input type="text" value="0" name="attr_damage_starting"
-        /></label>
-        <label
-          ><span>Damage per level</span
-          ><input type="text" value="0" name="attr_damage_per_level"
-        /></label>
-        <label
-          ><span>Damage unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_damage_unit"
-            list="damage-units"
-          />
-        </label>
-        <label
-          ><span>Starting D.C.</span
-          ><input type="number" value="0" name="attr_dc_starting"
-        /></label>
-        <label
-          ><span>D.C. per level</span
-          ><input type="number" value="0" name="attr_dc_per_level"
-        /></label>
-        <label
-          ><span>D.C. unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_dc_unit"
-            list="damage-units"
-          />
-        </label>
-        <label
-          ><span>Starting skill %</span
-          ><input type="number" value="0" name="attr_percentage_starting"
-        /></label>
-        <label
-          ><span>Skill % per level</span
-          ><input type="number" value="0" name="attr_percentage_per_level"
-        /></label>
-        <label
-          ><span>School</span
-          ><input
-            type="text"
-            value=""
-            name="attr_school"
-            list="spell-schools"
-          />
-        </label>
-      </div>
-      <label
-        ><b>Description</b>
-        <textarea class="full" name="attr_description" value=""></textarea>
-      </label>
-      <div class="macro-help">
-        <label
-          ><span><b>Row ID:</b></span>
-          <input type="text" readonly name="attr_rowid" value=""
-        /></label>
-      </div>
-    </details>
-  </fieldset>
+  <label
+    ><span>Starting duration</span
+    ><input type="number" value="0" name="attr_duration_starting"
+  /></label>
+  <label
+    ><span>Duration per level</span
+    ><input type="number" value="0" name="attr_duration_per_level"
+  /></label>
+  <label
+    ><span>Duration unit</span
+    ><input type="text" value="" name="attr_duration_unit" list="time-units" />
+  </label>
+  <label
+    ><span>Starting damage</span
+    ><input type="text" value="0" name="attr_damage_starting"
+  /></label>
+  <label
+    ><span>Damage per level</span
+    ><input type="text" value="0" name="attr_damage_per_level"
+  /></label>
+  <label
+    ><span>Damage unit</span
+    ><input type="text" value="" name="attr_damage_unit" list="damage-units" />
+  </label>
+  <label
+    ><span>Starting D.C.</span
+    ><input type="number" value="0" name="attr_dc_starting"
+  /></label>
+  <label
+    ><span>D.C. per level</span
+    ><input type="number" value="0" name="attr_dc_per_level"
+  /></label>
+  <label
+    ><span>D.C. unit</span
+    ><input type="text" value="" name="attr_dc_unit" list="damage-units" />
+  </label>
+  <label
+    ><span>Starting skill %</span
+    ><input type="number" value="0" name="attr_percentage_starting"
+  /></label>
+  <label
+    ><span>Skill % per level</span
+    ><input type="number" value="0" name="attr_percentage_per_level"
+  /></label>
+  <label
+    ><span>School</span
+    ><input type="text" value="" name="attr_school" list="spell-schools" />
+  </label>
 </div>

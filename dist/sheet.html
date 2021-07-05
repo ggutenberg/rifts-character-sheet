@@ -676,13 +676,7 @@
   ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
   Bonuses</label
 >
-<hr />
-<!-- <button type="action" class="metal linear small" name="act_addtobonuses">
-  Add to Bonuses
-</button>
-<button type="action" class="metal linear small" name="act_removefrombonuses">
-  Remove from Bonuses
-</button> -->
+<br />
 <div class="ability-details">
   <label
     ><span>Starting range</span
@@ -3420,175 +3414,758 @@
       </div>
     </div>
   </div>
-
-  <!-- inject:partials/magic.html -->
   <div class="magic">
-  <h3>Magic</h3>
-  <details>
-    <summary><b>Instructions</b></summary>
-    <p>
-      Enter a Spell name and its PPE. Optionally set the School and Spell Level.
-      Then expand the Details, and fill in the applicable values. They will
-      calculate and populate Range, Damage, Duration, and Skill if applicable.
-    </p>
-    <p>
-      For Starting Damage and Damage per Level enter values that roll20 would
-      use for dice rolls. Ex. "4d6", "1d6", etc.
-    </p>
-    <p>
-      Press the Cast button to remove the PPE from the Current PPE input field.
-      Click Reset PPE to set Current PPE back to the value on the Core tab. Note
-      the roll button beside Damage and Skill.
-    </p>
-    <p>
-      Don't forget to copy/paste the spell description into the Description
-      field to make life easier for your GM. Also use that field for any macros
-      you may need like Strike with an arbitrary bonus.
-    </p>
-  </details>
-  <p>Click <b>Instructions</b> for detailed instructions.</p>
-  <label
-    ><span>Current P.P.E.</span>
-    <input type="number" name="attr_currentppe" value="0" />
-    <button type="action" name="act_resetppe">Reset P.P.E.</button>
-  </label>
-  <fieldset class="repeating_magic">
-    <div class="spells-list">
-      <h5>Spell</h5>
-      <h5>Spell Level</h5>
-      <h5>Range</h5>
-      <h5>Duration</h5>
-      <h5>Damage</h5>
-      <h5></h5>
-      <h5 title="Damage Capacity">D.C.</h5>
-      <h5>Skill</h5>
-      <h5></h5>
-      <h5>P.P.E.</h5>
-      <h5></h5>
-      <input type="text" value="" name="attr_name" />
-      <input type="number" value="1" name="attr_spell_level" />
-      <input type="text" value="0" name="attr_range" />
-      <input type="text" value="0" name="attr_duration" />
-      <input type="text" value="0" name="attr_damage" />
-      <button
-        type="roll"
-        value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
-      />
-      <input type="text" value="0" name="attr_dc" />
-      <input type="number" value="0" name="attr_percentage" readonly />
-      <button
-        type="roll"
-        value="@{character_name} @{name} check: [[d100<@{percentage}]]"
-      />
-      <input type="number" value="0" name="attr_ppe" />
-      <button type="action" name="act_usespell">Cast</button>
-    </div>
+    <h3>Magic</h3>
     <details>
-      <summary>
-        <b>Details for <span name="attr_name"></span></b>
-      </summary>
-      <div class="spell-details">
-        <label
-          ><span>Starting range</span
-          ><input type="number" value="0" name="attr_range_starting"
-        /></label>
-        <label
-          ><span>Range per level</span
-          ><input type="number" value="0" name="attr_range_per_level"
-        /></label>
-        <label
-          ><span>Range unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_range_unit"
-            list="distance-units"
-          />
-        </label>
-        <label
-          ><span>Starting duration</span
-          ><input type="number" value="0" name="attr_duration_starting"
-        /></label>
-        <label
-          ><span>Duration per level</span
-          ><input type="number" value="0" name="attr_duration_per_level"
-        /></label>
-        <label
-          ><span>Duration unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_duration_unit"
-            list="time-units"
-          />
-        </label>
-        <label
-          ><span>Starting damage</span
-          ><input type="text" value="0" name="attr_damage_starting"
-        /></label>
-        <label
-          ><span>Damage per level</span
-          ><input type="text" value="0" name="attr_damage_per_level"
-        /></label>
-        <label
-          ><span>Damage unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_damage_unit"
-            list="damage-units"
-          />
-        </label>
-        <label
-          ><span>Starting D.C.</span
-          ><input type="number" value="0" name="attr_dc_starting"
-        /></label>
-        <label
-          ><span>D.C. per level</span
-          ><input type="number" value="0" name="attr_dc_per_level"
-        /></label>
-        <label
-          ><span>D.C. unit</span
-          ><input
-            type="text"
-            value=""
-            name="attr_dc_unit"
-            list="damage-units"
-          />
-        </label>
-        <label
-          ><span>Starting skill %</span
-          ><input type="number" value="0" name="attr_percentage_starting"
-        /></label>
-        <label
-          ><span>Skill % per level</span
-          ><input type="number" value="0" name="attr_percentage_per_level"
-        /></label>
-        <label
-          ><span>School</span
-          ><input
-            type="text"
-            value=""
-            name="attr_school"
-            list="spell-schools"
-          />
-        </label>
-      </div>
-      <label
-        ><b>Description</b>
-        <textarea class="full" name="attr_description" value=""></textarea>
-      </label>
-      <div class="macro-help">
-        <label
-          ><span><b>Row ID:</b></span>
-          <input type="text" readonly name="attr_rowid" value=""
-        /></label>
-      </div>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Spell name and its PPE. Optionally set the School and Spell
+        Level. Then expand the Details, and fill in the applicable values. They
+        will calculate and populate Range, Damage, Duration, and Skill if
+        applicable.
+      </p>
+      <p>
+        For Starting Damage and Damage per Level enter values that roll20 would
+        use for dice rolls. Ex. "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Cast button to remove the PPE from the Current PPE input
+        field. Click Reset PPE to set Current PPE back to the value on the Core
+        tab. Note the roll button beside Damage and Skill.
+      </p>
+      <p>
+        Don't forget to copy/paste the spell description into the Description
+        field to make life easier for your GM. Also use that field for any
+        macros you may need like Strike with an arbitrary bonus.
+      </p>
     </details>
-  </fieldset>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current P.P.E.</span>
+      <input type="number" name="attr_currentppe" value="0" />
+      <button type="action" name="act_resetppe">Reset P.P.E.</button>
+    </label>
+    <fieldset class="repeating_magic">
+      <details class="info">
+        <!-- inject:partials/magic.html -->
+        <summary>
+  <div class="spells-list">
+    <h5>Info</h5>
+    <h5>Spell</h5>
+    <h5>Spell Level</h5>
+    <h5>Range</h5>
+    <h5>Duration</h5>
+    <h5>Damage</h5>
+    <h5></h5>
+    <h5 title="Damage Capacity">D.C.</h5>
+    <h5>Skill</h5>
+    <h5></h5>
+    <h5>P.P.E.</h5>
+    <h5></h5>
+    <b class="click-expand"
+      ><span title="Click for more info">&nbsp;&#9432;</span></b
+    >
+    <input type="text" value="" name="attr_name" />
+    <input type="number" value="1" name="attr_spell_level" />
+    <input type="text" value="0" name="attr_range" />
+    <input type="text" value="0" name="attr_duration" />
+    <input type="text" value="0" name="attr_damage" />
+    <button
+      type="roll"
+      value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
+    />
+    <input type="text" value="0" name="attr_dc" />
+    <input type="number" value="0" name="attr_percentage" readonly />
+    <button
+      type="roll"
+      value="@{character_name} @{name} check: [[d100<@{percentage}]]"
+    />
+    <input type="number" value="0" name="attr_ppe" />
+    <button type="action" name="act_usespell">Cast</button>
+  </div>
+</summary>
+<br />
+<label
+  ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
+  Bonuses</label
+>
+<br />
+<div class="spell-details">
+  <label
+    ><span>Starting range</span
+    ><input type="number" value="0" name="attr_range_starting"
+  /></label>
+  <label
+    ><span>Range per level</span
+    ><input type="number" value="0" name="attr_range_per_level"
+  /></label>
+  <label
+    ><span>Range unit</span
+    ><input type="text" value="" name="attr_range_unit" list="distance-units" />
+  </label>
+  <label
+    ><span>Starting duration</span
+    ><input type="number" value="0" name="attr_duration_starting"
+  /></label>
+  <label
+    ><span>Duration per level</span
+    ><input type="number" value="0" name="attr_duration_per_level"
+  /></label>
+  <label
+    ><span>Duration unit</span
+    ><input type="text" value="" name="attr_duration_unit" list="time-units" />
+  </label>
+  <label
+    ><span>Starting damage</span
+    ><input type="text" value="0" name="attr_damage_starting"
+  /></label>
+  <label
+    ><span>Damage per level</span
+    ><input type="text" value="0" name="attr_damage_per_level"
+  /></label>
+  <label
+    ><span>Damage unit</span
+    ><input type="text" value="" name="attr_damage_unit" list="damage-units" />
+  </label>
+  <label
+    ><span>Starting D.C.</span
+    ><input type="number" value="0" name="attr_dc_starting"
+  /></label>
+  <label
+    ><span>D.C. per level</span
+    ><input type="number" value="0" name="attr_dc_per_level"
+  /></label>
+  <label
+    ><span>D.C. unit</span
+    ><input type="text" value="" name="attr_dc_unit" list="damage-units" />
+  </label>
+  <label
+    ><span>Starting skill %</span
+    ><input type="number" value="0" name="attr_percentage_starting"
+  /></label>
+  <label
+    ><span>Skill % per level</span
+    ><input type="number" value="0" name="attr_percentage_per_level"
+  /></label>
+  <label
+    ><span>School</span
+    ><input type="text" value="" name="attr_school" list="spell-schools" />
+  </label>
 </div>
 
-  <!-- endinject -->
+        <!-- endinject -->
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <input type="hidden" name="attr_bonus_id" value="" />
+<details>
+  <summary>
+    <h3>Attributes</h3>
+  </summary>
+  <div class="bonus-type-container attributes">
+    <label
+      ><span>I.Q.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_iq"
+        title="Intelligence Quotient"
+      />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
+      >
+      <input
+        class="attribute-bonus"
+        type="number"
+        value="0"
+        name="attr_mod_iq_bonus"
+        title="+ Skills %"
+        readonly
+      />
+      <input
+        class="attribute-bonus"
+        type="number"
+        value="0"
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+        readonly
+      />
+    </label>
+    <label
+      ><span>M.E.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_me"
+        title="Mental Endurance"
+      />
+      <label class="abs"
+        ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
+      >
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_me_bonus"
+        title="+ Save vs. Psionics"
+        readonly
+      />
+    </label>
+    <label
+      ><span>M.A.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_ma"
+        title="Mental Affinity"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
+      >
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_ma_bonus"
+        title="% Trust/Intimidate"
+        readonly
+      />
+    </label>
+    <label
+      ><span>P.S.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_ps"
+        title="Physical Strength"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
+      >
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_ps_bonus"
+        title="+ SDC Damage"
+        readonly
+      />
+    </label>
+    <label
+      ><span>P.P.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_pp"
+        title="Physical Prowess"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
+      >
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+        readonly
+      />
+    </label>
+    <label
+      ><span>P.E.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_pe"
+        title="Physical Endurance"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
+      >
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_pe_bonus"
+        title="+ Magic/Poison/Toxins"
+        readonly
+      />
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_pe_coma_bonus"
+        title="+ Coma/Death %"
+        readonly
+      />
+    </label>
+    <label
+      ><span>P.B.</span>
+      <input
+        type="number"
+        value="0"
+        name="attr_mod_pb"
+        title="Physical Beauty"
+      /><label class="abs"
+        ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
+      >
+      <input
+        class="attribute"
+        type="number"
+        value="0"
+        name="attr_mod_pb_bonus"
+        title="% Charm/Impress"
+        readonly
+      />
+    </label>
+    <label
+      ><span>Spd</span>
+      <input type="number" value="0" name="attr_mod_spd" title="Speed" /><label
+        class="abs"
+        ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
+      ></label
+    >
+  </div>
+  <hr />
+  <div class="bonus-ps-container">
+    <label class="select"
+      ><span>PS Type</span>
+      <select class="" name="attr_mod_character_ps_type" value="normal">
+        <option value="1">Normal</option>
+        <option value="2">Augmented</option>
+        <option value="3">Robotic</option>
+        <option value="3.5">Giant Robotic</option>
+        <option value="4">Supernatural</option>
+      </select></label
+    >
+    <label
+      ><span>Restrained Punch</span>
+      <input type="text" name="attr_mod_restrained_punch" value="0" />
+      <select name="attr_mod_restrained_punch_unit" value="sdc">
+        <option value="sdc">SDC</option>
+        <option value="mdc">MDC</option>
+      </select></label
+    >
+
+    <label
+      ><span>Punch</span>
+      <input type="text" name="attr_mod_punch" value="0" />
+      <select name="attr_mod_punch_unit" value="sdc">
+        <option value="sdc">SDC</option>
+        <option value="mdc">MDC</option>
+      </select></label
+    >
+
+    <label
+      ><span>Power Punch</span>
+      <input type="text" name="attr_mod_power_punch" value="0" />
+      <select name="attr_mod_power_punch_unit" value="sdc">
+        <option value="sdc">SDC</option>
+        <option value="mdc">MDC</option>
+      </select></label
+    >
+
+    <label
+      ><span>Kick</span>
+      <input type="text" name="attr_mod_kick" value="0" />
+      <select name="attr_mod_kick_unit" value="sdc">
+        <option value="sdc">SDC</option>
+        <option value="mdc">MDC</option>
+      </select></label
+    >
+
+    <label
+      ><span>Leap Kick</span>
+      <input type="text" name="attr_mod_leap_kick" value="0" />
+      <select name="attr_mod_leap_kick_unit" value="sdc">
+        <option value="sdc">SDC</option>
+        <option value="mdc">MDC</option>
+      </select>
+    </label>
+
+    <label
+      ><span>Lift</span>
+      <input type="number" value="0" name="attr_mod_lift" value="0" />
+      <span>lbs</span>
+    </label>
+
+    <label
+      ><span>Carry</span>
+      <input type="number" value="0" name="attr_mod_carry" value="0" />
+      <span>lbs</span></label
+    >
+
+    <label
+      ><span>Throw (&frac12; Carry)</span>
+      <input type="number" value="0" name="attr_mod_throw_distance" value="0" />
+      <span>Feet</span></label
+    >
+
+    <label
+      ><span>Carry Max</span>
+      <input type="number" value="0" name="attr_mod_carry_max" /><span
+        >Minutes</span
+      ></label
+    >
+
+    <label
+      ><span>Carry (Running)</span>
+      <input type="number" value="0" name="attr_mod_carry_running" /><span
+        >Minutes</span
+      ></label
+    >
+
+    <label
+      ><span>Hold Max.</span>
+      <input type="number" value="0" name="attr_mod_hold_max" /><span
+        >Melees</span
+      ></label
+    >
+  </div>
+  <hr />
+</details>
+<div class="bonus-type-container">
+  <label
+    ><span title="Hit Points">H.P.</span
+    ><input type="number" value="0" name="attr_hp"
+  /></label>
+  <label
+    ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
+  /></label>
+  <label
+    ><span>A.R.</span><input type="number" value="0" name="attr_ar"
+  /></label>
+  <label
+    ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
+  /></label>
+  <label
+    ><span>P.P.E.</span><input type="number" value="0" name="attr_ppe"
+  /></label>
+  <label
+    ><span>I.S.P.</span><input type="number" value="0" name="attr_isp"
+  /></label>
+  <label
+    ><span>H.F.</span><input type="number" value="0" name="attr_mod_hf" /><label
+      class="abs"
+      ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
+    ></label
+  >
+</div>
+<hr />
+<h3>Combat</h3>
+<div class="bonus-type-container">
+  <label
+    ><span>Attacks</span>
+    <input type="number" value="0" name="attr_attacks" />
+  </label>
+  <label
+    ><span>Initiative</span>
+    <input type="number" value="0" name="attr_initiative" />
+    <button type="roll" value="Initiative: [[d20+@{initiative}]]" />
+  </label>
+  <label
+    ><span>Strike</span>
+    <input type="number" value="0" name="attr_strike" />
+    <button type="roll" value="Strike: [[d20+@{strike}]]" />
+  </label>
+  <label
+    ><span>Parry</span>
+    <input type="number" value="0" name="attr_parry" />
+    <button type="roll" value="Parry: [[d20+@{parry}]]" />
+  </label>
+  <label
+    ><span>Dodge</span>
+    <input type="number" value="0" name="attr_dodge" />
+    <button type="roll" value="Dodge: [[d20+@{dodge}]]" />
+  </label>
+  <label
+    ><span>Throw</span>
+    <input type="number" value="0" name="attr_throw" />
+    <button type="roll" value="Throw: [[d20+@{throw}]]" />
+  </label>
+  <label
+    ><span>Disarm</span>
+    <input type="number" value="0" name="attr_disarm" />
+    <button type="roll" value="Disarm: [[d20+@{disarm}]]" />
+  </label>
+  <label
+    ><span>Entangle</span>
+    <input type="number" value="0" name="attr_entangle" />
+    <button type="roll" value="Entangle: [[d20+@{entangle}]]" />
+  </label>
+  <label
+    ><span>Pull Punch</span>
+    <input type="number" value="0" name="attr_pull" />
+    <button type="roll" value="Pull Punch: [[d20+@{pull}]]" />
+  </label>
+  <label
+    ><span>Roll w/ Impact</span>
+    <input type="number" value="0" name="attr_roll" />
+    <button type="roll" value="Roll w/ Impact: [[d20+@{roll}]]" />
+  </label>
+  <label
+    ><span>Body Flip/Throw</span>
+    <input type="number" value="0" name="attr_flipthrow" />
+    <button type="roll" value="Body Flip/Throw: [[d20+@{flipthrow}]]" />
+  </label>
+  <label
+    ><span>Damage</span>
+    <input type="text" value="0" name="attr_damage" />
+    <button
+      type="roll"
+      value="?{Add damage modifier?|
+          None,Damage: [[@{damage}]]|
+          Punch,Damage: [[@{damage}+@{punch}]]|
+          P.S. Bonus,Damage: [[@{damage}+@{ps_bonus}]]
+        }"
+    />
+  </label>
+  <label
+    ><span>Dodge: Flight</span>
+    <input type="number" value="0" name="attr_dodge_flight" />
+    <button type="roll" value="Dodge in Flight: [[d20+@{dodge_flight}]]" />
+  </label>
+  <label
+    >Dodge: Auto
+    <input type="number" value="0" name="attr_dodge_auto" />
+    <button type="roll" value="Auto Dodge: [[d20+@{dodge_auto}]]" />
+  </label>
+  <label
+    ><span>Dodge: Teleport</span>
+    <input type="number" value="0" name="attr_dodge_teleport" />
+    <button type="roll" value="Teleport Dodge: [[d20+@{dodge_teleport}]]" />
+  </label>
+  <label
+    ><span>Dodge: Motion</span>
+    <input type="number" value="0" name="attr_dodge_motion" />
+    <button type="roll" value="Dodge in Motion: [[d20+@{dodge_motion}]]" />
+  </label>
+  <label
+    ><span>Strike: Range</span>
+    <input type="number" value="0" name="attr_strike_range" />
+    <button type="roll" value="Range Strike: [[d20+@{strike_range}]]" />
+  </label>
+  <label
+    ><span>Range: Single</span>
+    <input type="number" value="0" name="attr_strike_range_single" />
+    <button type="roll" value="Range Strike: [[d20+@{strike_range_single}]]" />
+  </label>
+  <label
+    ><span>Range: Burst</span>
+    <input type="number" value="0" name="attr_strike_range_burst" />
+    <button type="roll" value="Range Strike: [[d20+@{strike_range_burst}]]" />
+  </label>
+  <label
+    ><span>Range: Aimed</span>
+    <input type="number" value="0" name="attr_strike_range_aimed" />
+    <button
+      type="roll"
+      value="Range Aimed Strike: [[d20+@{strike_range_aimed}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Single</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_aimed_single"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Pulse</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_aimed_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Called</span>
+    <input type="number" value="0" name="attr_strike_range_called" />
+    <button
+      type="roll"
+      value="Range Called Strike: [[d20+@{strike_range_called}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Called Single</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_called_single"
+    />
+    <button
+      type="roll"
+      value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Called Pulse</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_called_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Called Single</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_aimed_called_single"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
+    />
+  </label>
+  <label
+    ><span>Range: Aimed Called Pulse</span>
+    <input
+      readonly
+      type="number"
+      value="0"
+      name="attr_strike_range_aimed_called_pulse"
+    />
+    <button
+      type="roll"
+      value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
+    />
+  </label>
+  <label
+    ><span>Disarm: Range</span>
+    <input type="number" value="0" name="attr_disarm_range" />
+    <button type="roll" value="Range Disarm: [[d20+@{disarm_range}]]" />
+  </label>
+  <label
+    ><span>Damage: Range</span>
+    <input type="text" value="0" name="attr_damage_range" />
+    <button type="roll" value="Range Damage: [[@{damage_range}]]" />
+  </label>
+  <label
+    ><span>Critical</span> <input type="number" value="" name="attr_critical"
+  /></label>
+  <label
+    ><span>Knockout</span> <input type="number" value="" name="attr_knockout"
+  /></label>
+  <label
+    ><span>Death Blow</span>
+    <input type="number" value="0" name="attr_deathblow"
+  /></label>
+</div>
+<hr />
+<h3>Saving Throws</h3>
+<div class="bonus-type-container">
+  <label
+    ><span>Perception</span>
+    <input type="number" value="0" name="attr_perceptioncheck" />
+    <button type="roll" value="Perception Check: [[d20+@{perceptioncheck}]]" />
+  </label>
+  <label
+    ><span>Psionics</span>
+    <input type="number" value="0" name="attr_psionics" />
+    <button type="roll" value="Save vs. Psionics: [[d20+@{psionics}]]" />
+  </label>
+  <label
+    ><span>Magic</span>
+    <input type="number" value="0" name="attr_magic" />
+    <button type="roll" value="Save vs. Magic: [[d20+@{magic}]]" />
+  </label>
+  <label
+    ><span>Horror Factor</span>
+    <input type="number" value="0" name="attr_horrorfactor" />
+    <button
+      type="roll"
+      value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
+    />
+  </label>
+  <label
+    ><span>Mind Control</span>
+    <input type="number" value="0" name="attr_mindcontrol" />
+    <button type="roll" value="Save vs. Mind Control: [[d20+@{mindcontrol}]]" />
+  </label>
+  <label
+    ><span>Disease</span>
+    <input type="number" value="0" name="attr_disease" />
+    <button type="roll" value="Save vs. Disease: [[d20+@{disease}]]" />
+  </label>
+  <label
+    ><span>Illusions</span>
+    <input type="number" value="0" name="attr_illusions" />
+    <button type="roll" value="Save vs. Illusions: [[d20+@{illusions}]]" />
+  </label>
+  <label
+    ><span>Possession</span>
+    <input type="number" value="0" name="attr_possession" />
+    <button type="roll" value="Save vs. Possession: [[d20+@{possession}]]" />
+  </label>
+  <label
+    ><span>Insanity</span>
+    <input type="number" value="0" name="attr_insanity" />
+    <button type="roll" value="Save vs. Insanity: [[d20+@{insanity}]]" />
+  </label>
+  <label
+    ><span>Pain</span>
+    <input type="number" value="0" name="attr_pain" />
+    <button type="roll" value="Save vs. Pain: [[d20+@{pain}]]" />
+  </label>
+  <label
+    ><span>Lethal Poison</span>
+    <input type="number" value="0" name="attr_lethalpoison" />
+    <button
+      type="roll"
+      value="Save vs. Lethal Poison: [[d20+@{lethalpoison}]]"
+    />
+  </label>
+  <label
+    ><span>Non-Lethal Poison</span>
+    <input type="number" value="0" name="attr_nonlethalpoison" />
+    <button
+      type="roll"
+      value="Save vs. Non-Lethal Poison: [[d20+@{nonlethalpoison}]]"
+    />
+  </label>
+  <label
+    ><span>Drugs</span>
+    <input type="number" value="0" name="attr_drugs" />
+    <button type="roll" value="Save vs. Drugs: [[d20+@{drugs}]]" />
+  </label>
+  <label
+    ><span>Curses</span>
+    <input type="number" value="0" name="attr_curses" />
+    <button type="roll" value="Save vs. Curses: [[d20+@{curses}]]" />
+  </label>
+  <label
+    ><span>Coma/Death</span>
+    <input type="number" value="0" name="attr_comadeath" />
+    <button type="roll" value="Save vs. Coma/Death: [[d100-@{comadeath}]]" />
+  </label>
+</div>
+<label class="description"
+  ><b>Description</b>
+  <textarea class="full" name="attr_description" value=""></textarea>
+</label>
+<div class="macro-help">
+  <label
+    ><span><b>Row ID:</b></span>
+    <input type="text" readonly name="attr_rowid" value=""
+  /></label>
+</div>
+
+        <!-- endinject -->
+      </details>
+    </fieldset>
+  </div>
 
   <!-- inject:partials/psionics.html -->
   <div class="psionics">
@@ -5629,53 +6206,27 @@ async function addModifierToBonusesAsync(section, rowId) {
   await setAttrsAsync(attrs);
 }
 
-function addModifierToBonuses(section, rowId) {
-  console.log("addModifierToBonuses", section, rowId);
-  if (!section || !rowId) {
-    return;
-  }
-
-  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
-  const thingAttrs = COMBAT_SAVE_KEYS.map(
-    (key) => `repeating_${section}_${rowId}_${key}`
-  );
-  thingAttrs.push(thingBonusId);
-  getAttrs(thingAttrs, (a) => {
-    console.log(a);
-    const attrs = {};
-    let bonusRowId;
-    if (a[thingBonusId]) {
-      bonusRowId = a[thingBonusId];
-    } else {
-      bonusRowId = generateRowID();
-      attrs[thingBonusId] = bonusRowId;
+on(
+  "change:repeating_modifiers \
+  change:repeating_abilities \
+  change:repeating_magic",
+  async (e) => {
+    console.log("change:repeating_modifiers", e);
+    const sourceParts = e.sourceAttribute.split("_");
+    if (
+      e.sourceAttribute.endsWith("_bonus_id") ||
+      e.sourceAttribute.endsWith("_rowid") ||
+      sourceParts.length < 4
+    ) {
+      return;
     }
-    COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
-        a[`repeating_${section}_${rowId}_${key}`] || 0;
+    const [r, section, rowId] = sourceParts;
+    await setAttrsAsync({
+      [`${r}_${section}_rowid`]: `${r}_${section}_${rowId}_`,
     });
-    setAttrs(attrs);
-  });
-}
-
-on("change:repeating_modifiers", (e) => {
-  console.log("change:repeating_modifiers", e);
-  const sourceParts = e.sourceAttribute.split("_");
-  if (
-    e.sourceAttribute.endsWith("_bonus_id") ||
-    e.sourceAttribute.endsWith("_rowid") ||
-    sourceParts.length < 4
-  ) {
-    return;
+    await addModifierToBonusesAsync(section, rowId);
   }
-  const [r, section, rowId] = sourceParts;
-  //   addModifierToBonuses(section, rowId);
-  setAttrs(
-    { [`repeating_modifiers_rowid`]: `repeating_modifiers_${rowId}_` },
-    {},
-    () => addModifierToBonuses(section, rowId)
-  );
-});
+);
 
 on("remove:repeating_modifiers", (e) => {
   console.log("remove:repeating_modifiers", e);
@@ -6285,30 +6836,21 @@ on(nameListeners, (e) => {
   setAttrs(attrs);
 });
 
-on("change:repeating_abilities:addtobonuses", async (e) => {
-  console.log("change:repeating_abilities:addtobonuses", e);
-  const [r, section, rowId] = e.sourceAttribute.split("_");
-  const enabled = Boolean(Number(e.newValue));
-  if (enabled) {
-    addModifierToBonusesAsync(section, rowId);
-  } else {
-    const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
-    await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
+on(
+  "change:repeating_abilities:addtobonuses \
+  change:repeating_magic:addtobonuses",
+  async (e) => {
+    console.log("change:repeating_abilities:addtobonuses", e);
+    const [r, section, rowId] = e.sourceAttribute.split("_");
+    const enabled = Boolean(Number(e.newValue));
+    if (enabled) {
+      addModifierToBonusesAsync(section, rowId);
+    } else {
+      const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
+      await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
+    }
   }
-});
-
-on("clicked:repeating_abilities:addtobonuses", async (e) => {
-  console.log("clicked:repeating_abilities:addtobonuses", e);
-  const [r, section, rowId] = e.sourceAttribute.split("_");
-  await addModifierToBonusesAsync(section, rowId);
-});
-
-on("clicked:repeating_abilities:removefrombonuses", async (e) => {
-  console.log("clicked:repeating_abilities:removefrombonuses", e);
-  const [r, section, rowId] = e.sourceAttribute.split("_");
-  const a = await getAttrsAsync([`${r}_${section}_${rowId}_bonus_id`]);
-  await removeBonusRowsAsync(a[`${r}_${section}_${rowId}_bonus_id`]);
-});
+);
 
   /* endinject */
 
@@ -6477,6 +7019,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
    * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
+   * [] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
    *
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type, modifies PPE

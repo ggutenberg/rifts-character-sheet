@@ -253,9 +253,46 @@
       </div>
     </div>
   </div>
-
-  <!-- inject:partials/magic.html -->
-  <!-- endinject -->
+  <div class="magic">
+    <h3>Magic</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Spell name and its PPE. Optionally set the School and Spell
+        Level. Then expand the Details, and fill in the applicable values. They
+        will calculate and populate Range, Damage, Duration, and Skill if
+        applicable.
+      </p>
+      <p>
+        For Starting Damage and Damage per Level enter values that roll20 would
+        use for dice rolls. Ex. "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Cast button to remove the PPE from the Current PPE input
+        field. Click Reset PPE to set Current PPE back to the value on the Core
+        tab. Note the roll button beside Damage and Skill.
+      </p>
+      <p>
+        Don't forget to copy/paste the spell description into the Description
+        field to make life easier for your GM. Also use that field for any
+        macros you may need like Strike with an arbitrary bonus.
+      </p>
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current P.P.E.</span>
+      <input type="number" name="attr_currentppe" value="0" />
+      <button type="action" name="act_resetppe">Reset P.P.E.</button>
+    </label>
+    <fieldset class="repeating_magic">
+      <details class="info">
+        <!-- inject:partials/magic.html -->
+        <!-- endinject -->
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <!-- endinject -->
+      </details>
+    </fieldset>
+  </div>
 
   <!-- inject:partials/psionics.html -->
   <!-- endinject -->
@@ -335,6 +372,7 @@
    * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
    * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
+   * [] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
    *
    * @todo consider spells/gear that modifies attributes (either as a modifier or an absolute value),
    *    modifies PS type, modifies PPE

@@ -226,6 +226,11 @@
 .charsheet main#megaverse .profiles .bonus-type-container label.abs {
   display: none;
 }
+.charsheet main#megaverse .magic .spells-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 2.5rem 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+}
 
 /* Tabs */
 /* Configure the tab buttons */
@@ -397,12 +402,6 @@ img.logo {
   cursor: pointer;
   display: flex;
   align-items: center;
-}
-
-.charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .spells-list {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
 
 .charsheet .magic .repcontainer[data-groupname=repeating_magic] .repitem .spell-details {

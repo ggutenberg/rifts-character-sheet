@@ -33,53 +33,27 @@ async function addModifierToBonusesAsync(section, rowId) {
   await setAttrsAsync(attrs);
 }
 
-function addModifierToBonuses(section, rowId) {
-  console.log("addModifierToBonuses", section, rowId);
-  if (!section || !rowId) {
-    return;
-  }
-
-  const thingBonusId = `repeating_${section}_${rowId}_bonus_id`;
-  const thingAttrs = COMBAT_SAVE_KEYS.map(
-    (key) => `repeating_${section}_${rowId}_${key}`
-  );
-  thingAttrs.push(thingBonusId);
-  getAttrs(thingAttrs, (a) => {
-    console.log(a);
-    const attrs = {};
-    let bonusRowId;
-    if (a[thingBonusId]) {
-      bonusRowId = a[thingBonusId];
-    } else {
-      bonusRowId = generateRowID();
-      attrs[thingBonusId] = bonusRowId;
+on(
+  "change:repeating_modifiers \
+  change:repeating_abilities \
+  change:repeating_magic",
+  async (e) => {
+    console.log("change:repeating_modifiers", e);
+    const sourceParts = e.sourceAttribute.split("_");
+    if (
+      e.sourceAttribute.endsWith("_bonus_id") ||
+      e.sourceAttribute.endsWith("_rowid") ||
+      sourceParts.length < 4
+    ) {
+      return;
     }
-    COMBAT_SAVE_KEYS.forEach((key) => {
-      attrs[`repeating_bonuses_${bonusRowId}_${key}`] =
-        a[`repeating_${section}_${rowId}_${key}`] || 0;
+    const [r, section, rowId] = sourceParts;
+    await setAttrsAsync({
+      [`${r}_${section}_rowid`]: `${r}_${section}_${rowId}_`,
     });
-    setAttrs(attrs);
-  });
-}
-
-on("change:repeating_modifiers", (e) => {
-  console.log("change:repeating_modifiers", e);
-  const sourceParts = e.sourceAttribute.split("_");
-  if (
-    e.sourceAttribute.endsWith("_bonus_id") ||
-    e.sourceAttribute.endsWith("_rowid") ||
-    sourceParts.length < 4
-  ) {
-    return;
+    await addModifierToBonusesAsync(section, rowId);
   }
-  const [r, section, rowId] = sourceParts;
-  //   addModifierToBonuses(section, rowId);
-  setAttrs(
-    { [`repeating_modifiers_rowid`]: `repeating_modifiers_${rowId}_` },
-    {},
-    () => addModifierToBonuses(section, rowId)
-  );
-});
+);
 
 on("remove:repeating_modifiers", (e) => {
   console.log("remove:repeating_modifiers", e);
