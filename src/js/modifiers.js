@@ -57,9 +57,9 @@ on(
   }
 );
 
-on("remove:repeating_modifiers", (e) => {
+on("remove:repeating_modifiers", async (e) => {
   console.log("remove:repeating_modifiers", e);
   // remove repeating_bonusselections row with the same index
   const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  removeBonusRows(bonusRowId);
+  await removeBonusRowsAsync(bonusRowId);
 });

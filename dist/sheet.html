@@ -6449,40 +6449,11 @@ async function removeBonusRowsAsync(bonusRowId) {
   removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
 }
 
-function removeBonusSelectionsRow(bonusRowId, callback = null) {
-  getAttrs([`repeating_bonuses_${bonusRowId}_selection_id`], (a) => {
-    removeRepeatingRow(
-      `repeating_bonusselections_${
-        a[`repeating_bonuses_${bonusRowId}_selection_id`]
-      }`
-    );
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-function removeBonusRows(bonusRowId, callback = null) {
-  removeBonusSelectionsRow(bonusRowId, () => {
-    removeRepeatingRow(`repeating_bonuses_${bonusRowId}`);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-on("remove:repeating_wp remove:repeating_wpmodern", (e) => {
+on("remove:repeating_wp remove:repeating_wpmodern", async (e) => {
   console.log("remove wp", e);
   // const [r, section, rowId] = e.sourceAttribute.split('_');
   const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  removeBonusRows(bonusRowId);
-});
-
-on("remove:repeating_bonuses", (e) => {
-  console.log("remove:repeating_bonuses", e);
-  // remove repeating_selections row with the same index
-  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  // removeBonusSelectionsRow(bonusRowId);
+  await removeBonusRowsAsync(bonusRowId);
 });
 
 on("change:_reorder:combat", (e) => {
@@ -6816,11 +6787,11 @@ on(
   }
 );
 
-on("remove:repeating_modifiers", (e) => {
+on("remove:repeating_modifiers", async (e) => {
   console.log("remove:repeating_modifiers", e);
   // remove repeating_bonusselections row with the same index
   const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  removeBonusRows(bonusRowId);
+  await removeBonusRowsAsync(bonusRowId);
 });
 
   /* endinject */
