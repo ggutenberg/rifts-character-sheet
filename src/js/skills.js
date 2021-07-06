@@ -22,40 +22,37 @@ async function updateSkills() {
   }
 }
 
-function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
+async function updateSkillLevels(newCharacterLevel, oldCharacterLevel) {
   const delta = newCharacterLevel - oldCharacterLevel;
-  getSectionIDs("skills", (ids) => {
-    const attrNames = ids.map((id) => `repeating_skills_${id}_level`);
-    getAttrs(attrNames, (a) => {
-      const attrs = {};
-      ids.forEach((id) => {
-        attrs[`repeating_skills_${id}_level`] =
-          +a[`repeating_skills_${id}_level`] + delta;
-      });
-      setAttrs(attrs);
-    });
+  const ids = await getSectionIDsAsync("skills");
+  const attrNames = ids.map((id) => `repeating_skills_${id}_level`);
+  const a = await getAttrsAsync(attrNames);
+  const attrs = {};
+  ids.forEach((id) => {
+    attrs[`repeating_skills_${id}_level`] =
+      +a[`repeating_skills_${id}_level`] + delta;
   });
+  await setAttrsAsync(attrs);
 }
 
-on("change:repeating_skills", (e) => {
+on("change:repeating_skills", async (e) => {
   console.log("change:repeating_skills", e);
   if (e.sourceAttribute.endsWith("_name")) return;
   const sourceParts = e.sourceAttribute.split("_");
   // Return if no attribute is changed and it's the row itself
   if (sourceParts.length < 4) return;
   const [r, section, rowId] = sourceParts;
-  updateSkill(rowId);
+  await updateSkill(rowId);
 });
 
-on("change:repeating_skills:name", (e) => {
+on("change:repeating_skills:name", async (e) => {
   const [r, section, rowId, attr] = e.sourceAttribute.split("_");
-  getAttrs(["character_level"], (a) => {
-    console.log(a);
-    const attrs = {
-      repeating_skills_level: a.character_level,
-      [`repeating_${section}_rowid`]: `repeating_${section}_${rowId}`,
-    };
-    console.log(attrs);
-    setAttrs(attrs);
-  });
+  const a = await getAttrsAsync(["character_level"]);
+  console.log(a);
+  const attrs = {
+    [`${r}_${section}_${rowId}_level`]: a.character_level,
+    [`${r}_${section}_${rowId}_rowid`]: `repeating_${section}_${rowId}`,
+  };
+  console.log(attrs);
+  await setAttrsAsync(attrs);
 });
