@@ -245,7 +245,7 @@
 .tabstoggle[value="importexport"] ~ div.importexport,
 .tabstoggle[value="bonuses"] ~ div.bonuses,
 .tabstoggle[value="abilities"] ~ div.abilities,
-.tabstoggle[value="combat"] ~ div.modifiers {
+.tabstoggle[value="modifiers"] ~ div.modifiers {
   display: block;
 }
 

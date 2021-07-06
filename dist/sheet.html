@@ -2,20 +2,20 @@
 <main id="megaverse" class="debug">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
-    <button class="metal linear" type="action" name="act_abilities">
-      Abilities
-    </button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
-    <button class="metal linear" type="action" name="act_combat">
-      Modifiers
-    </button>
-    <button class="metal linear" type="action" name="act_bonuses">
-      Bonuses
+    <button class="metal linear" type="action" name="act_abilities">
+      Abilities
     </button>
     <button class="metal linear" type="action" name="act_magic">Magic</button>
     <button class="metal linear" type="action" name="act_psionics">
       Psionics
+    </button>
+    <button class="metal linear" type="action" name="act_modifiers">
+      Modifiers
+    </button>
+    <button class="metal linear" type="action" name="act_bonuses">
+      Bonuses
     </button>
     <button class="metal linear" type="action" name="act_equipment">
       Equipment
@@ -6296,11 +6296,6 @@ on("remove:repeating_wp remove:repeating_wpmodern", async (e) => {
   await removeBonusRowsAsync(bonusRowId);
 });
 
-on("change:_reorder:combat", (e) => {
-  // reorder repeating_bonusselections to match
-  console.log("change:_reorder:combat", e);
-});
-
 async function outputSelectedBonusIds() {
   const bonusselectionsIds = await getSectionIDsAsync("bonusselections");
   const checkboxNames = bonusselectionsIds.map(
@@ -7371,7 +7366,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
    * [] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
-   * [] Make things async
+   * [x] Make things async
    *
    * @todo Armor tab / repeater; Armor checkboxes in Aggregate Bonuses, and Armor list (name, MDC) underneath
    *    Aggregate Bonuses checkboxes that show and hide based on the check
@@ -7417,7 +7412,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
   const buttonlist = [
     "core",
     "wp",
-    "combat",
+    "modifiers",
     "bonuses",
     "equipment",
     "skills",

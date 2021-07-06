@@ -235,11 +235,6 @@ on("remove:repeating_wp remove:repeating_wpmodern", async (e) => {
   await removeBonusRowsAsync(bonusRowId);
 });
 
-on("change:_reorder:combat", (e) => {
-  // reorder repeating_bonusselections to match
-  console.log("change:_reorder:combat", e);
-});
-
 async function outputSelectedBonusIds() {
   const bonusselectionsIds = await getSectionIDsAsync("bonusselections");
   const checkboxNames = bonusselectionsIds.map(
