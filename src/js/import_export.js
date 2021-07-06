@@ -1,74 +1,55 @@
 (function () {
-  function getRepeatingRows(section, callback) {
-    getSectionIDs(section, (ids) => {
-      const attrNames = ids.reduce((acc, id) => {
-        SECTIONS[section].forEach((key) => {
-          acc.push(`repeating_${section}_${id}_${key}`);
-        });
-        return acc;
-      }, []);
-      getRepeatingSectionArray(section, ids, attrNames, callback);
-    });
-  }
-
-  function getRepeatingSectionArray(section, rowIds, attrNames, callback) {
+  async function getRepeatingSectionArrayAsync(section, rowIds, attrNames) {
     let sectionArray = [];
-    getAttrs(attrNames, (attrs) => {
-      rowIds.forEach((rowId) => {
-        const wpObj = Object.keys(attrs).reduce((acc, attr) => {
-          if (attr.includes(rowId)) {
-            acc[attr.replace(`repeating_${section}_${rowId}_`, "")] =
-              attrs[attr];
-          }
-          return acc;
-        }, {});
-        sectionArray.push(wpObj);
-      });
-      callback(sectionArray);
+    const attrs = await getAttrsAsync(attrNames);
+    rowIds.forEach((rowId) => {
+      const wpObj = Object.keys(attrs).reduce((acc, attr) => {
+        if (attr.includes(rowId)) {
+          acc[attr.replace(`repeating_${section}_${rowId}_`, "")] = attrs[attr];
+        }
+        return acc;
+      }, {});
+      sectionArray.push(wpObj);
     });
+    return sectionArray;
   }
 
-  on("clicked:export", (e) => {
+  async function getRepeatingRowsAsync(section, callback) {
+    const ids = await getSectionIDsAsync(section);
+    const attrNames = ids.reduce((acc, id) => {
+      SECTIONS[section].forEach((key) => {
+        acc.push(`repeating_${section}_${id}_${key}`);
+      });
+      return acc;
+    }, []);
+    const repeatingSectionArray = await getRepeatingSectionArrayAsync(
+      section,
+      ids,
+      attrNames,
+      callback
+    );
+    return repeatingSectionArray;
+  }
+
+  on("clicked:export", async (e) => {
     console.log("export", e);
     const attrs = {};
-    getRepeatingRows("wp", (wpSectionArray) => {
-      attrs.wp = wpSectionArray;
-
-      getRepeatingRows("wpmodern", (wpmodernSectionArray) => {
-        attrs.wpmodern = wpmodernSectionArray;
-
-        getRepeatingRows("skills", (skillsSectionArray) => {
-          attrs.skills = skillsSectionArray;
-
-          getRepeatingRows("combat", (combatSectionArray) => {
-            attrs.combat = combatSectionArray;
-
-            getRepeatingRows("magic", (magicSectionArray) => {
-              attrs.magic = magicSectionArray;
-
-              getRepeatingRows("psionics", (psionicsSectionArray) => {
-                attrs.psionics = psionicsSectionArray;
-
-                getRepeatingRows("movement", (movementSectionArray) => {
-                  attrs.movement = movementSectionArray;
-
-                  getAttrs(CORE_KEYS, (coreAttrs) => {
-                    Object.entries(coreAttrs).forEach(
-                      ([key, val]) => (attrs[key] = val)
-                    );
-
-                    setAttrs({ importexport: JSON.stringify(attrs, null, 2) });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+    attrs.wp = await getRepeatingRowsAsync("wp");
+    attrs.wpmodern = await getRepeatingRowsAsync("wpmodern");
+    attrs.skills = await getRepeatingRowsAsync("skills");
+    attrs.magic = await getRepeatingRowsAsync("magic");
+    attrs.psionics = await getRepeatingRowsAsync("psionics");
+    attrs.movement = await getRepeatingRowsAsync("movement");
+    attrs.abilities = await getRepeatingRowsAsync("abilities");
+    attrs.modifiers = await getRepeatingRowsAsync("modifiers");
+    // Profiles are tricky to export because IDs that they refer to won't line up
+    // attrs.profiles = await getRepeatingRowsAsync("profiles");
+    const coreAttrs = await getAttrsAsync(CORE_KEYS);
+    Object.entries(coreAttrs).forEach(([key, val]) => (attrs[key] = val));
+    await setAttrsAsync({ importexport: JSON.stringify(attrs, null, 2) });
   });
 
-  function setRepeatingRows(section, data, callback) {
+  async function setRepeatingRowsAsync(section, data) {
     console.log("setRepeatingRows", section, data);
     if (!data) return callback();
     console.log("continuing setRepeatingRows", section);
@@ -79,36 +60,33 @@
       });
       return acc;
     }, {});
-    setAttrs(attrs, {}, callback);
+    await setAttrsAsync(attrs);
   }
 
-  on("clicked:import", (e) => {
+  on("clicked:import", async (e) => {
     console.log("import", e);
-    getAttrs(["importexport"], (a) => {
-      const data = JSON.parse(a.importexport);
-      console.log(data);
-      setRepeatingRows("wp", data.wp, () => {
-        delete data.wp;
-        setRepeatingRows("wpmodern", data.wpmodern, () => {
-          delete data.wpmodern;
-          setRepeatingRows("skills", data.skills, () => {
-            delete data.skills;
-            setRepeatingRows("modifiers", data.modifiers, () => {
-              delete data.modifiers;
-              setRepeatingRows("magic", data.magic, () => {
-                delete data.magic;
-                setRepeatingRows("psionics", data.psionics, () => {
-                  delete data.psionics;
-                  setRepeatingRows("movement", data.movement, () => {
-                    delete data.movement;
-                    setAttrs(data);
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+    await setAttrsAsync({ importexportstatus: "Importing..." });
+    const a = await getAttrsAsync(["importexport"]);
+    const data = JSON.parse(a.importexport);
+    console.log(data);
+    await setRepeatingRowsAsync("wp", data.wp);
+    delete data.wp;
+    await setRepeatingRowsAsync("wpmodern", data.wpmodern);
+    delete data.wpmodern;
+    await setRepeatingRowsAsync("skills", data.skills);
+    delete data.skills;
+    await setRepeatingRowsAsync("magic", data.magic);
+    delete data.magic;
+    await setRepeatingRowsAsync("psionics", data.psionics);
+    delete data.psionics;
+    await setRepeatingRowsAsync("movement", data.movement);
+    delete data.movement;
+    await setRepeatingRowsAsync("abilities", data.abilities);
+    delete data.abilities;
+    await setRepeatingRowsAsync("modifiers", data.modifiers);
+    delete data.modifiers;
+    await setAttrsAsync(data);
+    // Done isn't actually true until everything is using async and no more callbacks
+    await setAttrsAsync({ importexportstatus: "Done Importing!" });
   });
 })();

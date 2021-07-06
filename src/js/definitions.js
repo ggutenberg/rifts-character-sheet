@@ -636,6 +636,8 @@ const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
   "percentage_per_level",
 ]);
 
+const PROFILES_KEYS = REPEATING_BONUS_KEYS.concat(["bonus_ids", "bonus_names"]);
+
 const CORE_KEYS = [
   "character_name",
   "truename_name",
@@ -720,5 +722,7 @@ const SECTIONS = {
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
+  abilities: ABILITIES_KEYS,
+  // profiles: PROFILES_KEYS, // Tricky to export because IDs that they refer to won't line up
   // equipment: EQUIPMENT_KEYS,
 };
