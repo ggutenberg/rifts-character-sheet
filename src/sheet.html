@@ -450,8 +450,8 @@
   on("change:character_level", async (e) => {
     console.log("change:character_level", e.newValue, e.previousValue);
     // Update WPs
-    updateWeaponProficiencies("wp", e.newValue, e.previousValue);
-    updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
+    await updateWeaponProficiencies("wp", e.newValue, e.previousValue);
+    await updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
     await updateSkillLevels(+e.newValue, +e.previousValue);
     await updateMagicPsionicsLevels();
   });
