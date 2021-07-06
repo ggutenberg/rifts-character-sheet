@@ -7257,91 +7257,83 @@ on("change:repeating_skills:name", (e) => {
 
   /* endinject */
 
-  /* inject:js/magic_psionics.js */
-  on("clicked:repeating_magic:usespell", (e) => {
+  /* inject:js/magic_psionics_abilities.js */
+  on("clicked:repeating_magic:usespell", async (e) => {
   console.log(e);
-  getAttrs(["repeating_magic_ppe", "currentppe"], (a) => {
-    console.log(a);
-    setAttrs({ currentppe: a.currentppe - a.repeating_magic_ppe });
-  });
+  const a = await getAttrs(["repeating_magic_ppe", "currentppe"]);
+  console.log(a);
+  await setAttrsAsync({ currentppe: a.currentppe - a.repeating_magic_ppe });
 });
 
-on("clicked:resetppe", (e) => {
+on("clicked:resetppe", async (e) => {
   console.log(e);
-  getAttrs(["character_ppe"], (a) => {
-    setAttrs({ currentppe: a.character_ppe });
-  });
+  const a = await getAttrsAsync(["character_ppe"]);
+  await setAttrsAsync({ currentppe: a.character_ppe });
 });
 
-on("clicked:repeating_psionics:usepsionic", (e) => {
+on("clicked:repeating_psionics:usepsionic", async (e) => {
   console.log(e);
-  getAttrs(["repeating_psionics_isp", "currentisp"], (a) => {
-    console.log(a);
-    setAttrs({ currentisp: a.currentisp - a.repeating_psionics_isp });
-  });
+  const a = await getAttrsAsync(["repeating_psionics_isp", "currentisp"]);
+  console.log(a);
+  await setAttrsAsync({ currentisp: a.currentisp - a.repeating_psionics_isp });
 });
 
-on("clicked:resetisp", (e) => {
+on("clicked:resetisp", async (e) => {
   console.log(e);
-  getAttrs(["character_isp"], (a) => {
-    setAttrs({ currentisp: a.character_isp });
-  });
+  const a = await getAttrsAsync(["character_isp"]);
+  await setAttrsAsync({ currentisp: a.character_isp });
 });
 
-function calculateRangeDuration(row) {
+async function calculateRangeDuration(row) {
+  console.log("calculateRangeDuration", row);
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
   console.log(attrNames);
-  getAttrs(attrNames.concat(["character_level"]), (a) => {
-    console.log(a);
-    const value =
-      +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
-    const unit = a[`${row}_unit`];
-    const valueWithUnits = `${value} ${unit}`;
-    setAttrs({ [row]: valueWithUnits });
-  });
+  const a = await getAttrsAsync(attrNames.concat(["character_level"]));
+  console.log(a);
+  const value =
+    +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
+  const unit = a[`${row}_unit`];
+  const valueWithUnits = `${value} ${unit}`;
+  await setAttrsAsync({ [row]: valueWithUnits });
 }
 
-function calculatePercentage(row) {
+async function calculatePercentage(row) {
   const attrNames = ["starting", "per_level"].map(
     (subProp) => `${row}_${subProp}`
   );
-  getAttrs(attrNames.concat(["character_level"]), (a) => {
-    console.log(a);
-    const value =
-      +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
-    setAttrs({ [row]: value });
-  });
+  const a = await getAttrsAsync(attrNames.concat(["character_level"]));
+  console.log(a);
+  const value =
+    +a[`${row}_starting`] + (+a.character_level - 1) * +a[`${row}_per_level`];
+  await setAttrsAsync({ [row]: value });
 }
 
-function calculateDamage(row) {
+async function calculateDamage(row) {
   const attrNames = ["starting", "per_level", "unit"].map(
     (subProp) => `${row}_${subProp}`
   );
-  getAttrs(attrNames.concat(["character_level"]), (a) => {
-    console.log(a);
-    const perLevel = a[`${row}_per_level`];
-    const repeats = perLevel
-      ? `+${perLevel}`.repeat(a.character_level - 1)
-      : "";
-    const value = `${a[`${row}_starting`]}${repeats}`;
-    setAttrs({ [row]: value });
-  });
+  const a = await getAttrsAsync(attrNames.concat(["character_level"]));
+  console.log(a);
+  const perLevel = a[`${row}_per_level`];
+  const repeats = perLevel ? `+${perLevel}`.repeat(a.character_level - 1) : "";
+  const value = `${a[`${row}_starting`]}${repeats}`;
+  await setAttrsAsync({ [row]: value });
 }
 
-function updateMagicPsionicsLevels() {
-  ABILITIES_REPEATERS.forEach((section) => {
-    getSectionIDs(section, (ids) => {
-      ids.forEach((id) => {
-        const row = `repeating_${section}_${id}`;
-        calculateDamage(`${row}_damage`);
-        calculatePercentage(`${row}_percentage`);
-        calculateRangeDuration(`${row}_range`);
-        calculateRangeDuration(`${row}_duration`);
-      });
-    });
-  });
+async function updateMagicPsionicsLevels() {
+  for (const section of ABILITIES_REPEATERS) {
+    const ids = await getSectionIDsAsync(section);
+    for (const id of ids) {
+      const row = `repeating_${section}_${id}`;
+      console.log("updateMagicPsionicsLevels", row);
+      await calculateDamage(`${row}_damage`);
+      await calculatePercentage(`${row}_percentage`);
+      await calculateRangeDuration(`${row}_range`);
+      await calculateRangeDuration(`${row}_duration`);
+    }
+  }
 }
 
 const nameListeners = ABILITIES_REPEATERS.map(
@@ -7373,32 +7365,32 @@ const rangeDurationFrequencyDcListeners = ABILITIES_REPEATERS.reduce(
   []
 ).join(" ");
 
-on(damageListeners, (e) => {
+on(damageListeners, async (e) => {
   console.log(e);
-  const [r, section] = e.sourceAttribute.split("_");
-  const row = `${r}_${section}_damage`;
-  calculateDamage(row);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_${rowId}_damage`;
+  await calculateDamage(row);
 });
 
-on(percentageListeners, (e) => {
+on(percentageListeners, async (e) => {
   console.log(e);
-  const [r, section] = e.sourceAttribute.split("_");
-  const row = `${r}_${section}_percentage`;
-  calculatePercentage(row);
+  const [r, section, rowId] = e.sourceAttribute.split("_");
+  const row = `${r}_${section}_${rowId}_percentage`;
+  await calculatePercentage(row);
 });
 
-on(rangeDurationFrequencyDcListeners, (e) => {
+on(rangeDurationFrequencyDcListeners, async (e) => {
   console.log(e);
   const [r, section, rowId, property] = e.sourceAttribute.split("_");
-  const row = `${r}_${section}_${property}`;
-  calculateRangeDuration(row);
+  const row = `${r}_${section}_${rowId}_${property}`;
+  await calculateRangeDuration(row);
 });
 
-on(nameListeners, (e) => {
+on(nameListeners, async (e) => {
   const [r, section, rowId] = e.sourceAttribute.split("_");
   const attrs = {};
   attrs[`${r}_${section}_rowid`] = `${r}_${section}_${rowId}_`;
-  setAttrs(attrs);
+  await setAttrsAsync(attrs);
 });
 
 on(
@@ -7598,13 +7590,13 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /**
    * This one could be a doozy
    * */
-  on("change:character_level", (e) => {
+  on("change:character_level", async (e) => {
     console.log("change:character_level", e.newValue, e.previousValue);
     // Update WPs
     updateWeaponProficiencies("wp", e.newValue, e.previousValue);
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
     updateSkillLevels(+e.newValue, +e.previousValue);
-    updateMagicPsionicsLevels();
+    await updateMagicPsionicsLevels();
   });
 
   const buttonlist = [

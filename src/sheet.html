@@ -393,7 +393,7 @@
   /* inject:js/skills.js */
   /* endinject */
 
-  /* inject:js/magic_psionics.js */
+  /* inject:js/magic_psionics_abilities.js */
   /* endinject */
 
   /* inject:js/movement.js */
@@ -447,13 +447,13 @@
   /**
    * This one could be a doozy
    * */
-  on("change:character_level", (e) => {
+  on("change:character_level", async (e) => {
     console.log("change:character_level", e.newValue, e.previousValue);
     // Update WPs
     updateWeaponProficiencies("wp", e.newValue, e.previousValue);
     updateWeaponProficiencies("wpmodern", e.newValue, e.previousValue);
     updateSkillLevels(+e.newValue, +e.previousValue);
-    updateMagicPsionicsLevels();
+    await updateMagicPsionicsLevels();
   });
 
   const buttonlist = [
