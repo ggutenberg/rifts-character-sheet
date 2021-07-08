@@ -1,5 +1,5 @@
 <!-- Add class="debug" to <main> for debugging -->
-<main id="megaverse" class="debug">
+<main id="megaverse" class="xdebug">
   <div>
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
@@ -40,23 +40,25 @@
   <!-- inject:partials/skills.html -->
   <!-- endinject -->
 
+  <!-- inject:partials/weapon_proficiencies.html -->
+  <!-- endinject -->
+
   <div class="abilities">
     <h3>Natural Abilities / Powers</h3>
     <details>
       <summary><b>Instructions</b></summary>
       <p>
         Enter some natural abilities/powers that are neither magic nor psionic
-        in nature.
+        in nature. Click the <b>&#9432;</b> icon to expand each row.
       </p>
       <p>
-        For Starting Damage and Damage per Level enter values that roll20 would
-        use for dice rolls. Ex. "4d6", "1d6", etc.
+        Range, Duration, Frequency, Damage, D.C., and Skill are all calculated
+        from the per-level values you enter in the details. For Starting Damage
+        and Damage per Level enter values that roll20 would use for dice rolls.
+        Ex. "4d6", "1d6", etc.
       </p>
-      <p>
-        Don't forget to copy/paste the power description into the Description
-        field to make life easier for your GM. Also use that field for any
-        macros you may need like Strike with an arbitrary bonus.
-      </p>
+      <!-- inject:partials/repeated_instructions.html -->
+      <!-- endinject -->
     </details>
     <p>Click <b>Instructions</b> for detailed instructions.</p>
     <div class="repeating-bonuses-outer">
@@ -64,6 +66,7 @@
         <details class="info">
           <!-- inject:partials/abilities.html -->
           <!-- endinject -->
+          <h2>Modifiers</h2>
           <!-- inject:partials/repeating_bonuses_details.html -->
           <!-- endinject -->
         </details>
@@ -71,8 +74,84 @@
     </div>
   </div>
 
-  <!-- inject:partials/weapon_proficiencies.html -->
-  <!-- endinject -->
+  <div class="magic">
+    <h3>Magic</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Spell name and its PPE. Click the <b>&#9432;</b> icon to expand
+        each row., and fill in the applicable values.
+      </p>
+      <p>
+        Range, Duration, Damage, D.C., and Skill are all calculated from the
+        per-level values you enter in the details. For Starting Damage and
+        Damage per Level enter values that roll20 would use for dice rolls. Ex.
+        "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Cast button to remove the PPE from the
+        <b>Current PPE</b> input field. Click <b>Reset PPE</b> to set
+        <b>Current PPE</b> back to the value on the Core tab. Note the roll
+        buttons beside Damage and Skill.
+      </p>
+      <!-- inject:partials/repeated_instructions.html -->
+      <!-- endinject -->
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current P.P.E.</span>
+      <input type="number" name="attr_currentppe" value="0" />
+      <button type="action" name="act_resetppe">Reset P.P.E.</button>
+    </label>
+    <fieldset class="repeating_magic">
+      <details class="info">
+        <!-- inject:partials/magic.html -->
+        <!-- endinject -->
+        <h2>Modifiers</h2>
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <!-- endinject -->
+      </details>
+    </fieldset>
+  </div>
+
+  <div class="psionics">
+    <h3>Psionics</h3>
+    <details>
+      <summary><b>Instructions</b></summary>
+      <p>
+        Enter a Psionic name and its ISP. Click the <b>&#9432;</b> icon to
+        expand each row, and fill in the applicable values.
+      </p>
+      <p>
+        Range, Duration, Damage, D.C., and Skill are all calculated from the
+        per-level values you enter in the details. For Starting Damage and
+        Damage per Level enter values that roll20 would use for dice rolls. Ex.
+        "4d6", "1d6", etc.
+      </p>
+      <p>
+        Press the Use button to remove the ISP from the <b>Current ISP</b> input
+        field. Click <b>Reset ISP</b> to set <b>Current ISP</b> back to the
+        value on the Core tab. Note the roll button beside Damage and Skill.
+      </p>
+      <!-- inject:partials/repeated_instructions.html -->
+      <!-- endinject -->
+    </details>
+    <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <label
+      ><span>Current I.S.P.</span>
+      <input type="number" name="attr_currentisp" value="0" />
+      <button type="action" name="act_resetisp">Reset I.S.P.</button>
+    </label>
+    <fieldset class="repeating_psionics">
+      <details class="info">
+        <!-- inject:partials/psionics.html -->
+        <!-- endinject -->
+        <h2>Modifiers</h2>
+        <!-- inject:partials/repeating_bonuses_details.html -->
+        <!-- endinject -->
+      </details>
+    </fieldset>
+  </div>
 
   <div class="modifiers">
     <div class="bonuses-container">
@@ -85,16 +164,8 @@
           them and don't need to select from the list. What's there is just a
           small sample.
         </p>
-        <p>
-          Any modifiers you add will appear as checkboxes on the Bonuses tab.
-          Toggling them will recalculate the bonuses for all checked items.
-        </p>
-        <p>
-          If you have additional bonuses from items, magic, training, etc., you
-          can create arbitrarily named sections and apply those as well. You can
-          also add weapons here, and include any strike/parry bonuses they
-          provide, as well as their damage.
-        </p>
+        <!-- inject:partials/repeated_instructions.html -->
+        <!-- endinject -->
       </details>
       <p>Click <b>Instructions</b> for detailed instructions.</p>
       <div class="repeating-bonuses-outer">
@@ -132,25 +203,48 @@
           <p></p>
           <p>
             Any modifiers you add on the Modifiers tab will appear as checkboxes
-            here.
+            here. Additionally any Abilities, Magic, or Psionics that you
+            checked <b>Add to Bonuses</b> will appear here. Any Weapon
+            Proficiencies you add on the WPs tab will appear on this page as
+            well.
           </p>
           <p>
-            Any Weapon Proficiencies you add on the WPs tab will appear on this
-            page as well. Weapon Proficiencies <b>automatically</b> calculate
-            their bonuses based on level, but no other skill (like Hand-to-Hand)
-            does so yet.
+            Create a new Profile in the Profiles section. Check all of the items
+            that make up that particular profile, click the <b>&#9432;</b> icon
+            to expand the details, and click the
+            <b>Apply Checked Modifiers to this Profile</b> button. This will
+            aggregate all of the bonuses and values from all of the checked
+            modifiers and store them in that profile. In simple cases, this may
+            be all you need - stack all of your gear into one Profile, and
+            that's that. But you might have a profile where you have some TW
+            Armor that grants abilities, so that's a different profile than your
+            default. Or you might have a series of spells you cast to buff up,
+            which you might want to add to another profile. Or you might be a
+            Glitter Boy pilot that has a totally different set of gear and
+            bonuses inside and outside his armor.
           </p>
           <p>
-            Note that PP bonus is added to Strike, Parry, Dodge, Throw, Disarm,
-            Entangle, Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge:
-            Motion. Damage adds everything together as a rollable field, and
-            prompts to add Punch damage. Crit/Knockout/Death Blow use the lowest
-            of the available options (ex. Crit: 17 is better than Crit: 19).
+            Profiles also allow you to set up different macros with different
+            configurations, as you can reference the individual profiles. Note
+            that each Profile includes a read-only field with the Row ID for use
+            in macros.
+          </p>
+          <p>
+            PP bonus is added to Strike, Parry, Dodge, Throw, Disarm, Entangle,
+            Dodge: Flight, Dodge: Auto, Dodge: Teleport, and Dodge: Motion.
+            Damage adds everything together as a rollable field, and prompts to
+            add Punch damage. Crit/Knockout/Death Blow use the lowest of the
+            available options (ex. Crit: 17 is better than Crit: 19).
           </p>
           <p>
             The first Profile in the list is considered the
             <b>Default</b> profile and is used to perform global calculations
-            like speed over time and skill bonuses.
+            like speed over time and skill bonuses. Click the
+            <b>Modify</b> button and drag to reorder as needed.
+          </p>
+          <p>
+            Note that profiles aren't cumulative, but you can make multiple
+            profiles that are very similar with only one or two differences.
           </p>
         </details>
         <p>Click <b>Instructions</b> for detailed instructions.</p>
@@ -254,90 +348,12 @@
     </div>
   </div>
 
-  <div class="magic">
-    <h3>Magic</h3>
-    <details>
-      <summary><b>Instructions</b></summary>
-      <p>
-        Enter a Spell name and its PPE. Optionally set the School and Spell
-        Level. Then expand the Details, and fill in the applicable values. They
-        will calculate and populate Range, Damage, Duration, and Skill if
-        applicable.
-      </p>
-      <p>
-        For Starting Damage and Damage per Level enter values that roll20 would
-        use for dice rolls. Ex. "4d6", "1d6", etc.
-      </p>
-      <p>
-        Press the Cast button to remove the PPE from the Current PPE input
-        field. Click Reset PPE to set Current PPE back to the value on the Core
-        tab. Note the roll button beside Damage and Skill.
-      </p>
-      <p>
-        Don't forget to copy/paste the spell description into the Description
-        field to make life easier for your GM. Also use that field for any
-        macros you may need like Strike with an arbitrary bonus.
-      </p>
-    </details>
-    <p>Click <b>Instructions</b> for detailed instructions.</p>
-    <label
-      ><span>Current P.P.E.</span>
-      <input type="number" name="attr_currentppe" value="0" />
-      <button type="action" name="act_resetppe">Reset P.P.E.</button>
-    </label>
-    <fieldset class="repeating_magic">
-      <details class="info">
-        <!-- inject:partials/magic.html -->
-        <!-- endinject -->
-        <!-- inject:partials/repeating_bonuses_details.html -->
-        <!-- endinject -->
-      </details>
-    </fieldset>
-  </div>
-
-  <div class="psionics">
-    <h3>Psionics</h3>
-    <details>
-      <summary><b>Instructions</b></summary>
-      <p>
-        Enter a Psionic name and its ISP. Then expand the Details, and fill in
-        the applicable values. They will calculate and populate Range, Damage,
-        Duration, and Skill if applicable.
-      </p>
-      <p>
-        For Starting Damage and Damage per Level enter values that roll20 would
-        use for dice rolls. Ex. "4d6", "1d6", etc.
-      </p>
-      <p>
-        Press the Use button to remove the ISP from the Current ISP input field.
-        Click Reset ISP to set Current ISP back to the value on the Core tab.
-        Note the roll button beside Damage and Skill.
-      </p>
-      <p>
-        Don't forget to copy/paste the power description into the Description
-        field to make life easier for your GM. Also use that field for any
-        macros you may need like Strike with an arbitrary bonus.
-      </p>
-    </details>
-    <p>Click <b>Instructions</b> for detailed instructions.</p>
-    <label
-      ><span>Current I.S.P.</span>
-      <input type="number" name="attr_currentisp" value="0" />
-      <button type="action" name="act_resetisp">Reset I.S.P.</button>
-    </label>
-    <fieldset class="repeating_psionics">
-      <details class="info">
-        <!-- inject:partials/psionics.html -->
-        <!-- endinject -->
-        <!-- inject:partials/repeating_bonuses_details.html -->
-        <!-- endinject -->
-      </details>
-    </fieldset>
-  </div>
-
   <div class="equipment">
     <h3>Equipment</h3>
-    <p>Free form equipment list for now.</p>
+    <p>
+      Free form equipment list for now. Weapons and armor should go in the
+      Modifiers tab.
+    </p>
     <textarea class="full tall" name="attr_equipment"></textarea>
   </div>
 
@@ -403,6 +419,8 @@
   /* endinject */
 
   /**
+   * [] Add/update Instructions on every tab, then re-release.
+   *
    * Add attributes, PS type, ISP, PPE, HP, SDC, MDC, etc. to Bonuses
    * [x] Allow for an "absolute" value
    * [x] Add additional field(s) to Profile for aggregate attribute bonuses

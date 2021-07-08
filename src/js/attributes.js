@@ -30,6 +30,7 @@ async function mePpPeBonus(attribute, value, prefix = "") {
           ? 8 + (value - 19) * 2
           : 30 + (value - 30)
         : 0;
+    attrs[`${prefix}run_at_max`] = Math.round(value / 2);
   }
   console.log(attrs);
   await setAttrsAsync(attrs);
