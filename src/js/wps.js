@@ -46,7 +46,6 @@ async function setWp({
   oldCharacterLevel,
   newWpLevel,
   rowId,
-  callback,
 }) {
   console.log("setWp", {
     section,
@@ -55,21 +54,14 @@ async function setWp({
     oldCharacterLevel,
     newWpLevel,
     rowId,
-    callback,
   });
   const keyPrefix = rowId
     ? `repeating_${section}_${rowId}`
     : `repeating_${section}`;
   if (newWpLevel) {
     await setWpRow(section, wpName, keyPrefix, newWpLevel);
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   } else if (!rowId) {
     await setWpRow(section, wpName, keyPrefix, newCharacterLevel);
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   } else {
     const a = await getAttrsAsync([`${keyPrefix}_level`]);
     const oldWpLevel = a[`${keyPrefix}_level`];
@@ -84,11 +76,7 @@ async function setWp({
     } else {
       await setWpRow(section, wpName, keyPrefix, newCharacterLevel);
     }
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   }
-  // return { section };
 }
 
 async function updateWeaponProficiencies(

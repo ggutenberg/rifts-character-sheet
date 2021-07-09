@@ -5,7 +5,6 @@
  * @param {string[]} fields An array of fields to aggregate into the associated destination
  * @param  {...any} extras Some extra stuff
  * If an extra is an object, it will be used for extendedProps.
- * Currently this only includes `callback` which gets run after `setAttrs()`
  */
 async function repeatingSumAsync(destinations, section, fields, ...extras) {
   const isNumber = (value) => parseFloat(value).toString() === value.toString();

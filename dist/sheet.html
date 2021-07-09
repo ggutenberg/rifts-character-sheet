@@ -5915,7 +5915,6 @@ const SECTIONS = {
  * @param {string[]} fields An array of fields to aggregate into the associated destination
  * @param  {...any} extras Some extra stuff
  * If an extra is an object, it will be used for extendedProps.
- * Currently this only includes `callback` which gets run after `setAttrs()`
  */
 async function repeatingSumAsync(destinations, section, fields, ...extras) {
   const isNumber = (value) => parseFloat(value).toString() === value.toString();
@@ -6582,7 +6581,6 @@ async function setWp({
   oldCharacterLevel,
   newWpLevel,
   rowId,
-  callback,
 }) {
   console.log("setWp", {
     section,
@@ -6591,21 +6589,14 @@ async function setWp({
     oldCharacterLevel,
     newWpLevel,
     rowId,
-    callback,
   });
   const keyPrefix = rowId
     ? `repeating_${section}_${rowId}`
     : `repeating_${section}`;
   if (newWpLevel) {
     await setWpRow(section, wpName, keyPrefix, newWpLevel);
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   } else if (!rowId) {
     await setWpRow(section, wpName, keyPrefix, newCharacterLevel);
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   } else {
     const a = await getAttrsAsync([`${keyPrefix}_level`]);
     const oldWpLevel = a[`${keyPrefix}_level`];
@@ -6620,11 +6611,7 @@ async function setWp({
     } else {
       await setWpRow(section, wpName, keyPrefix, newCharacterLevel);
     }
-    // if (callback) {
-    //   callback(section, rowId, wpName);
-    // }
   }
-  // return { section };
 }
 
 async function updateWeaponProficiencies(
@@ -7411,7 +7398,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
     return sectionArray;
   }
 
-  async function getRepeatingRowsAsync(section, callback) {
+  async function getRepeatingRowsAsync(section) {
     const ids = await getSectionIDsAsync(section);
     const attrNames = ids.reduce((acc, id) => {
       SECTIONS[section].forEach((key) => {
@@ -7422,8 +7409,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
     const repeatingSectionArray = await getRepeatingSectionArrayAsync(
       section,
       ids,
-      attrNames,
-      callback
+      attrNames
     );
     return repeatingSectionArray;
   }
@@ -7448,7 +7434,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
 
   async function setRepeatingRowsAsync(section, data) {
     console.log("setRepeatingRows", section, data);
-    if (!data) return callback();
+    if (!data) return;
     console.log("continuing setRepeatingRows", section);
     const attrs = data.reduce((acc, row) => {
       const rowId = generateRowID();

@@ -14,7 +14,7 @@
     return sectionArray;
   }
 
-  async function getRepeatingRowsAsync(section, callback) {
+  async function getRepeatingRowsAsync(section) {
     const ids = await getSectionIDsAsync(section);
     const attrNames = ids.reduce((acc, id) => {
       SECTIONS[section].forEach((key) => {
@@ -25,8 +25,7 @@
     const repeatingSectionArray = await getRepeatingSectionArrayAsync(
       section,
       ids,
-      attrNames,
-      callback
+      attrNames
     );
     return repeatingSectionArray;
   }
@@ -51,7 +50,7 @@
 
   async function setRepeatingRowsAsync(section, data) {
     console.log("setRepeatingRows", section, data);
-    if (!data) return callback();
+    if (!data) return;
     console.log("continuing setRepeatingRows", section);
     const attrs = data.reduce((acc, row) => {
       const rowId = generateRowID();
