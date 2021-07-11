@@ -247,7 +247,7 @@
 .psionics,
 .importexport,
 .bonuses,
-.abilities,
+.powersabilities,
 .modifiers {
   display: none;
 }
@@ -261,7 +261,7 @@
 .tabstoggle[value=psionics] ~ div.psionics,
 .tabstoggle[value=importexport] ~ div.importexport,
 .tabstoggle[value=bonuses] ~ div.bonuses,
-.tabstoggle[value=abilities] ~ div.abilities,
+.tabstoggle[value=powersabilities] ~ div.powersabilities,
 .tabstoggle[value=modifiers] ~ div.modifiers {
   display: block;
 }
@@ -341,7 +341,7 @@ img.logo {
   grid-template-columns: 1fr 8rem 8rem 8rem 8rem max-content;
 }
 
-.charsheet .abilities .repcontainer[data-groupname=repeating_abilities] .repitem .abilities-list {
+.charsheet .powersabilities .repcontainer[data-groupname=repeating_powersabilities] .repitem .abilities-list {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 5rem 8rem 10rem 8rem 4rem 8rem 4rem 4rem;
@@ -379,7 +379,7 @@ img.logo {
 .charsheet .magic .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .psionics .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .skills .repcontainer .repitem:not(:first-of-type) h5,
-.charsheet .abilities .repcontainer .repitem:not(:first-of-type) h5,
+.charsheet .powersabilities .repcontainer .repitem:not(:first-of-type) h5,
 .charsheet .wp-container .repcontainer .repitem:not(:first-of-type) h5 {
   display: none;
 }

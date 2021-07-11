@@ -4,7 +4,7 @@
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
-    <button class="metal linear" type="action" name="act_abilities">
+    <button class="metal linear" type="action" name="act_powersabilities">
       Abilities
     </button>
     <button class="metal linear" type="action" name="act_magic">Magic</button>
@@ -43,7 +43,7 @@
   <!-- inject:partials/weapon_proficiencies.html -->
   <!-- endinject -->
 
-  <div class="abilities">
+  <div class="powersabilities">
     <h3>Natural Abilities / Powers</h3>
     <details>
       <summary><b>Instructions</b></summary>
@@ -62,9 +62,9 @@
     </details>
     <p>Click <b>Instructions</b> for detailed instructions.</p>
     <div class="repeating-bonuses-outer">
-      <fieldset class="repeating_abilities">
+      <fieldset class="repeating_powersabilities">
         <details class="info">
-          <!-- inject:partials/abilities.html -->
+          <!-- inject:partials/powersabilities.html -->
           <!-- endinject -->
           <h2>Modifiers</h2>
           <!-- inject:partials/repeating_bonuses_details.html -->
@@ -484,7 +484,7 @@
     "magic",
     "psionics",
     "importexport",
-    "abilities",
+    "powersabilities",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {

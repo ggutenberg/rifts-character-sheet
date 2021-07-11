@@ -4,7 +4,7 @@
     <button class="metal linear" type="action" name="act_core">Core</button>
     <button class="metal linear" type="action" name="act_skills">Skills</button>
     <button class="metal linear" type="action" name="act_wp">WPs</button>
-    <button class="metal linear" type="action" name="act_abilities">
+    <button class="metal linear" type="action" name="act_powersabilities">
       Abilities
     </button>
     <button class="metal linear" type="action" name="act_magic">Magic</button>
@@ -613,6 +613,7 @@
           <button
             type="roll"
             value="@{character_name} @{name} check: [[d100<@{total}]]"
+            name="roll_skill"
           />
         </div>
       </summary>
@@ -683,7 +684,7 @@
 
   <!-- endinject -->
 
-  <div class="abilities">
+  <div class="powersabilities">
     <h3>Natural Abilities / Powers</h3>
     <details>
       <summary><b>Instructions</b></summary>
@@ -726,124 +727,9 @@
     </details>
     <p>Click <b>Instructions</b> for detailed instructions.</p>
     <div class="repeating-bonuses-outer">
-      <fieldset class="repeating_abilities">
+      <fieldset class="repeating_powersabilities">
         <details class="info">
-          <!-- inject:partials/abilities.html -->
-          <summary>
-  <div class="abilities-list">
-    <h5>Info</h5>
-    <h5>Ability</h5>
-    <h5>Range</h5>
-    <h5>Duration</h5>
-    <h5>Frequency</h5>
-    <h5>Damage</h5>
-    <h5></h5>
-    <h5 title="Damage Capacity">D.C.</h5>
-    <h5>Skill</h5>
-    <h5></h5>
-    <b class="click-expand"
-      ><span title="Click for more info">&nbsp;&#9432;</span></b
-    >
-    <input type="text" value="" name="attr_name" />
-    <input type="text" value="0" name="attr_range" readonly />
-    <input type="text" value="0" name="attr_duration" readonly />
-    <input type="text" value="0" name="attr_frequency" readonly />
-    <input type="text" value="0" name="attr_damage" readonly />
-    <button
-      type="roll"
-      value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
-    />
-    <input type="text" value="0" name="attr_dc" readonly />
-    <input type="number" value="0" name="attr_percentage" readonly />
-    <button
-      type="roll"
-      value="@{character_name} @{name} check: [[d100<@{percentage}]]"
-    />
-  </div>
-</summary>
-<br />
-<label
-  ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
-  Bonuses</label
->
-<br />
-<div class="ability-details">
-  <label
-    ><span>Starting range</span
-    ><input type="number" value="0" name="attr_range_starting"
-  /></label>
-  <label
-    ><span>Range per level</span
-    ><input type="number" value="0" name="attr_range_per_level"
-  /></label>
-  <label
-    ><span>Range unit</span
-    ><input type="text" value="" name="attr_range_unit" list="distance-units" />
-  </label>
-  <label
-    ><span>Starting duration</span
-    ><input type="number" value="0" name="attr_duration_starting"
-  /></label>
-  <label
-    ><span>Duration per level</span
-    ><input type="number" value="0" name="attr_duration_per_level"
-  /></label>
-  <label
-    ><span>Duration unit</span
-    ><input type="text" value="" name="attr_duration_unit" list="time-units" />
-  </label>
-  <label
-    ><span>Starting frequency</span
-    ><input type="number" value="0" name="attr_frequency_starting"
-  /></label>
-  <label
-    ><span>Frequency per level</span
-    ><input type="number" value="0" name="attr_frequency_per_level"
-  /></label>
-  <label
-    ><span>Frequency unit</span
-    ><input
-      type="text"
-      value=""
-      name="attr_frequency_unit"
-      list="frequency-units"
-    />
-  </label>
-  <label
-    ><span>Starting damage</span
-    ><input type="text" value="0" name="attr_damage_starting"
-  /></label>
-  <label
-    ><span>Damage per level</span
-    ><input type="text" value="0" name="attr_damage_per_level"
-  /></label>
-  <label
-    ><span>Damage unit</span
-    ><input type="text" value="" name="attr_damage_unit" list="damage-units" />
-  </label>
-  <label
-    ><span>Starting D.C.</span
-    ><input type="number" value="0" name="attr_dc_starting"
-  /></label>
-  <label
-    ><span>D.C. per level</span
-    ><input type="number" value="0" name="attr_dc_per_level"
-  /></label>
-  <label
-    ><span>D.C. unit</span
-    ><input type="text" value="" name="attr_dc_unit" list="damage-units" />
-  </label>
-  <label
-    ><span>Starting skill %</span
-    ><input type="number" value="0" name="attr_percentage_starting"
-  /></label>
-  <label
-    ><span>Skill % per level</span
-    ><input type="number" value="0" name="attr_percentage_per_level"
-  /></label>
-  <label></label>
-</div>
-
+          <!-- inject:partials/powersabilities.html -->
           <!-- endinject -->
           <h2>Modifiers</h2>
           <!-- inject:partials/repeating_bonuses_details.html -->
@@ -5739,7 +5625,7 @@ const SAVE_KEYS = Object.values(SAVE_KEYS_ATTRIBUTE_BONUSES).reduce(
 const REPEATING_BONUS_KEYS = COMBAT_KEYS.concat(SAVE_KEYS, ATTRIBUTE_KEYS);
 const SKILL_KEYS = ["name", "base", "bonus", "perlevel", "level", "total"];
 
-const ABILITIES_REPEATERS = ["magic", "psionics", "abilities"];
+const ABILITIES_REPEATERS = ["magic", "psionics", "powersabilities"];
 
 const MAGIC_KEYS = REPEATING_BONUS_KEYS.concat([
   "name",
@@ -7326,11 +7212,11 @@ on(nameListeners, async (e) => {
 });
 
 on(
-  "change:repeating_abilities:addtobonuses \
+  "change:repeating_powersabilities:addtobonuses \
   change:repeating_magic:addtobonuses \
   change:repeating_psionics:addtobonuses",
   async (e) => {
-    console.log("change:repeating_abilities:addtobonuses", e);
+    console.log("change:repeating_powersabilities:addtobonuses", e);
     const [r, section, rowId] = e.sourceAttribute.split("_");
     const enabled = Boolean(Number(e.newValue));
     if (enabled) {
@@ -7542,7 +7428,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
     "magic",
     "psionics",
     "importexport",
-    "abilities",
+    "powersabilities",
   ];
   buttonlist.forEach((button) => {
     on(`clicked:${button}`, function () {

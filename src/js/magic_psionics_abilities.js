@@ -134,11 +134,11 @@ on(nameListeners, async (e) => {
 });
 
 on(
-  "change:repeating_abilities:addtobonuses \
+  "change:repeating_powersabilities:addtobonuses \
   change:repeating_magic:addtobonuses \
   change:repeating_psionics:addtobonuses",
   async (e) => {
-    console.log("change:repeating_abilities:addtobonuses", e);
+    console.log("change:repeating_powersabilities:addtobonuses", e);
     const [r, section, rowId] = e.sourceAttribute.split("_");
     const enabled = Boolean(Number(e.newValue));
     if (enabled) {
