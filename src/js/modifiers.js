@@ -35,7 +35,7 @@ async function addModifierToBonusesAsync(section, rowId) {
 
 on(
   "change:repeating_modifiers \
-  change:repeating_abilities \
+  change:repeating_powersabilities \
   change:repeating_magic \
   change:repeating_psionics",
   async (e) => {

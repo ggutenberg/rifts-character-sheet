@@ -426,7 +426,7 @@ img.logo {
   max-width: 10rem;
 }
 
-.charsheet .abilities .repcontainer[data-groupname=repeating_abilities] .repitem .ability-details,
+.charsheet .powersabilities .repcontainer[data-groupname=repeating_powersabilities] .repitem .ability-details,
 .charsheet .psionics .repcontainer[data-groupname=repeating_psionics] .repitem .psionic-details {
   display: grid;
   gap: 0.5rem;
