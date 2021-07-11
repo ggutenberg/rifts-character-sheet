@@ -21,12 +21,14 @@
     <button
       type="roll"
       value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
+      name="roll_psionic_damage"
     />
     <input type="text" value="0" name="attr_dc" />
     <input type="number" value="0" name="attr_percentage" readonly />
     <button
       type="roll"
       value="@{character_name} @{name} check: [[d100<@{percentage}]]"
+      name="roll_psionic_skill"
     />
     <input type="number" value="0" name="attr_isp" />
     <button type="action" name="act_usepsionic">Use</button>
