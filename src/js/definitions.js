@@ -722,7 +722,7 @@ const SECTIONS = {
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
-  abilities: ABILITIES_KEYS,
+  powersabilities: ABILITIES_KEYS,
   // profiles: PROFILES_KEYS, // Tricky to export because IDs that they refer to won't line up
   // equipment: EQUIPMENT_KEYS,
 };

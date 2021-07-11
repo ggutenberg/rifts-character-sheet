@@ -6727,7 +6727,7 @@ const SECTIONS = {
   magic: MAGIC_KEYS,
   psionics: PSIONICS_KEYS,
   movement: MOVEMENT_KEYS,
-  abilities: ABILITIES_KEYS,
+  powersabilities: ABILITIES_KEYS,
   // profiles: PROFILES_KEYS, // Tricky to export because IDs that they refer to won't line up
   // equipment: EQUIPMENT_KEYS,
 };
@@ -8250,7 +8250,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
     attrs.magic = await getRepeatingRowsAsync("magic");
     attrs.psionics = await getRepeatingRowsAsync("psionics");
     attrs.movement = await getRepeatingRowsAsync("movement");
-    attrs.abilities = await getRepeatingRowsAsync("abilities");
+    attrs.powersabilities = await getRepeatingRowsAsync("powersabilities");
     attrs.modifiers = await getRepeatingRowsAsync("modifiers");
     // Profiles are tricky to export because IDs that they refer to won't line up
     // attrs.profiles = await getRepeatingRowsAsync("profiles");
@@ -8291,8 +8291,8 @@ on("change:repeating_movement:ft_melee", async (e) => {
     delete data.psionics;
     await setRepeatingRowsAsync("movement", data.movement);
     delete data.movement;
-    await setRepeatingRowsAsync("abilities", data.abilities);
-    delete data.abilities;
+    await setRepeatingRowsAsync("powersabilities", data.powersabilities);
+    delete data.powersabilities;
     await setRepeatingRowsAsync("modifiers", data.modifiers);
     delete data.modifiers;
     await setAttrsAsync(data);

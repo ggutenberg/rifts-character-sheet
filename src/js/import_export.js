@@ -39,7 +39,7 @@
     attrs.magic = await getRepeatingRowsAsync("magic");
     attrs.psionics = await getRepeatingRowsAsync("psionics");
     attrs.movement = await getRepeatingRowsAsync("movement");
-    attrs.abilities = await getRepeatingRowsAsync("abilities");
+    attrs.powersabilities = await getRepeatingRowsAsync("powersabilities");
     attrs.modifiers = await getRepeatingRowsAsync("modifiers");
     // Profiles are tricky to export because IDs that they refer to won't line up
     // attrs.profiles = await getRepeatingRowsAsync("profiles");
@@ -80,8 +80,8 @@
     delete data.psionics;
     await setRepeatingRowsAsync("movement", data.movement);
     delete data.movement;
-    await setRepeatingRowsAsync("abilities", data.abilities);
-    delete data.abilities;
+    await setRepeatingRowsAsync("powersabilities", data.powersabilities);
+    delete data.powersabilities;
     await setRepeatingRowsAsync("modifiers", data.modifiers);
     delete data.modifiers;
     await setAttrsAsync(data);
