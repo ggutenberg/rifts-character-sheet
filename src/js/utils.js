@@ -266,17 +266,15 @@ function mergeAndAddObjects(data) {
 }
 
 async function getSectionIDsOrderedAsync(sectionName) {
-  console.log("getSectionIDsOrderedAsync", sectionName);
   const v = await getAttrsAsync([`_reporder_repeating_${sectionName}`]);
-  console.log(v);
   const idArray = await getSectionIDsAsync(sectionName);
-  let reporderArray = v[`_reporder_repeating_${sectionName}`]
-      ? v[`_reporder_repeating_${sectionName}`].toLowerCase().split(",")
-      : [],
-    ids = [
-      ...new Set(
-        reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
-      ),
-    ];
+  const reporderArray = v[`_reporder_repeating_${sectionName}`]
+    ? v[`_reporder_repeating_${sectionName}`].toLowerCase().split(",")
+    : [];
+  const ids = [
+    ...new Set(
+      reporderArray.filter((x) => idArray.includes(x)).concat(idArray)
+    ),
+  ];
   return ids;
 }
