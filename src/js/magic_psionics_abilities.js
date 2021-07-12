@@ -1,27 +1,37 @@
 on("clicked:repeating_magic:usespell", async (e) => {
   console.log(e);
-  const a = await getAttrs(["repeating_magic_ppe", "currentppe"]);
+  const a = await getAttrsAsync(["repeating_magic_ppecost", "currentppe"]);
   console.log(a);
-  await setAttrsAsync({ currentppe: a.currentppe - a.repeating_magic_ppe });
+  await setAttrsAsync({ currentppe: a.currentppe - a.repeating_magic_ppecost });
 });
 
 on("clicked:resetppe", async (e) => {
   console.log(e);
-  const a = await getAttrsAsync(["character_ppe"]);
-  await setAttrsAsync({ currentppe: a.character_ppe });
+  const sectionIds = await getSectionIDsOrderedAsync("profiles");
+  const attrs = [`repeating_profiles_${sectionIds[0]}_ppe`];
+  const a = await getAttrsAsync(attrs);
+  await setAttrsAsync({
+    currentppe: +a[`repeating_profiles_${sectionIds[0]}_ppe`],
+  });
 });
 
 on("clicked:repeating_psionics:usepsionic", async (e) => {
   console.log(e);
-  const a = await getAttrsAsync(["repeating_psionics_isp", "currentisp"]);
+  const a = await getAttrsAsync(["repeating_psionics_ispcost", "currentisp"]);
   console.log(a);
-  await setAttrsAsync({ currentisp: a.currentisp - a.repeating_psionics_isp });
+  await setAttrsAsync({
+    currentisp: a.currentisp - a.repeating_psionics_ispcost,
+  });
 });
 
 on("clicked:resetisp", async (e) => {
   console.log(e);
-  const a = await getAttrsAsync(["character_isp"]);
-  await setAttrsAsync({ currentisp: a.character_isp });
+  const sectionIds = await getSectionIDsOrderedAsync("profiles");
+  const attrs = [`repeating_profiles_${sectionIds[0]}_isp`];
+  const a = await getAttrsAsync(attrs);
+  await setAttrsAsync({
+    currentisp: +a[`repeating_profiles_${sectionIds[0]}_isp`],
+  });
 });
 
 async function calculateRangeDuration(row) {

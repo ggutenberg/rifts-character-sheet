@@ -266,10 +266,12 @@ function mergeAndAddObjects(data) {
 }
 
 async function getSectionIDsOrderedAsync(sectionName) {
-  const v = await getAttrsAsync([`_reporder_${sectionName}`]);
+  console.log("getSectionIDsOrderedAsync", sectionName);
+  const v = await getAttrsAsync([`_reporder_repeating_${sectionName}`]);
+  console.log(v);
   const idArray = await getSectionIDsAsync(sectionName);
-  let reporderArray = v[`_reporder_${sectionName}`]
-      ? v[`_reporder_${sectionName}`].toLowerCase().split(",")
+  let reporderArray = v[`_reporder_repeating_${sectionName}`]
+      ? v[`_reporder_repeating_${sectionName}`].toLowerCase().split(",")
       : [],
     ids = [
       ...new Set(
