@@ -149,11 +149,11 @@ async function combineBonuses(rowIds, destinationPrefix) {
   });
 
   const noAttributeBonusFields = [
-    "hp",
-    "sdc",
-    "mdc",
-    "ppe",
-    "isp",
+    // "hp",
+    // "sdc",
+    // "mdc",
+    // "ppe",
+    // "isp",
     "attacks",
     "initiative",
     "pull",
@@ -173,6 +173,46 @@ async function combineBonuses(rowIds, destinationPrefix) {
     `filter:${rowIds.toString()}`
   );
   await addStrikeRangeToCombinedAsync(destinationPrefix);
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_hp`],
+    "bonuses",
+    ["hp"],
+    `filter:${rowIds.toString()}`,
+    "character_hp"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_sdc`],
+    "bonuses",
+    ["sdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_mdc`],
+    "bonuses",
+    ["mdc"],
+    `filter:${rowIds.toString()}`,
+    "character_mdc"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_ppe`],
+    "bonuses",
+    ["ppe"],
+    `filter:${rowIds.toString()}`,
+    "character_ppe"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_isp`],
+    "bonuses",
+    ["isp"],
+    `filter:${rowIds.toString()}`,
+    "character_isp"
+  );
 
   const ppBonusFields = [
     "strike",

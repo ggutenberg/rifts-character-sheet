@@ -7170,11 +7170,11 @@ async function combineBonuses(rowIds, destinationPrefix) {
   });
 
   const noAttributeBonusFields = [
-    "hp",
-    "sdc",
-    "mdc",
-    "ppe",
-    "isp",
+    // "hp",
+    // "sdc",
+    // "mdc",
+    // "ppe",
+    // "isp",
     "attacks",
     "initiative",
     "pull",
@@ -7194,6 +7194,46 @@ async function combineBonuses(rowIds, destinationPrefix) {
     `filter:${rowIds.toString()}`
   );
   await addStrikeRangeToCombinedAsync(destinationPrefix);
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_hp`],
+    "bonuses",
+    ["hp"],
+    `filter:${rowIds.toString()}`,
+    "character_hp"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_sdc`],
+    "bonuses",
+    ["sdc"],
+    `filter:${rowIds.toString()}`,
+    "character_sdc"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_mdc`],
+    "bonuses",
+    ["mdc"],
+    `filter:${rowIds.toString()}`,
+    "character_mdc"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_ppe`],
+    "bonuses",
+    ["ppe"],
+    `filter:${rowIds.toString()}`,
+    "character_ppe"
+  );
+
+  await repeatingSumAsync(
+    [`${destinationPrefix}_isp`],
+    "bonuses",
+    ["isp"],
+    `filter:${rowIds.toString()}`,
+    "character_isp"
+  );
 
   const ppBonusFields = [
     "strike",
@@ -7557,12 +7597,18 @@ on(
   }
 );
 
-on("remove:repeating_modifiers", async (e) => {
-  console.log("remove:repeating_modifiers", e);
-  // remove repeating_bonusselections row with the same index
-  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  await removeBonusRowsAsync(bonusRowId);
-});
+on(
+  "remove:repeating_modifiers \
+  remove:repeating_powersabilities \
+  remove:repeating_magic \
+  remove:repeating_psionics",
+  async (e) => {
+    console.log("remove:repeating_modifiers", e);
+    // remove repeating_bonusselections row with the same index
+    const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+    await removeBonusRowsAsync(bonusRowId);
+  }
+);
 
   /* endinject */
 
@@ -8310,7 +8356,8 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] PPE on Profiles needs to include primary. Reset PPE on Magic tabs needs to pull from default (1st) profile
-   * [] Removing Abilities doesn't seem to remove them from Bonus Sources
+   * [] Magic/... DC should populate S/MDC based on DC unit
+   * [x] Removing Abilities doesn't seem to remove them from Bonus Sources
    * [] Removing Bonus Sources doesn't remove them from Selections
    *
    * [x] Add/update Instructions on every tab, then re-release.

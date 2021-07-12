@@ -59,9 +59,15 @@ on(
   }
 );
 
-on("remove:repeating_modifiers", async (e) => {
-  console.log("remove:repeating_modifiers", e);
-  // remove repeating_bonusselections row with the same index
-  const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
-  await removeBonusRowsAsync(bonusRowId);
-});
+on(
+  "remove:repeating_modifiers \
+  remove:repeating_powersabilities \
+  remove:repeating_magic \
+  remove:repeating_psionics",
+  async (e) => {
+    console.log("remove:repeating_modifiers", e);
+    // remove repeating_bonusselections row with the same index
+    const bonusRowId = e.removedInfo[`${e.sourceAttribute}_bonus_id`];
+    await removeBonusRowsAsync(bonusRowId);
+  }
+);
