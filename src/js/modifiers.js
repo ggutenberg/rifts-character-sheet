@@ -53,7 +53,9 @@ on(
     await setAttrsAsync({
       [`${r}_${section}_rowid`]: `${r}_${section}_${rowId}_`,
     });
-    await addModifierToBonusesAsync(section, rowId);
+    if (section == "modifiers") {
+      await addModifierToBonusesAsync(section, rowId);
+    }
   }
 );
 
