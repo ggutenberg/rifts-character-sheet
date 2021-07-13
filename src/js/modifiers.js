@@ -55,6 +55,13 @@ on(
     });
     if (section == "modifiers") {
       await addModifierToBonusesAsync(section, rowId);
+    } else {
+      const addToBonusesKey = `${r}_${section}_${rowId}_addtobonuses`;
+      const a = await getAttrsAsync([addToBonusesKey]);
+      const addToBonuses = Boolean(Number(a[addToBonusesKey]));
+      if (addToBonuses) {
+        await addModifierToBonusesAsync(section, rowId);
+      }
     }
   }
 );

@@ -7593,6 +7593,13 @@ on(
     });
     if (section == "modifiers") {
       await addModifierToBonusesAsync(section, rowId);
+    } else {
+      const addToBonusesKey = `${r}_${section}_${rowId}_addtobonuses`;
+      const a = await getAttrsAsync([addToBonusesKey]);
+      const addToBonuses = Boolean(Number(a[addToBonusesKey]));
+      if (addToBonuses) {
+        await addModifierToBonusesAsync(section, rowId);
+      }
     }
   }
 );
@@ -8227,6 +8234,23 @@ on(
   }
 );
 
+on(
+  "change:repeating_powersabilities:dc \
+  change:repeating_magic:dc \
+  change:repeating_psionics:dc",
+  async (e) => {
+    const [r, section, rowId] = e.sourceAttribute.split("_");
+    const prefix = `${r}_${section}_${rowId}`;
+    const a = await getAttrsAsync([`${prefix}_dc_unit`]);
+    const unit = a[`${prefix}_dc_unit`].toLowerCase();
+    if (unit == "sdc" || unit == "mdc") {
+      const value = parseInt(e.newValue);
+      const attrs = { [`${prefix}_${unit}`]: value };
+      await setAttrsAsync(attrs);
+    }
+  }
+);
+
   /* endinject */
 
   /* inject:js/movement.js */
@@ -8362,13 +8386,13 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /* endinject */
 
   /**
-   * [x] Why are Abilities showing up on the Bonuses tab without Add to Bonuses being checked?
    * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
-   * [x] PPE on Profiles needs to include primary. Reset PPE on Magic tabs needs to pull from default (1st) profile
-   * [] Magic/... DC should populate S/MDC based on DC unit
-   * [x] Removing Abilities doesn't seem to remove them from Bonus Sources
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Magic/... DC should populate S/MDC based on DC unit.
+   * [x] Why are Abilities showing up on the Bonuses tab without Add to Bonuses being checked?
+   * [x] PPE on Profiles needs to include primary. Reset PPE on Magic tabs needs to pull from default (1st) profile
+   * [x] Removing Abilities doesn't seem to remove them from Bonus Sources
    *
    * [x] Add/update Instructions on every tab, then re-release.
    *

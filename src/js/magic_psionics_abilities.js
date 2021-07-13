@@ -159,3 +159,20 @@ on(
     }
   }
 );
+
+on(
+  "change:repeating_powersabilities:dc \
+  change:repeating_magic:dc \
+  change:repeating_psionics:dc",
+  async (e) => {
+    const [r, section, rowId] = e.sourceAttribute.split("_");
+    const prefix = `${r}_${section}_${rowId}`;
+    const a = await getAttrsAsync([`${prefix}_dc_unit`]);
+    const unit = a[`${prefix}_dc_unit`].toLowerCase();
+    if (unit == "sdc" || unit == "mdc") {
+      const value = parseInt(e.newValue);
+      const attrs = { [`${prefix}_${unit}`]: value };
+      await setAttrsAsync(attrs);
+    }
+  }
+);
