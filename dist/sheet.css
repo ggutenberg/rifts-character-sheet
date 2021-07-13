@@ -135,6 +135,26 @@
   margin-bottom: 0;
   font-size: 1.3rem;
 }
+.charsheet main#megaverse .side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.charsheet main#megaverse .center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.charsheet main#megaverse .movement-container span:not(.not-readonly) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
+}
 .charsheet main#megaverse .macro-help label {
   display: grid;
   gap: 0.5rem;
@@ -338,6 +358,16 @@ img.logo {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: max-content 5rem 5rem 5rem;
+}
+.ss-2a span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
 }
 
 .ss-2b {

@@ -83,6 +83,24 @@
       font-size: 1.3rem;
     }
 
+    .side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .movement-container {
+      span:not(.not-readonly) {
+        @include readonly;
+      }
+    }
+
     .macro-help {
       label {
         display: grid;
@@ -327,6 +345,10 @@ img.logo {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: max-content 5rem 5rem 5rem;
+
+  span {
+    @include readonly;
+  }
 }
 
 .ss-2b {

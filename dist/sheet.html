@@ -222,21 +222,22 @@
           title="Intelligence Quotient"
         />
         <input
-          class="attribute-bonus"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_iq_bonus"
           title="+ Skills %"
-          readonly
         />
+        <span name="attr_iq_bonus" title="+ Skills %"></span>
         <input
-          class="attribute-bonus"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_perception_bonus"
           title="+ Perception (Rifter #13, p.16)"
-          readonly
         />
+        <span
+          name="attr_perception_bonus"
+          title="+ Perception (Rifter #13, p.16)"
+        ></span>
 
         <label for="mental-endurance">M.E.</label>
         <input
@@ -247,13 +248,12 @@
           title="Mental Endurance"
         />
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_me_bonus"
           title="+ Save vs. Psionics"
-          readonly
         />
+        <span name="attr_me_bonus" title="+ Save vs. Psionics"></span>
         <div></div>
 
         <label for="mental-affinity">M.A.</label>
@@ -265,12 +265,12 @@
           title="Mental Affinity"
         />
         <input
-          type="number"
+          type="hidden"
           value="0"
           name="attr_ma_bonus"
           title="% Trust/Intimidate"
-          readonly
         />
+        <span name="attr_ma_bonus" title="% Trust/Intimidate"></span>
         <div></div>
 
         <label for="physical-strength">P.S.</label>
@@ -282,13 +282,12 @@
           title="Physical Strength"
         />
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_ps_bonus"
           title="+ SDC Damage"
-          readonly
         />
+        <span name="attr_ps_bonus" title="+ SDC Damage"></span>
         <div></div>
 
         <label for="physical-prowess">P.P</label>
@@ -300,13 +299,15 @@
           title="Physical Prowess"
         />
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_pp_bonus"
           title="+ Strike/Parry/Dodge/Entangle/Disarm"
-          readonly
         />
+        <span
+          name="attr_pp_bonus"
+          title="+ Strike/Parry/Dodge/Entangle/Disarm"
+        ></span>
         <div></div>
 
         <label for="physical-endurance">P.E.</label>
@@ -318,21 +319,19 @@
           title="Physical Endurance"
         />
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_pe_bonus"
           title="+ Magic/Poison/Toxins"
-          readonly
         />
+        <span name="attr_pe_bonus" title="+ Magic/Poison/Toxins"></span>
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_pe_coma_bonus"
           title="+ Coma/Death %"
-          readonly
         />
+        <span name="attr_pe_coma_bonus" title="+ Coma/Death %"></span>
 
         <label for="physical-beauty">P.B.</label>
         <input
@@ -343,13 +342,12 @@
           title="Physical Beauty"
         />
         <input
-          class="attribute"
-          type="number"
+          type="hidden"
           value="0"
           name="attr_pb_bonus"
           title="% Charm/Impress"
-          readonly
         />
+        <span name="attr_pb_bonus" title="% Charm/Impress"></span>
         <div></div>
 
         <label for="speed">Spd</label>
@@ -505,37 +503,23 @@
   <h2>Movement</h2>
   <div class="movement-container">
     <div></div>
-    <label for="mph">MPH</label>
-    <label for="ft-melee">Ft/Melee</label>
-    <label for="ft-attack">Ft/Attack</label>
+    <label>MPH</label>
+    <label>Ft/Melee</label>
+    <label>Ft/Attack</label>
     <label for="cruising">Cruising</label>
-    <label for="run-at-max">Run at Max</label>
+    <label>Run at Max</label>
     <label>Run</label>
-    <input id="mph" type="number" value="0" readonly name="attr_run_mph" />
-    <input
-      id="ft-melee"
-      type="number"
-      value="0"
-      readonly
-      name="attr_run_ft_melee"
-    />
-    <input
-      id="ft-attack"
-      type="number"
-      value="0"
-      readonly
-      name="attr_run_ft_attack"
-    />
+    <input type="hidden" value="0" name="attr_run_mph" />
+    <span name="attr_run_mph"></span>
+    <input type="hidden" value="0" name="attr_run_ft_melee" />
+    <span name="attr_run_ft_melee"></span>
+    <input type="hidden" value="0" name="attr_run_ft_attack" />
+    <span name="attr_run_ft_attack"></span>
     <input id="cruising" type="number" value="0" name="attr_run_cruising" />
-    <div>
-      <input
-        id="run-at-max"
-        type="number"
-        value="0"
-        disabled="true"
-        name="attr_run_at_max"
-      />
-      minutes
+    <div class="side-by-side">
+      <input type="hidden" value="0" name="attr_run_at_max" />
+      <span name="attr_run_at_max"></span
+      ><span class="not-readonly center">minutes</span>
     </div>
 
     <label>Leaping Distance</label>
@@ -555,9 +539,11 @@
       <h5>Cruising</h5>
       <h5>Max speed duration</h5>
       <input type="text" value="" name="attr_name" />
-      <input type="number" value="0" name="attr_mph" />
+      <input type="hidden" value="0" name="attr_mph" />
+      <span name="attr_mph" class="readonly"></span>
       <input type="number" value="0" name="attr_ft_melee" />
-      <input type="number" value="0" name="attr_ft_attack" readonly />
+      <input type="hidden" value="0" name="attr_ft_attack" />
+      <span name="attr_ft_attack" class="readonly"></span>
       <input type="number" value="0" name="attr_cruising" />
       <label
         ><input type="number" value="0" name="attr_dur_at_max" /> minutes</label
@@ -8292,6 +8278,8 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /* endinject */
 
   /**
+   * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
+   * [] Fix coma/death aggregation in profiles (and add a roll button?)
    * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
