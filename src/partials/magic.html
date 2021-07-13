@@ -17,16 +17,20 @@
     >
     <input type="text" value="" name="attr_name" />
     <input type="number" value="1" name="attr_spell_level" />
-    <input type="text" value="0" name="attr_range" />
-    <input type="text" value="0" name="attr_duration" />
-    <input type="text" value="0" name="attr_damage" />
+    <input type="hidden" value="0" name="attr_range" />
+    <span name="attr_range"></span>
+    <input type="hidden" value="0" name="attr_duration" />
+    <span name="attr_duration"></span>
+    <input type="text" value="0" name="attr_damage" readonly />
     <button
       type="roll"
       value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
       name="roll_spell_damage"
     />
-    <input type="text" value="0" name="attr_dc" />
-    <input type="number" value="0" name="attr_percentage" readonly />
+    <input type="hidden" value="0" name="attr_dc" />
+    <span name="attr_dc"></span>
+    <input type="hidden" value="0" name="attr_percentage" />
+    <span name="attr_percentage"></span>
     <button
       type="roll"
       value="@{character_name} @{name} check: [[d100<@{percentage}]]"

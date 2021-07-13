@@ -613,7 +613,8 @@
           <input type="number" value="0" name="attr_bonus" />
           <input type="number" value="0" name="attr_perlevel" />
           <input type="number" value="1" name="attr_level" />
-          <input type="number" value="0" name="attr_total" readonly />
+          <input type="hidden" value="0" name="attr_total" />
+          <span class="readonly" name="attr_total"></span>
           <button
             type="roll"
             value="@{character_name} @{name} check: [[d100<@{total}]]"
@@ -750,17 +751,22 @@
       ><span title="Click for more info">&nbsp;&#9432;</span></b
     >
     <input type="text" value="" name="attr_name" />
-    <input type="text" value="0" name="attr_range" readonly />
-    <input type="text" value="0" name="attr_duration" readonly />
-    <input type="text" value="0" name="attr_frequency" readonly />
+    <input type="hidden" value="0" name="attr_range" />
+    <span name="attr_range"></span>
+    <input type="hidden" value="0" name="attr_duration" />
+    <span name="attr_duration"></span>
+    <input type="hidden" value="0" name="attr_frequency" />
+    <span name="attr_frequency"></span>
     <input type="text" value="0" name="attr_damage" readonly />
     <button
       type="roll"
       value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
       name="roll_powerability_damage"
     />
-    <input type="text" value="0" name="attr_dc" readonly />
-    <input type="number" value="0" name="attr_percentage" readonly />
+    <input type="hidden" value="0" name="attr_dc" />
+    <span name="attr_dc"></span>
+    <input type="hidden" value="0" name="attr_percentage" />
+    <span name="attr_percentage"></span>
     <button
       type="roll"
       value="@{character_name} @{name} check: [[d100<@{percentage}]]"
@@ -872,21 +878,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -900,13 +907,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -919,12 +925,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -937,13 +943,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -956,13 +961,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -975,21 +982,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -1002,13 +1007,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -1327,12 +1331,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -1341,12 +1341,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -1364,12 +1360,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -1378,12 +1370,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -1393,11 +1381,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -1407,11 +1395,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
@@ -1678,16 +1666,20 @@
     >
     <input type="text" value="" name="attr_name" />
     <input type="number" value="1" name="attr_spell_level" />
-    <input type="text" value="0" name="attr_range" />
-    <input type="text" value="0" name="attr_duration" />
-    <input type="text" value="0" name="attr_damage" />
+    <input type="hidden" value="0" name="attr_range" />
+    <span name="attr_range"></span>
+    <input type="hidden" value="0" name="attr_duration" />
+    <span name="attr_duration"></span>
+    <input type="text" value="0" name="attr_damage" readonly />
     <button
       type="roll"
       value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
       name="roll_spell_damage"
     />
-    <input type="text" value="0" name="attr_dc" />
-    <input type="number" value="0" name="attr_percentage" readonly />
+    <input type="hidden" value="0" name="attr_dc" />
+    <span name="attr_dc"></span>
+    <input type="hidden" value="0" name="attr_percentage" />
+    <span name="attr_percentage"></span>
     <button
       type="roll"
       value="@{character_name} @{name} check: [[d100<@{percentage}]]"
@@ -1787,21 +1779,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -1815,13 +1808,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -1834,12 +1826,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -1852,13 +1844,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -1871,13 +1862,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -1890,21 +1883,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -1917,13 +1908,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -2242,12 +2232,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -2256,12 +2242,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -2279,12 +2261,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -2293,12 +2271,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -2308,11 +2282,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -2322,11 +2296,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
@@ -2589,16 +2563,20 @@
       ><span title="Click for more info">&nbsp;&#9432;</span></b
     >
     <input type="text" value="" name="attr_name" />
-    <input type="text" value="0" name="attr_range" />
-    <input type="text" value="0" name="attr_duration" />
-    <input type="text" value="0" name="attr_damage" />
+    <input type="hidden" value="0" name="attr_range" />
+    <span name="attr_range"></span>
+    <input type="hidden" value="0" name="attr_duration" />
+    <span name="attr_duration"></span>
+    <input type="text" value="0" name="attr_damage" readonly />
     <button
       type="roll"
       value="@{character_name} @{name} [[@{damage}]] @{damage_unit}"
       name="roll_psionic_damage"
     />
-    <input type="text" value="0" name="attr_dc" />
-    <input type="number" value="0" name="attr_percentage" readonly />
+    <input type="hidden" value="0" name="attr_dc" />
+    <span name="attr_dc"></span>
+    <input type="hidden" value="0" name="attr_percentage" />
+    <span name="attr_percentage"></span>
     <button
       type="roll"
       value="@{character_name} @{name} check: [[d100<@{percentage}]]"
@@ -2695,21 +2673,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -2723,13 +2702,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -2742,12 +2720,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -2760,13 +2738,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -2779,13 +2756,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -2798,21 +2777,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -2825,13 +2802,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -3150,12 +3126,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -3164,12 +3136,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -3187,12 +3155,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -3201,12 +3165,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -3216,11 +3176,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -3230,11 +3190,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
@@ -3501,21 +3461,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -3529,13 +3490,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -3548,12 +3508,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -3566,13 +3526,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -3585,13 +3544,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -3604,21 +3565,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -3631,13 +3590,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -3956,12 +3914,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -3970,12 +3924,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -3993,12 +3943,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -4007,12 +3953,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -4022,11 +3964,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -4036,11 +3978,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
@@ -4371,21 +4313,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -4399,13 +4342,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -4418,12 +4360,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -4436,13 +4378,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -4455,13 +4396,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -4474,21 +4417,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -4501,13 +4442,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -4826,12 +4766,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -4840,12 +4776,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -4863,12 +4795,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -4877,12 +4805,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -4892,11 +4816,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -4906,11 +4830,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"
@@ -5141,21 +5065,22 @@
         ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
       >
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq_bonus"
         title="+ Skills %"
-        readonly
       />
+      <span name="attr_mod_iq_bonus" title="+ Skills %"></span>
       <input
-        class="attribute-bonus"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_perception_bonus"
         title="+ Perception (Rifter #13, p.16)"
-        readonly
       />
+      <span
+        name="attr_mod_perception_bonus"
+        title="+ Perception (Rifter #13, p.16)"
+      ></span>
     </label>
     <label
       ><span>M.E.</span>
@@ -5169,13 +5094,12 @@
         ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me_bonus"
         title="+ Save vs. Psionics"
-        readonly
       />
+      <span name="attr_mod_me_bonus" title="+ Save vs. Psionics"></span>
     </label>
     <label
       ><span>M.A.</span>
@@ -5188,12 +5112,12 @@
         ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
       >
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma_bonus"
         title="% Trust/Intimidate"
-        readonly
       />
+      <span name="attr_mod_ma_bonus" title="% Trust/Intimidate"></span>
     </label>
     <label
       ><span>P.S.</span>
@@ -5206,13 +5130,12 @@
         ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps_bonus"
         title="+ SDC Damage"
-        readonly
       />
+      <span name="attr_mod_ps_bonus" title="+ SDC Damage"></span>
     </label>
     <label
       ><span>P.P.</span>
@@ -5225,13 +5148,15 @@
         ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp_bonus"
         title="+ Strike/Parry/Dodge/Entangle/Disarm"
-        readonly
       />
+      <span
+        name="attr_mod_pp_bonus"
+        title="+ Strike/Parry/Dodge/Entangle/Disarm"
+      ></span>
     </label>
     <label
       ><span>P.E.</span>
@@ -5244,21 +5169,19 @@
         ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_bonus"
         title="+ Magic/Poison/Toxins"
-        readonly
       />
+      <span name="attr_mod_pe_bonus" title="+ Magic/Poison/Toxins"></span>
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe_coma_bonus"
         title="+ Coma/Death %"
-        readonly
       />
+      <span name="attr_mod_pe_coma_bonus" title="+ Coma/Death %"></span>
     </label>
     <label
       ><span>P.B.</span>
@@ -5271,13 +5194,12 @@
         ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
       >
       <input
-        class="attribute"
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb_bonus"
         title="% Charm/Impress"
-        readonly
       />
+      <span name="attr_mod_pb_bonus" title="% Charm/Impress"></span>
     </label>
     <label
       ><span>Spd</span>
@@ -5596,12 +5518,8 @@
   </label>
   <label
     ><span>Range: Aimed Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_single" />
+    <span name="attr_strike_range_aimed_single"></span>
     <button
       type="roll"
       value="Range Aimed Single Strike: [[d20+@{strike_range_aimed_single}]]"
@@ -5610,12 +5528,8 @@
   </label>
   <label
     ><span>Range: Aimed Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_aimed_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_aimed_pulse" />
+    <span name="attr_strike_range_aimed_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Pulse Strike: [[d20+@{strike_range_aimed_pulse}]]"
@@ -5633,12 +5547,8 @@
   </label>
   <label
     ><span>Range: Called Single</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_single"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_single" />
+    <span name="attr_strike_range_called_single"></span>
     <button
       type="roll"
       value="Range Called Single Strike: [[d20+@{strike_range_called_single}]]"
@@ -5647,12 +5557,8 @@
   </label>
   <label
     ><span>Range: Called Pulse</span>
-    <input
-      readonly
-      type="number"
-      value="0"
-      name="attr_strike_range_called_pulse"
-    />
+    <input type="hidden" value="0" name="attr_strike_range_called_pulse" />
+    <span name="attr_strike_range_called_pulse"></span>
     <button
       type="roll"
       value="Range Called Pulse Strike: [[d20+@{strike_range_called_pulse}]]"
@@ -5662,11 +5568,11 @@
   <label
     ><span>Range: Aimed Called Single</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_single"
     />
+    <span name="attr_strike_range_aimed_called_single"></span>
     <button
       type="roll"
       value="Range Aimed Called Single Strike: [[d20+@{strike_range_aimed_called_single}]]"
@@ -5676,11 +5582,11 @@
   <label
     ><span>Range: Aimed Called Pulse</span>
     <input
-      readonly
-      type="number"
+      type="hidden"
       value="0"
       name="attr_strike_range_aimed_called_pulse"
     />
+    <span name="attr_strike_range_aimed_called_pulse"></span>
     <button
       type="roll"
       value="Range Aimed Called Pulse Strike: [[d20+@{strike_range_aimed_called_pulse}]]"

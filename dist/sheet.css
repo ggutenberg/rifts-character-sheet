@@ -85,6 +85,16 @@
 .charsheet main#megaverse:not(.debug) .bonuses [name=attr_bonus_ids] {
   display: none;
 }
+.charsheet main#megaverse .readonly {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
+}
 .charsheet main#megaverse details {
   display: revert;
   margin-bottom: 1rem;
@@ -184,13 +194,23 @@
 .charsheet main#megaverse .bonus-type-container label {
   display: grid;
   gap: 0.2rem;
-  grid-template-columns: 1fr min-content 4rem;
+  grid-template-columns: 1fr 5rem 4rem;
   width: 100%;
 }
 .charsheet main#megaverse .bonus-type-container label span {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.charsheet main#megaverse .bonus-type-container label span[name^=attr_] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
 }
 .charsheet main#megaverse .bonus-type-container label.select {
   grid-template-columns: max-content 1fr 4rem;
@@ -226,15 +246,32 @@
 .charsheet main#megaverse .profiles .bonus-type-container label.abs {
   display: none;
 }
+.charsheet main#megaverse .powersabilities .abilities-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 2.5rem 1fr 5rem 8rem 10rem 8rem 4rem 8rem 4rem 4rem;
+}
+.charsheet main#megaverse .powersabilities .abilities-list span {
+  display: flex;
+  align-items: center;
+}
 .charsheet main#megaverse .magic .spells-list {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
+.charsheet main#megaverse .magic .spells-list span {
+  display: flex;
+  align-items: center;
+}
 .charsheet main#megaverse .psionics .psionics-list {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
+}
+.charsheet main#megaverse .psionics .psionics-list span {
+  display: flex;
+  align-items: center;
 }
 
 /* Tabs */
@@ -339,12 +376,6 @@ img.logo {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 1fr 8rem 8rem 8rem 8rem max-content;
-}
-
-.charsheet .powersabilities .repcontainer[data-groupname=repeating_powersabilities] .repitem .abilities-list {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 2.5rem 1fr 5rem 8rem 10rem 8rem 4rem 8rem 4rem 4rem;
 }
 
 .charsheet .skills .repcontainer[data-groupname=repeating_skills] .repitem .values {
