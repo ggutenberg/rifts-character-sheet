@@ -271,27 +271,45 @@
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 5rem 8rem 10rem 8rem 4rem 8rem 4rem 4rem;
 }
-.charsheet main#megaverse .powersabilities .abilities-list span {
+.charsheet main#megaverse .powersabilities .abilities-list span:not(.not-readonly) {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
 }
 .charsheet main#megaverse .magic .spells-list {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 4rem 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
-.charsheet main#megaverse .magic .spells-list span {
+.charsheet main#megaverse .magic .spells-list span:not(.not-readonly) {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
 }
 .charsheet main#megaverse .psionics .psionics-list {
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 2.5rem 1fr 5rem 8rem 8rem 4rem 8rem 4rem 4rem 5rem 4rem;
 }
-.charsheet main#megaverse .psionics .psionics-list span {
+.charsheet main#megaverse .psionics .psionics-list span:not(.not-readonly) {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  margin: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+  font-weight: normal;
+  padding-left: 0.5rem;
 }
 
 /* Tabs */
