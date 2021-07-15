@@ -1,4 +1,5 @@
 @use 'metal-buttons';
+@use 'tabs';
 
 @mixin center {
   display: flex;
@@ -276,35 +277,6 @@
       }
     }
   }
-}
-
-/* Tabs */
-/* Configure the tab buttons */
-.core,
-.wp,
-.equipment,
-.skills,
-.magic,
-.psionics,
-.importexport,
-.bonuses,
-.powersabilities,
-.modifiers {
-  display: none;
-}
-
-/* show the selected tab */
-.tabstoggle[value="core"] ~ div.core,
-.tabstoggle[value="wp"] ~ div.wp,
-.tabstoggle[value="equipment"] ~ div.equipment,
-.tabstoggle[value="skills"] ~ div.skills,
-.tabstoggle[value="magic"] ~ div.magic,
-.tabstoggle[value="psionics"] ~ div.psionics,
-.tabstoggle[value="importexport"] ~ div.importexport,
-.tabstoggle[value="bonuses"] ~ div.bonuses,
-.tabstoggle[value="powersabilities"] ~ div.powersabilities,
-.tabstoggle[value="modifiers"] ~ div.modifiers {
-  display: block;
 }
 
 img.logo {
