@@ -45,6 +45,7 @@ on(
       e.sourceAttribute.endsWith("_bonus_id") ||
       e.sourceAttribute.endsWith("_rowid") ||
       e.sourceAttribute.endsWith("_addtobonuses") ||
+      e.sourceAttribute.endsWith("_description") ||
       sourceParts.length < 4
     ) {
       return;

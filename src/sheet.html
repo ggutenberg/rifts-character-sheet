@@ -291,6 +291,7 @@
             <hr />
             <div class="profiles repeating-bonuses-outer">
               <h3>Profiles</h3>
+              <input type="hidden" name="attr_default_mdc" />
               <fieldset class="repeating_profiles">
                 <details class="info">
                   <summary>
@@ -455,6 +456,8 @@
   /* endinject */
 
   /**
+   * [] Fix +Punch/PS roll to use value in current section rather than global
+   * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
    * [] Fix coma/death aggregation in profiles (and add a roll button?)
    * [] Add weight to abilities/magic/psionics

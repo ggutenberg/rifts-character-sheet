@@ -33,3 +33,12 @@ on(
     await updateProfile(rowId);
   }
 );
+
+on("change:_reporder:profiles", async (e) => {
+  console.log("change:_reporder:profiles", e);
+  const sectionIds = await getSectionIDsOrderedAsync("profiles");
+  const prefix = `repeating_profiles_${sectionIds[0]}`;
+  const a = await getAttrsAsync([`${prefix}_mdc`]);
+  await setAttrsAsync({ default_mdc: a[`${prefix}_mdc`] });
+  console.log(a);
+});
