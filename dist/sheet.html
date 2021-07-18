@@ -368,7 +368,7 @@
           id="trust-intimidate"
           type="number"
           value="0"
-          name="attr_trust_intimidate"
+          name="attr_trustintimidate"
         /><span>%</span>
 
         <label for="charm-impress">Charm/Impress</label>
@@ -376,7 +376,7 @@
           id="charm-impress"
           type="number"
           value="0"
-          name="attr_charm_impress"
+          name="attr_charmimpress"
         /><span>%</span>
       </div>
       <div class="ss-2c">
@@ -1153,6 +1153,20 @@
         name="attr_spellstrength_abs"
       />|x|</label
     >
+  </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="number" value="0" name="attr_mod_trustintimidate" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_trustintimidate_abs" />|x|
+    </label>
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="number" value="0" name="attr_mod_charmimpress" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
+    </label>
   </label>
 </div>
 <hr />
@@ -2074,6 +2088,20 @@
       />|x|</label
     >
   </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="number" value="0" name="attr_mod_trustintimidate" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_trustintimidate_abs" />|x|
+    </label>
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="number" value="0" name="attr_mod_charmimpress" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
+    </label>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -2984,6 +3012,20 @@
       />|x|</label
     >
   </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="number" value="0" name="attr_mod_trustintimidate" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_trustintimidate_abs" />|x|
+    </label>
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="number" value="0" name="attr_mod_charmimpress" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
+    </label>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -3788,6 +3830,20 @@
         name="attr_spellstrength_abs"
       />|x|</label
     >
+  </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="number" value="0" name="attr_mod_trustintimidate" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_trustintimidate_abs" />|x|
+    </label>
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="number" value="0" name="attr_mod_charmimpress" />
+    <label class="abs">
+      <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
+    </label>
   </label>
 </div>
 <hr />
@@ -4641,6 +4697,26 @@
     <input type="hidden" value="0" name="attr_mod_spellstrength" />
     <span name="attr_mod_spellstrength"></span>
   </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="hidden" value="0" name="attr_mod_trustintimidate" />
+    <span name="attr_mod_trustintimidate"></span>
+    <button
+      type="roll"
+      value="@{character_name} Trust/Intimidate check: [[d100<@{mod_trustintimidate}]]"
+      name="roll_trustintimidate"
+    />
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="hidden" value="0" name="attr_mod_charmimpress" />
+    <span name="attr_mod_charmimpress"></span>
+    <button
+      type="roll"
+      value="@{character_name} Charm/Impress check: [[d100<@{mod_charmimpress}]]"
+      name="roll_charmimpress"
+    />
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -5435,6 +5511,26 @@
     <span>Spell Strength</span>
     <input type="hidden" value="0" name="attr_mod_spellstrength" />
     <span name="attr_mod_spellstrength"></span>
+  </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="hidden" value="0" name="attr_mod_trustintimidate" />
+    <span name="attr_mod_trustintimidate"></span>
+    <button
+      type="roll"
+      value="@{character_name} Trust/Intimidate check: [[d100<@{mod_trustintimidate}]]"
+      name="roll_trustintimidate"
+    />
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="hidden" value="0" name="attr_mod_charmimpress" />
+    <span name="attr_mod_charmimpress"></span>
+    <button
+      type="roll"
+      value="@{character_name} Charm/Impress check: [[d100<@{mod_charmimpress}]]"
+      name="roll_charmimpress"
+    />
   </label>
 </div>
 <hr />
@@ -6562,6 +6658,10 @@ const ATTRIBUTE_KEYS = [
   "hf_abs",
   "mod_spellstrength",
   "spellstrength_abs",
+  "mod_trustintimidate",
+  "trustintimidate_abs",
+  "mod_charmimpress",
+  "charmimpress_abs",
 ];
 
 const COMBAT_KEYS = [
@@ -6740,8 +6840,8 @@ const CORE_KEYS = [
   "pb",
   "pb_bonus",
   "spd",
-  "trust_intimidate",
-  "charm_impress",
+  "trustintimidate",
+  "charmimpress",
   "restrained_punch",
   "restrained_punch_unit",
   "punch",
@@ -7157,6 +7257,8 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
     "spd",
     "hf",
     "spellstrength",
+    "trustintimidate",
+    "charmimpress",
   ];
   const fieldNames = rowIds.reduce((acc, rowId) => {
     const absFieldNames = fields.map(
@@ -7191,12 +7293,18 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       // repeatingSum
       const rsaDestinations = [`${destinationPrefix}_mod_${field}`];
       const rsaFields = [`mod_${field}`];
+      let base = field;
+      if (field == "trustintimidate") {
+        base = `${destinationPrefix}_mod_ma_bonus`;
+      } else if (field == "charmimpress") {
+        base = `${destinationPrefix}_mod_pb_bonus`;
+      }
       await repeatingSumAsync(
         rsaDestinations,
         "bonuses",
         rsaFields,
         `filter:${rowIds.toString()}`,
-        field
+        base
       );
     }
   });
@@ -7788,7 +7896,7 @@ async function maBonus(value, prefix = "") {
       : 0;
   setAttrs({
     [`${prefix}ma_bonus`]: ma_bonus,
-    [`${prefix}trust_intimidate`]: ma_bonus,
+    [`${prefix}trustintimidate`]: ma_bonus,
   });
 }
 
@@ -8041,7 +8149,7 @@ async function pbBonus(value, prefix = "") {
       : 0;
   await setAttrsAsync({
     [`${prefix}pb_bonus`]: pb_bonus,
-    [`${prefix}charm_impress`]: pb_bonus,
+    [`${prefix}charmimpress`]: pb_bonus,
   });
 }
 

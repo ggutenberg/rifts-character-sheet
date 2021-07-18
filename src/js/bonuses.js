@@ -73,6 +73,8 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
     "spd",
     "hf",
     "spellstrength",
+    "trustintimidate",
+    "charmimpress",
   ];
   const fieldNames = rowIds.reduce((acc, rowId) => {
     const absFieldNames = fields.map(
@@ -107,12 +109,18 @@ async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
       // repeatingSum
       const rsaDestinations = [`${destinationPrefix}_mod_${field}`];
       const rsaFields = [`mod_${field}`];
+      let base = field;
+      if (field == "trustintimidate") {
+        base = `${destinationPrefix}_mod_ma_bonus`;
+      } else if (field == "charmimpress") {
+        base = `${destinationPrefix}_mod_pb_bonus`;
+      }
       await repeatingSumAsync(
         rsaDestinations,
         "bonuses",
         rsaFields,
         `filter:${rowIds.toString()}`,
-        field
+        base
       );
     }
   });

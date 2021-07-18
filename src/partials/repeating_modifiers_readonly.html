@@ -282,6 +282,26 @@
     <input type="hidden" value="0" name="attr_mod_spellstrength" />
     <span name="attr_mod_spellstrength"></span>
   </label>
+  <label>
+    <span>Trust/Intimidate</span>
+    <input type="hidden" value="0" name="attr_mod_trustintimidate" />
+    <span name="attr_mod_trustintimidate"></span>
+    <button
+      type="roll"
+      value="@{character_name} Trust/Intimidate check: [[d100<@{mod_trustintimidate}]]"
+      name="roll_trustintimidate"
+    />
+  </label>
+  <label>
+    <span>Charm/Impress</span>
+    <input type="hidden" value="0" name="attr_mod_charmimpress" />
+    <span name="attr_mod_charmimpress"></span>
+    <button
+      type="roll"
+      value="@{character_name} Charm/Impress check: [[d100<@{mod_charmimpress}]]"
+      name="roll_charmimpress"
+    />
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>

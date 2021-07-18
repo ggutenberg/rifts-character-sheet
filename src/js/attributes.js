@@ -49,7 +49,7 @@ async function maBonus(value, prefix = "") {
       : 0;
   setAttrs({
     [`${prefix}ma_bonus`]: ma_bonus,
-    [`${prefix}trust_intimidate`]: ma_bonus,
+    [`${prefix}trustintimidate`]: ma_bonus,
   });
 }
 
@@ -302,7 +302,7 @@ async function pbBonus(value, prefix = "") {
       : 0;
   await setAttrsAsync({
     [`${prefix}pb_bonus`]: pb_bonus,
-    [`${prefix}charm_impress`]: pb_bonus,
+    [`${prefix}charmimpress`]: pb_bonus,
   });
 }
 

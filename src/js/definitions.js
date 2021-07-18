@@ -500,6 +500,10 @@ const ATTRIBUTE_KEYS = [
   "hf_abs",
   "mod_spellstrength",
   "spellstrength_abs",
+  "mod_trustintimidate",
+  "trustintimidate_abs",
+  "mod_charmimpress",
+  "charmimpress_abs",
 ];
 
 const COMBAT_KEYS = [
@@ -678,8 +682,8 @@ const CORE_KEYS = [
   "pb",
   "pb_bonus",
   "spd",
-  "trust_intimidate",
-  "charm_impress",
+  "trustintimidate",
+  "charmimpress",
   "restrained_punch",
   "restrained_punch_unit",
   "punch",
