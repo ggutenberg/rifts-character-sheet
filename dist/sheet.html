@@ -710,9 +710,9 @@
   to dodge. Add those in the modifiers section in the spell details on the Magic
   tab. Use the <b>|x|</b> checkbox next to Spd to indicate that the value is
   absolute, and not additive. If adding a Magic Spell, Psionic, or Ability that
-  includes modifiers, check the <b>Add to Bonuses</b> checkbox. This will make
-  those modifiers available on the Bonuses tab to be used in a Profile (see the
-  Bonuses tab instructions for details on Profiles).
+  includes modifiers, check the <b>Add to Cumulative Modifiers</b> checkbox.
+  This will make those modifiers available on the Profiles tab to be used in a
+  Profile (see the Profiles tab instructions for details).
 </p>
 <p>
   Note that each section includes a read-only Row ID that can be used in macros.
@@ -774,7 +774,7 @@
 <br />
 <label
   ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
-  Bonuses</label
+  Cumulative Modifiers (Profiles tab)</label
 >
 <br />
 <div class="ability-details">
@@ -856,7 +856,7 @@
 
               <!-- endinject -->
               <h2>Modifiers</h2>
-              <!-- inject:partials/repeating_bonuses_details.html -->
+              <!-- inject:partials/repeating_modifiers.html -->
               <input type="hidden" name="attr_bonus_id" value="" />
 <details>
   <summary>
@@ -1622,9 +1622,9 @@
   to dodge. Add those in the modifiers section in the spell details on the Magic
   tab. Use the <b>|x|</b> checkbox next to Spd to indicate that the value is
   absolute, and not additive. If adding a Magic Spell, Psionic, or Ability that
-  includes modifiers, check the <b>Add to Bonuses</b> checkbox. This will make
-  those modifiers available on the Bonuses tab to be used in a Profile (see the
-  Bonuses tab instructions for details on Profiles).
+  includes modifiers, check the <b>Add to Cumulative Modifiers</b> checkbox.
+  This will make those modifiers available on the Profiles tab to be used in a
+  Profile (see the Profiles tab instructions for details).
 </p>
 <p>
   Note that each section includes a read-only Row ID that can be used in macros.
@@ -1693,7 +1693,7 @@
 <br />
 <label
   ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
-  Bonuses</label
+  Cumulative Modifiers (Profiles tab)</label
 >
 <br />
 <div class="spell-details">
@@ -1761,7 +1761,7 @@
 
             <!-- endinject -->
             <h2>Modifiers</h2>
-            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- inject:partials/repeating_modifiers.html -->
             <input type="hidden" name="attr_bonus_id" value="" />
 <details>
   <summary>
@@ -2526,9 +2526,9 @@
   to dodge. Add those in the modifiers section in the spell details on the Magic
   tab. Use the <b>|x|</b> checkbox next to Spd to indicate that the value is
   absolute, and not additive. If adding a Magic Spell, Psionic, or Ability that
-  includes modifiers, check the <b>Add to Bonuses</b> checkbox. This will make
-  those modifiers available on the Bonuses tab to be used in a Profile (see the
-  Bonuses tab instructions for details on Profiles).
+  includes modifiers, check the <b>Add to Cumulative Modifiers</b> checkbox.
+  This will make those modifiers available on the Profiles tab to be used in a
+  Profile (see the Profiles tab instructions for details).
 </p>
 <p>
   Note that each section includes a read-only Row ID that can be used in macros.
@@ -2595,7 +2595,7 @@
 <br />
 <label
   ><input type="checkbox" name="attr_addtobonuses" value="1" /> Add to
-  Bonuses</label
+  Cumulative Modifiers (Profiles tab)</label
 >
 <br />
 <div class="psionic-details">
@@ -2660,7 +2660,7 @@
 
             <!-- endinject -->
             <h2>Modifiers</h2>
-            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- inject:partials/repeating_modifiers.html -->
             <input type="hidden" name="attr_bonus_id" value="" />
 <details>
   <summary>
@@ -3416,9 +3416,9 @@
   to dodge. Add those in the modifiers section in the spell details on the Magic
   tab. Use the <b>|x|</b> checkbox next to Spd to indicate that the value is
   absolute, and not additive. If adding a Magic Spell, Psionic, or Ability that
-  includes modifiers, check the <b>Add to Bonuses</b> checkbox. This will make
-  those modifiers available on the Bonuses tab to be used in a Profile (see the
-  Bonuses tab instructions for details on Profiles).
+  includes modifiers, check the <b>Add to Cumulative Modifiers</b> checkbox.
+  This will make those modifiers available on the Profiles tab to be used in a
+  Profile (see the Profiles tab instructions for details).
 </p>
 <p>
   Note that each section includes a read-only Row ID that can be used in macros.
@@ -3454,7 +3454,7 @@
                     </label>
                   </div>
                 </summary>
-                <!-- inject:partials/repeating_bonuses_details.html -->
+                <!-- inject:partials/repeating_modifiers.html -->
                 <input type="hidden" name="attr_bonus_id" value="" />
 <details>
   <summary>
@@ -4191,7 +4191,7 @@
     <div class="r-tab-content">
       <div class="bonuses">
         <div class="bonuses-container">
-          <h3>Aggregated Bonuses</h3>
+          <h3>Cumulative Modifiers</h3>
           <div class="combat-combined">
             <details>
               <summary><b>Instructions</b></summary>
@@ -4199,9 +4199,9 @@
               <p>
                 Any modifiers you add on the Modifiers tab will appear as
                 checkboxes here. Additionally any Abilities, Magic, or Psionics
-                that you checked <b>Add to Bonuses</b> will appear here. Any
-                Weapon Proficiencies you add on the WPs tab will appear on this
-                page as well.
+                that you checked <b>Add to Cumulative Modifiers</b> will appear
+                here. Any Weapon Proficiencies you add on the WPs tab will
+                appear on this page as well.
               </p>
               <p>
                 Create a new Profile in the Profiles section. Check all of the
@@ -4294,11 +4294,7 @@
                     <div class="bonus-names">
                       <span name="attr_bonus_names"></span>
                     </div>
-                    <button
-                      type="action"
-                      name="act_copybonusids"
-                      class="metal linear small"
-                    >
+                    <button type="action" name="act_copybonusids" class="small">
                       Apply Checked Modifiers to this Profile
                     </button>
                     <!-- <button type="action" name="act_checkbonusids">
@@ -4307,14 +4303,14 @@
                     <button
                       type="action"
                       name="act_updateprofile"
-                      class="metal linear small"
+                      class="small"
                     >
                       Update Profile if Attributes or Modifiers have changed
                     </button>
                   </div>
-                  <!-- inject:partials/repeating_bonuses_details.html -->
+                  <!-- inject:partials/repeating_modifiers_readonly.html -->
                   <input type="hidden" name="attr_bonus_id" value="" />
-<details>
+<details class="">
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -4322,14 +4318,12 @@
     <label
       ><span>I.Q.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq"
         title="Intelligence Quotient"
       />
-      <label class="abs"
-        ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
-      >
+      <span name="attr_mod_iq" title="Intelligence Quotient"></span>
       <input
         type="hidden"
         value="0"
@@ -4351,14 +4345,12 @@
     <label
       ><span>M.E.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me"
         title="Mental Endurance"
       />
-      <label class="abs"
-        ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
-      >
+      <span name="attr_mod_me" title="Mental Endurance"></span>
       <input
         type="hidden"
         value="0"
@@ -4370,13 +4362,12 @@
     <label
       ><span>M.A.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma"
         title="Mental Affinity"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_ma" title="Mental Affinity"></span>
       <input
         type="hidden"
         value="0"
@@ -4388,13 +4379,12 @@
     <label
       ><span>P.S.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps"
         title="Physical Strength"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_ps" title="Physical Strength"></span>
       <input
         type="hidden"
         value="0"
@@ -4406,13 +4396,12 @@
     <label
       ><span>P.P.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp"
         title="Physical Prowess"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pp" title="Physical Prowess"></span>
       <input
         type="hidden"
         value="0"
@@ -4427,13 +4416,12 @@
     <label
       ><span>P.E.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe"
         title="Physical Endurance"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pe" title="Physical Endurance"></span>
       <input
         type="hidden"
         value="0"
@@ -4452,13 +4440,12 @@
     <label
       ><span>P.B.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb"
         title="Physical Beauty"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pb" title="Physical Beauty"></span>
       <input
         type="hidden"
         value="0"
@@ -4469,11 +4456,9 @@
     </label>
     <label
       ><span>Spd</span>
-      <input type="number" value="0" name="attr_mod_spd" title="Speed" /><label
-        class="abs"
-        ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
-      ></label
-    >
+      <input type="hidden" value="0" name="attr_mod_spd" title="Speed" />
+      <span name="attr_mod_spd" title="Speed"></span>
+    </label>
   </div>
   <hr />
   <div class="bonus-ps-container">
@@ -4485,90 +4470,90 @@
         <option value="3">Robotic</option>
         <option value="3.5">Giant Robotic</option>
         <option value="4">Supernatural</option>
-      </select></label
-    >
+      </select>
+      <!-- <input type="hidden" name="attr_mod_character_ps_type" /> -->
+      <!-- <span name="attr_mod_character_ps_type"></span> -->
+    </label>
     <label
       ><span>Restrained Punch</span>
-      <input type="text" name="attr_mod_restrained_punch" value="0" />
-      <select name="attr_mod_restrained_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_restrained_punch" value="0" />
+      <span name="attr_mod_restrained_punch"></span>
+      <input type="hidden" name="attr_mod_restrained_punch_unit" />
+      <span name="attr_mod_restrained_punch_unit"></span>
+    </label>
 
     <label
       ><span>Punch</span>
-      <input type="text" name="attr_mod_punch" value="0" />
-      <select name="attr_mod_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_punch" value="0" />
+      <span name="attr_mod_punch"></span>
+      <input type="hidden" name="attr_mod_punch_unit" />
+      <span name="attr_mod_punch_unit"></span>
+    </label>
 
     <label
       ><span>Power Punch</span>
-      <input type="text" name="attr_mod_power_punch" value="0" />
-      <select name="attr_mod_power_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_power_punch" value="0" />
+      <span name="attr_mod_power_punch"></span>
+      <input type="hidden" name="attr_mod_power_punch_unit" />
+      <span name="attr_mod_power_punch_unit"></span>
+    </label>
 
     <label
       ><span>Kick</span>
-      <input type="text" name="attr_mod_kick" value="0" />
-      <select name="attr_mod_kick_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_kick" value="0" />
+      <span name="attr_mod_kick"></span>
+      <input type="hidden" name="attr_mod_kick_unit" />
+      <span name="attr_mod_kick_unit"></span>
+    </label>
 
     <label
       ><span>Leap Kick</span>
-      <input type="text" name="attr_mod_leap_kick" value="0" />
-      <select name="attr_mod_leap_kick_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select>
+      <input type="hidden" name="attr_mod_leap_kick" value="0" />
+      <span name="attr_mod_leap_kick"></span>
+      <input type="hidden" name="attr_mod_leap_kick_unit" />
+      <span name="attr_mod_leap_kick_unit"></span>
     </label>
 
     <label
       ><span>Lift</span>
-      <input type="number" value="0" name="attr_mod_lift" value="0" />
+      <input type="hidden" value="0" name="attr_mod_lift" value="0" />
+      <span name="attr_mod_lift"></span>
       <span>lbs</span>
     </label>
 
     <label
       ><span>Carry</span>
-      <input type="number" value="0" name="attr_mod_carry" value="0" />
-      <span>lbs</span></label
-    >
+      <input type="hidden" value="0" name="attr_mod_carry" value="0" />
+      <span name="attr_mod_carry"></span>
+      <span>lbs</span>
+    </label>
 
     <label
       ><span>Throw (&frac12; Carry)</span>
-      <input type="number" value="0" name="attr_mod_throw_distance" value="0" />
+      <input type="hidden" value="0" name="attr_mod_throw_distance" value="0" />
+      <span name="attr_mod_throw_distance"></span>
       <span>Feet</span></label
     >
 
     <label
       ><span>Carry Max</span>
-      <input type="number" value="0" name="attr_mod_carry_max" /><span
-        >Minutes</span
-      ></label
-    >
+      <input type="hidden" value="0" name="attr_mod_carry_max" />
+      <span name="attr_mod_carry_max"></span>
+      <span>Minutes</span>
+    </label>
 
     <label
       ><span>Carry (Running)</span>
-      <input type="number" value="0" name="attr_mod_carry_running" /><span
-        >Minutes</span
-      ></label
+      <input type="hidden" value="0" name="attr_mod_carry_running" />
+      <span name="attr_mod_carry_running"></span>
+      <span>Minutes</span></label
     >
 
     <label
       ><span>Hold Max.</span>
-      <input type="number" value="0" name="attr_mod_hold_max" /><span
-        >Melees</span
-      ></label
+      <input type="hidden" value="0" name="attr_mod_hold_max" />
+      <span name="attr_mod_hold_max"></span>
+      <span>Melees</span></label
     >
   </div>
   <hr />
@@ -4576,40 +4561,46 @@
 <div class="bonus-type-container">
   <label
     ><span title="Hit Points">H.P.</span
-    ><input type="number" value="0" name="attr_hp"
-  /></label>
+    ><input type="hidden" value="0" name="attr_hp" />
+    <span name="attr_hp"></span>
+  </label>
   <label
-    ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
-  /></label>
+    ><span>S.D.C.</span><input type="hidden" value="0" name="attr_sdc" />
+    <span name="attr_sdc"></span>
+  </label>
   <label
-    ><span>A.R.</span><input type="number" value="0" name="attr_ar"
-  /></label>
+    ><span>A.R.</span><input type="hidden" value="0" name="attr_ar" />
+    <span name="attr_ar"></span>
+  </label>
   <label
-    ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
-  /></label>
+    ><span>M.D.C.</span><input type="hidden" value="0" name="attr_mdc" />
+    <span name="attr_mdc"></span>
+  </label>
   <label
-    ><span>P.P.E.</span><input type="number" value="0" name="attr_ppe"
-  /></label>
+    ><span>P.P.E.</span><input type="hidden" value="0" name="attr_ppe" />
+    <span name="attr_ppe"></span>
+  </label>
   <label
-    ><span>I.S.P.</span><input type="number" value="0" name="attr_isp"
-  /></label>
+    ><span>I.S.P.</span><input type="hidden" value="0" name="attr_isp" />
+    <span name="attr_isp"></span>
+  </label>
   <label
-    ><span>H.F.</span><input type="number" value="0" name="attr_mod_hf" /><label
-      class="abs"
-      ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
-    ></label
-  >
+    ><span>H.F.</span><input type="hidden" value="0" name="attr_mod_hf" />
+    <span name="attr_mod_hf"></span>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
 <div class="bonus-type-container">
   <label
     ><span>Attacks</span>
-    <input type="number" value="0" name="attr_attacks" />
+    <input type="hidden" value="0" name="attr_attacks" />
+    <span name="attr_attacks"></span>
   </label>
   <label
     ><span>Initiative</span>
-    <input type="number" value="0" name="attr_initiative" />
+    <input type="hidden" value="0" name="attr_initiative" />
+    <span name="attr_initiative"></span>
     <button
       type="roll"
       value="Initiative: [[d20+@{initiative}]]"
@@ -4618,7 +4609,8 @@
   </label>
   <label
     ><span>Strike</span>
-    <input type="number" value="0" name="attr_strike" />
+    <input type="hidden" value="0" name="attr_strike" />
+    <span name="attr_strike"></span>
     <button
       type="roll"
       value="Strike: [[d20+@{strike}]]"
@@ -4627,7 +4619,8 @@
   </label>
   <label
     ><span>Parry</span>
-    <input type="number" value="0" name="attr_parry" />
+    <input type="hidden" value="0" name="attr_parry" />
+    <span name="attr_parry"></span>
     <button
       type="roll"
       value="Parry: [[d20+@{parry}]]"
@@ -4636,7 +4629,8 @@
   </label>
   <label
     ><span>Dodge</span>
-    <input type="number" value="0" name="attr_dodge" />
+    <input type="hidden" value="0" name="attr_dodge" />
+    <span name="attr_dodge"></span>
     <button
       type="roll"
       value="Dodge: [[d20+@{dodge}]]"
@@ -4645,7 +4639,8 @@
   </label>
   <label
     ><span>Throw</span>
-    <input type="number" value="0" name="attr_throw" />
+    <input type="hidden" value="0" name="attr_throw" />
+    <span name="attr_throw"></span>
     <button
       type="roll"
       value="Throw: [[d20+@{throw}]]"
@@ -4654,7 +4649,8 @@
   </label>
   <label
     ><span>Disarm</span>
-    <input type="number" value="0" name="attr_disarm" />
+    <input type="hidden" value="0" name="attr_disarm" />
+    <span name="attr_disarm"></span>
     <button
       type="roll"
       value="Disarm: [[d20+@{disarm}]]"
@@ -4663,7 +4659,8 @@
   </label>
   <label
     ><span>Entangle</span>
-    <input type="number" value="0" name="attr_entangle" />
+    <input type="hidden" value="0" name="attr_entangle" />
+    <span name="attr_entangle"></span>
     <button
       type="roll"
       value="Entangle: [[d20+@{entangle}]]"
@@ -4672,7 +4669,8 @@
   </label>
   <label
     ><span>Pull Punch</span>
-    <input type="number" value="0" name="attr_pull" />
+    <input type="hidden" value="0" name="attr_pull" />
+    <span name="attr_pull"></span>
     <button
       type="roll"
       value="Pull Punch: [[d20+@{pull}]]"
@@ -4681,7 +4679,8 @@
   </label>
   <label
     ><span>Roll w/ Impact</span>
-    <input type="number" value="0" name="attr_roll" />
+    <input type="hidden" value="0" name="attr_roll" />
+    <span name="attr_roll"></span>
     <button
       type="roll"
       value="Roll w/ Impact: [[d20+@{roll}]]"
@@ -4690,7 +4689,8 @@
   </label>
   <label
     ><span>Body Flip/Throw</span>
-    <input type="number" value="0" name="attr_flipthrow" />
+    <input type="hidden" value="0" name="attr_flipthrow" />
+    <span name="attr_flipthrow"></span>
     <button
       type="roll"
       value="Body Flip/Throw: [[d20+@{flipthrow}]]"
@@ -4699,7 +4699,8 @@
   </label>
   <label
     ><span>Damage</span>
-    <input type="text" value="0" name="attr_damage" />
+    <input type="hidden" value="0" name="attr_damage" />
+    <span name="attr_damage"></span>
     <button
       type="roll"
       value="?{Add damage modifier?|
@@ -4712,7 +4713,8 @@
   </label>
   <label
     ><span>Dodge: Flight</span>
-    <input type="number" value="0" name="attr_dodge_flight" />
+    <input type="hidden" value="0" name="attr_dodge_flight" />
+    <span name="attr_dodge_flight"></span>
     <button
       type="roll"
       value="Dodge in Flight: [[d20+@{dodge_flight}]]"
@@ -4721,7 +4723,8 @@
   </label>
   <label
     >Dodge: Auto
-    <input type="number" value="0" name="attr_dodge_auto" />
+    <input type="hidden" value="0" name="attr_dodge_auto" />
+    <span name="attr_dodge_auto"></span>
     <button
       type="roll"
       value="Auto Dodge: [[d20+@{dodge_auto}]]"
@@ -4730,7 +4733,8 @@
   </label>
   <label
     ><span>Dodge: Teleport</span>
-    <input type="number" value="0" name="attr_dodge_teleport" />
+    <input type="hidden" value="0" name="attr_dodge_teleport" />
+    <span name="attr_dodge_auto"></span>
     <button
       type="roll"
       value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
@@ -4739,7 +4743,8 @@
   </label>
   <label
     ><span>Dodge: Motion</span>
-    <input type="number" value="0" name="attr_dodge_motion" />
+    <input type="hidden" value="0" name="attr_dodge_motion" />
+    <span name="attr_dodge_motion"></span>
     <button
       type="roll"
       value="Dodge in Motion: [[d20+@{dodge_motion}]]"
@@ -4748,7 +4753,8 @@
   </label>
   <label
     ><span>Strike: Range</span>
-    <input type="number" value="0" name="attr_strike_range" />
+    <input type="hidden" value="0" name="attr_strike_range" />
+    <span name="attr_strike_range"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range}]]"
@@ -4757,7 +4763,8 @@
   </label>
   <label
     ><span>Range: Single</span>
-    <input type="number" value="0" name="attr_strike_range_single" />
+    <input type="hidden" value="0" name="attr_strike_range_single" />
+    <span name="attr_strike_range_single"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range_single}]]"
@@ -4766,7 +4773,8 @@
   </label>
   <label
     ><span>Range: Burst</span>
-    <input type="number" value="0" name="attr_strike_range_burst" />
+    <input type="hidden" value="0" name="attr_strike_range_burst" />
+    <span name="attr_strike_range_burst"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range_burst}]]"
@@ -4775,7 +4783,8 @@
   </label>
   <label
     ><span>Range: Aimed</span>
-    <input type="number" value="0" name="attr_strike_range_aimed" />
+    <input type="hidden" value="0" name="attr_strike_range_aimed" />
+    <span name="attr_strike_range_aimed"></span>
     <button
       type="roll"
       value="Range Aimed Strike: [[d20+@{strike_range_aimed}]]"
@@ -4804,7 +4813,8 @@
   </label>
   <label
     ><span>Range: Called</span>
-    <input type="number" value="0" name="attr_strike_range_called" />
+    <input type="hidden" value="0" name="attr_strike_range_called" />
+    <span name="attr_strike_range_called"></span>
     <button
       type="roll"
       value="Range Called Strike: [[d20+@{strike_range_called}]]"
@@ -4861,7 +4871,8 @@
   </label>
   <label
     ><span>Disarm: Range</span>
-    <input type="number" value="0" name="attr_disarm_range" />
+    <input type="hidden" value="0" name="attr_disarm_range" />
+    <span name="attr_disarm_range"></span>
     <button
       type="roll"
       value="Range Disarm: [[d20+@{disarm_range}]]"
@@ -4870,7 +4881,8 @@
   </label>
   <label
     ><span>Damage: Range</span>
-    <input type="text" value="0" name="attr_damage_range" />
+    <input type="hidden" value="0" name="attr_damage_range" />
+    <span name="attr_damage_range"></span>
     <button
       type="roll"
       value="Range Damage: [[@{damage_range}]]"
@@ -4878,22 +4890,26 @@
     />
   </label>
   <label
-    ><span>Critical</span> <input type="number" value="" name="attr_critical"
-  /></label>
+    ><span>Critical</span> <input type="hidden" value="" name="attr_critical" />
+    <span name="attr_critical"></span>
+  </label>
   <label
-    ><span>Knockout</span> <input type="number" value="" name="attr_knockout"
-  /></label>
+    ><span>Knockout</span> <input type="hidden" value="" name="attr_knockout" />
+    <span name="attr_knockout"></span>
+  </label>
   <label
     ><span>Death Blow</span>
-    <input type="number" value="0" name="attr_deathblow"
-  /></label>
+    <input type="hidden" value="0" name="attr_deathblow" />
+    <span name="attr_deathblow"></span>
+  </label>
 </div>
 <hr />
 <h3>Saving Throws</h3>
 <div class="bonus-type-container">
   <label
     ><span>Perception</span>
-    <input type="number" value="0" name="attr_perceptioncheck" />
+    <input type="hidden" value="0" name="attr_perceptioncheck" />
+    <span name="attr_perceptioncheck"></span>
     <button
       type="roll"
       value="Perception Check: [[d20+@{perceptioncheck}]]"
@@ -4902,7 +4918,8 @@
   </label>
   <label
     ><span>Psionics</span>
-    <input type="number" value="0" name="attr_psionics" />
+    <input type="hidden" value="0" name="attr_psionics" />
+    <span name="attr_psionics"></span>
     <button
       type="roll"
       value="Save vs. Psionics: [[d20+@{psionics}]]"
@@ -4911,7 +4928,8 @@
   </label>
   <label
     ><span>Magic</span>
-    <input type="number" value="0" name="attr_magic" />
+    <input type="hidden" value="0" name="attr_magic" />
+    <span name="attr_magic"></span>
     <button
       type="roll"
       value="Save vs. Magic: [[d20+@{magic}]]"
@@ -4920,7 +4938,8 @@
   </label>
   <label
     ><span>Horror Factor</span>
-    <input type="number" value="0" name="attr_horrorfactor" />
+    <input type="hidden" value="0" name="attr_horrorfactor" />
+    <span name="attr_horrorfactor"></span>
     <button
       type="roll"
       value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
@@ -4929,7 +4948,8 @@
   </label>
   <label
     ><span>Mind Control</span>
-    <input type="number" value="0" name="attr_mindcontrol" />
+    <input type="hidden" value="0" name="attr_mindcontrol" />
+    <span name="attr_mindcontrol"></span>
     <button
       type="roll"
       value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
@@ -4938,7 +4958,8 @@
   </label>
   <label
     ><span>Disease</span>
-    <input type="number" value="0" name="attr_disease" />
+    <input type="hidden" value="0" name="attr_disease" />
+    <span name="attr_disease"></span>
     <button
       type="roll"
       value="Save vs. Disease: [[d20+@{disease}]]"
@@ -4947,7 +4968,8 @@
   </label>
   <label
     ><span>Illusions</span>
-    <input type="number" value="0" name="attr_illusions" />
+    <input type="hidden" value="0" name="attr_illusions" />
+    <span name="attr_illusions"></span>
     <button
       type="roll"
       value="Save vs. Illusions: [[d20+@{illusions}]]"
@@ -4956,7 +4978,8 @@
   </label>
   <label
     ><span>Possession</span>
-    <input type="number" value="0" name="attr_possession" />
+    <input type="hidden" value="0" name="attr_possession" />
+    <span name="attr_possession"></span>
     <button
       type="roll"
       value="Save vs. Possession: [[d20+@{possession}]]"
@@ -4965,7 +4988,8 @@
   </label>
   <label
     ><span>Insanity</span>
-    <input type="number" value="0" name="attr_insanity" />
+    <input type="hidden" value="0" name="attr_insanity" />
+    <span name="attr_insanity"></span>
     <button
       type="roll"
       value="Save vs. Insanity: [[d20+@{insanity}]]"
@@ -4974,7 +4998,8 @@
   </label>
   <label
     ><span>Pain</span>
-    <input type="number" value="0" name="attr_pain" />
+    <input type="hidden" value="0" name="attr_pain" />
+    <span name="attr_pain"></span>
     <button
       type="roll"
       value="Save vs. Pain: [[d20+@{pain}]]"
@@ -4983,7 +5008,8 @@
   </label>
   <label
     ><span>Lethal Poison</span>
-    <input type="number" value="0" name="attr_lethalpoison" />
+    <input type="hidden" value="0" name="attr_lethalpoison" />
+    <span name="attr_lethalpoison"></span>
     <button
       type="roll"
       value="Save vs. Lethal Poison: [[d20+@{lethalpoison}]]"
@@ -4992,7 +5018,8 @@
   </label>
   <label
     ><span>Non-Lethal Poison</span>
-    <input type="number" value="0" name="attr_nonlethalpoison" />
+    <input type="hidden" value="0" name="attr_nonlethalpoison" />
+    <span name="attr_nonlethalpoison"></span>
     <button
       type="roll"
       value="Save vs. Non-Lethal Poison: [[d20+@{nonlethalpoison}]]"
@@ -5001,7 +5028,8 @@
   </label>
   <label
     ><span>Drugs</span>
-    <input type="number" value="0" name="attr_drugs" />
+    <input type="hidden" value="0" name="attr_drugs" />
+    <span name="attr_drugs"></span>
     <button
       type="roll"
       value="Save vs. Drugs: [[d20+@{drugs}]]"
@@ -5010,7 +5038,8 @@
   </label>
   <label
     ><span>Curses</span>
-    <input type="number" value="0" name="attr_curses" />
+    <input type="hidden" value="0" name="attr_curses" />
+    <span name="attr_curses"></span>
     <button
       type="roll"
       value="Save vs. Curses: [[d20+@{curses}]]"
@@ -5019,7 +5048,8 @@
   </label>
   <label
     ><span>Coma/Death</span>
-    <input type="number" value="0" name="attr_comadeath" />
+    <input type="hidden" value="0" name="attr_comadeath" />
+    <span name="attr_comadeath"></span>
     <button
       type="roll"
       value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
@@ -5068,9 +5098,9 @@
                     </label>
                   </div>
                 </summary>
-                <!-- inject:partials/repeating_bonuses_details.html -->
+                <!-- inject:partials/repeating_modifiers_readonly.html -->
                 <input type="hidden" name="attr_bonus_id" value="" />
-<details>
+<details class="">
   <summary>
     <h3>Attributes</h3>
   </summary>
@@ -5078,14 +5108,12 @@
     <label
       ><span>I.Q.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_iq"
         title="Intelligence Quotient"
       />
-      <label class="abs"
-        ><input type="checkbox" value="1" name="attr_iq_abs" />|x|</label
-      >
+      <span name="attr_mod_iq" title="Intelligence Quotient"></span>
       <input
         type="hidden"
         value="0"
@@ -5107,14 +5135,12 @@
     <label
       ><span>M.E.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_me"
         title="Mental Endurance"
       />
-      <label class="abs"
-        ><input type="checkbox" value="1" name="attr_me_abs" />|x|</label
-      >
+      <span name="attr_mod_me" title="Mental Endurance"></span>
       <input
         type="hidden"
         value="0"
@@ -5126,13 +5152,12 @@
     <label
       ><span>M.A.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ma"
         title="Mental Affinity"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_ma_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_ma" title="Mental Affinity"></span>
       <input
         type="hidden"
         value="0"
@@ -5144,13 +5169,12 @@
     <label
       ><span>P.S.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_ps"
         title="Physical Strength"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_ps_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_ps" title="Physical Strength"></span>
       <input
         type="hidden"
         value="0"
@@ -5162,13 +5186,12 @@
     <label
       ><span>P.P.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pp"
         title="Physical Prowess"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pp_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pp" title="Physical Prowess"></span>
       <input
         type="hidden"
         value="0"
@@ -5183,13 +5206,12 @@
     <label
       ><span>P.E.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pe"
         title="Physical Endurance"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pe_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pe" title="Physical Endurance"></span>
       <input
         type="hidden"
         value="0"
@@ -5208,13 +5230,12 @@
     <label
       ><span>P.B.</span>
       <input
-        type="number"
+        type="hidden"
         value="0"
         name="attr_mod_pb"
         title="Physical Beauty"
-      /><label class="abs"
-        ><input type="checkbox" value="1" name="attr_pb_abs" />|x|</label
-      >
+      />
+      <span name="attr_mod_pb" title="Physical Beauty"></span>
       <input
         type="hidden"
         value="0"
@@ -5225,11 +5246,9 @@
     </label>
     <label
       ><span>Spd</span>
-      <input type="number" value="0" name="attr_mod_spd" title="Speed" /><label
-        class="abs"
-        ><input type="checkbox" value="1" name="attr_spd_abs" />|x|</label
-      ></label
-    >
+      <input type="hidden" value="0" name="attr_mod_spd" title="Speed" />
+      <span name="attr_mod_spd" title="Speed"></span>
+    </label>
   </div>
   <hr />
   <div class="bonus-ps-container">
@@ -5241,90 +5260,90 @@
         <option value="3">Robotic</option>
         <option value="3.5">Giant Robotic</option>
         <option value="4">Supernatural</option>
-      </select></label
-    >
+      </select>
+      <!-- <input type="hidden" name="attr_mod_character_ps_type" /> -->
+      <!-- <span name="attr_mod_character_ps_type"></span> -->
+    </label>
     <label
       ><span>Restrained Punch</span>
-      <input type="text" name="attr_mod_restrained_punch" value="0" />
-      <select name="attr_mod_restrained_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_restrained_punch" value="0" />
+      <span name="attr_mod_restrained_punch"></span>
+      <input type="hidden" name="attr_mod_restrained_punch_unit" />
+      <span name="attr_mod_restrained_punch_unit"></span>
+    </label>
 
     <label
       ><span>Punch</span>
-      <input type="text" name="attr_mod_punch" value="0" />
-      <select name="attr_mod_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_punch" value="0" />
+      <span name="attr_mod_punch"></span>
+      <input type="hidden" name="attr_mod_punch_unit" />
+      <span name="attr_mod_punch_unit"></span>
+    </label>
 
     <label
       ><span>Power Punch</span>
-      <input type="text" name="attr_mod_power_punch" value="0" />
-      <select name="attr_mod_power_punch_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_power_punch" value="0" />
+      <span name="attr_mod_power_punch"></span>
+      <input type="hidden" name="attr_mod_power_punch_unit" />
+      <span name="attr_mod_power_punch_unit"></span>
+    </label>
 
     <label
       ><span>Kick</span>
-      <input type="text" name="attr_mod_kick" value="0" />
-      <select name="attr_mod_kick_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select></label
-    >
+      <input type="hidden" name="attr_mod_kick" value="0" />
+      <span name="attr_mod_kick"></span>
+      <input type="hidden" name="attr_mod_kick_unit" />
+      <span name="attr_mod_kick_unit"></span>
+    </label>
 
     <label
       ><span>Leap Kick</span>
-      <input type="text" name="attr_mod_leap_kick" value="0" />
-      <select name="attr_mod_leap_kick_unit" value="sdc">
-        <option value="sdc">SDC</option>
-        <option value="mdc">MDC</option>
-      </select>
+      <input type="hidden" name="attr_mod_leap_kick" value="0" />
+      <span name="attr_mod_leap_kick"></span>
+      <input type="hidden" name="attr_mod_leap_kick_unit" />
+      <span name="attr_mod_leap_kick_unit"></span>
     </label>
 
     <label
       ><span>Lift</span>
-      <input type="number" value="0" name="attr_mod_lift" value="0" />
+      <input type="hidden" value="0" name="attr_mod_lift" value="0" />
+      <span name="attr_mod_lift"></span>
       <span>lbs</span>
     </label>
 
     <label
       ><span>Carry</span>
-      <input type="number" value="0" name="attr_mod_carry" value="0" />
-      <span>lbs</span></label
-    >
+      <input type="hidden" value="0" name="attr_mod_carry" value="0" />
+      <span name="attr_mod_carry"></span>
+      <span>lbs</span>
+    </label>
 
     <label
       ><span>Throw (&frac12; Carry)</span>
-      <input type="number" value="0" name="attr_mod_throw_distance" value="0" />
+      <input type="hidden" value="0" name="attr_mod_throw_distance" value="0" />
+      <span name="attr_mod_throw_distance"></span>
       <span>Feet</span></label
     >
 
     <label
       ><span>Carry Max</span>
-      <input type="number" value="0" name="attr_mod_carry_max" /><span
-        >Minutes</span
-      ></label
-    >
+      <input type="hidden" value="0" name="attr_mod_carry_max" />
+      <span name="attr_mod_carry_max"></span>
+      <span>Minutes</span>
+    </label>
 
     <label
       ><span>Carry (Running)</span>
-      <input type="number" value="0" name="attr_mod_carry_running" /><span
-        >Minutes</span
-      ></label
+      <input type="hidden" value="0" name="attr_mod_carry_running" />
+      <span name="attr_mod_carry_running"></span>
+      <span>Minutes</span></label
     >
 
     <label
       ><span>Hold Max.</span>
-      <input type="number" value="0" name="attr_mod_hold_max" /><span
-        >Melees</span
-      ></label
+      <input type="hidden" value="0" name="attr_mod_hold_max" />
+      <span name="attr_mod_hold_max"></span>
+      <span>Melees</span></label
     >
   </div>
   <hr />
@@ -5332,40 +5351,46 @@
 <div class="bonus-type-container">
   <label
     ><span title="Hit Points">H.P.</span
-    ><input type="number" value="0" name="attr_hp"
-  /></label>
+    ><input type="hidden" value="0" name="attr_hp" />
+    <span name="attr_hp"></span>
+  </label>
   <label
-    ><span>S.D.C.</span><input type="number" value="0" name="attr_sdc"
-  /></label>
+    ><span>S.D.C.</span><input type="hidden" value="0" name="attr_sdc" />
+    <span name="attr_sdc"></span>
+  </label>
   <label
-    ><span>A.R.</span><input type="number" value="0" name="attr_ar"
-  /></label>
+    ><span>A.R.</span><input type="hidden" value="0" name="attr_ar" />
+    <span name="attr_ar"></span>
+  </label>
   <label
-    ><span>M.D.C.</span><input type="number" value="0" name="attr_mdc"
-  /></label>
+    ><span>M.D.C.</span><input type="hidden" value="0" name="attr_mdc" />
+    <span name="attr_mdc"></span>
+  </label>
   <label
-    ><span>P.P.E.</span><input type="number" value="0" name="attr_ppe"
-  /></label>
+    ><span>P.P.E.</span><input type="hidden" value="0" name="attr_ppe" />
+    <span name="attr_ppe"></span>
+  </label>
   <label
-    ><span>I.S.P.</span><input type="number" value="0" name="attr_isp"
-  /></label>
+    ><span>I.S.P.</span><input type="hidden" value="0" name="attr_isp" />
+    <span name="attr_isp"></span>
+  </label>
   <label
-    ><span>H.F.</span><input type="number" value="0" name="attr_mod_hf" /><label
-      class="abs"
-      ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
-    ></label
-  >
+    ><span>H.F.</span><input type="hidden" value="0" name="attr_mod_hf" />
+    <span name="attr_mod_hf"></span>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
 <div class="bonus-type-container">
   <label
     ><span>Attacks</span>
-    <input type="number" value="0" name="attr_attacks" />
+    <input type="hidden" value="0" name="attr_attacks" />
+    <span name="attr_attacks"></span>
   </label>
   <label
     ><span>Initiative</span>
-    <input type="number" value="0" name="attr_initiative" />
+    <input type="hidden" value="0" name="attr_initiative" />
+    <span name="attr_initiative"></span>
     <button
       type="roll"
       value="Initiative: [[d20+@{initiative}]]"
@@ -5374,7 +5399,8 @@
   </label>
   <label
     ><span>Strike</span>
-    <input type="number" value="0" name="attr_strike" />
+    <input type="hidden" value="0" name="attr_strike" />
+    <span name="attr_strike"></span>
     <button
       type="roll"
       value="Strike: [[d20+@{strike}]]"
@@ -5383,7 +5409,8 @@
   </label>
   <label
     ><span>Parry</span>
-    <input type="number" value="0" name="attr_parry" />
+    <input type="hidden" value="0" name="attr_parry" />
+    <span name="attr_parry"></span>
     <button
       type="roll"
       value="Parry: [[d20+@{parry}]]"
@@ -5392,7 +5419,8 @@
   </label>
   <label
     ><span>Dodge</span>
-    <input type="number" value="0" name="attr_dodge" />
+    <input type="hidden" value="0" name="attr_dodge" />
+    <span name="attr_dodge"></span>
     <button
       type="roll"
       value="Dodge: [[d20+@{dodge}]]"
@@ -5401,7 +5429,8 @@
   </label>
   <label
     ><span>Throw</span>
-    <input type="number" value="0" name="attr_throw" />
+    <input type="hidden" value="0" name="attr_throw" />
+    <span name="attr_throw"></span>
     <button
       type="roll"
       value="Throw: [[d20+@{throw}]]"
@@ -5410,7 +5439,8 @@
   </label>
   <label
     ><span>Disarm</span>
-    <input type="number" value="0" name="attr_disarm" />
+    <input type="hidden" value="0" name="attr_disarm" />
+    <span name="attr_disarm"></span>
     <button
       type="roll"
       value="Disarm: [[d20+@{disarm}]]"
@@ -5419,7 +5449,8 @@
   </label>
   <label
     ><span>Entangle</span>
-    <input type="number" value="0" name="attr_entangle" />
+    <input type="hidden" value="0" name="attr_entangle" />
+    <span name="attr_entangle"></span>
     <button
       type="roll"
       value="Entangle: [[d20+@{entangle}]]"
@@ -5428,7 +5459,8 @@
   </label>
   <label
     ><span>Pull Punch</span>
-    <input type="number" value="0" name="attr_pull" />
+    <input type="hidden" value="0" name="attr_pull" />
+    <span name="attr_pull"></span>
     <button
       type="roll"
       value="Pull Punch: [[d20+@{pull}]]"
@@ -5437,7 +5469,8 @@
   </label>
   <label
     ><span>Roll w/ Impact</span>
-    <input type="number" value="0" name="attr_roll" />
+    <input type="hidden" value="0" name="attr_roll" />
+    <span name="attr_roll"></span>
     <button
       type="roll"
       value="Roll w/ Impact: [[d20+@{roll}]]"
@@ -5446,7 +5479,8 @@
   </label>
   <label
     ><span>Body Flip/Throw</span>
-    <input type="number" value="0" name="attr_flipthrow" />
+    <input type="hidden" value="0" name="attr_flipthrow" />
+    <span name="attr_flipthrow"></span>
     <button
       type="roll"
       value="Body Flip/Throw: [[d20+@{flipthrow}]]"
@@ -5455,7 +5489,8 @@
   </label>
   <label
     ><span>Damage</span>
-    <input type="text" value="0" name="attr_damage" />
+    <input type="hidden" value="0" name="attr_damage" />
+    <span name="attr_damage"></span>
     <button
       type="roll"
       value="?{Add damage modifier?|
@@ -5468,7 +5503,8 @@
   </label>
   <label
     ><span>Dodge: Flight</span>
-    <input type="number" value="0" name="attr_dodge_flight" />
+    <input type="hidden" value="0" name="attr_dodge_flight" />
+    <span name="attr_dodge_flight"></span>
     <button
       type="roll"
       value="Dodge in Flight: [[d20+@{dodge_flight}]]"
@@ -5477,7 +5513,8 @@
   </label>
   <label
     >Dodge: Auto
-    <input type="number" value="0" name="attr_dodge_auto" />
+    <input type="hidden" value="0" name="attr_dodge_auto" />
+    <span name="attr_dodge_auto"></span>
     <button
       type="roll"
       value="Auto Dodge: [[d20+@{dodge_auto}]]"
@@ -5486,7 +5523,8 @@
   </label>
   <label
     ><span>Dodge: Teleport</span>
-    <input type="number" value="0" name="attr_dodge_teleport" />
+    <input type="hidden" value="0" name="attr_dodge_teleport" />
+    <span name="attr_dodge_auto"></span>
     <button
       type="roll"
       value="Teleport Dodge: [[d20+@{dodge_teleport}]]"
@@ -5495,7 +5533,8 @@
   </label>
   <label
     ><span>Dodge: Motion</span>
-    <input type="number" value="0" name="attr_dodge_motion" />
+    <input type="hidden" value="0" name="attr_dodge_motion" />
+    <span name="attr_dodge_motion"></span>
     <button
       type="roll"
       value="Dodge in Motion: [[d20+@{dodge_motion}]]"
@@ -5504,7 +5543,8 @@
   </label>
   <label
     ><span>Strike: Range</span>
-    <input type="number" value="0" name="attr_strike_range" />
+    <input type="hidden" value="0" name="attr_strike_range" />
+    <span name="attr_strike_range"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range}]]"
@@ -5513,7 +5553,8 @@
   </label>
   <label
     ><span>Range: Single</span>
-    <input type="number" value="0" name="attr_strike_range_single" />
+    <input type="hidden" value="0" name="attr_strike_range_single" />
+    <span name="attr_strike_range_single"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range_single}]]"
@@ -5522,7 +5563,8 @@
   </label>
   <label
     ><span>Range: Burst</span>
-    <input type="number" value="0" name="attr_strike_range_burst" />
+    <input type="hidden" value="0" name="attr_strike_range_burst" />
+    <span name="attr_strike_range_burst"></span>
     <button
       type="roll"
       value="Range Strike: [[d20+@{strike_range_burst}]]"
@@ -5531,7 +5573,8 @@
   </label>
   <label
     ><span>Range: Aimed</span>
-    <input type="number" value="0" name="attr_strike_range_aimed" />
+    <input type="hidden" value="0" name="attr_strike_range_aimed" />
+    <span name="attr_strike_range_aimed"></span>
     <button
       type="roll"
       value="Range Aimed Strike: [[d20+@{strike_range_aimed}]]"
@@ -5560,7 +5603,8 @@
   </label>
   <label
     ><span>Range: Called</span>
-    <input type="number" value="0" name="attr_strike_range_called" />
+    <input type="hidden" value="0" name="attr_strike_range_called" />
+    <span name="attr_strike_range_called"></span>
     <button
       type="roll"
       value="Range Called Strike: [[d20+@{strike_range_called}]]"
@@ -5617,7 +5661,8 @@
   </label>
   <label
     ><span>Disarm: Range</span>
-    <input type="number" value="0" name="attr_disarm_range" />
+    <input type="hidden" value="0" name="attr_disarm_range" />
+    <span name="attr_disarm_range"></span>
     <button
       type="roll"
       value="Range Disarm: [[d20+@{disarm_range}]]"
@@ -5626,7 +5671,8 @@
   </label>
   <label
     ><span>Damage: Range</span>
-    <input type="text" value="0" name="attr_damage_range" />
+    <input type="hidden" value="0" name="attr_damage_range" />
+    <span name="attr_damage_range"></span>
     <button
       type="roll"
       value="Range Damage: [[@{damage_range}]]"
@@ -5634,22 +5680,26 @@
     />
   </label>
   <label
-    ><span>Critical</span> <input type="number" value="" name="attr_critical"
-  /></label>
+    ><span>Critical</span> <input type="hidden" value="" name="attr_critical" />
+    <span name="attr_critical"></span>
+  </label>
   <label
-    ><span>Knockout</span> <input type="number" value="" name="attr_knockout"
-  /></label>
+    ><span>Knockout</span> <input type="hidden" value="" name="attr_knockout" />
+    <span name="attr_knockout"></span>
+  </label>
   <label
     ><span>Death Blow</span>
-    <input type="number" value="0" name="attr_deathblow"
-  /></label>
+    <input type="hidden" value="0" name="attr_deathblow" />
+    <span name="attr_deathblow"></span>
+  </label>
 </div>
 <hr />
 <h3>Saving Throws</h3>
 <div class="bonus-type-container">
   <label
     ><span>Perception</span>
-    <input type="number" value="0" name="attr_perceptioncheck" />
+    <input type="hidden" value="0" name="attr_perceptioncheck" />
+    <span name="attr_perceptioncheck"></span>
     <button
       type="roll"
       value="Perception Check: [[d20+@{perceptioncheck}]]"
@@ -5658,7 +5708,8 @@
   </label>
   <label
     ><span>Psionics</span>
-    <input type="number" value="0" name="attr_psionics" />
+    <input type="hidden" value="0" name="attr_psionics" />
+    <span name="attr_psionics"></span>
     <button
       type="roll"
       value="Save vs. Psionics: [[d20+@{psionics}]]"
@@ -5667,7 +5718,8 @@
   </label>
   <label
     ><span>Magic</span>
-    <input type="number" value="0" name="attr_magic" />
+    <input type="hidden" value="0" name="attr_magic" />
+    <span name="attr_magic"></span>
     <button
       type="roll"
       value="Save vs. Magic: [[d20+@{magic}]]"
@@ -5676,7 +5728,8 @@
   </label>
   <label
     ><span>Horror Factor</span>
-    <input type="number" value="0" name="attr_horrorfactor" />
+    <input type="hidden" value="0" name="attr_horrorfactor" />
+    <span name="attr_horrorfactor"></span>
     <button
       type="roll"
       value="Save vs. Horror Factor: [[d20+@{horrorfactor}]]"
@@ -5685,7 +5738,8 @@
   </label>
   <label
     ><span>Mind Control</span>
-    <input type="number" value="0" name="attr_mindcontrol" />
+    <input type="hidden" value="0" name="attr_mindcontrol" />
+    <span name="attr_mindcontrol"></span>
     <button
       type="roll"
       value="Save vs. Mind Control: [[d20+@{mindcontrol}]]"
@@ -5694,7 +5748,8 @@
   </label>
   <label
     ><span>Disease</span>
-    <input type="number" value="0" name="attr_disease" />
+    <input type="hidden" value="0" name="attr_disease" />
+    <span name="attr_disease"></span>
     <button
       type="roll"
       value="Save vs. Disease: [[d20+@{disease}]]"
@@ -5703,7 +5758,8 @@
   </label>
   <label
     ><span>Illusions</span>
-    <input type="number" value="0" name="attr_illusions" />
+    <input type="hidden" value="0" name="attr_illusions" />
+    <span name="attr_illusions"></span>
     <button
       type="roll"
       value="Save vs. Illusions: [[d20+@{illusions}]]"
@@ -5712,7 +5768,8 @@
   </label>
   <label
     ><span>Possession</span>
-    <input type="number" value="0" name="attr_possession" />
+    <input type="hidden" value="0" name="attr_possession" />
+    <span name="attr_possession"></span>
     <button
       type="roll"
       value="Save vs. Possession: [[d20+@{possession}]]"
@@ -5721,7 +5778,8 @@
   </label>
   <label
     ><span>Insanity</span>
-    <input type="number" value="0" name="attr_insanity" />
+    <input type="hidden" value="0" name="attr_insanity" />
+    <span name="attr_insanity"></span>
     <button
       type="roll"
       value="Save vs. Insanity: [[d20+@{insanity}]]"
@@ -5730,7 +5788,8 @@
   </label>
   <label
     ><span>Pain</span>
-    <input type="number" value="0" name="attr_pain" />
+    <input type="hidden" value="0" name="attr_pain" />
+    <span name="attr_pain"></span>
     <button
       type="roll"
       value="Save vs. Pain: [[d20+@{pain}]]"
@@ -5739,7 +5798,8 @@
   </label>
   <label
     ><span>Lethal Poison</span>
-    <input type="number" value="0" name="attr_lethalpoison" />
+    <input type="hidden" value="0" name="attr_lethalpoison" />
+    <span name="attr_lethalpoison"></span>
     <button
       type="roll"
       value="Save vs. Lethal Poison: [[d20+@{lethalpoison}]]"
@@ -5748,7 +5808,8 @@
   </label>
   <label
     ><span>Non-Lethal Poison</span>
-    <input type="number" value="0" name="attr_nonlethalpoison" />
+    <input type="hidden" value="0" name="attr_nonlethalpoison" />
+    <span name="attr_nonlethalpoison"></span>
     <button
       type="roll"
       value="Save vs. Non-Lethal Poison: [[d20+@{nonlethalpoison}]]"
@@ -5757,7 +5818,8 @@
   </label>
   <label
     ><span>Drugs</span>
-    <input type="number" value="0" name="attr_drugs" />
+    <input type="hidden" value="0" name="attr_drugs" />
+    <span name="attr_drugs"></span>
     <button
       type="roll"
       value="Save vs. Drugs: [[d20+@{drugs}]]"
@@ -5766,7 +5828,8 @@
   </label>
   <label
     ><span>Curses</span>
-    <input type="number" value="0" name="attr_curses" />
+    <input type="hidden" value="0" name="attr_curses" />
+    <span name="attr_curses"></span>
     <button
       type="roll"
       value="Save vs. Curses: [[d20+@{curses}]]"
@@ -5775,7 +5838,8 @@
   </label>
   <label
     ><span>Coma/Death</span>
-    <input type="number" value="0" name="attr_comadeath" />
+    <input type="hidden" value="0" name="attr_comadeath" />
+    <span name="attr_comadeath"></span>
     <button
       type="roll"
       value="Save vs. Coma/Death: [[d100-@{comadeath}]]"
@@ -7087,7 +7151,6 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "critical",
     "knockout",
     "deathblow",
-    "mod_hf",
     "mod_character_ps_type",
   ];
   const pickBestDestinations = pickBestFieldsBase.map(
@@ -8359,12 +8422,15 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /* endinject */
 
   /**
-   * [] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
+   * [] Change Profile fields to hidden + span for efficiency's sake
+   * [] Add Spell Strength to magic tab
+   * [] Make sure that "Add to Bonuses" checkbox is exported/imported
+   * [] Add weight to abilities/magic/psionics
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
-   * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
    * [x] Fix coma/death aggregation in profiles (and add a roll button?)
    * [x] Fix +Punch/PS roll to use value in current section rather than global
    * [x] Magic/... DC should populate S/MDC based on DC unit.
@@ -8383,7 +8449,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
    * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
-   * [] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
+   * [x] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
    * [x] Make things async
    *
    * @todo Armor tab / repeater; Armor checkboxes in Aggregate Bonuses, and Armor list (name, MDC) underneath

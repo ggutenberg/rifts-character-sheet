@@ -13,6 +13,7 @@
   border-radius: 0.1rem;
   font-weight: normal;
   padding-left: 0.5rem;
+  overflow: scroll;
 }
 
 .charsheet {
@@ -140,7 +141,7 @@
         display: grid;
         align-items: center;
         gap: 0.5rem;
-        grid-template-columns: 6.5rem 6rem min-content;
+        grid-template-columns: 6.5rem 6rem 1fr;
 
         &.select {
           select {
@@ -150,6 +151,14 @@
 
         input {
           width: 6rem;
+        }
+
+        span {
+          @include center;
+
+          &[name^="attr_"] {
+            @include readonly;
+          }
         }
       }
     }
@@ -183,9 +192,7 @@
         width: 100%;
 
         span {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          @include center;
 
           &[name^="attr_"] {
             @include readonly;

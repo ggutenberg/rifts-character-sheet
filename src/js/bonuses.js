@@ -131,7 +131,6 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "critical",
     "knockout",
     "deathblow",
-    "mod_hf",
     "mod_character_ps_type",
   ];
   const pickBestDestinations = pickBestFieldsBase.map(

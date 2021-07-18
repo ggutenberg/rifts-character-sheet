@@ -76,7 +76,7 @@
               <!-- inject:partials/powersabilities.html -->
               <!-- endinject -->
               <h2>Modifiers</h2>
-              <!-- inject:partials/repeating_bonuses_details.html -->
+              <!-- inject:partials/repeating_modifiers.html -->
               <!-- endinject -->
             </details>
           </fieldset>
@@ -119,7 +119,7 @@
             <!-- inject:partials/magic.html -->
             <!-- endinject -->
             <h2>Modifiers</h2>
-            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- inject:partials/repeating_modifiers.html -->
             <!-- endinject -->
           </details>
         </fieldset>
@@ -161,7 +161,7 @@
             <!-- inject:partials/psionics.html -->
             <!-- endinject -->
             <h2>Modifiers</h2>
-            <!-- inject:partials/repeating_bonuses_details.html -->
+            <!-- inject:partials/repeating_modifiers.html -->
             <!-- endinject -->
           </details>
         </fieldset>
@@ -206,7 +206,7 @@
                     </label>
                   </div>
                 </summary>
-                <!-- inject:partials/repeating_bonuses_details.html -->
+                <!-- inject:partials/repeating_modifiers.html -->
                 <!-- endinject -->
               </details>
             </fieldset>
@@ -218,7 +218,7 @@
     <div class="r-tab-content">
       <div class="bonuses">
         <div class="bonuses-container">
-          <h3>Aggregated Bonuses</h3>
+          <h3>Cumulative Modifiers</h3>
           <div class="combat-combined">
             <details>
               <summary><b>Instructions</b></summary>
@@ -226,9 +226,9 @@
               <p>
                 Any modifiers you add on the Modifiers tab will appear as
                 checkboxes here. Additionally any Abilities, Magic, or Psionics
-                that you checked <b>Add to Bonuses</b> will appear here. Any
-                Weapon Proficiencies you add on the WPs tab will appear on this
-                page as well.
+                that you checked <b>Add to Cumulative Modifiers</b> will appear
+                here. Any Weapon Proficiencies you add on the WPs tab will
+                appear on this page as well.
               </p>
               <p>
                 Create a new Profile in the Profiles section. Check all of the
@@ -321,11 +321,7 @@
                     <div class="bonus-names">
                       <span name="attr_bonus_names"></span>
                     </div>
-                    <button
-                      type="action"
-                      name="act_copybonusids"
-                      class="metal linear small"
-                    >
+                    <button type="action" name="act_copybonusids" class="small">
                       Apply Checked Modifiers to this Profile
                     </button>
                     <!-- <button type="action" name="act_checkbonusids">
@@ -334,12 +330,12 @@
                     <button
                       type="action"
                       name="act_updateprofile"
-                      class="metal linear small"
+                      class="small"
                     >
                       Update Profile if Attributes or Modifiers have changed
                     </button>
                   </div>
-                  <!-- inject:partials/repeating_bonuses_details.html -->
+                  <!-- inject:partials/repeating_modifiers_readonly.html -->
                   <!-- endinject -->
                 </details>
               </fieldset>
@@ -370,7 +366,7 @@
                     </label>
                   </div>
                 </summary>
-                <!-- inject:partials/repeating_bonuses_details.html -->
+                <!-- inject:partials/repeating_modifiers_readonly.html -->
                 <!-- endinject -->
               </details>
             </fieldset>
@@ -456,12 +452,15 @@
   /* endinject */
 
   /**
-   * [] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
+   * [] Change Profile fields to hidden + span for efficiency's sake
+   * [] Add Spell Strength to magic tab
+   * [] Make sure that "Add to Bonuses" checkbox is exported/imported
+   * [] Add weight to abilities/magic/psionics
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
-   * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
    * [x] Fix coma/death aggregation in profiles (and add a roll button?)
    * [x] Fix +Punch/PS roll to use value in current section rather than global
    * [x] Magic/... DC should populate S/MDC based on DC unit.
@@ -480,7 +479,7 @@
    * - HP, SDC, AR, MDC are grouped on their own Armor row w/ Name
    * - PPE, ISP are grouped on their own "Mana"? row w/ Name
    *
-   * [] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
+   * [x] Have abilities/magic/psionics auto-calculate/populate MDC/SDC/HP/...
    * [x] Make things async
    *
    * @todo Armor tab / repeater; Armor checkboxes in Aggregate Bonuses, and Armor list (name, MDC) underneath
