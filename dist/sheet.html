@@ -1474,8 +1474,8 @@
     <input type="number" value="0" name="attr_psionics" />
     <button
       type="roll"
-      value="Save vs. Psionics: [[d20+@{psionics}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
   </label>
   <label
@@ -2408,8 +2408,8 @@
     <input type="number" value="0" name="attr_psionics" />
     <button
       type="roll"
-      value="Save vs. Psionics: [[d20+@{psionics}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
   </label>
   <label
@@ -2603,13 +2603,12 @@
         </label>
         <label>
           <span>Psionic Ability</span>
-          <input type="number" name="attr_psionic_ability" value="15" />
-          <!-- <select name="attr_psionic_ability" value="">
+          <select name="attr_psionic_ability" value="15">
             <option value="15">None</option>
             <option value="12">Minor</option>
             <option value="12">Major</option>
             <option value="10">Master</option>
-          </select> -->
+          </select>
         </label>
         <fieldset class="repeating_psionics">
           <details class="info">
@@ -3342,8 +3341,8 @@
     <input type="number" value="0" name="attr_psionics" />
     <button
       type="roll"
-      value="Save vs. Psionics: [[d20+@{psionics}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
   </label>
   <label
@@ -4161,8 +4160,8 @@
     <input type="number" value="0" name="attr_psionics" />
     <button
       type="roll"
-      value="Save vs. Psionics: [[d20+@{psionics}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
   </label>
   <label
@@ -5061,14 +5060,9 @@
     <span name="attr_psionics"></span>
     <button
       type="roll"
-      value="Save vs. Psionics: @{psionic_ability} [[d20>@{psionic_ability}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
-    <!-- <button
-      type="roll"
-      value="Save vs. Psionics: @{psionic_ability} [[d20>[[@{psionic_ability}-@{psionics}]]]]"
-      name="roll_bonus_psionics"
-    ></button> -->
   </label>
   <label
     ><span>Magic</span>
@@ -5881,14 +5875,9 @@
     <span name="attr_psionics"></span>
     <button
       type="roll"
-      value="Save vs. Psionics: @{psionic_ability} [[d20>@{psionic_ability}]]"
-      name="roll_bonus_psionics"
+      value="Save vs. Psionics: [[d20>[[@{psionic_ability}-@{psionics}]]]]"
+      name="roll_save_psionics"
     ></button>
-    <!-- <button
-      type="roll"
-      value="Save vs. Psionics: @{psionic_ability} [[d20>[[@{psionic_ability}-@{psionics}]]]]"
-      name="roll_bonus_psionics"
-    ></button> -->
   </label>
   <label
     ><span>Magic</span>
