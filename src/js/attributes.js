@@ -22,7 +22,7 @@ async function mePpPeBonus(attribute, value, prefix = "") {
   const attrs = {};
   attrs[`${prefix}${attribute}_bonus`] = bonus;
   if (attribute.endsWith("pe")) {
-    attrs[`${prefix}pe_coma_bonus`] =
+    attrs[`${prefix}${attribute}_coma_bonus`] =
       value >= 16
         ? value <= 18
           ? 4 + (value - 16)

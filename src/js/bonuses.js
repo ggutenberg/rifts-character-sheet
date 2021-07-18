@@ -149,11 +149,6 @@ async function combineBonuses(rowIds, destinationPrefix) {
   });
 
   const noAttributeBonusFields = [
-    // "hp",
-    // "sdc",
-    // "mdc",
-    // "ppe",
-    // "isp",
     "attacks",
     "initiative",
     "pull",
@@ -232,7 +227,7 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "bonuses",
     ppBonusFields,
     `filter:${rowIds.toString()}`,
-    "pp_bonus"
+    `${destinationPrefix}_mod_pp_bonus`
   );
 
   // Saving Throws
@@ -246,7 +241,7 @@ async function combineBonuses(rowIds, destinationPrefix) {
         section,
         fields,
         `filter:${rowIds.toString()}`,
-        attributeBonus
+        `${destinationPrefix}_mod_${attributeBonus}`
       );
     }
   );

@@ -7105,11 +7105,6 @@ async function combineBonuses(rowIds, destinationPrefix) {
   });
 
   const noAttributeBonusFields = [
-    // "hp",
-    // "sdc",
-    // "mdc",
-    // "ppe",
-    // "isp",
     "attacks",
     "initiative",
     "pull",
@@ -7188,7 +7183,7 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "bonuses",
     ppBonusFields,
     `filter:${rowIds.toString()}`,
-    "pp_bonus"
+    `${destinationPrefix}_mod_pp_bonus`
   );
 
   // Saving Throws
@@ -7202,7 +7197,7 @@ async function combineBonuses(rowIds, destinationPrefix) {
         section,
         fields,
         `filter:${rowIds.toString()}`,
-        attributeBonus
+        `${destinationPrefix}_mod_${attributeBonus}`
       );
     }
   );
@@ -7628,7 +7623,7 @@ async function mePpPeBonus(attribute, value, prefix = "") {
   const attrs = {};
   attrs[`${prefix}${attribute}_bonus`] = bonus;
   if (attribute.endsWith("pe")) {
-    attrs[`${prefix}pe_coma_bonus`] =
+    attrs[`${prefix}${attribute}_coma_bonus`] =
       value >= 16
         ? value <= 18
           ? 4 + (value - 16)
@@ -8364,13 +8359,14 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /* endinject */
 
   /**
-   * [] Fix +Punch/PS roll to use value in current section rather than global
+   * [] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
-   * [] Fix coma/death aggregation in profiles (and add a roll button?)
    * [] Add weight to abilities/magic/psionics
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Fix coma/death aggregation in profiles (and add a roll button?)
+   * [x] Fix +Punch/PS roll to use value in current section rather than global
    * [x] Magic/... DC should populate S/MDC based on DC unit.
    * [x] Why are Abilities showing up on the Bonuses tab without Add to Bonuses being checked?
    * [x] PPE on Profiles needs to include primary. Reset PPE on Magic tabs needs to pull from default (1st) profile
