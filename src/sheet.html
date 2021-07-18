@@ -114,6 +114,10 @@
           <input type="number" name="attr_currentppe" value="0" />
           <button type="action" name="act_resetppe">Reset P.P.E.</button>
         </label>
+        <label>
+          <span>Spell Strength</span>
+          <input type="number" name="attr_spellstrength" value="0" />
+        </label>
         <fieldset class="repeating_magic">
           <details class="info">
             <!-- inject:partials/magic.html -->
@@ -452,14 +456,14 @@
   /* endinject */
 
   /**
-   * [] Change Profile fields to hidden + span for efficiency's sake
-   * [] Add Spell Strength to magic tab
-   * [] Make sure that "Add to Bonuses" checkbox is exported/imported
    * [] Add weight to abilities/magic/psionics
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Make sure that "Add to Bonuses" checkbox is exported/imported
+   * [x] Add Spell Strength to magic tab
+   * [x] Change Profile fields to hidden + span for efficiency's sake
    * [x] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
    * [x] Fix coma/death aggregation in profiles (and add a roll button?)
    * [x] Fix +Punch/PS roll to use value in current section rather than global

@@ -498,6 +498,8 @@ const ATTRIBUTE_KEYS = [
   "isp",
   "mod_hf",
   "hf_abs",
+  "mod_spellstrength",
+  "spellstrength_abs",
 ];
 
 const COMBAT_KEYS = [
@@ -586,6 +588,7 @@ const MAGIC_KEYS = REPEATING_BONUS_KEYS.concat([
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const PSIONICS_KEYS = REPEATING_BONUS_KEYS.concat([
@@ -609,6 +612,7 @@ const PSIONICS_KEYS = REPEATING_BONUS_KEYS.concat([
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
@@ -634,6 +638,7 @@ const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
   "frequency_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const PROFILES_KEYS = REPEATING_BONUS_KEYS.concat(["bonus_ids", "bonus_names"]);
@@ -698,6 +703,7 @@ const CORE_KEYS = [
   "character_ppe",
   "character_isp",
   "hf",
+  "spellstrength",
   "perception",
   "run_mph",
   "run_ft_melee",

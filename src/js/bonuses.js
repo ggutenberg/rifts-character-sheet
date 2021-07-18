@@ -62,7 +62,18 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
 
 async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
   console.log("repeatingAbsoluteAttributes", rowIds, destinationPrefix);
-  const fields = ["iq", "me", "ma", "ps", "pp", "pe", "pb", "spd", "hf"];
+  const fields = [
+    "iq",
+    "me",
+    "ma",
+    "ps",
+    "pp",
+    "pe",
+    "pb",
+    "spd",
+    "hf",
+    "spellstrength",
+  ];
   const fieldNames = rowIds.reduce((acc, rowId) => {
     const absFieldNames = fields.map(
       (f) => `repeating_bonuses_${rowId}_${f}_abs`
@@ -137,12 +148,12 @@ async function combineBonuses(rowIds, destinationPrefix) {
     (field) => `${destinationPrefix}_${field}`
   );
   const pickBestFields = pickBestFieldsBase;
-  const core = await getAttrsAsync(["character_ps_type", "hf"]);
+  const core = await getAttrsAsync(["character_ps_type"]);
   await repeatingPickBestAsync({
     destinations: pickBestDestinations,
     section: "bonuses",
     fields: pickBestFields,
-    defaultValues: [0, 20, 0, 0, core.hf, core.character_ps_type],
+    defaultValues: [0, 20, 0, 0, core.character_ps_type],
     ranks: ["high", "low", "low", "low", "high", "high"],
     filter: rowIds,
   });

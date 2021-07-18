@@ -1143,6 +1143,17 @@
       ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
     ></label
   >
+  <label>
+    <span>Spell Strength</span>
+    <input type="number" value="0" name="attr_mod_spellstrength" />
+    <label class="abs"
+      ><input
+        type="checkbox"
+        value="1"
+        name="attr_spellstrength_abs"
+      />|x|</label
+    >
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -1643,6 +1654,10 @@
           <input type="number" name="attr_currentppe" value="0" />
           <button type="action" name="act_resetppe">Reset P.P.E.</button>
         </label>
+        <label>
+          <span>Spell Strength</span>
+          <input type="number" name="attr_spellstrength" value="0" />
+        </label>
         <fieldset class="repeating_magic">
           <details class="info">
             <!-- inject:partials/magic.html -->
@@ -2048,6 +2063,17 @@
       ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
     ></label
   >
+  <label>
+    <span>Spell Strength</span>
+    <input type="number" value="0" name="attr_mod_spellstrength" />
+    <label class="abs"
+      ><input
+        type="checkbox"
+        value="1"
+        name="attr_spellstrength_abs"
+      />|x|</label
+    >
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -2947,6 +2973,17 @@
       ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
     ></label
   >
+  <label>
+    <span>Spell Strength</span>
+    <input type="number" value="0" name="attr_mod_spellstrength" />
+    <label class="abs"
+      ><input
+        type="checkbox"
+        value="1"
+        name="attr_spellstrength_abs"
+      />|x|</label
+    >
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -3741,6 +3778,17 @@
       ><input type="checkbox" value="1" name="attr_hf_abs" />|x|</label
     ></label
   >
+  <label>
+    <span>Spell Strength</span>
+    <input type="number" value="0" name="attr_mod_spellstrength" />
+    <label class="abs"
+      ><input
+        type="checkbox"
+        value="1"
+        name="attr_spellstrength_abs"
+      />|x|</label
+    >
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -4588,6 +4636,11 @@
     ><span>H.F.</span><input type="hidden" value="0" name="attr_mod_hf" />
     <span name="attr_mod_hf"></span>
   </label>
+  <label>
+    <span>Spell Strength</span>
+    <input type="hidden" value="0" name="attr_mod_spellstrength" />
+    <span name="attr_mod_spellstrength"></span>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -5377,6 +5430,11 @@
   <label
     ><span>H.F.</span><input type="hidden" value="0" name="attr_mod_hf" />
     <span name="attr_mod_hf"></span>
+  </label>
+  <label>
+    <span>Spell Strength</span>
+    <input type="hidden" value="0" name="attr_mod_spellstrength" />
+    <span name="attr_mod_spellstrength"></span>
   </label>
 </div>
 <hr />
@@ -6502,6 +6560,8 @@ const ATTRIBUTE_KEYS = [
   "isp",
   "mod_hf",
   "hf_abs",
+  "mod_spellstrength",
+  "spellstrength_abs",
 ];
 
 const COMBAT_KEYS = [
@@ -6590,6 +6650,7 @@ const MAGIC_KEYS = REPEATING_BONUS_KEYS.concat([
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const PSIONICS_KEYS = REPEATING_BONUS_KEYS.concat([
@@ -6613,6 +6674,7 @@ const PSIONICS_KEYS = REPEATING_BONUS_KEYS.concat([
   "duration_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
@@ -6638,6 +6700,7 @@ const ABILITIES_KEYS = REPEATING_BONUS_KEYS.concat([
   "frequency_units",
   "percentage_starting",
   "percentage_per_level",
+  "addtobonuses",
 ]);
 
 const PROFILES_KEYS = REPEATING_BONUS_KEYS.concat(["bonus_ids", "bonus_names"]);
@@ -6702,6 +6765,7 @@ const CORE_KEYS = [
   "character_ppe",
   "character_isp",
   "hf",
+  "spellstrength",
   "perception",
   "run_mph",
   "run_ft_melee",
@@ -7082,7 +7146,18 @@ async function addStrikeRangeToCombinedAsync(rowPrefix) {
 
 async function repeatingAbsoluteAttributes(rowIds, destinationPrefix) {
   console.log("repeatingAbsoluteAttributes", rowIds, destinationPrefix);
-  const fields = ["iq", "me", "ma", "ps", "pp", "pe", "pb", "spd", "hf"];
+  const fields = [
+    "iq",
+    "me",
+    "ma",
+    "ps",
+    "pp",
+    "pe",
+    "pb",
+    "spd",
+    "hf",
+    "spellstrength",
+  ];
   const fieldNames = rowIds.reduce((acc, rowId) => {
     const absFieldNames = fields.map(
       (f) => `repeating_bonuses_${rowId}_${f}_abs`
@@ -7157,12 +7232,12 @@ async function combineBonuses(rowIds, destinationPrefix) {
     (field) => `${destinationPrefix}_${field}`
   );
   const pickBestFields = pickBestFieldsBase;
-  const core = await getAttrsAsync(["character_ps_type", "hf"]);
+  const core = await getAttrsAsync(["character_ps_type"]);
   await repeatingPickBestAsync({
     destinations: pickBestDestinations,
     section: "bonuses",
     fields: pickBestFields,
-    defaultValues: [0, 20, 0, 0, core.hf, core.character_ps_type],
+    defaultValues: [0, 20, 0, 0, core.character_ps_type],
     ranks: ["high", "low", "low", "low", "high", "high"],
     filter: rowIds,
   });
@@ -8422,14 +8497,14 @@ on("change:repeating_movement:ft_melee", async (e) => {
   /* endinject */
 
   /**
-   * [] Change Profile fields to hidden + span for efficiency's sake
-   * [] Add Spell Strength to magic tab
-   * [] Make sure that "Add to Bonuses" checkbox is exported/imported
    * [] Add weight to abilities/magic/psionics
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Make sure that "Add to Bonuses" checkbox is exported/imported
+   * [x] Add Spell Strength to magic tab
+   * [x] Change Profile fields to hidden + span for efficiency's sake
    * [x] Profile values (bonuses, saves) that aggregate with a global attribute/attribute bonus should use the profile-specific value instead
    * [x] Fix coma/death aggregation in profiles (and add a roll button?)
    * [x] Fix +Punch/PS roll to use value in current section rather than global
