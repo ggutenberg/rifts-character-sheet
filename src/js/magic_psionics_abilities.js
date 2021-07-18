@@ -176,3 +176,7 @@ on(
     }
   }
 );
+
+on("change:psionic_ability", (e) => {
+  console.log("change:psionic_ability", e);
+});
