@@ -172,7 +172,7 @@
         > label {
           display: grid;
           gap: 0.2rem;
-          grid-template-columns: 1fr 4rem 3rem 4rem 4rem;
+          grid-template-columns: 1fr 5rem 3rem 4rem 4rem;
 
           input[type="number"],
           input[type="text"] {
@@ -373,7 +373,7 @@ img.logo {
   .values {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: 2.5rem 1fr min-content 4rem 4rem 4rem 4rem 4rem 4rem;
+  grid-template-columns: 2.5rem 1fr min-content 5rem 5rem 5rem 5rem 4rem 4rem;
 }
 
 .charsheet .skills .repcontainer[data-groupname="repeating_skills"] .repitem h5,
