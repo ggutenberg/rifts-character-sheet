@@ -84,13 +84,16 @@ async function psBonusComplete(prefix = "") {
   let lift = carry * 2;
   let hold_max = Math.round((pe * 3) / 15);
   let throw_distance = ps;
+  let name = "";
 
   switch (ps_type) {
-    case "1": // normal
+    case "1":
+      name = "Normal";
       punch = "1D4";
       kick = "1D4";
       break;
-    case "2": // augmented
+    case "2":
+      name = "Augmented";
       throw_distance = ps * 2;
       if (ps < 24) {
         // nop
@@ -120,8 +123,10 @@ async function psBonusComplete(prefix = "") {
         power_punch_unit = "mdc";
       }
       break;
-    case "3": // robotic
-    case "3.5": // giant robotic
+    case "3":
+      name = "Robotic";
+    case "3.5":
+      name = "Giant Robotic";
       if (ps >= 17) {
         if (ps_type == "3") {
           lift = carry = ps * 25;
@@ -213,7 +218,8 @@ async function psBonusComplete(prefix = "") {
             "mdc";
       }
       break;
-    case "4": // supernatural
+    case "4":
+      name = "Supernatural";
       if (ps >= 18) {
         carry = ps * 50;
       } else {
@@ -277,6 +283,7 @@ async function psBonusComplete(prefix = "") {
       break;
   }
   const attrs = {
+    [`${prefix}character_ps_type_name`]: name,
     [`${prefix}ps_bonus`]: ps_bonus,
     [`${prefix}restrained_punch`]: restrained_punch,
     [`${prefix}punch`]: punch,

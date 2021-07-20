@@ -92,6 +92,10 @@
       @include center;
     }
 
+    .twospan2 {
+      grid-column: 2 / span 2;
+    }
+
     .movement-container {
       span:not(.not-readonly) {
         @include readonly;
