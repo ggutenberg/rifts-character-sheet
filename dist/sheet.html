@@ -1168,6 +1168,10 @@
       <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
     </label>
   </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="number" value="0" name="attr_mod_skillbonus" />
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -2102,6 +2106,10 @@
       <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
     </label>
   </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="number" value="0" name="attr_mod_skillbonus" />
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -3035,6 +3043,10 @@
       <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
     </label>
   </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="number" value="0" name="attr_mod_skillbonus" />
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -3853,6 +3865,10 @@
     <label class="abs">
       <input type="checkbox" value="1" name="attr_charmimpress_abs" />|x|
     </label>
+  </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="number" value="0" name="attr_mod_skillbonus" />
   </label>
 </div>
 <hr />
@@ -4726,6 +4742,11 @@
       name="roll_charmimpress"
     ></button>
   </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="hidden" value="0" name="attr_mod_skillbonus" />
+    <span name="attr_mod_skillbonus"></span>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -5541,6 +5562,11 @@
       name="roll_charmimpress"
     ></button>
   </label>
+  <label>
+    <span>Skill Bonus %</span>
+    <input type="hidden" value="0" name="attr_mod_skillbonus" />
+    <span name="attr_mod_skillbonus"></span>
+  </label>
 </div>
 <hr />
 <h3>Combat</h3>
@@ -6058,6 +6084,7 @@
         <p>Click <b>Instructions</b> for detailed instructions.</p>
         <button type="action" name="act_import">Import</button>
         <button type="action" name="act_export">Export</button>
+        <button type="action" name="act_test">Test</button>
         <label>Status: <span name="attr_importexportstatus"></span></label>
         <input type="hidden" name="attr_importexportstatus" />
         <textarea class="full tall" name="attr_importexport"></textarea>
@@ -6671,6 +6698,7 @@ const ATTRIBUTE_KEYS = [
   "trustintimidate_abs",
   "mod_charmimpress",
   "charmimpress_abs",
+  "mod_skillbonus",
 ];
 
 const COMBAT_KEYS = [
@@ -7420,6 +7448,13 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "character_isp"
   );
 
+  await repeatingSumAsync(
+    [`${destinationPrefix}_mod_skillbonus`],
+    "bonuses",
+    ["mod_skillbonus"],
+    `filter:${rowIds.toString()}`
+  );
+
   const ppBonusFields = [
     "strike",
     "parry",
@@ -7851,6 +7886,11 @@ on("change:_reporder:profiles", async (e) => {
   console.log(a);
 });
 
+on("change:repeating_profiles:mod_skillbonus", async (e) => {
+  console.log("change:repeating_profiles:mod_skillbonus", e);
+  await updateSkills();
+});
+
   /* endinject */
 
   /* inject:js/attributes.js */
@@ -8206,15 +8246,20 @@ on("change:spd", async (e) => {
 
   /* inject:js/skills.js */
   async function updateSkill(rowId, iqBonusKey = "iq_bonus") {
+  const profilesIds = await getSectionIDsOrderedAsync("profiles");
+  const defaultProfileSkillBonusKey = `repeating_profiles_${profilesIds[0]}_mod_skillbonus`;
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
   console.log(skillAttrs);
-  const a = await getAttrsAsync(skillAttrs.concat([iqBonusKey]));
+  const a = await getAttrsAsync(
+    skillAttrs.concat([iqBonusKey, defaultProfileSkillBonusKey])
+  );
   console.log(a);
   const attrs = {};
   const total =
     +a[`${row}_base`] +
     +a[iqBonusKey] +
+    +a[defaultProfileSkillBonusKey] +
     +a[`${row}_bonus`] +
     (+a[`${row}_level`] - 1) * +a[`${row}_perlevel`];
   console.log(total);
@@ -8622,6 +8667,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Add +skill % and any other missing attribute bonuses
    * [x] Add Psionics type to Psionics tab (minor, major, master), and use that to calculate save roll
    * [x] Add trust/charm to Profile (consider an item that gives MA/PB bonus)
    * [x] Make sure that "Add to Bonuses" checkbox is exported/imported

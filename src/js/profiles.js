@@ -42,3 +42,8 @@ on("change:_reporder:profiles", async (e) => {
   await setAttrsAsync({ default_mdc: a[`${prefix}_mdc`] });
   console.log(a);
 });
+
+on("change:repeating_profiles:mod_skillbonus", async (e) => {
+  console.log("change:repeating_profiles:mod_skillbonus", e);
+  await updateSkills();
+});

@@ -1,13 +1,18 @@
 async function updateSkill(rowId, iqBonusKey = "iq_bonus") {
+  const profilesIds = await getSectionIDsOrderedAsync("profiles");
+  const defaultProfileSkillBonusKey = `repeating_profiles_${profilesIds[0]}_mod_skillbonus`;
   const row = `repeating_skills_${rowId}`;
   const skillAttrs = SKILL_KEYS.map((key) => `${row}_${key}`);
   console.log(skillAttrs);
-  const a = await getAttrsAsync(skillAttrs.concat([iqBonusKey]));
+  const a = await getAttrsAsync(
+    skillAttrs.concat([iqBonusKey, defaultProfileSkillBonusKey])
+  );
   console.log(a);
   const attrs = {};
   const total =
     +a[`${row}_base`] +
     +a[iqBonusKey] +
+    +a[defaultProfileSkillBonusKey] +
     +a[`${row}_bonus`] +
     (+a[`${row}_level`] - 1) * +a[`${row}_perlevel`];
   console.log(total);

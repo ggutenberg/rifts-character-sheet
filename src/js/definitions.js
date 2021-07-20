@@ -504,6 +504,7 @@ const ATTRIBUTE_KEYS = [
   "trustintimidate_abs",
   "mod_charmimpress",
   "charmimpress_abs",
+  "mod_skillbonus",
 ];
 
 const COMBAT_KEYS = [

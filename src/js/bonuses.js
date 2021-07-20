@@ -227,6 +227,13 @@ async function combineBonuses(rowIds, destinationPrefix) {
     "character_isp"
   );
 
+  await repeatingSumAsync(
+    [`${destinationPrefix}_mod_skillbonus`],
+    "bonuses",
+    ["mod_skillbonus"],
+    `filter:${rowIds.toString()}`
+  );
+
   const ppBonusFields = [
     "strike",
     "parry",
