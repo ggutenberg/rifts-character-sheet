@@ -170,11 +170,6 @@
   width: auto;
   margin-bottom: 0;
 }
-.charsheet main#megaverse .spell-details label span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .charsheet main#megaverse input[type=number] {
   width: auto;
 }
@@ -207,6 +202,22 @@
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 1fr 7fr !important;
+}
+.charsheet main#megaverse .grid-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr min-content;
+}
+.charsheet main#megaverse .grid-container .section-one label {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+.charsheet main#megaverse .spell-details label span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .charsheet main#megaverse .bonus-thing-heading {
   display: grid;
@@ -384,24 +395,6 @@ img.logo {
   max-height: 30px;
 }
 
-.grid-container {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 4fr 1fr 1fr;
-}
-
-/* .section-one {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: max-content 1fr;
-} */
-.section-one label {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  margin: 0.5rem 0;
-}
-
 .section-one label span,
 .section-three label span {
   display: flex;
@@ -431,16 +424,19 @@ img.logo {
 .ss-2b {
   padding: 0.5rem 0;
   display: grid;
-  grid-template-columns: max-content 5rem max-content;
+  grid-template-columns: max-content 5rem max-content 4rem;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .ss-2c {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: max-content 8rem max-content;
   border: 1px solid #ccc;
   padding: 0.5rem;
+}
+.ss-2c label {
+  display: grid;
+  grid-template-columns: 8rem 10rem 4rem;
+  gap: 0.5rem;
 }
 
 .section-three label {

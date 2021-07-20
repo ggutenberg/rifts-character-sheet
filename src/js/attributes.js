@@ -54,6 +54,14 @@ async function maBonus(value, prefix = "") {
 }
 
 async function psBonus(prefix = "") {
+  const a = await getAttrsAsync([`${prefix}ps`]);
+  const ps = +a[`${prefix}ps`];
+  const ps_bonus = ps > 15 ? ps - 15 : 0;
+  const attrs = { [`${prefix}ps_bonus`]: ps_bonus };
+  await setAttrsAsync(attrs);
+}
+
+async function psBonusComplete(prefix = "") {
   const a = await getAttrsAsync([
     `${prefix}ps`,
     `${prefix}character_ps_type`,

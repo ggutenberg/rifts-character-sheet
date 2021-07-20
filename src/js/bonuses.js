@@ -386,7 +386,7 @@ on(
   async (e) => {
     console.log("change:repeating_profiles:mod_ps", e);
     const [r, section, rowId] = e.sourceAttribute.split("_");
-    await psBonus(`${r}_${section}_${rowId}_mod_`);
+    await psBonusComplete(`${r}_${section}_${rowId}_mod_`);
   }
 );
 

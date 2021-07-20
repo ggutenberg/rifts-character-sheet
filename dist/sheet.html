@@ -164,9 +164,9 @@
           <option value="0"></option>
           <option value="Principled">Principled</option>
           <option value="Scrupulous">Scrupulous</option>
+          <option value="Taoist">Taoist</option>
           <option value="Unprincipled">Unprincipled</option>
           <option value="Anarchist">Anarchist</option>
-          <option value="Taoist">Taoist</option>
           <option value="Miscreant">Miscreant</option>
           <option value="Abberant">Aberrant</option>
           <option value="Diabolic">Diabolic</option>
@@ -370,6 +370,11 @@
           value="0"
           name="attr_trustintimidate"
         /><span>%</span>
+        <button
+          type="roll"
+          value="@{character_name} Trust/Intimidate check: [[d100<@{trustintimidate}]]"
+          name="roll_skill"
+        ></button>
 
         <label for="charm-impress">Charm/Impress</label>
         <input
@@ -378,128 +383,55 @@
           value="0"
           name="attr_charmimpress"
         /><span>%</span>
-      </div>
-      <div class="ss-2c">
-        <label for="restrained-punch">Restrained Punch</label>
-        <input
-          id="restrained-punch"
-          type="text"
-          name="attr_restrained_punch"
-          value="0"
-        />
-        <select name="attr_restrained_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="punch">Punch</label>
-        <input id="punch" type="text" name="attr_punch" value="0" />
-        <select name="attr_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="power-punch">Power Punch</label>
-        <input id="power-punch" type="text" name="attr_power_punch" value="0" />
-        <select name="attr_power_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="kick">Kick</label>
-        <input id="kick" type="text" name="attr_kick" value="0" />
-        <select name="attr_kick_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="leap-kick">Leap Kick</label>
-        <input id="leap-kick" type="text" name="attr_leap_kick" value="0" />
-        <select name="attr_leap_kick_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="lift">Lift</label>
-        <input id="lift" type="number" value="0" name="attr_lift" value="0" />
-        <div>lbs</div>
-
-        <label for="carry">Carry</label>
-        <input id="carry" type="number" value="0" name="attr_carry" value="0" />
-        <div>lbs</div>
-
-        <label for="throw">Throw (&frac12; Carry)</label>
-        <input
-          id="throw"
-          type="number"
-          value="0"
-          name="attr_throw_distance"
-          value="0"
-        />
-        <div>Feet</div>
-
-        <label for="carry-max">Carry Max</label>
-        <input
-          id="carry-max"
-          type="number"
-          value="0"
-          name="attr_carry_max"
-        />Minutes
-
-        <label for="carry-running">Carry (Running)</label>
-        <input
-          id="carry-running"
-          type="number"
-          value="0"
-          name="attr_carry_running"
-        />Minutes
-
-        <label for="hold-max">Hold Max.</label>
-        <input
-          id="hold-max"
-          type="number"
-          value="0"
-          name="attr_hold_max"
-        />Melees
-      </div>
-    </div>
-    <div class="section-three">
-      <label
-        ><span>Hit Points</span>
-        <input type="number" value="0" name="attr_character_hp" />
-      </label>
-      <label>
-        <span>S.D.C.</span>
-        <input type="number" value="0" name="attr_character_sdc" />
-      </label>
-      <label
-        ><span>A.R.</span
-        ><input type="number" value="0" name="attr_character_ar"
-      /></label>
-      <label
-        ><span>M.D.C.</span>
-        <input type="number" value="0" name="attr_character_mdc" />
-      </label>
-      <label
-        ><span>P.P.E.</span>
-        <input type="number" value="0" name="attr_character_ppe" />
-      </label>
-      <label
-        ><span>I.S.P.</span
-        ><input type="number" value="0" name="attr_character_isp"
-      /></label>
-      <label
-        ><span>H.F.</span><input type="number" value="0" name="attr_hf"
-      /></label>
-      <label
-        ><span>Perception</span>
-        <input id="perception" type="number" value="0" name="attr_perception" />
         <button
           type="roll"
-          value="Perception: [[d20+@{perception}]]"
-          name="roll_perception"
+          value="@{character_name} Charm/Impress check: [[d100<@{charmimpress}]]"
+          name="roll_skill"
         ></button>
-      </label>
+      </div>
+      <div class="ss-2c">
+        <label
+          ><span>Hit Points</span>
+          <input type="number" value="0" name="attr_character_hp" />
+        </label>
+        <label>
+          <span>S.D.C.</span>
+          <input type="number" value="0" name="attr_character_sdc" />
+        </label>
+        <label
+          ><span>A.R.</span
+          ><input type="number" value="0" name="attr_character_ar"
+        /></label>
+        <label
+          ><span>M.D.C.</span>
+          <input type="number" value="0" name="attr_character_mdc" />
+        </label>
+        <label
+          ><span>P.P.E.</span>
+          <input type="number" value="0" name="attr_character_ppe" />
+        </label>
+        <label
+          ><span>I.S.P.</span
+          ><input type="number" value="0" name="attr_character_isp"
+        /></label>
+        <label
+          ><span>H.F.</span><input type="number" value="0" name="attr_hf"
+        /></label>
+        <label
+          ><span>Perception</span>
+          <input
+            id="perception"
+            type="number"
+            value="0"
+            name="attr_perception"
+          />
+          <button
+            type="roll"
+            value="Perception: [[d20+@{perception}]]"
+            name="roll_perception"
+          ></button>
+        </label>
+      </div>
     </div>
   </div>
 
@@ -6879,22 +6811,6 @@ const CORE_KEYS = [
   "spd",
   "trustintimidate",
   "charmimpress",
-  "restrained_punch",
-  "restrained_punch_unit",
-  "punch",
-  "punch_unit",
-  "power_punch",
-  "power_punch_unit",
-  "kick",
-  "kick_unit",
-  "leap_kick",
-  "leap_kick_unit",
-  "lift",
-  "carry",
-  "throw_distance",
-  "carry_max",
-  "carry_running",
-  "hold_max",
   "character_hp",
   "character_sdc",
   "character_ar",
@@ -7607,7 +7523,7 @@ on(
   async (e) => {
     console.log("change:repeating_profiles:mod_ps", e);
     const [r, section, rowId] = e.sourceAttribute.split("_");
-    await psBonus(`${r}_${section}_${rowId}_mod_`);
+    await psBonusComplete(`${r}_${section}_${rowId}_mod_`);
   }
 );
 
@@ -7950,6 +7866,14 @@ async function maBonus(value, prefix = "") {
 }
 
 async function psBonus(prefix = "") {
+  const a = await getAttrsAsync([`${prefix}ps`]);
+  const ps = +a[`${prefix}ps`];
+  const ps_bonus = ps > 15 ? ps - 15 : 0;
+  const attrs = { [`${prefix}ps_bonus`]: ps_bonus };
+  await setAttrsAsync(attrs);
+}
+
+async function psBonusComplete(prefix = "") {
   const a = await getAttrsAsync([
     `${prefix}ps`,
     `${prefix}character_ps_type`,
@@ -8667,6 +8591,7 @@ on("change:repeating_movement:ft_melee", async (e) => {
    * [] Add a non-repeating section for Default Profile so that profile attributes can be set on the token
    * [] Pressing space when typing an ability name expands and collapses the Details panel
    * [] Removing Bonus Sources doesn't remove them from Selections
+   * [x] Remove punch/lift section from Core as it's in Profiles
    * [x] Add +skill % and any other missing attribute bonuses
    * [x] Add Psionics type to Psionics tab (minor, major, master), and use that to calculate save roll
    * [x] Add trust/charm to Profile (consider an item that gives MA/PB bonus)

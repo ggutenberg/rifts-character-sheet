@@ -45,9 +45,9 @@
           <option value="0"></option>
           <option value="Principled">Principled</option>
           <option value="Scrupulous">Scrupulous</option>
+          <option value="Taoist">Taoist</option>
           <option value="Unprincipled">Unprincipled</option>
           <option value="Anarchist">Anarchist</option>
-          <option value="Taoist">Taoist</option>
           <option value="Miscreant">Miscreant</option>
           <option value="Abberant">Aberrant</option>
           <option value="Diabolic">Diabolic</option>
@@ -251,6 +251,11 @@
           value="0"
           name="attr_trustintimidate"
         /><span>%</span>
+        <button
+          type="roll"
+          value="@{character_name} Trust/Intimidate check: [[d100<@{trustintimidate}]]"
+          name="roll_skill"
+        ></button>
 
         <label for="charm-impress">Charm/Impress</label>
         <input
@@ -259,128 +264,55 @@
           value="0"
           name="attr_charmimpress"
         /><span>%</span>
-      </div>
-      <div class="ss-2c">
-        <label for="restrained-punch">Restrained Punch</label>
-        <input
-          id="restrained-punch"
-          type="text"
-          name="attr_restrained_punch"
-          value="0"
-        />
-        <select name="attr_restrained_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="punch">Punch</label>
-        <input id="punch" type="text" name="attr_punch" value="0" />
-        <select name="attr_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="power-punch">Power Punch</label>
-        <input id="power-punch" type="text" name="attr_power_punch" value="0" />
-        <select name="attr_power_punch_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="kick">Kick</label>
-        <input id="kick" type="text" name="attr_kick" value="0" />
-        <select name="attr_kick_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="leap-kick">Leap Kick</label>
-        <input id="leap-kick" type="text" name="attr_leap_kick" value="0" />
-        <select name="attr_leap_kick_unit" value="sdc">
-          <option value="sdc">SDC</option>
-          <option value="mdc">MDC</option>
-        </select>
-
-        <label for="lift">Lift</label>
-        <input id="lift" type="number" value="0" name="attr_lift" value="0" />
-        <div>lbs</div>
-
-        <label for="carry">Carry</label>
-        <input id="carry" type="number" value="0" name="attr_carry" value="0" />
-        <div>lbs</div>
-
-        <label for="throw">Throw (&frac12; Carry)</label>
-        <input
-          id="throw"
-          type="number"
-          value="0"
-          name="attr_throw_distance"
-          value="0"
-        />
-        <div>Feet</div>
-
-        <label for="carry-max">Carry Max</label>
-        <input
-          id="carry-max"
-          type="number"
-          value="0"
-          name="attr_carry_max"
-        />Minutes
-
-        <label for="carry-running">Carry (Running)</label>
-        <input
-          id="carry-running"
-          type="number"
-          value="0"
-          name="attr_carry_running"
-        />Minutes
-
-        <label for="hold-max">Hold Max.</label>
-        <input
-          id="hold-max"
-          type="number"
-          value="0"
-          name="attr_hold_max"
-        />Melees
-      </div>
-    </div>
-    <div class="section-three">
-      <label
-        ><span>Hit Points</span>
-        <input type="number" value="0" name="attr_character_hp" />
-      </label>
-      <label>
-        <span>S.D.C.</span>
-        <input type="number" value="0" name="attr_character_sdc" />
-      </label>
-      <label
-        ><span>A.R.</span
-        ><input type="number" value="0" name="attr_character_ar"
-      /></label>
-      <label
-        ><span>M.D.C.</span>
-        <input type="number" value="0" name="attr_character_mdc" />
-      </label>
-      <label
-        ><span>P.P.E.</span>
-        <input type="number" value="0" name="attr_character_ppe" />
-      </label>
-      <label
-        ><span>I.S.P.</span
-        ><input type="number" value="0" name="attr_character_isp"
-      /></label>
-      <label
-        ><span>H.F.</span><input type="number" value="0" name="attr_hf"
-      /></label>
-      <label
-        ><span>Perception</span>
-        <input id="perception" type="number" value="0" name="attr_perception" />
         <button
           type="roll"
-          value="Perception: [[d20+@{perception}]]"
-          name="roll_perception"
+          value="@{character_name} Charm/Impress check: [[d100<@{charmimpress}]]"
+          name="roll_skill"
         ></button>
-      </label>
+      </div>
+      <div class="ss-2c">
+        <label
+          ><span>Hit Points</span>
+          <input type="number" value="0" name="attr_character_hp" />
+        </label>
+        <label>
+          <span>S.D.C.</span>
+          <input type="number" value="0" name="attr_character_sdc" />
+        </label>
+        <label
+          ><span>A.R.</span
+          ><input type="number" value="0" name="attr_character_ar"
+        /></label>
+        <label
+          ><span>M.D.C.</span>
+          <input type="number" value="0" name="attr_character_mdc" />
+        </label>
+        <label
+          ><span>P.P.E.</span>
+          <input type="number" value="0" name="attr_character_ppe" />
+        </label>
+        <label
+          ><span>I.S.P.</span
+          ><input type="number" value="0" name="attr_character_isp"
+        /></label>
+        <label
+          ><span>H.F.</span><input type="number" value="0" name="attr_hf"
+        /></label>
+        <label
+          ><span>Perception</span>
+          <input
+            id="perception"
+            type="number"
+            value="0"
+            name="attr_perception"
+          />
+          <button
+            type="roll"
+            value="Perception: [[d20+@{perception}]]"
+            name="roll_perception"
+          ></button>
+        </label>
+      </div>
     </div>
   </div>
 
